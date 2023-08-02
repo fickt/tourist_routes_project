@@ -1,0 +1,35 @@
+version: '3.9'
+services:
+  app:
+    container_name: app
+    build:
+      context: ./server/laravel
+      dockerfile: Dockerfile
+    volumes:
+      - ./server/laravel:/var/www
+    depends_on:
+      - web
+      - db
+    env_file:
+      - .env
+
+  web:
+    build:
+      context: ./server/nginx
+      dockerfile: Dockerfile
+    container_name: web
+    ports:
+      - ${WEB_SERVER_PORT:-8080}:${WEB_SERVER_PORT:-8080}
+    volumes:
+      - ./server/app:/var/www
+
+  db:
+    image: postgres:15
+    container_name: db
+    ports:
+      - ${DB_PORT:-5432}:${DB_PORT:-5432}
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=${DB_DATABASE:-postgres}
+      - POSTGRES_USER=${DB_USER:-root}
+      - POSTGRES_PASSWORD=${DB_PASSWORD?}
