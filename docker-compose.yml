@@ -33,3 +33,21 @@ services:
       - POSTGRES_DB=${DB_DATABASE:-postgres}
       - POSTGRES_USER=${DB_USER:-root}
       - POSTGRES_PASSWORD=${DB_PASSWORD?}
+
+  rabbitmq:
+    image: 'rabbitmq:3.6-management-alpine'
+    ports:
+      # The standard AMQP protocol port
+      - '5672:5672'
+      # HTTP management UI
+      - '15672:15672'
+    environment:
+      AMQP_URL: ${AMQP_URL}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS?}
+    networks:
+      - network
+networks:
+  # Declare our private network.  We must declare one for the magic
+  # Docker DNS to work, but otherwise its default settings are fine.
+  network: {}
