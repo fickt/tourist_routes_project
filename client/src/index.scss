@@ -1,0 +1,63 @@
+@import "~normalize.css";
+
+html {
+    box-sizing: border-box;
+    height: 100%;
+}
+
+body {
+    background-color: #ececec;
+    height: 100%;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-left: 50px;
+    padding-right: 50px;
+    width: calc(100% - 100px);
+}
+
+main {
+    flex: 1;
+}
+
+[class*="copyrights-pane"] {
+    display: none !important;
+  }
+
+.map {
+    width: 80vw;
+    height: 400px;
+    background-color: #7B8E98;
+}
+
+
+@media (max-width: 760px) {
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+.dgis-map , #mapId{
+
+    width: 100%;
+    height: 600px;
+
+    .mapIcon {
+        border-radius: 10px;
+        border: 5px solid #ffffff;
+    }
+
+    .balloon-image{
+        max-width: 300px;
+        display: block;
+    }
+}
