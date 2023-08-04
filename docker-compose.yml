@@ -42,9 +42,10 @@ services:
       # HTTP management UI
       - '15672:15672'
     environment:
-      AMQP_URL: ${AMQP_URL}
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS?}
+      - AMQP_URL=${AMQP_URL}
+      - RABBITMQ_VHOST=${RABBITMQ_VHOST}
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD?}
     networks:
       - network
 networks:
