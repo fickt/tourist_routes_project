@@ -6,6 +6,7 @@ use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 
 use App\Http\Resources\LoginResource;
+use App\Http\Resources\LogoutResource;
 use App\Http\Resources\UserRegisterResource;
 use App\Models\User;
 use Illuminate\Http\Response;
@@ -29,8 +30,11 @@ class AuthController extends Controller
         return new LoginResource($token);
     }
 
-    public function logout()
+    public function logout(): LogoutResource
     {
+        $user = auth()->user();
         auth()->logout();
+
+        return new LogoutResource($user);
     }
 }
