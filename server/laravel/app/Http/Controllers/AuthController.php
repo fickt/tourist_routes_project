@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 
+use App\Http\Resources\UserRegisterResource;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -14,7 +15,7 @@ class AuthController extends Controller
    public function register(UserRegisterRequest $request)
    {
        $user = User::query()->create($request->validated());
-       return $user;
+       return new UserRegisterResource($user);
    }
     public function login(UserLoginRequest $request)
     {
