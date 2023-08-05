@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class UserRegisterResource extends JsonResource
 {
@@ -20,5 +21,10 @@ class UserRegisterResource extends JsonResource
             'last_name' => $this->last_name,
             'email' => $this->email
         ];
+    }
+
+    public function withResponse($request, $response): void
+    {
+        $response->setStatusCode(Response::HTTP_CREATED);
     }
 }
