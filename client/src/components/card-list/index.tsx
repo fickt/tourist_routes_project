@@ -1,8 +1,9 @@
-import { Card } from "components/card";
 import { useAppSelector } from "storage/hook-types";
-import s from './styles.module.scss';
+import s from "./styles.module.scss";
+import React from "react";
+import Card from "components/card";
 
-export function CardList() {
+const CardList = () => {
 
   const spots = useAppSelector(state => state.spots.data);
   
@@ -12,3 +13,5 @@ export function CardList() {
     </div>
   );
 }
+
+export default React.memo(CardList)

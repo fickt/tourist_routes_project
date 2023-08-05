@@ -1,14 +1,8 @@
 import { TMarker } from "components/ymap/markers";
 import { SPOTS_ERROR, IS_SPOTS_LOADING, GET_LOCAL_SPOTS } from "storage/action-types";
 
-//commons
-
-export type TEmptyAction = {
-    type: string
-}
-
 //spots-data
-export type TSpotsActions =  TSpotsDataLoading | TSpotsDataError | TLocalSpotsDataAction
+export type TSpotsActions =  TSpotsDataLoading | TSpotsDataError | TLocalSpotsDataAction;
 
 
 export type TLocalSpotsDataAction = {

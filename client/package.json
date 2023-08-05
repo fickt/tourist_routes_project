@@ -38,7 +38,6 @@
         "gh-pages": "^5.0.0",
         "html-webpack-plugin": "^5.5.3",
         "mini-css-extract-plugin": "^2.7.6",
-        "react-hook-form": "^7.45.2",
         "sass": "^1.63.6",
         "sass-loader": "^13.3.2",
         "style-loader": "^3.3.3",
@@ -53,13 +52,11 @@
         "yup": "^1.2.0"
     },
     "dependencies": {
-        "@2gis/mapgl": "^1.38.1",
         "@ant-design/icons": "^5.1.4",
         "@pbe/react-yandex-maps": "^1.2.4",
         "@react-google-maps/api": "^2.19.2",
         "@redux-devtools/extension": "^3.2.5",
         "@types/react-redux": "^7.1.25",
-        "2gis-maps": "^3.7.3",
         "classnames": "^2.3.2",
         "normalize.css": "^8.0.1",
         "react": "^18.2.0",

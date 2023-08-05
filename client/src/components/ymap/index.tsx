@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { TMarker } from "./markers";
-import s from './styles.module.scss'
+import s from "./styles.module.scss";
 import { mapControls, mapState, removeControls } from "utils/common";
 
 type props = {
@@ -52,7 +52,7 @@ const YMapComponent = ({ markers }: props) => {
                         maximumAge: 0,
                     };
                     //Определение геолокации
-                    function success(pos: any) {
+                    function success(pos: GeolocationPosition) {
 
                         myMap.geoObjects.remove(multiRoute) //очищаем маршрут перед созданием нового
                         const crd = pos.coords; //получаем объект с координатами
@@ -67,7 +67,6 @@ const YMapComponent = ({ markers }: props) => {
                                 // Ограничение на максимальное количество маршрутов, возвращаемое маршрутизатором.
                                 results: 2
                             },
-
                         }, {
                             // Автоматически устанавливать границы карты так, чтобы маршрут был виден целиком.
                             boundsAutoApply: true
@@ -95,10 +94,8 @@ const YMapComponent = ({ markers }: props) => {
     return (
         <>
             <h3>Вариант использования Яндекс карты</h3>
-            <span>Разработал Максим</span>
             <div id="mapId" className={s.map} />
         </>
-
     );
 }
 

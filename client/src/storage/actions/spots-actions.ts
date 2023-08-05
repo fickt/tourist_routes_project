@@ -6,7 +6,7 @@ import { TMarker } from "components/ymap/markers";
 export function getLocalSpotsAction(data:TMarker[]):TLocalSpotsDataAction {
     return {
         type: GET_LOCAL_SPOTS,
-        payload: data, //получаем строку успешной авторизации
+        payload: data,
     }
 }
 

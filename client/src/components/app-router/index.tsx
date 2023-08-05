@@ -1,17 +1,11 @@
-import { TRoutes } from "components/app";
 import HomePage from "pages/home-page";
 import NotFoundPage from "pages/not-found-page";
 import SpotPage from "pages/spot-page";
 import SpotsPage from "pages/spots-page";
-import { Route, Routes, useLocation } from "react-router-dom";
-
-
+import { Route, Routes } from "react-router-dom";
+import { TRoutes } from "types/routes";
 
 const AppRouter = () => {
-
-    const location = useLocation();
-    const initialPath = location.state?.initialPath;
-    const backgroundLocation = location.state?.backgroundLocation;   
     
     const mainRoutes: TRoutes[] = [
         { path: '/', element: <HomePage /> },
@@ -21,7 +15,7 @@ const AppRouter = () => {
     ]
 
     return (
-        <Routes location={backgroundLocation && { ...backgroundLocation, pathname: initialPath } || location}>
+        <Routes >
             {mainRoutes.map(({ path, element }) => <Route path={path} element={element} key={path} />)}
         </Routes>)
 

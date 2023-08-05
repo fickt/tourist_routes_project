@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "storage/hook-types";
-import s from './styles.module.scss'
+import s from "./styles.module.scss"
 import { useEffect, useState } from "react";
-import { Card } from "components/card";
 import { getLocalSpotsAction } from "storage/actions/spots-actions";
 import { TMarker, markers } from "components/ymap/markers";
 import YMapComponent from "components/ymap";
+import Card from "components/card";
 
 function SpotPage() {
     const { spotId } = useParams();

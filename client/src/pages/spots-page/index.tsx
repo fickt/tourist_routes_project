@@ -1,5 +1,5 @@
-import s from './styles.module.scss';
-import { CardList } from "components/card-list";
+import CardList from "components/card-list";
+import s from "./styles.module.scss";
 
 function SpotsPage() {
 

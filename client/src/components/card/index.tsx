@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import s from './styles.module.scss'
+import s from "./styles.module.scss"
 import { Button } from "antd";
 import { TMarker } from "components/ymap/markers";
 
 type props = TMarker & { children?: ReactNode }
 
-export function Card({ id, name, description, coordinates, picture, children }: props) {  
+const Card = ({ id, name, description, coordinates, picture, children }: props) => {  
 
   return (
     <>
@@ -27,4 +27,4 @@ export function Card({ id, name, description, coordinates, picture, children }: 
   );
 }
 
-
+export default Card;
