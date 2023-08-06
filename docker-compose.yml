@@ -1,5 +1,23 @@
 version: '3.9'
 services:
+
+  #Frontend
+  client:
+    container_name: client
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - ${CLIENT_HOST_PORT}:${CLIENT_CONTAINER_PORT}
+    #volumes:
+      #- ./client:/app
+    stdin_open: true
+    tty: true
+    environment:
+      - NODE_ENV=development
+      - CI=true
+
+  #Backend
   app:
     container_name: app
     build:
@@ -13,6 +31,7 @@ services:
     env_file:
       - .env
 
+  #NGINX
   web:
     build:
       context: ./server/nginx
@@ -51,4 +70,4 @@ services:
 networks:
   # Declare our private network.  We must declare one for the magic
   # Docker DNS to work, but otherwise its default settings are fine.
-  network: {}
+  network: { }
