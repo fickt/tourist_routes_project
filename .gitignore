@@ -5,7 +5,7 @@
 /public/storage
 /storage/*.key
 /server/laravel/vendor
-.env
+server/laravel/.env
 .env.backup
 .env.production
 .phpunit.result.cache
@@ -18,3 +18,4 @@ yarn-error.log
 /.idea
 /.vscode
 .idea
+.env
