@@ -1,9 +1,9 @@
 import { Footer } from "antd/es/layout/layout";
 import AppRouter from "components/app-router";
-import Header from "components/header";
-import { markers } from "components/ymap/markers";
-import React, { useEffect } from "react";
-import { getLocalSpotsAction } from "storage/actions/spots-actions";
+import Header from "modules/header/components";
+import { markers } from "modules/ymap/constants/markers";
+import { useEffect, memo } from "react";
+import { getLocalSpotsAction } from "modules/card-list/store/spots-actions";
 import { useAppDispatch } from "storage/hook-types";
 
 const App = () => {
@@ -25,4 +25,4 @@ const App = () => {
     )
 }
 
-export default React.memo(App);
+export default memo(App);

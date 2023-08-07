@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import s from "./styles.module.scss"
 import { Button } from "antd";
-import { TMarker } from "components/ymap/markers";
+import { TMarker } from "modules/ymap/constants/markers";
 
 type props = TMarker & { children?: ReactNode }
 

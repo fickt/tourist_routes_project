@@ -1,7 +1,7 @@
 
 import s from "./styles.module.scss"
-import YMapComponent from "components/ymap";
-import { markers } from "components/ymap/markers";
+import YMapComponent from "modules/ymap/components/ymap-component/ymap-component";
+import { markers } from "modules/ymap/constants/markers";
 
 
 function HomePage() {   

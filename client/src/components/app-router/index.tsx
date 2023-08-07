@@ -3,10 +3,10 @@ import NotFoundPage from "pages/not-found-page";
 import SpotPage from "pages/spot-page";
 import SpotsPage from "pages/spots-page";
 import { Route, Routes } from "react-router-dom";
-import { TRoutes } from "types/routes";
+import { TRoutes } from "./router-types";
 
 const AppRouter = () => {
-    
+
     const mainRoutes: TRoutes[] = [
         { path: '/', element: <HomePage /> },
         { path: '/spots/*', element: <SpotsPage /> },
@@ -22,7 +22,3 @@ const AppRouter = () => {
 }
 
 export default AppRouter;
-
-
-
-

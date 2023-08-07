@@ -1,8 +1,8 @@
-import icon1 from "./img/riverEmbankment.jpg";
-import icon2 from "./img/botanicalGarden.jpg";
-import icon3 from "./img/northPark.jpg";
-import icon4 from "./img/stoneBridge.jpg";
-import icon5 from "./img/lunevTower.jpg";
+import icon1 from "../components/ymap-component/img/riverEmbankment.jpg";
+import icon2 from "../components/ymap-component/img/botanicalGarden.jpg";
+import icon3 from "../components/ymap-component/img/northPark.jpg";
+import icon4 from "../components/ymap-component/img/stoneBridge.jpg";
+import icon5 from "../components/ymap-component/img/lunevTower.jpg";
 
 export type TMarker = {
         id: number,

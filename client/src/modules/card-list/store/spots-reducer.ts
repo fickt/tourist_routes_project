@@ -1,6 +1,6 @@
-import { GET_LOCAL_SPOTS, IS_SPOTS_LOADING, SPOTS_ERROR } from "../action-types";
-import { TSpotsActions } from "types/actions";
-import { TMarker } from "components/ymap/markers";
+import { GET_LOCAL_SPOTS, IS_SPOTS_LOADING, SPOTS_ERROR } from "./spots-action-type-names";
+import { TSpotsActions } from "modules/card-list/store/types/spots-action-types";
+import { TMarker } from "modules/ymap/constants/markers";
 
 export type TSpotsState = {
     data: TMarker[],
