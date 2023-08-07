@@ -1,8 +1,9 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import s from "./styles.module.scss"
-import { Button } from "antd";
+
 import { TMarker } from "modules/ymap/constants/markers";
+import Button from "ui/button";
 
 type props = TMarker & { children?: ReactNode }
 
@@ -20,7 +21,7 @@ const Card = ({ id, name, description, coordinates, picture, children }: props) 
             <img className={s.card__image} src={picture} />
           </div>
         </Link>
-        <Button className={s.button} type="primary" href={`https://yandex.ru/maps/?rtext=~${coordinates[0]},${coordinates[1]}`} target="_blank">Открыть в Яндекс Картах</Button>
+        <Button type="primary" href={`https://yandex.ru/maps/?rtext=~${coordinates[0]},${coordinates[1]}`} target="_blank">Открыть в Яндекс Картах</Button>
         {children}
       </article>
     </>
