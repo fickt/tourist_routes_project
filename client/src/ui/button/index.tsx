@@ -1,8 +1,10 @@
 import { Button as ButtonAntd } from "antd";
 import { TButtonProps } from "./types";
 import { MouseEvent } from "react";
+import classNames from "classnames";
+import s from "./styles.module.scss"
 
-const Button = ({children, type, target, href, action}:TButtonProps) => {
+const Button = ({ children, type, target, href, extraClass, action }: TButtonProps) => {
 
     const onclick = (e: MouseEvent<HTMLAnchorElement>) => {
         href && e.preventDefault();
@@ -10,7 +12,15 @@ const Button = ({children, type, target, href, action}:TButtonProps) => {
     }
 
     return (
-        <ButtonAntd href={href} target={target} type={type} onClick={onclick}>{children}</ButtonAntd>
+        <ButtonAntd
+            href={href}
+            target={target}
+            type={type}
+            onClick={onclick}
+            className={classNames(
+                s.button,
+                { [extraClass]: !!extraClass }
+        )}>{children}</ButtonAntd>
     )
 }
 

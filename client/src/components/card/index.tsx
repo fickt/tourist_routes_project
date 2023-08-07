@@ -21,7 +21,7 @@ const Card = ({ id, name, description, coordinates, picture, children }: props) 
             <img className={s.card__image} src={picture} />
           </div>
         </Link>
-        <Button type="primary" href={`https://yandex.ru/maps/?rtext=~${coordinates[0]},${coordinates[1]}`} target="_blank">Открыть в Яндекс Картах</Button>
+        <Button extraClass={s.button} type="primary" href={`https://yandex.ru/maps/?rtext=~${coordinates[0]},${coordinates[1]}`} target="_blank">Открыть в Яндекс Картах</Button>
         {children}
       </article>
     </>
