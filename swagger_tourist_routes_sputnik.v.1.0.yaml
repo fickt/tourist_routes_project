@@ -1,0 +1,162 @@
+openapi: 3.0.3
+info: 
+  title: Tourist routes sputnik App
+  description: |-
+    Описание пока не придумал :) Ну типа платишь денежку, а тебе генерят интересные маршруты исходя из всяких там твоих хотелок, маршруты эти пока вроде как только по Хакасии...пока что...Но это ненадолго ;)
+  version: 1.0.0
+servers:
+  - url: https://localhost:8080/api
+tags:
+  - name: auth
+    description: Authorization/Login/Logout
+    externalDocs:
+      description: Find out more about our store
+      url: http://swagger.io
+  - name: user
+    description: Operations about user
+paths:
+  /auth/register:
+    post:
+      tags:
+        - auth
+      description: Register new user
+      operationId: updatePet
+      requestBody:
+        description: Register new user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+    
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'          
+        '500':
+          description: The email has already been taken! || The password field confirmation does not match.
+  /auth/login:
+    post:
+      tags:
+        - auth
+      requestBody:
+        description: Register new user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'  
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+  /auth/logout:
+    post:
+      tags:
+        - auth
+      requestBody:
+        description: Register new user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogout'  
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'                 
+        
+   
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+  
+        first_name:
+          type: string
+          example: theUser
+        last_name:
+          type: string
+          example: James
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: '12345'
+        password_confirmation:
+          type: string
+          example: '12345'  
+      xml:
+        name: user
+    UserResponse:
+    
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        first_name:
+          type: string
+          example: theUser
+        last_name:
+          type: string
+          example: James
+        email:
+          type: string
+          example: john@email.com
+        
+      xml:
+        name: user   
+    UserLogin:
+    
+      type: object
+      properties:
+        email:
+          type: string
+          example: john@email.com
+        password:  
+          type: string
+          example: password
+      xml:
+        name: user
+    
+    UserLogout:
+      type: object
+      properties:
+        message:
+          type: string
+          example: User has logged out!
+        user:
+          type: object
+      xml:
+        name: user       
+    
+    LoginResponse:
+      type: object
+      properties:
+  
+        access_token:
+          type: string
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+        token_type:
+          type: string
+          example: bearer
+        expires_in:
+          type: integer
+          example: 3600
+        user: 
+          type: object
+      xml:
+        name: user        
+        
