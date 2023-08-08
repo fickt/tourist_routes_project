@@ -30,6 +30,8 @@ services:
       - db
     env_file:
       - .env
+    environment:
+      - APP_KEY=${APP_KEY}
 
   #NGINX
   web:
