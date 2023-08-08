@@ -24,7 +24,7 @@ class AuthController extends Controller
     public function login(UserLoginRequest $request): LoginResource
     {
         if (!$token = auth()->attempt($request->validated())) {
-            throw new HttpException(Response::HTTP_UNAUTHORIZED, 'Unauthorized');
+            throw new HttpException(Response::HTTP_UNAUTHORIZED, 'Incorrect email or password');
         }
 
         return new LoginResource($token);
