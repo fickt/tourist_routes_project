@@ -1,3 +1,4 @@
 export type TStarIconProps = {
-    rating: string
+    rating: string,
+    id: number
 }

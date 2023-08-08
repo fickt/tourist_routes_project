@@ -11,7 +11,8 @@ export type TMarker = {
         description: string,
         iconImageSize: [number, number],
         iconImageOffset: [number, number],
-        picture: string;
+        picture: string,
+        rating: number
 }
 
 export const markers:TMarker[] = [
@@ -22,7 +23,8 @@ export const markers:TMarker[] = [
         description: "Набережная по которой любят гулять томичи и гости города. На ней Вы можете встретиться со знаменитым русским поэтом А.П. Чеховым.",
         iconImageSize: [80, 80],
         iconImageOffset: [-120, -90],
-        picture: icon1
+        picture: icon1,
+        rating: 2.5
     },
     {
         id: 2,
@@ -31,7 +33,8 @@ export const markers:TMarker[] = [
         description: "Вечное лето в Сибири.",
         iconImageSize: [80, 80],
         iconImageOffset: [-40, -80],
-        picture: icon2
+        picture: icon2,
+        rating: 4
     },
     {
         id: 3,
@@ -40,7 +43,8 @@ export const markers:TMarker[] = [
         description: "Микрорайон нового типа на левом берегу реки Томи в 2 километрах от Томска.",
         iconImageSize: [80, 80],
         iconImageOffset: [-100, -50],
-        picture: icon3
+        picture: icon3,
+        rating: 3.5
     },
     {
         id: 4,
@@ -49,7 +53,8 @@ export const markers:TMarker[] = [
         description: "Мост через реку Ушайку в историческом центре города Томска.",
         iconImageSize: [80, 80],
         iconImageOffset: [0, -140],
-        picture: icon4
+        picture: icon4,
+        rating: 2.5
     },
     {
         id: 5,
@@ -58,7 +63,8 @@ export const markers:TMarker[] = [
         description: "Водонапорная башня в центре города, в которой живёт настоящий человек.",
         iconImageSize: [80, 80],
         iconImageOffset: [10, -140],
-        picture: icon5
+        picture: icon5,
+        rating: 5
     },
 ];
 

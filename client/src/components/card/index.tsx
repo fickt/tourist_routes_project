@@ -8,7 +8,7 @@ import RatingStar from "components/rating";
 
 type props = TMarker & { children?: ReactNode }
 
-const Card = ({ id, name, description, coordinates, picture, children }: props) => {  
+const Card = ({ id, name, description, coordinates, picture, children, rating }: props) => {  
 
   return (
     <>
@@ -16,7 +16,7 @@ const Card = ({ id, name, description, coordinates, picture, children }: props) 
         <Link to={`/spots/${id}`} className={s.card__link}>
           <div className={s.card__desc}>
             <h3 className={s.card__name}>{name}</h3>
-            <RatingStar rating={4.5}/>
+            <RatingStar rating={rating} id={id}/>
             <span>{description}</span>
           </div>
           <div className={s.imgWrapper}>
