@@ -1,4 +1,4 @@
-import CardList from "modules/card-list";
+import { CardList } from "modules/card-list";
 import s from "./styles.module.scss";
 
 function SpotsPage() {

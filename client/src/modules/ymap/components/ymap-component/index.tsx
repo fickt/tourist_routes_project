@@ -3,19 +3,17 @@ import { TMarker } from "../../constants/markers";
 import s from "./styles.module.scss";
 import { mapControls, mapState } from "modules/ymap/constants/constants";
 import { removeControls } from "modules/ymap/helpers/ymap-options";
-
+import ymaps from 'ymaps';
 
 type props = {
     markers: TMarker[]
 }
 
-const YMapComponent = ({ markers }: props) => {
-
-    const ymaps = window.ymaps;
+export const YMapComponent = ({ markers }: props) => {
 
     const init = () => {
 
-        let myMap = new window.ymaps.Map('mapId', mapState);
+        let myMap = new ymaps.Map('mapId', mapState);
         //задаем пустой объект маршрута, нужен для перерисовки
         let multiRoute = new ymaps.multiRouter.MultiRoute({
             referencePoints: [],
@@ -101,4 +99,3 @@ const YMapComponent = ({ markers }: props) => {
     );
 }
 
-export default YMapComponent;

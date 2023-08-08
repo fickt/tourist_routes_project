@@ -1,10 +1,10 @@
 import s from "./styles.module.scss";
 import { memo } from "react";
 import Card from "components/card";
-import { spotsSelectors } from "./store/spots-selectors"
+import { spotsSelectors } from "../../store/spots-selectors"
 import { useAppSelector } from "storage/hook-types";
 
-const CardList = () => {  
+export const CardList = memo(() => {  
   
   const spots = useAppSelector(spotsSelectors)
 
@@ -13,6 +13,5 @@ const CardList = () => {
       {spots?.map((spot) => <Card key={spot.id} {...spot} />)}
     </div>
   );
-}
+})
 
-export default memo(CardList)

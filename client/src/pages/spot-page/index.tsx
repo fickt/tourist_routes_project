@@ -4,7 +4,7 @@ import s from "./styles.module.scss"
 import { useEffect, useState } from "react";
 import { getLocalSpotsAction } from "modules/card-list/store/spots-actions";
 import { TMarker, markers } from "modules/ymap/constants/markers";
-import YMapComponent from "modules/ymap/components/ymap-component/ymap-component";
+import { YMapComponent } from "modules/ymap";
 import Card from "components/card";
 
 function SpotPage() {

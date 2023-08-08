@@ -1,9 +1,9 @@
 import { createRoot } from 'react-dom/client';
 import { Provider } from "react-redux";
 import store from 'storage/store'
-import 'index.scss'
+import './styles/index.scss'
 import { BrowserRouter, HashRouter } from "react-router-dom";
-import App from 'components/app';
+import App from 'app/app-component';
 
 window.ResizeObserver = undefined;
 

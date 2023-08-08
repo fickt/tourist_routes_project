@@ -4,6 +4,7 @@ import SpotPage from "pages/spot-page";
 import SpotsPage from "pages/spots-page";
 import { Route, Routes } from "react-router-dom";
 import { TRoutes } from "./router-types";
+import { memo } from "react";
 
 const AppRouter = () => {
 
@@ -16,9 +17,9 @@ const AppRouter = () => {
 
     return (
         <Routes >
-            {mainRoutes.map(({ path, element }) => <Route path={path} element={element} key={path} />)}
+            {mainRoutes.map(({path, element}) => <Route path={path} element={element} key={path} />)}
         </Routes>)
 
 }
 
-export default AppRouter;
+export default memo(AppRouter);
