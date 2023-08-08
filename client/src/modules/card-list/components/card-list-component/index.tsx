@@ -3,15 +3,20 @@ import { memo } from "react";
 import Card from "components/card";
 import { spotsSelectors } from "../../store/spots-selectors"
 import { useAppSelector } from "storage/hook-types";
+import { Search } from "ui/search";
 
 export const CardList = memo(() => {  
   
   const spots = useAppSelector(spotsSelectors)
 
   return (
-    <div className={s.cards}>
+    <div>
+      <Search placeholder="Найти лучший маршрут" handleFormSubmit={() => console.log('submit')} handleInputChange={() => console.log('change')}/>
+      <div className={s.cards}>
       {spots?.map((spot) => <Card key={spot.id} {...spot} />)}
     </div>
+    </div>
+    
   );
 })
 

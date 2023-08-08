@@ -4,6 +4,7 @@ import s from "./styles.module.scss"
 
 import { TMarker } from "modules/ymap/constants/markers";
 import Button from "ui/button";
+import RatingStar from "components/rating";
 
 type props = TMarker & { children?: ReactNode }
 
@@ -15,6 +16,7 @@ const Card = ({ id, name, description, coordinates, picture, children }: props) 
         <Link to={`/spots/${id}`} className={s.card__link}>
           <div className={s.card__desc}>
             <h3 className={s.card__name}>{name}</h3>
+            <RatingStar rating={4.5}/>
             <span>{description}</span>
           </div>
           <div className={s.imgWrapper}>
