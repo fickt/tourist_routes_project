@@ -27,4 +27,21 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        return response()->json([
+            'error' => $exception->getMessage(),
+        ], $this->getStatusCode($exception));
+    }
+
+    protected function getStatusCode(Throwable $exception)
+    {
+        $status = method_exists($exception, 'getStatusCode')
+            ? $exception->getStatusCode()
+            : 500;
+
+        return !is_numeric($status) ? 500 : $status;
+    }
+
 }
