@@ -1,0 +1,118 @@
+.loader {
+/*     position: absolute;
+    transform: translate(-50%); временно, для отображения спинера*/
+    top: 50%;
+    left: 50%;    
+    z-index: 100;
+
+    .loader-wrapper {
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+
+        .clouds {
+            display: flex;
+            position: relative;
+            height: 24px;
+            align-items: end;
+            justify-content: end;
+
+            .cloud-1 {
+                position: absolute;
+                top: -2px;
+                right: -20px;
+                align-self: flex-end;
+                animation: cloud 3s linear infinite;
+                z-index: 101;
+            }
+
+            .cloud-2 {
+                position: absolute;
+                top: 2px;
+                right: -20px;
+                align-self: flex-end;
+                animation: cloud 3s linear infinite;
+                animation-delay: 1.5s;
+                z-index: 101;
+            }            
+        }
+        
+        .loading-text {
+            text-align: center;
+            font-size: 20px;
+        }
+    }
+}
+
+
+
+.car {
+    &__body {
+        animation: shake 0.2s ease-in-out infinite alternate;
+    }
+
+    &__line {
+        transform-origin: center right;
+        stroke-dasharray: 22;
+        animation: line 0.8s ease-in-out infinite;
+        animation-fill-mode: both;
+
+        &--top {
+            animation-delay: 0s;
+        }
+
+        &--middle {
+            animation-delay: 0.2s;
+        }
+
+        &--bottom {
+            animation-delay: 0.4s;
+        }
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateY(-1%);
+    }
+
+    100% {
+        transform: translateY(3%);
+    }
+}
+
+@keyframes line {
+    0% {
+        stroke-dashoffset: 22;
+    }
+
+    25% {
+        stroke-dashoffset: 22;
+    }
+
+    50% {
+        stroke-dashoffset: 0;
+    }
+
+    51% {
+        stroke-dashoffset: 0;
+    }
+
+    80% {
+        stroke-dashoffset: -22;
+    }
+
+    100% {
+        stroke-dashoffset: -22;
+    }
+}
+
+ 
+@keyframes cloud {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-120px);
+	}
+}
