@@ -27,15 +27,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
-
 COPY . /var/www
 COPY --chown=www:www . /var/www
 
 USER www
-
-RUN bin/composer-installer.sh
-
-RUN bin/env-generator.sh
-
+ENTRYPOINT bin/composer-installer.sh ; php-fpm
 EXPOSE 9000
-CMD ["php-fpm"]
