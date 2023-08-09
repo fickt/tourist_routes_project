@@ -1,10 +1,14 @@
-import HomePage from "pages/home-page";
-import NotFoundPage from "pages/not-found-page";
-import SpotPage from "pages/spot-page";
-import SpotsPage from "pages/spots-page";
+import HomePage from "pages/home-page/HomePage";
+import NotFoundPage from "pages/not-found-page/NotFoundPage";
+import SpotPage from "pages/spot-page/SpotPage";
+import SpotsPage from "pages/spots-page/SpotsPage";
 import { Route, Routes } from "react-router-dom";
-import { TRoutes } from "./router-types";
-import { memo } from "react";
+import { ReactNode, memo } from "react";
+
+type TRoutes = {
+    path: string,
+    element: ReactNode,
+}
 
 const AppRouter = () => {
 

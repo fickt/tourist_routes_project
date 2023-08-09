@@ -1,5 +1,5 @@
 import { Footer } from "antd/es/layout/layout";
-import AppRouter from "app/app-router";
+import AppRouter from "pages/AppRouter";
 import { markers } from "modules/ymap/constants/markers";
 import { useEffect, memo } from "react";
 import { getLocalSpotsAction } from "modules/card-list/store/spots-actions";

@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { getLocalSpotsAction } from "modules/card-list/store/spots-actions";
 import { TMarker, markers } from "modules/ymap/constants/markers";
 import { YMapComponent } from "modules/ymap";
-import Card from "components/card";
+import Card from "components/card/Card";
 
-function SpotPage() {
+const SpotPage = () => {
     const { spotId } = useParams();
     const spots = useAppSelector(state => state?.spots?.data)
     const [spotItem, setSpotItem] = useState<TMarker[]>(null);

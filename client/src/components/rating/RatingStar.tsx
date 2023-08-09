@@ -1,4 +1,4 @@
-import { StarIcon } from "ui/rating-star";
+import { StarIcon } from "ui/star-icon/StarIcon";
 import { MAX_RATE } from "./constants";
 import s from "./styles.module.scss";
 

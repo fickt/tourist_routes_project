@@ -1,1 +1,1 @@
-export { CardList } from './components/card-list-component';
+export { CardList } from './components/card-list/CardList';

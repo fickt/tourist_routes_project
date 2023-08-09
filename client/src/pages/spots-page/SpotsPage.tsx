@@ -1,7 +1,7 @@
 import { CardList } from "modules/card-list";
 import s from "./styles.module.scss";
 
-function SpotsPage() {
+const SpotsPage = () => {
 
     return ( 
         <div className={s.wrapper}>

@@ -1,7 +1,7 @@
 import s from "./styles.module.scss"
 import { YMapComponent } from "modules/ymap";
 import { markers } from "modules/ymap/constants/markers";
-import Spiner from "ui/spiner";
+import Spiner from "ui/spiner/Spiner";
 
 const HomePage = () => {   
  

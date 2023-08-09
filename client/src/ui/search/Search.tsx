@@ -3,7 +3,7 @@ import SearchIcon from './assets/search-icon.svg';
 import { ISearchProps } from './types';
 import classNames from "classnames";
 
-export function Search({handleFormSubmit, handleInputChange, placeholder}: ISearchProps) {
+export const Search = ({handleFormSubmit, handleInputChange, placeholder}: ISearchProps) => {
     
   return (
     <form className={s.search} onSubmit={handleFormSubmit}>

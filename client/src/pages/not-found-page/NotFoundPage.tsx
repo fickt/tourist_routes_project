@@ -1,6 +1,6 @@
-import NotFound from "components/not-found";
+import NotFound from "components/not-found/NotFound";
 
-function NotFoundPage() {
+const NotFoundPage = () => {
     
     return (
         <div className="content container">

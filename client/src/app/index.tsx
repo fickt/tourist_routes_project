@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import store from 'storage/store'
 import './styles/index.scss'
 import { BrowserRouter, HashRouter } from "react-router-dom";
-import App from 'app/app-component';
+import App from 'app/app-component/App';
 
 window.ResizeObserver = undefined;
 
