@@ -33,8 +33,9 @@ COPY --chown=www:www . /var/www
 
 USER www
 
-# bin/env-generator.sh
-ENTRYPOINT bin/composer-installer.sh ; bin/env-generator.sh ; "php-fpm"
+RUN bin/composer-installer.sh
+
+RUN bin/env-generator.sh
 
 EXPOSE 9000
-#CMD ["php-fpm"]
+CMD ["php-fpm"]
