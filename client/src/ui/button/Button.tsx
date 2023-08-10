@@ -4,7 +4,7 @@ import { MouseEvent } from "react";
 import classNames from "classnames";
 import s from "./styles.module.scss"
 
-const Button = ({ children, type, target, href, extraClass, action }: TButtonProps) => {
+const Button = ({ children, type, target, href, extraClass, htmlType, action }: TButtonProps) => {
 
     const onclick = (e: MouseEvent<HTMLAnchorElement>) => {
         href && e.preventDefault();
@@ -13,6 +13,7 @@ const Button = ({ children, type, target, href, extraClass, action }: TButtonPro
 
     return (
         <ButtonAntd
+            htmlType={htmlType}
             href={href}
             target={target}
             type={type}

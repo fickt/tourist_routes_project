@@ -6,5 +6,6 @@ export type TButtonProps = {
     children: ReactNode,
     type?: "text" | "link" | "ghost" | "default" | "primary" | "dashed",
     action?: () => void,
-    extraClass?: string
+    extraClass?: string,
+    htmlType?: "button" | "submit" | "reset"
 }

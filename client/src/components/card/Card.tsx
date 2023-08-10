@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import s from "./styles.module.scss"
 import { TMarker } from "modules/ymap/constants/markers";
 import Button from "ui/button/Button";
-import RatingStar from "components/rating/RatingStar";
+import RatingStar from "components/rating-star/RatingStar";
 
 type props = TMarker & { children?: ReactNode }
 

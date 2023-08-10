@@ -1,14 +1,22 @@
 @import "~normalize.css";
 @import url("variables.scss");
 
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
 html {
     box-sizing: border-box;
     height: 100%;
+    min-width: 375px;
 }
 
 body {
     background-color: #ececec;
     height: 100%;
+    min-width: 375px;
 }
 
 #root {
@@ -24,7 +32,9 @@ body {
     padding-right: 50px;
     width: calc(100% - 100px);
 }
-
+.content {
+    padding: 20px 0;
+}
 main {
     flex: 1;
 }
@@ -44,6 +54,9 @@ main {
     .container {
         padding-left: 20px;
         padding-right: 20px;
+    }
+    .content {
+        padding: 10px 0;
     }
 }
 

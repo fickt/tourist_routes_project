@@ -1,0 +1,55 @@
+.review {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding-bottom: 20px;
+	border: 1px solid var(--color-gray);
+	width: 100%;
+	border-radius: 4px;
+	padding: 10px;
+}
+
+.review:last-child {
+	border-bottom: none;
+}
+
+.review__name {
+	font-style: normal;
+	font-weight: 800;
+	font-size: 20px;
+	line-height: 24px;
+	color: #1A1A1A;
+}
+
+
+.review__date {
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 20px;
+	color: #7B8E98;
+}
+
+.review__city {
+	font-style: normal;
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 14px;
+	color: #7B8E98;
+}
+
+
+.review__text {
+	margin-top: 8px;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 20px;
+	color: #1A1A1A;
+	margin-bottom: 0;
+}
+
+.review__header {
+	display: flex;
+	align-items: flex-end;
+	gap: 8px;
+}
