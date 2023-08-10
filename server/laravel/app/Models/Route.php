@@ -10,6 +10,7 @@ class Route extends Model
 {
     use HasFactory;
 
+    protected $table = 'routes';
     protected $fillable = [
         'name',
         'description',
@@ -23,8 +24,11 @@ class Route extends Model
         'rating'
     ];
 
+    /**
+     * Возвращает пути до фоток от Route
+     */
     public function photoPaths(): HasMany
     {
-
+        return $this->hasMany(RoutePhoto::class, 'route_id');
     }
 }
