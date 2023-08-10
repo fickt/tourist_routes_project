@@ -1,17 +1,16 @@
+import React from "react";
 import s from "./styles.module.scss"
-import { YMapComponent } from "modules/ymap";
-import { markers } from "modules/ymap/constants/markers";
-import Spiner from "ui/spiner/Spiner";
+import { MainContent } from "components/main-content/MainContent";
+import { Spinner } from "ui/spinner/Spinner";
 
-const HomePage = () => {   
+const HomePage = () => {
  
-    return ( 
+    return (
         <div className={s.wrapper}>
-            <h2>Путешествуй и не парься</h2>
-            <Spiner />            
-            <YMapComponent markers={markers}/>
-       </div>
-     );
+            <MainContent />
+            <Spinner />
+        </div>
+    );
 }
 
 export default HomePage; 

@@ -1,0 +1,28 @@
+.form input:-webkit-autofill,
+.form input:-webkit-autofill:hover,
+.form input:-webkit-autofill:focus,
+.form input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  background-color: white !important;
+  color: #212529;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+  align-items: flex-start;
+}
+
+.form__inputs {
+  width: 343px;
+}
+
+.forgot__button {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  text-decoration: underline;
+  border: none;
+  cursor: pointer;
+}

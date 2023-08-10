@@ -8,7 +8,7 @@ const Menu = () => {
             <ul className={s.nav__list}>
                 <li><Link to={"/"} className={s.nav__link}>Главная</Link></li>
                 <li><Link to={"/spots"} className={s.nav__link}>Где можно отдохнуть?</Link></li>
-                <li><Link to={"#"} className={s.nav__link}>О проекте</Link></li>
+                <li><Link to={"/login"} className={s.nav__link}>Войти</Link></li>
             </ul>
         </nav>
     );
