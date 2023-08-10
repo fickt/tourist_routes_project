@@ -76,3 +76,9 @@ main {
         display: block;
     }
 }
+
+.auth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

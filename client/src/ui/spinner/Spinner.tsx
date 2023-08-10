@@ -1,7 +1,7 @@
 import "./styles-spiner.scss";
 import CloudIcon from "./img/cloud-xmark-svgrepo-com.svg"
 
-const Spiner = () => {
+export const Spinner = () => {
 
     return (
         <>
@@ -23,11 +23,7 @@ const Spiner = () => {
                     </svg>
                     <span className="loading-text">Загрузка</span>
                 </div>
-
             </div>
         </>
     )
-
 }
-
-export default Spiner;
