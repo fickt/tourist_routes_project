@@ -59,7 +59,16 @@ export const AuthForm = ({ type }: Props) => {
         }
     }
 
+    const handleFormChange = (changedFields: any) => {
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            ...changedFields,
+        }));
+    };
+
     const formValidation = async (values: any) => {
+        console.log(formData)
+
         userRegStatus
             ? await performAuth(values.email, values.password, false)
             : await performAuth(values.email, values.password, true)
@@ -73,6 +82,7 @@ export const AuthForm = ({ type }: Props) => {
             initialValues={{remember: true}}
             autoComplete="off"
             onFinish={formValidation}
+            onValuesChange={handleFormChange}
         >
             <div className={s.form__inputs}>
                 {type === "registration"
