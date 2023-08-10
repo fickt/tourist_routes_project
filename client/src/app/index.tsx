@@ -5,8 +5,6 @@ import './styles/index.scss'
 import { BrowserRouter, HashRouter } from "react-router-dom";
 import App from 'app/app-component/App';
 
-//window.ResizeObserver = undefined;
-
 const Router = process.env.REACT_APP_GH_PAGES !== 'true' ? BrowserRouter : HashRouter;
 
 const root = createRoot(document.getElementById('root'));    

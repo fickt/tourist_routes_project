@@ -6,6 +6,8 @@ import { getLocalSpotsAction } from "modules/card-list/store/spots-actions";
 import { TMarker, markers } from "modules/ymap/constants/markers";
 import { YMapComponent } from "modules/ymap";
 import Card from "components/card/Card";
+import { ContentHeader } from "ui/content-header/ContentHeader";
+import { ReviewBlock } from "modules/review-block/components/review-block/ReviewBlock";
 
 const SpotPage = () => {
     const { spotId } = useParams();
@@ -30,16 +32,23 @@ const SpotPage = () => {
 
     }, [spotId, spots])
 
-    if (spotItem)
+    if (spotItem) {
+
+        const spot = {...spotItem[0]}
 
         return (
             <div className={s.wrapper}>
-                <h2>Страница места</h2>
+                <ContentHeader textButton="назад" title={spot.name} />
                 <Card {...spotItem[0]}>
                     <YMapComponent markers={spotItem} />
+                    <ReviewBlock id={spot.id}/>
                 </Card>
+                
             </div>
         );
+    }
+
+        
 }
 
 export default SpotPage;
