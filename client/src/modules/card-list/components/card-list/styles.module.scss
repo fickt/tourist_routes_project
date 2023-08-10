@@ -1,9 +1,10 @@
 .cards {
-	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);	
 	row-gap: 40px;
-	column-gap: 16px;	
+	column-gap: 16px;
+	align-items: center;
+	text-align: center;
 }
 
 @media (max-width: 880px) {
