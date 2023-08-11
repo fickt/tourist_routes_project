@@ -31,7 +31,7 @@ export const MainContent = () => {
             </section>
             <section className={s.routes}>
                 <div className="container content">
-                    <h2>Наши маршруты</h2>
+                    <h2 className={s.section__title}>Наши маршруты</h2>
                     <CardList />
                 </div>
             </section>

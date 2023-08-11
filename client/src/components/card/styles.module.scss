@@ -3,7 +3,8 @@
 	display: flex;
 	align-items: flex-start;
 	padding: 10px;
-	border-radius: 10px;
+	border: 1px solid var(--color-gray);
+	border-radius: 4px;
 	background-color: var(--color-white);
 	gap: 12px;
 	flex-wrap: nowrap;
