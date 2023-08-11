@@ -16,7 +16,7 @@ const initialState: TSpotsState = {
     error: false
 };
 
-export function spotReducer(state = initialState, action:TSpotsActions) {
+export function spotsReducer(state = initialState, action:TSpotsActions) {
 
     switch (action.type) {
         case GET_LOCAL_SPOTS: 
