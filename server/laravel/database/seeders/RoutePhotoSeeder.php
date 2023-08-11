@@ -15,7 +15,7 @@ class RoutePhotoSeeder extends Seeder
     public function run(): void
     {
         $route = Route::query()->where('name','=', 'Тестовый маршрут')->first();
-        
+
         RoutePhoto::query()->create(
             [
                 'route_id' => $route->id,
