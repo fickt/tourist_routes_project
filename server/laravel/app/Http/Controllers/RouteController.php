@@ -8,8 +8,12 @@ use Illuminate\Http\Request;
 
 class RouteController extends Controller
 {
-    public function index(): RouteResource
+    public function index()
     {
-        return RouteResource::make(Route::all());
+        return RouteResource::collection(
+            Route::query()
+                ->with(['difficulty', 'photoPaths'])
+                ->get()
+        );
     }
 }

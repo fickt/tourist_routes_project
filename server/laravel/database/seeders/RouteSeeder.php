@@ -13,7 +13,7 @@ class RouteSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public static function run(): void
     {
         $route_difficulty = RouteDifficulty::query()->where('name', '=', 'easy')->first();
 
@@ -37,7 +37,8 @@ class RouteSeeder extends Seeder
                 'difficulty_id' => $route_difficulty->id,
                 'longitude' => 91.4,
                 'latitude' => 53.7,
-                'distance_from_nearest_city'
+                'distance_from_nearest_city' => 142.243,
+                'rating' => 0
             ]
         );
     }

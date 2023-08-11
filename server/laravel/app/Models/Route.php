@@ -40,7 +40,7 @@ class Route extends Model
     {
         return $this->belongsTo(
             RouteDifficulty::class,
-            'id',
-            'difficulty_id');
+            'difficulty_id', 'id');
+
     }
 }
