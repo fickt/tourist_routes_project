@@ -12,7 +12,7 @@ const RatingStar = ({rating=5, id=0}) => {
 
     return (
         <>
-            <span>
+            <span className={s.star_wrapper}>
                 <StarIcon rating={calculateRating(rating, MAX_RATE)} id={id}/>
                 <span className={s.rating_number}>{rating.toFixed(1)}</span>
             </span>

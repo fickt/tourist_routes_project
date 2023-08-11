@@ -8,7 +8,6 @@ const HomePage = () => {
     return (
         <div className={s.wrapper}>
             <MainContent />
-            <Spinner />
         </div>
     );
 }

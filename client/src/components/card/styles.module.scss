@@ -1,11 +1,13 @@
 .card {
 	position: relative;
 	display: flex;
-	flex-direction: column;
 	align-items: flex-start;
 	padding: 10px;
 	border-radius: 10px;
 	background-color: var(--color-white);
+	gap: 12px;
+	flex-wrap: nowrap;
+	padding: 4px;
 }
 
 .card:hover {
@@ -16,15 +18,27 @@
 	box-shadow: 0 0 1px rgba(40, 41, 61, 0.16), 0 0.5px 2px rgba(96, 97, 112, 0.24);
 }
 
+.card__text_block {
+	flex-grow: 1;
+}
+
 .card__desc {
 	font-size: 16px;
 	padding-top: 14px;
 	position: relative;
+	text-align: left;
+}
+
+.card__image_wrapper {
+	height: 98px;
+	width: 104px;
+	flex-shrink: 0;
+	flex-grow: 0;
 }
 
 .card__image {
-	width: 100%;
-	object-fit: contain;
+	width: 105px;
+	object-fit: cover;
 	margin-bottom: 16px;
 	aspect-ratio: 1 / 1;
 }
@@ -47,7 +61,9 @@
 }
 
 .button {
-	margin-top: auto;
-	font-size: 16px;
+    font-size: 11px;
     line-height: normal;
+    height: auto;
+    padding: 4px 12px;
+    border-radius: 10px;
 }

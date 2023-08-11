@@ -1,4 +1,9 @@
-.rating_number {
-    font-size: 24px;
-    font-weight: 600;
+.star_wrapper {
+    min-width: max-content;
+
+    .rating_number {
+        font-size: 24px;
+        font-weight: 600;
+    }
 }
+

@@ -17,7 +17,7 @@ const App = () => {
     return (
         <>
             <Header />
-            <main className='container content'>
+            <main>
                 <AppRouter />
             </main>
             <Footer><h2>Путешествия по Томску от стажеров Спутника</h2></Footer>
