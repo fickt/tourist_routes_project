@@ -1,0 +1,15 @@
+.card__image {
+    object-fit: cover;
+    width: 100%;
+}
+
+.section {
+    width: 100%;
+    margin-bottom: 24px;
+    
+    &_title {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+}
+

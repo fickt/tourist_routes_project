@@ -92,10 +92,7 @@ export const YMapComponent = ({ markers }: props) => {
     }, [])
 
     return (
-        <>
-            <h3>Вариант использования Яндекс карты</h3>
-            <div id="mapId" className={s.map} />
-        </>
+        <div id="mapId" className={s.map} />
     );
 }
 

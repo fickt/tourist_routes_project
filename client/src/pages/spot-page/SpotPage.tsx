@@ -5,9 +5,9 @@ import s from "./styles.module.scss"
 import { getLocalSpotsAction } from "modules/card-list/store/spots-actions";
 import { TMarker, markers } from "modules/ymap/constants/markers";
 import { YMapComponent } from "modules/ymap";
-import Card from "components/card/Card";
 import { ContentHeader } from "ui/content-header/ContentHeader";
 import { ReviewBlock } from "modules/review-block/components/review-block/ReviewBlock";
+import { SpotItem } from "modules/spot-item";
 
 const SpotPage = () => {
 
@@ -35,21 +35,17 @@ const SpotPage = () => {
 
     if (spotItem) {
 
-        const spot = {...spotItem[0]}
+        const spot = { ...spotItem[0] }
 
         return (
             <div className={s.wrapper}>
-                <ContentHeader textButton="назад" title={spot.name} />
-                <Card {...spotItem[0]}>
-                    <YMapComponent markers={spotItem} />
-                    <ReviewBlock id={spot.id}/>
-                </Card>
-                
+                <div className="content container">
+                    <ContentHeader textButton="назад" title={spot.name} />
+                    <SpotItem spotItem={spotItem} />                    
+                </div>
             </div>
         );
     }
-
-        
 }
 
 export default SpotPage;

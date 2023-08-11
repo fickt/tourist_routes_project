@@ -1,6 +1,7 @@
 import Button from "ui/button/Button";
 import { Form, Input, Rate } from 'antd';
 import { IFormReviewProps, TFormValues } from "./types";
+import s from "./styles.module.scss"
 
 const { TextArea } = Input;
 
@@ -14,7 +15,7 @@ export const ReviewForm = ({ title = 'Отзыв о месте', productId }: IF
 
     return (
         <>
-            <h2>{title}</h2>
+            <h2 className={s.title}>{title}</h2>
             <Form onFinish={onFinish} form={form}>
                 <Form.Item name="rating" rules={[{ required: true, message: 'Укажите рейтинг' }]}>
                     <Rate allowClear={false}/>
