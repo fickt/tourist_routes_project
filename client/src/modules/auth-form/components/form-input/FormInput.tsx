@@ -12,10 +12,7 @@ export const FormInput = ({ name, rules, placeholder }: Props) => {
 
     return (
         <Form.Item name={name} rules={rules} hasFeedback>
-            <Input
-                placeholder={placeholder}
-                className={s.form__input}
-            />
+            <Input type={name} placeholder={placeholder} className={s.form__input} />
         </Form.Item>
     )
 }
