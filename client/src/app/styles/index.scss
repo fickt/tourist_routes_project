@@ -28,12 +28,12 @@ body {
 .container {
     max-width: 1000px;
     margin: 0 auto;
-    padding-left: 50px;
-    padding-right: 50px;
-    width: calc(100% - 100px);
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+    width: calc(100% - 2*(var(--container-padding)));
 }
 .content {
-    padding: 20px 0;
+    padding: var(--content-padding) 0;
 }
 main {
     flex: 1;
@@ -49,18 +49,6 @@ main {
     background-color: #7B8E98;
 }
 
-
-@media (max-width: 760px) {
-    .container {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-    .content {
-        padding: 10px 0;
-    }
-}
-
-.dgis-map,
 #mapId {
 
     width: 100%;
@@ -81,4 +69,15 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+@media (min-width: 760px) {
+    .container {
+        padding-left: calc(var(--container-padding) * 2);
+        padding-right: calc(var(--container-padding) * 2);
+        width: calc(100% - 4*(var(--container-padding)));
+    }
+    .content {
+        padding: calc(var(--content-padding) * 2) 0;
+    }
 }
