@@ -4,14 +4,33 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 from nltk.stem.porter import PorterStemmer
 import random
+from sqlalchemy import create_engine, text
+from nlp_rake import Rake
+import nltk
+from nltk.corpus import stopwords
 
 app = FastAPI(title = 'Recommender System')
 
-data = pd.read_csv("processed.csv")
+alchemy_engine = create_engine('postgresql+psycopg2://root:root@127.0.0.1:5432/postgres')
+
+connection = alchemy_engine.connect()
+
+routes = pd.read_sql('select * from routes', connection).set_index('id')
+route_difficulties = pd.read_sql('select * from route_difficulties', connection).set_index('id')
+
+nltk.download("russian")
+stops = list(set(stopwords.words("russian")))
+
+rake = Rake(stopwords = stops, max_words = 5)
+
+key_words = (
+    routes["description"].apply(rake.apply).apply(lambda x: " ".join([e[0] for e in x]))
+)
+routes['key_words'] = key_words
 
 cv = CountVectorizer(max_features = 1500)
 
-vectors = cv.fit_transform(data["tags"]).toarray()
+vectors = cv.fit_transform(routes["key_words"]).toarray()
 
 ps = PorterStemmer()
 
@@ -23,7 +42,7 @@ def stem(text):
     return " ".join(y)
 
 
-data["tags"] = data["tags"].apply(stem)
+routes["key_words"] = routes["key_words"].apply(stem)
 
 
 @app.post('/recommend-on-servey')
@@ -46,11 +65,18 @@ def recommend_on_survey(likes: str):
         to_recommend = random.sample(sorted(set(to_recommend)), 5)
 
         result = {}
+        print(to_recommend)
         for i in range(len(to_recommend)):
+            print(routes.iloc[to_recommend[i]]['difficulty_id'] - 1)
+
             result[f'place{i}'] = {
-                'index': to_recommend[i],
-                'name': data.iloc[to_recommend[i]]['name'],
-                'type': data.iloc[to_recommend[i]]['type']
+                'index': to_recommend[i] + 1,
+                'name': routes.iloc[to_recommend[i]]['name'],
+                'description': routes.iloc[to_recommend[i]]['description'],
+                'difficulty': route_difficulties.iloc[routes.iloc[to_recommend[i]]['difficulty_id'] - 1]['name'],
+                'longitude': routes.iloc[to_recommend[i]]['longitude'],
+                'latitude': routes.iloc[to_recommend[i]]['latitude'],
+                'distance_from_nearest_city': routes.iloc[to_recommend[i]]['distance_from_nearest_city']
             }
 
         return result
