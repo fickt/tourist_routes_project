@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class RouteResource extends JsonResource
 {
@@ -22,7 +23,7 @@ class RouteResource extends JsonResource
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
             'rating' => $this->rating,
-            'photos' => $this->whenLoaded('photoPaths')
+            'photos' => RoutePhotoResource::collection($this->whenLoaded('photoPaths'))
         ];
     }
 }
