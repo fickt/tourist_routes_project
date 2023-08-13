@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./style.module.scss";
 import { Form, Input } from "antd";
-import { FormInput, passwordRules } from "modules/auth-form";
+import { passwordRules } from "modules/auth-form/constants/formRules";
 
 type Props = {
     type: string;
@@ -11,7 +11,13 @@ export const PasswordInput = ({ type }: Props) => {
 
     return (
         <>
-            <FormInput name="password" rules={passwordRules} placeholder="Пароль"/>
+            <Form.Item name="password" rules={passwordRules} hasFeedback>
+                <Input.Password
+                    type="password"
+                    placeholder="Пароль"
+                    className={s.form__input}
+                />
+            </Form.Item>
             {type === "registration" && (
                 <Form.Item
                     name="confirm"

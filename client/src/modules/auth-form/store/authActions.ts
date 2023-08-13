@@ -1,5 +1,5 @@
-import { IS_USER_REG, IS_USER_AUTH, SET_USER, ERROR_MESSAGE, IS_LOADER_ACTIVE } from "./actionsTypes";
-import { TUser } from "modules/auth-form/types/TUser";
+import { IS_USER_REG, IS_USER_AUTH, SET_USER, ERROR_MESSAGE, IS_LOADER_ACTIVE } from "./authActionsTypes";
+import { TUser } from "modules/auth-form/types/authTypes";
 
 export const handleErrorMessage = (payload: string) => ({
     type: ERROR_MESSAGE,

@@ -1,8 +1,8 @@
 import axios from "axios";
-import { handleErrorMessage } from "../store/actions";
+import { handleErrorMessage } from "../store/authActions";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
-import {AuthResponse} from "modules/auth-form/types/AuthResponse";
+import { AuthResponse } from "modules/auth-form/types/authTypes";
 
 export const API_URL = `http://localhost:5000/api`;
 export const $api = axios.create({
