@@ -14,13 +14,13 @@ class RouteDifficultySeeder extends Seeder
     public static function run(): void
     {
         RouteDifficulty::query()->create([
-            'name' => 'easy'
+            'name' => 'новичок'
         ]);
         RouteDifficulty::query()->create([
-            'name' => 'medium'
+            'name' => 'знающий'
         ]);
         RouteDifficulty::query()->create([
-            'name' => 'hard'
+            'name' => 'опытный'
         ]);
     }
 }
