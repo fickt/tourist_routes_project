@@ -50,7 +50,7 @@ class Route extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(RouteCategory::class,
-            'routes_route_category',
+            'routes_route_categories',
             'category_id',
             'route_id');
     }

@@ -14,37 +14,37 @@ class RouteCategorySeeder extends Seeder
     public static function run(): void
     {
         RouteCategory::query()->create(
-            ['озёра']
+            ['name' => 'озёра']
         );
         RouteCategory::query()->create(
-            ['горы']
+            ['name' => 'горы']
         );
         RouteCategory::query()->create(
-            ['исторические места']
+            ['name' => 'исторические места']
         );
         RouteCategory::query()->create(
-            ['зоны отдыха']
+            ['name' => 'зоны отдыха']
         );
         RouteCategory::query()->create(
-            ['реки']
+            ['name' => 'реки']
         );
         RouteCategory::query()->create(
-            ['пещеры']
+            ['name' => 'пещеры']
         );
         RouteCategory::query()->create(
-            ['горнолыжные комплексы']
+            ['name' => 'горнолыжные комплексы']
         );
         RouteCategory::query()->create(
-            ['леса']
+            ['name' => 'леса']
         );
         RouteCategory::query()->create(
-            ['парки']
+            ['name' => 'парки']
         );
         RouteCategory::query()->create(
-            ['заповедники']
+            ['name' => 'заповедники']
         );
         RouteCategory::query()->create(
-            ['курганы']
+            ['name' => 'курганы']
         );
     }
 }

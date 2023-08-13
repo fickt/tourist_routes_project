@@ -18,6 +18,6 @@ class RouteCategory extends Model
 
     protected $table = 'route_categories';
     protected $fillable = [
-      'name'
+        'name'
     ];
 }

@@ -12,7 +12,7 @@ class RouteController extends Controller
     {
         return RouteResource::collection(
             Route::query()
-                ->with(['difficulty', 'photoPaths'])
+                ->with(['difficulty', 'photoPaths', 'categories'])
                 ->get()
         );
     }

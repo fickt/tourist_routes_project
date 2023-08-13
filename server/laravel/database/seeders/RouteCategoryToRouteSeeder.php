@@ -12,7 +12,7 @@ class RouteCategoryToRouteSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public static function run(): void
     {
         $route = Route::query()
             ->where('name', '=', 'Тестовый маршрут')
