@@ -1,22 +1,23 @@
-.main__content {
+.map_section {
   font-family: "Inter", sans-serif;
-  display: flex;
   flex-direction: column;
-  row-gap: 104px;
-  top: 15%;
-  max-width: 343px;
-  margin: 0 auto;
-  z-index: 100;
+  display: flex;
+  background: lightgray 50% / cover no-repeat;
+  width: 100%;
+  padding: 32px 16px;
 }
 
 .main__header {
   display: flex;
   flex-direction: column;
   row-gap: 12px;
+  margin-top: 70px;
+  margin-bottom: 104px;
 }
 
 .header__title {
   font-size: 24px;
+  line-height: 30px;
   font-weight: 500;
   margin: 0;
 }
@@ -24,5 +25,11 @@
 .header__text {
   font-size: 14px;
   font-weight: 400;
+  line-height: 18px;
   margin: 0;
+}
+
+.section__title {
+  font-size: 20px;
+  margin-bottom: 12px;
 }

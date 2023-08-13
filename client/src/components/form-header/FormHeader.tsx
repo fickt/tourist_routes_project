@@ -18,16 +18,14 @@ export const FormHeader = ({ title, text, link, headerLink, textLink }: Props) =
 
     const resetErrorMessage = () => {
         dispatch(handleErrorMessage(""));
-    }
+    };
 
     return (
         <div className={s.form__header}>
             <h2 className={s.header__title}>{title}</h2>
             {text && <p className={s.header__text}>{text}</p>}
-            <>
-                <p className={s.header__extra__text}>{headerLink}</p>
-                <UnderlineLink link={link} textLink={textLink} onClick={resetErrorMessage} />
-            </>
+            <p className={s.header__extra__text}>{headerLink}</p>
+            <UnderlineLink link={link} textLink={textLink} onClick={resetErrorMessage} />
         </div>
     )
 }

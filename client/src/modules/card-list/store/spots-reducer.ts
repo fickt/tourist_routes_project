@@ -1,6 +1,6 @@
+import { TMarker } from "components/ymap/constants/markers";
 import { GET_LOCAL_SPOTS, IS_SPOTS_LOADING, SPOTS_ERROR } from "./spots-action-type-names";
 import { TSpotsActions } from "modules/card-list/store/types/spots-action-types";
-import { TMarker } from "modules/ymap/constants/markers";
 
 export type TSpotsState = {
     data: TMarker[],
@@ -16,7 +16,7 @@ const initialState: TSpotsState = {
     error: false
 };
 
-export function spotReducer(state = initialState, action:TSpotsActions) {
+export function spotsReducer(state = initialState, action:TSpotsActions) {
 
     switch (action.type) {
         case GET_LOCAL_SPOTS: 

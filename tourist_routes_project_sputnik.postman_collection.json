@@ -22,11 +22,21 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"first_name\":\"Andrei\",\r\n    \"last_name\":\"Ivanovich\",\r\n    \"email\":\"andrei2ivanovic1h@gmail.com\",\r\n    \"password\":\"password\",\r\n    \"password_confirmation\":\"password\"\r\n}",
+					"raw": "{\r\n    \"nickname\":\"vasya228\",\r\n    \"email\":\"andrei2ivanovich@gmail.com\",\r\n    \"password\":\"password\",\r\n    \"password_confirmation\":\"password\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -104,6 +114,16 @@
 		{
 			"name": "Logout user",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"url": {
@@ -114,6 +134,23 @@
 					"path": [
 						"auth",
 						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all routes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/routes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes"
 					]
 				}
 			},
@@ -143,7 +180,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "http://localhost:8080/api",
+			"value": "http://localhost:8000/api",
 			"type": "string"
 		},
 		{
