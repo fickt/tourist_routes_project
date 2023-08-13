@@ -1,8 +1,8 @@
 import s from "./styles.module.scss";
 import { memo } from "react";
 import Card from "components/card/Card";
-import { spotsSelectors } from "../../store/spots-selectors"
 import { useAppSelector } from "storage/hook-types";
+import { spotsSelectors } from "modules/card-list/store/spots-selectors";
 
 export const CardList = memo(() => {
 

@@ -1,5 +1,5 @@
 import s from "./styles.module.scss"
-import { MainContent } from "components/main-content/MainContent";
+import { MainContent } from "modules/main-content/MainContent";
 
 const HomePage = () => {
  
