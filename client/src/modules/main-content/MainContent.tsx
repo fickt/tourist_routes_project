@@ -1,8 +1,6 @@
-import { FormEvent, useState } from "react";
+import React from "react";
 import s from "./styles.module.scss";
-import { SearchForm } from "ui/search/SearchForm";
-import { CardList } from "modules/card-list";
-import backImage from "./assets/map_bg.jpg";
+import { Search } from "ui/search/Search";
 
 export const MainContent = () => {
 
