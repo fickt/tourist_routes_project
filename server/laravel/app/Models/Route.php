@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Route extends Model
@@ -41,6 +42,13 @@ class Route extends Model
         return $this->belongsTo(
             RouteDifficulty::class,
             'difficulty_id', 'id');
+    }
 
+    /**
+     * Возвращает категории от Route
+     */
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(RouteCategory::class, 'routes_route_category', 'category_id', 'route_id');
     }
 }
