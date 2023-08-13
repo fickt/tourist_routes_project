@@ -25,7 +25,7 @@ export const MainContent = () => {
                     <p className={s.header__text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
                 <SearchForm
-                    placeholder={'Найти лучший маршрут'}
+                    placeholder={"Найти лучший маршрут"}
                     searchValue={searchValue}
                     handleFormSubmit={handleSearchClick}
                     handleInputChange={handleInputChange} />
