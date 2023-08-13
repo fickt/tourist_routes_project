@@ -5,29 +5,29 @@
 *::after,
 *::before {
   box-sizing: inherit;
-}
+};
 
 html {
     box-sizing: border-box;
     height: 100%;
     min-width: 375px;
-}
+};
 
 body {
     background-color: var(--color-white);
     height: 100%;
     min-width: 375px;
-}
+};
 
 #root {
     display: flex;
     flex-direction: column;
     height: 100%;
-}
+};
 
 h1, h2, h3, h4, h5, p {
     margin: 0;
-}
+};
 
 .container {
     max-width: 1000px;
@@ -35,23 +35,25 @@ h1, h2, h3, h4, h5, p {
     padding-left: var(--container-padding);
     padding-right: var(--container-padding);
     width: calc(100% - 2*(var(--container-padding)));
-}
+};
+
 .content {
     padding: var(--content-padding) 0;
-}
+};
+
 main {
     flex: 1;
-}
+};
 
 [class*="copyrights-pane"] {
     display: none !important;
-}
+};
 
 .map {
     width: 80vw;
     height: 400px;
     background-color: #7B8E98;
-}
+};
 
 #mapId {
 
@@ -67,13 +69,13 @@ main {
         max-width: 300px;
         display: block;
     }
-}
+};
 
 .auth {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+};
 
 @media (min-width: 760px) {
     .container {
@@ -84,4 +86,4 @@ main {
     .content {
         padding: calc(var(--content-padding) * 2) 0;
     }
-}
+};

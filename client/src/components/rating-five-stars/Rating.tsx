@@ -1,12 +1,11 @@
-import s from './styles.module.scss';
-import StarIcon from './img/star.svg';
-import { useActionData } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import classNames from 'classnames';
+import s from "./styles.module.scss";
+import StarIcon from "./img/star.svg";
+import { useEffect, useState } from "react";
+import classNames from "classnames";
+import { MAX_COUNT_RATING } from "./constants";
 
-const MAX_COUNT_RATING = 5;
 
-interface IRatingProps {
+type IRatingProps = {
     isEditable?: boolean, 
     currentRating: number, 
     setCurrentRating?: (number:number) => void,
@@ -36,7 +35,7 @@ function Rating({isEditable = false, currentRating, setCurrentRating, error}: IR
             )
         } )
         
-        setRatingArray(updateRatingArray)
+        setRatingArray(updateRatingArray);
     }
 
     function changeDisplay(rating:number) {
@@ -52,9 +51,9 @@ function Rating({isEditable = false, currentRating, setCurrentRating, error}: IR
     useEffect(() => constructRating(currentRating), [currentRating])
 
     return ( 
-    <div className='rating__container'>        
+    <div className="rating__container">        
         {ratingArray.map((star, i) => <span key={i} className={s.spn}>{star}</span>)}
-        {error && <p className='error-message'>{error.message}</p>}
+        {error && <p className="error-message">{error.message}</p>}
     </div>
      );
 }

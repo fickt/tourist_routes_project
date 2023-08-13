@@ -1,1 +1,1 @@
-export { YMapComponent } from './components/ymap-component/YMapComponent';
+export { YMapComponent } from "./components/ymap-component/YMapComponent";

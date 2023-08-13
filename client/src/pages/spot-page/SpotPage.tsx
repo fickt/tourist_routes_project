@@ -4,9 +4,7 @@ import { useAppDispatch, useAppSelector } from "storage/hook-types";
 import s from "./styles.module.scss"
 import { getLocalSpotsAction } from "modules/card-list/store/spots-actions";
 import { TMarker, markers } from "modules/ymap/constants/markers";
-import { YMapComponent } from "modules/ymap";
 import { ContentHeader } from "ui/content-header/ContentHeader";
-import { ReviewBlock } from "modules/review-block/components/review-block/ReviewBlock";
 import { SpotItem } from "modules/spot-item";
 
 const SpotPage = () => {

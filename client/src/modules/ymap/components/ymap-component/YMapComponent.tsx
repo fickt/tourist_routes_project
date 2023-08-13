@@ -3,7 +3,7 @@ import { TMarker } from "../../constants/markers";
 import s from "./styles.module.scss";
 import { mapControls, mapState } from "modules/ymap/constants/constants";
 import { removeControls } from "modules/ymap/helpers/ymap-options";
-import ymaps from 'ymaps';
+import ymaps from "ymaps";
 
 type props = {
     markers: TMarker[]
@@ -13,7 +13,7 @@ export const YMapComponent = ({ markers }: props) => {
 
     const init = () => {
 
-        let myMap = new ymaps.Map('mapId', mapState);
+        let myMap = new ymaps.Map("mapId", mapState);
         //задаем пустой объект маршрута, нужен для перерисовки
         let multiRoute = new ymaps.multiRouter.MultiRoute({
             referencePoints: [],
@@ -31,7 +31,7 @@ export const YMapComponent = ({ markers }: props) => {
                     hintContent: marker.name,
                     balloonContent: marker.description,
                     balloonContentHeader: marker.name,
-                    balloonContentBody: marker.description + `<img class='balloon-image' src=${marker.picture} alt="img" />`,
+                    balloonContentBody: marker.description + `<img class="balloon-image" src=${marker.picture} alt="img" />`,
                     balloonContentFooter: `<a  target="_blank" href="https://yandex.ru/maps/?rtext=~${marker.coordinates[0]},${marker.coordinates[1]}">Проложить маршрут</a>`,
                 }
                 //параметры для картинки на карте
