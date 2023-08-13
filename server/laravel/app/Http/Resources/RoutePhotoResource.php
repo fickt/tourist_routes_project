@@ -16,7 +16,6 @@ class RoutePhotoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        //header('Content-Type: image/png');
         return [
             base64_encode(File::get(public_path() . '/images/test_photo.jpg'))
         ];
