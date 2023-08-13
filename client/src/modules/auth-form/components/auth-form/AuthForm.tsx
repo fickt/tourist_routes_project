@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Form, Alert, FormInstance } from "antd";
+import { Form, FormInstance } from "antd";
 import s from "./style.module.scss";
 import Cookies from "js-cookie";
-import { RootState } from "storage/redux-types";
 import AuthService from "modules/auth-form/api/AuthService";
-import { handleErrorMessage, handleLoaderActive, handleSetUser, handleUserAuth, handleUserReg } from "modules/auth-form/store/actions";
 import { UnderlineLink } from "ui/underline-link/UnderlineLink";
-import { emailRules, FormButton, FormInput, nicknameRules, PasswordInput, TFormData } from "modules/auth-form";
 import { Spinner } from "ui/spinner/Spinner";
+import { FormInput } from "modules/auth-form/components/form-input/FormInput";
+import { emailRules, nicknameRules } from "modules/auth-form/constants/formRules";
+import { PasswordInput } from "modules/auth-form/components/form-input/PasswordInput";
+import { FormButton } from "modules/auth-form/components/form-button/FormButton";
+import { handleErrorMessage, handleLoaderActive, handleSetUser, handleUserAuth, handleUserReg } from "modules/auth-form/store/authActions";
+import { useAppSelector, useAppDispatch } from "storage/hook-types";
+import { TFormData } from "modules/auth-form/types/authTypes";
+import { authError, authLoader, isUserReg } from "modules/auth-form/store/authSelectors";
+import { ErrorMessage } from "ui/error-message/ErrorMessage";
 
 type Props = {
     type: string;
@@ -16,15 +21,14 @@ type Props = {
 
 export const AuthForm = ({ type }: Props) => {
 
+    const dispatch = useAppDispatch();
+    const loader = useAppSelector(authLoader);
+    const error = useAppSelector(authError);
+    const userReg= useAppSelector(isUserReg);
+
     useEffect(() => {
         dispatch(handleErrorMessage(""));
     }, [])
-
-    const dispatch = useDispatch();
-
-    const userRegStatus = useSelector((state: RootState) => state.userStatus.user_reg);
-    const errorMessage = useSelector((state: RootState) => state.errorMessage.error_message);
-    const loader = useSelector((state: RootState) => state.isLoaderActive.is_loader_active);
 
     const [form] = Form.useForm<FormInstance>();
     const [formData, setFormData] = useState<TFormData | null>(null);
@@ -67,9 +71,8 @@ export const AuthForm = ({ type }: Props) => {
     };
 
     const formValidation = async (values: any) => {
-        console.log(formData)
-
-        userRegStatus
+        console.log(formData);
+        userReg
             ? await performAuth(values.email, values.password, false)
             : await performAuth(values.email, values.password, true)
     }
@@ -85,9 +88,7 @@ export const AuthForm = ({ type }: Props) => {
             onValuesChange={handleFormChange}
         >
             <div className={s.form__inputs}>
-                {type === "registration"
-                    && <FormInput name="nickname" rules={nicknameRules} placeholder="Имя пользователя" />
-                }
+                {type === "registration" && <FormInput name="name" rules={nicknameRules} placeholder="Имя пользователя" />}
                 <FormInput name="email" rules={emailRules} placeholder="E-mail" />
                 <PasswordInput type={type} />
                 <FormButton
@@ -100,7 +101,7 @@ export const AuthForm = ({ type }: Props) => {
             </div>
             {type === "login" && <UnderlineLink link="/forgotPassword" textLink="Забыли пароль?" onClick={null} />}
             {loader && <Spinner />}
-            {!loader && (errorMessage && <Alert message={errorMessage} />)}
+            {!loader && (error && <ErrorMessage errorText="Ошибка авторизации" />)}
         </Form>
     )
 }

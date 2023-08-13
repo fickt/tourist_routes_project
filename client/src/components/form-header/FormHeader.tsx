@@ -1,8 +1,8 @@
 import React from "react";
-import { handleErrorMessage } from "modules/auth-form/store/actions";
 import { useDispatch } from "react-redux";
 import s from "./style.module.scss";
 import { UnderlineLink } from "ui/underline-link/UnderlineLink";
+import { handleErrorMessage } from "modules/auth-form/store/authActions";
 
 type Props = {
     title: string;
@@ -12,7 +12,7 @@ type Props = {
     textLink: string;
 }
 
-export const HeaderForm = ({ title, text, link, headerLink, textLink }: Props) => {
+export const FormHeader = ({ title, text, link, headerLink, textLink }: Props) => {
 
     const dispatch = useDispatch();
 
