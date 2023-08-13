@@ -1,9 +1,9 @@
-import { YMapComponent } from "modules/ymap"
 import s from "./styles.module.scss"
-import { TMarker } from "modules/ymap/constants/markers"
 import { ReactNode } from "react"
 import Button from "ui/button/Button"
 import { ReviewBlock } from "modules/review-block"
+import { YMapComponent } from "components/ymap/YMapComponent"
+import { TMarker } from "components/ymap/constants/markers"
 
 type props = {
     spotItem: TMarker[]
@@ -24,7 +24,7 @@ export const SpotItem = ({ spotItem }: props) => {
                     <div className={s.card__desc}>
                         <span>{description}</span>
                     </div>
-                    <Button extraClass={s.button} type="primary" href="#">Лучшие отзывы</Button>
+                    <Button extraClass={s.button} type="primary">Лучшие отзывы</Button>
                 </div>
             </section>
             <section className={s.section}>

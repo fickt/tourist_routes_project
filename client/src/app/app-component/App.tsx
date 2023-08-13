@@ -1,10 +1,10 @@
 import { Footer } from "antd/es/layout/layout";
 import AppRouter from "pages/AppRouter";
-import { markers } from "modules/ymap/constants/markers";
 import { useEffect, memo } from "react";
 import { getLocalSpotsAction } from "modules/card-list/store/spots-actions";
 import { useAppDispatch } from "storage/hook-types";
 import { Header } from "modules/header";
+import { markers } from "components/ymap/constants/markers";
 
 const App = () => {
 

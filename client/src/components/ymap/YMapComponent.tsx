@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { TMarker } from "../../constants/markers";
 import s from "./styles.module.scss";
-import { mapControls, mapState } from "modules/ymap/constants/constants";
-import { removeControls } from "modules/ymap/helpers/ymap-options";
 import ymaps from "ymaps";
+import { removeControls } from "./helpers/ymap-options";
+import { mapControls, mapState } from "./constants/constants";
+import { TMarker } from "./constants/markers";
 
 type props = {
     markers: TMarker[]

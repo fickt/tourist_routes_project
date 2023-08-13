@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "storage/hook-types";
 import s from "./styles.module.scss"
 import { getLocalSpotsAction } from "modules/card-list/store/spots-actions";
-import { TMarker, markers } from "modules/ymap/constants/markers";
 import { ContentHeader } from "ui/content-header/ContentHeader";
 import { SpotItem } from "modules/spot-item";
+import { TMarker, markers } from "components/ymap/constants/markers";
 
 const SpotPage = () => {
 
