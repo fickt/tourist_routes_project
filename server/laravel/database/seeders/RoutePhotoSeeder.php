@@ -19,7 +19,14 @@ class RoutePhotoSeeder extends Seeder
         RoutePhoto::query()->create(
             [
                 'route_id' => $route->id,
-                'photo_path' => 'public/images/test_photo.jpg'
+                'photo_path' => 'test_photo.jpg'
+            ]
+        );
+
+        RoutePhoto::query()->create(
+            [
+                'route_id' => $route->id,
+                'photo_path' => 'test_photo.jpg'
             ]
         );
     }
