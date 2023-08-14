@@ -22,15 +22,15 @@ function Rating({isEditable = false, currentRating, setCurrentRating, error}: IR
             let starValue = i + 1
             return (
                 /* с помощью classNames добавляю класс заливки при true */
-                <StarIcon className={classNames(s.star,
+                <StarIcon className={classNames(
                     {
                         [s.filled]: filledRating > i,
                         [s.editable]: isEditable
                     
                     })}
-                    onMouseEnter={() => changeDisplay(starValue)}
-                    onMouseLeave={() => changeDisplay(currentRating)}
-                    onClick={() => changeRating(starValue)}
+                    onMouseEnter={changeDisplay(starValue)}
+                    onMouseLeave={changeDisplay(currentRating)}
+                    onClick={changeRating(starValue)}
                 />
             )
         } )

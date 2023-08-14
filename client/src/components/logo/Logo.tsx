@@ -8,7 +8,7 @@ const { Title } = Typography;
 const Logo = () => {
 
     const location = useLocation();
-    const handleclick = (e: SyntheticEvent<HTMLAnchorElement>) => {
+    const handleClick = (e: SyntheticEvent<HTMLAnchorElement>) => {
         
         if (location.pathname === "/") {
             e.preventDefault();
@@ -16,7 +16,7 @@ const Logo = () => {
     };
 
     return (
-        <Link to={"/"} className={s.logo} onClick={handleclick}>
+        <Link to={"/"} className={s.logo} onClick={handleClick}>
             <Title level={2} className={s.text}>Travel</Title>
         </Link>
     );
