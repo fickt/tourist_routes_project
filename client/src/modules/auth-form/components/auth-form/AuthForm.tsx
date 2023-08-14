@@ -10,7 +10,7 @@ import { emailRules, nicknameRules } from "modules/auth-form/constants/formRules
 import { PasswordInput } from "modules/auth-form/components/form-input/PasswordInput";
 import { FormButton } from "modules/auth-form/components/form-button/FormButton";
 import { handleErrorMessage, handleLoaderActive, handleSetUser, handleUserAuth, handleUserReg } from "modules/auth-form/store/authActions";
-import { useAppSelector, useAppDispatch } from "storage/hook-types";
+import { useAppSelector, useAppDispatch } from "storage/hookTypes";
 import { TFormData } from "modules/auth-form/types/authTypes";
 import { authError, authLoader, isUserReg } from "modules/auth-form/store/authSelectors";
 import { ErrorMessage } from "ui/error-message/ErrorMessage";

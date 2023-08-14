@@ -1,2 +1,2 @@
 export { CardList } from "./components/card-list/CardList";
-export { spotsReducer } from "./store/spots-reducer";
+export { spotsReducer } from "./store/spotsReducer";

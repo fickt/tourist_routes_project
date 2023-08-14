@@ -1,4 +1,4 @@
-import { RootState } from "storage/redux-types";
+import { RootState } from "storage/reduxTypes";
 
 export const authLoader = (state:RootState) => state.auth.is_loader_active;
 export const authError = (state:RootState) => state.auth.error_message;

@@ -1,5 +1,5 @@
 import { TMarker } from "components/ymap/constants/markers";
-import { SPOTS_ERROR, IS_SPOTS_LOADING, GET_LOCAL_SPOTS } from "modules/card-list/store/spots-action-type-names";
+import { SPOTS_ERROR, IS_SPOTS_LOADING, GET_LOCAL_SPOTS } from "modules/card-list/store/spotsActionTypeNames";
 
 //spots-data
 export type TSpotsActions =  TSpotsDataLoading | TSpotsDataError | TLocalSpotsDataAction;

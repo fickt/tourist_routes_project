@@ -1,5 +1,5 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "./redux-types";
+import { AppDispatch, RootState } from "./reduxTypes";
 
 //типизируем стандартные хуки под наше приложение
 type DispatchFunc = () => AppDispatch;

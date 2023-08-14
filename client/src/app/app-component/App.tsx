@@ -1,8 +1,8 @@
 import { Footer } from "antd/es/layout/layout";
 import AppRouter from "pages/AppRouter";
 import { useEffect, memo } from "react";
-import { getLocalSpotsAction } from "modules/card-list/store/spots-actions";
-import { useAppDispatch } from "storage/hook-types";
+import { getLocalSpotsAction } from "modules/card-list/store/spotsActions";
+import { useAppDispatch } from "storage/hookTypes";
 import { Header } from "modules/header";
 import { markers } from "components/ymap/constants/markers";
 

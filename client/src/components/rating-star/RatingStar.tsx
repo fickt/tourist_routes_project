@@ -1,8 +1,9 @@
 import { StarIcon } from "ui/star-icon/StarIcon";
 import { MAX_RATE } from "./constants";
 import s from "./styles.module.scss";
+import { TRatingStarProps } from "./types";
 
-const RatingStar = ({rating=5, id=0}) => {    
+const RatingStar = ({rating=5, id=0}:TRatingStarProps) => {    
 
     const calculateRating = (rating:number, MAX_RATE:number) => {
 
