@@ -14,12 +14,9 @@ import { useAppSelector, useAppDispatch } from "storage/hook-types";
 import { TFormData } from "modules/auth-form/types/authTypes";
 import { authError, authLoader, isUserReg } from "modules/auth-form/store/authSelectors";
 import { ErrorMessage } from "ui/error-message/ErrorMessage";
+import { AuthFormProps } from "modules/auth-form/components/auth-form/types";
 
-type Props = {
-    type: string;
-}
-
-export const AuthForm = ({ type }: Props) => {
+export const AuthForm = ({ type }: AuthFormProps) => {
 
     const dispatch = useAppDispatch();
     const loader = useAppSelector(authLoader);
