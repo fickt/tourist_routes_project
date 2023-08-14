@@ -1,12 +1,12 @@
 import React from "react";
-import "../../app/styles/index.scss";
+import s from "./styles.module.scss";
 import { AuthForm } from "modules/auth-form/components/auth-form/AuthForm";
 import { FormHeader } from "components/form-header/FormHeader";
 
 const LoginPage = () => {
 
     return (
-        <div className="auth">
+        <div className={s.auth}>
             <FormHeader
                 title="Добро пожаловать"
                 text="Чтобы продолжить, пожалуйста, войдите в аккаунт"
