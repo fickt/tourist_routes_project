@@ -3,7 +3,6 @@ import { Form, FormInstance } from "antd";
 import s from "./style.module.scss";
 import Cookies from "js-cookie";
 import AuthService from "modules/auth-form/api/AuthService";
-import { UnderlineLink } from "ui/underline-link/UnderlineLink";
 import { PreloaderCar } from "ui/spinner/PreloaderCar";
 import { FormInput } from "modules/auth-form/components/form-input/FormInput";
 import { emailRules, nicknameRules } from "modules/auth-form/constants/formRules";
@@ -15,6 +14,7 @@ import { TFormData } from "modules/auth-form/store/types/authTypes";
 import { authError, authLoader, isUserReg } from "modules/auth-form/store/authSelectors";
 import { ErrorMessage } from "ui/error-message/ErrorMessage";
 import { TAuthFormProps } from "./types";
+import { FormLink } from "modules/auth-form/components/form-link/FormLink";
 
 export const AuthForm = ({ type }: TAuthFormProps) => {
 
@@ -24,7 +24,7 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
     const userReg= useAppSelector(isUserReg);
 
     useEffect(() => {
-        dispatch(handleErrorMessage(""));
+        dispatch(handleErrorMessage(null));
     }, [])
 
     const [form] = Form.useForm<FormInstance>();
@@ -96,7 +96,7 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
                     }
                 />
             </div>
-            {type === "login" && <UnderlineLink link="/forgotPassword" textLink="Забыли пароль?" onClick={null} />}
+            {type === "login" && <FormLink link="/forgotPassword" textLink="Забыли пароль?" onClick={null} />}
             {loader && <PreloaderCar />}
             {!loader && (error && <ErrorMessage errorText="Ошибка авторизации" />)}
         </Form>
