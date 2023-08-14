@@ -26,7 +26,7 @@ class RoutePhotoSeeder extends Seeder
         RoutePhoto::query()->create(
             [
                 'route_id' => $route->id,
-                'photo_path' => 'test_photo.jpg'
+                'photo_path' => 'test_photo_2.jpg'
             ]
         );
     }
