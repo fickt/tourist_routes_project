@@ -27,7 +27,7 @@
 
 2) Если нужны постман тесты, в корне лежит файлик tourist_routes_project_sputnik.postman_collection.json
 
-## Баги
+## Баги и их решения
 
 1) Fatal error: Uncaught Error: Failed opening required 'var/www/vendor/autoload.php'
    Решение: пропишите в терминал docker exec app composer update --no-scripts --ignore-platform-req=ext-sockets
