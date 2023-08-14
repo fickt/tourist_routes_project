@@ -1,4 +1,4 @@
-export type TUnderlineLinkProps = {
+export type TFormLinkProps = {
     link: string;
     textLink: string;
     onClick: () => void;

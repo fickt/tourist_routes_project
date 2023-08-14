@@ -1,9 +1,8 @@
-import React from "react";
 import s from "./style.module.scss";
 import { Link } from "react-router-dom";
-import { TUnderlineLinkProps } from "./types";
+import { TFormLinkProps } from "./types";
 
-export const UnderlineLink = ({ link, textLink, onClick }: TUnderlineLinkProps) => {
+export const FormLink = ({ link, textLink, onClick }: TFormLinkProps) => {
     return (
         <Link
             to={link}

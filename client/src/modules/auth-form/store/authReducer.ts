@@ -1,12 +1,5 @@
-import { ERROR_MESSAGE, IS_LOADER_ACTIVE, IS_USER_AUTH, IS_USER_REG, SET_USER } from "../authActionsTypes";
-import { TState, TUser } from "modules/auth-form/types/authTypes";
-
-
-type IAction = {
-    type: string;
-    payload: string;
-    user: TUser | null;
-}
+import { ERROR_MESSAGE, IS_LOADER_ACTIVE, IS_USER_AUTH, IS_USER_REG, SET_USER } from "./authActionsTypes";
+import { TState, TAction } from "./types/authTypes";
 
 const initialState: TState = {
     error_message: "",
@@ -16,7 +9,7 @@ const initialState: TState = {
     user_reg: false,
 }
 
-export const authReducer = (state = initialState, action:IAction) => {
+export const authReducer = (state = initialState, action: TAction) => {
     switch(action.type) {
         case ERROR_MESSAGE:
             return {

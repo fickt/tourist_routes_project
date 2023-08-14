@@ -1,14 +1,9 @@
 import React from "react";
 import s from "./style.module.scss";
 import { Form, Input } from "antd";
+import { TFormInputProps } from "./types";
 
-type Props = {
-    name: string;
-    rules: any[];
-    placeholder: string;
-}
-
-export const FormInput = ({ name, rules, placeholder }: Props) => {
+export const FormInput = ({ name, rules, placeholder }: TFormInputProps) => {
 
     return (
         <Form.Item name={name} rules={rules} hasFeedback>

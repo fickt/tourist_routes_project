@@ -2,12 +2,10 @@ import React from "react";
 import s from "./style.module.scss";
 import { Form, Input } from "antd";
 import { passwordRules } from "modules/auth-form/constants/formRules";
+import { TPasswordInputProps } from "./types";
+import { AppRoutes, RoutePath } from "pages/routeConfig";
 
-type Props = {
-    type: string;
-}
-
-export const PasswordInput = ({ type }: Props) => {
+export const PasswordInput = ({ type }: TPasswordInputProps) => {
 
     return (
         <>
@@ -18,7 +16,7 @@ export const PasswordInput = ({ type }: Props) => {
                     className={s.form__input}
                 />
             </Form.Item>
-            {type === "registration" && (
+            {type === RoutePath[AppRoutes.REGISTRATION] && (
                 <Form.Item
                     name="confirm"
                     hasFeedback
