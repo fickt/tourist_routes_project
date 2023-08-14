@@ -29,5 +29,9 @@
 
 ## Баги
 
-Если вдруг вылезет Fatal error: Uncaught Error: Failed opening required 'var/www/vendor/autoload.php'
-пропишите в терминал docker exec app composer update --no-scripts --ignore-platform-req=ext-sockets
+1) Fatal error: Uncaught Error: Failed opening required 'var/www/vendor/autoload.php'
+   Решение: пропишите в терминал docker exec app composer update --no-scripts --ignore-platform-req=ext-sockets
+
+2) "There is no existing directory at \storage\logs\" and it could not be created: No such file or directory"
+    Решение: пропишите в терминал две команды 1) docker exec app php artisan cache:clear
+                                              2) docker exec app php artisan optimize       
