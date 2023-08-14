@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import { Form, FormInstance } from "antd";
 import s from "./style.module.scss";
 import Cookies from "js-cookie";
@@ -39,6 +39,12 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
             ...changedFields,
         }));
     };
+
+    // запрос отправляется по кнопке, убрано задвоение запроса
+    const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        form.submit();
+    }
 
     // отправка запроса (login или reg)
     const sendForm = async (values: any) => {
@@ -96,7 +102,7 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
                 <PasswordInput type={type} />
                 <FormButton
                     value={type === RoutePath[AppRoutes.LOGIN] ? "Войти" : "Зарегистрироваться"}
-                    onClick={form.submit}
+                    onClick={handleButtonClick}
                     disabled={!form.isFieldsTouched(true) || form.getFieldsError()
                         .filter(({errors}) => errors.length).length > 0
                     }

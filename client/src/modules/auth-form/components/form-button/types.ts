@@ -1,5 +1,7 @@
+import { MouseEvent } from "react";
+
 export type TFormButtonProps = {
     value: string;
-    onClick: () => void;
+    onClick: (e: MouseEvent<HTMLButtonElement>) => void;
     disabled: boolean;
 }
