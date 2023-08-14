@@ -6,7 +6,7 @@ import { TSpotItemProps } from "./types";
 
 export const SpotItem = ({ spotItem }: TSpotItemProps) => {
 
-    const { name, description, picture, id } = spotItem[0];
+    const { name, description, picture, id } = spotItem;
 
     return (
         <div className={s.wrapper}>
@@ -24,7 +24,7 @@ export const SpotItem = ({ spotItem }: TSpotItemProps) => {
             </section>
             <section className={s.section}>
                 <h2 className={s.section__title}>На карте</h2>
-                <YMapComponent markers={spotItem} />
+                <YMapComponent markers={[spotItem]} />
             </section>
             <section className={s.section}>
                 <h2 className={s.section__title}>Мнения пользователей</h2>

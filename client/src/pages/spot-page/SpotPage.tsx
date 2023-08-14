@@ -11,14 +11,20 @@ const SpotPage = () => {
 
     const { spotId } = useParams();
     const spots = useAppSelector(state => state?.spots?.data);
-    const [spotItem, setSpotItem] = useState<TMarker[]>(null);
+    const [spotItem, setSpotItem] = useState<TMarker>(null);
 
     const dispatch = useAppDispatch();
 
     const getSpotById = (spotId: string) => {
 
         if (spots) {
-            setSpotItem(spots?.filter(spot => spot.id === Number(spotId)));
+            // setSpotItem(spots?.filter(spot => spot.id === Number(spotId)));
+            setSpotItem(spots.find(spot => {
+                if (spot.id === Number(spotId))
+                    return true
+                else
+                    return false
+            }))
         }
     }
 
@@ -33,17 +39,16 @@ const SpotPage = () => {
 
     if (spotItem) {
 
-        const spot = { ...spotItem[0] }
-
         return (
             <div className={s.wrapper}>
                 <div className="content container">
-                    <ContentHeader textButton="назад" title={spot.name} />
-                    <SpotItem spotItem={spotItem} />                    
+                    <ContentHeader textButton="назад" title={spotItem.name} />
+                    <SpotItem spotItem={spotItem} />
                 </div>
             </div>
         );
     }
+
 }
 
 export default SpotPage;
