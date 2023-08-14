@@ -3,16 +3,11 @@ import { useDispatch } from "react-redux";
 import s from "./style.module.scss";
 import { UnderlineLink } from "ui/underline-link/UnderlineLink";
 import { handleErrorMessage } from "modules/auth-form/store/authActions";
+import { TFormHeaderProps } from "./types";
 
-type Props = {
-    title: string;
-    text: string;
-    link: string;
-    headerLink: string;
-    textLink: string;
-}
 
-export const FormHeader = ({ title, text, link, headerLink, textLink }: Props) => {
+
+export const FormHeader = ({ title, text, link, headerLink, textLink }: TFormHeaderProps) => {
 
     const dispatch = useDispatch();
 

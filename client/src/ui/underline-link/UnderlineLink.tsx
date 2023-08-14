@@ -1,14 +1,9 @@
 import React from "react";
 import s from "./style.module.scss";
 import { Link } from "react-router-dom";
+import { TUnderlineLinkProps } from "./types";
 
-type Props = {
-    link: string;
-    textLink: string;
-    onClick: () => void;
-}
-
-export const UnderlineLink = ({ link, textLink, onClick }: Props) => {
+export const UnderlineLink = ({ link, textLink, onClick }: TUnderlineLinkProps) => {
     return (
         <Link
             to={link}

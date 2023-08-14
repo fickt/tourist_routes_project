@@ -3,13 +3,10 @@ import s from "./styles.module.scss";
 import ymaps from "ymaps";
 import { removeControls } from "./helpers/ymap-options";
 import { mapControls, mapState } from "./constants/constants";
+import { TYMapprops } from "./types";
 import { TMarker } from "./constants/markers";
 
-type props = {
-    markers: TMarker[]
-}
-
-export const YMapComponent = ({ markers }: props) => {
+export const YMapComponent = ({ markers }: TYMapprops) => {
 
     const init = () => {
 

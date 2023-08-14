@@ -3,16 +3,9 @@ import StarIcon from "./img/star.svg";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { MAX_COUNT_RATING } from "./constants";
+import { TRatingProps } from "./types";
 
-
-type IRatingProps = {
-    isEditable?: boolean, 
-    currentRating: number, 
-    setCurrentRating?: (number:number) => void,
-    error?: any
-}
-
-function Rating({isEditable = false, currentRating, setCurrentRating, error}: IRatingProps) {
+function Rating({isEditable = false, currentRating, setCurrentRating, error}: TRatingProps) {
 
     const [ratingArray, setRatingArray] = useState(new Array(MAX_COUNT_RATING).fill(<></>)) //новый пассив из 5 звезд
 

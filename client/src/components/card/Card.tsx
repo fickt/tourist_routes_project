@@ -1,13 +1,13 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import s from "./styles.module.scss"
 import Button from "ui/button/Button";
 import RatingStar from "components/rating-star/RatingStar";
-import { TMarker } from "components/ymap/constants/markers";
+import { TCardProps } from "./types";
 
-type props = TMarker & { children?: ReactNode }
 
-const Card = ({ id, name, description, coordinates, picture, children, rating }: props) => {
+
+const Card = ({ id, name, description, coordinates, picture, children, rating }: TCardProps) => {
 
     return (
         <article className={s.card}>

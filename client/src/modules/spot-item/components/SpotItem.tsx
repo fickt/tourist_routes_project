@@ -1,15 +1,10 @@
-import s from "./styles.module.scss"
-import { ReactNode } from "react"
-import Button from "ui/button/Button"
-import { ReviewBlock } from "modules/review-block"
-import { YMapComponent } from "components/ymap/YMapComponent"
-import { TMarker } from "components/ymap/constants/markers"
+import s from "./styles.module.scss";
+import Button from "ui/button/Button";
+import { ReviewBlock } from "modules/review-block";
+import { YMapComponent } from "components/ymap/YMapComponent";
+import { TSpotItemProps } from "./types";
 
-type props = {
-    spotItem: TMarker[]
-} & { children?: ReactNode }
-
-export const SpotItem = ({ spotItem }: props) => {
+export const SpotItem = ({ spotItem }: TSpotItemProps) => {
 
     const { name, description, picture, id } = spotItem[0];
 
@@ -35,7 +30,6 @@ export const SpotItem = ({ spotItem }: props) => {
                 <h2 className={s.section__title}>Мнения пользователей</h2>
                 <ReviewBlock id={id} />
             </section>
-
         </div>
     )
 }

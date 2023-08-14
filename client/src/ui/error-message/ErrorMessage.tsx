@@ -1,12 +1,9 @@
 import React from "react";
 import s from "./style.module.scss";
 import { Alert } from "antd";
+import { TErrorMessageProps } from "./types";
 
-type Props = {
-    errorText: string;
-}
-
-export const ErrorMessage = ({ errorText }: Props) => {
+export const ErrorMessage = ({ errorText }: TErrorMessageProps) => {
 
     return (
         <Alert message={ errorText } className={s.error} />

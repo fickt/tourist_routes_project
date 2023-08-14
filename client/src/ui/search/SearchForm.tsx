@@ -1,9 +1,9 @@
 import s from "./styles.module.scss"
 import SearchIcon from "./assets/search-icon.svg";
-import { ISearchProps } from "./types";
 import classNames from "classnames";
+import { TSearchProps } from "./types";
 
-export const SearchForm = ({ handleFormSubmit, handleInputChange, placeholder, searchValue }: ISearchProps) => {
+export const SearchForm = ({ handleFormSubmit, handleInputChange, placeholder, searchValue }: TSearchProps) => {
 
     const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         handleInputChange(e.target.value)

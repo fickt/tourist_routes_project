@@ -1,14 +1,8 @@
 import s from "./styles.module.scss"
-import { ReactNode } from "react";
 import NotFoundIcon from "./images/notfound-icon.svg"
 import { Link } from "react-router-dom";
 import { Button } from "antd";
-
-type TNotFoundProps = {
-  children?: ReactNode,
-  title: string,
-  buttonText?: string,
-}
+import { TNotFoundProps } from "./types";
 
 const NotFound = ({ children, title, buttonText = "На главную" }: TNotFoundProps) => {
 
