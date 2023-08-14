@@ -1,20 +1,18 @@
 import { TRoutes } from "./AppRouter";
 import HomePage from "pages/home-page/HomePage";
 import SpotsPage from "./spots-page/SpotsPage";
-import { RouteProps } from "react-router-dom";
 import SpotPage from "./spot-page/SpotPage";
 import LoginPage from "./login-page/LoginPage";
 import RegistrationPage from "./registration-page/RegistrationPage";
 import ForgotPasswordPage from "./forgot-password/ForgotPasswordPage";
 import NotFoundPage from "./not-found-page/NotFoundPage";
 
-
 export enum AppRoutes {
     HOME = "home",
     SPOTS = "spots",
     SPOT_ID = "spotId",
     LOGIN = "login",
-    REGISTRATIOM = "registration",
+    REGISTRATION = "registration",
     FORGOT_PASSWORD = "forgotPassword",
     NOT_FOUND = "not_found",
 }
@@ -24,7 +22,7 @@ export const RoutePath = {
     [AppRoutes.SPOTS]: "/spots",
     [AppRoutes.SPOT_ID]: "/spots/:spotId/*",
     [AppRoutes.LOGIN]: "/login",
-    [AppRoutes.REGISTRATIOM]: "/registration",
+    [AppRoutes.REGISTRATION]: "/registration",
     [AppRoutes.FORGOT_PASSWORD]: "/forgotPassword",
     [AppRoutes.NOT_FOUND]: "*",
 }
