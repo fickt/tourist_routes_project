@@ -1,7 +1,7 @@
-import React from "react";
 import s from "./styles.module.scss";
 import { AuthForm } from "modules/auth-form/components/auth-form/AuthForm";
 import { FormHeader } from "components/form-header/FormHeader";
+import { AppRoutes, RoutePath } from "pages/routeConfig";
 
 const LoginPage = () => {
 
@@ -14,7 +14,7 @@ const LoginPage = () => {
                 headerLink="Ещё не зарегистрированы?"
                 textLink="Зарегистрируйтесь здесь."
             />
-            <AuthForm type="login" />
+            <AuthForm type={RoutePath[AppRoutes.LOGIN]} />
         </div>
     );
 }
