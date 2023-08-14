@@ -9,7 +9,6 @@ const RegistrationPage = () => {
         <div className={s.auth}>
             <FormHeader
                 title="Регистрация"
-                text=""
                 link="/login"
                 headerLink="Уже зарегистрированы?"
                 textLink="Войдите в аккаунт."
