@@ -1,9 +1,8 @@
-import React from "react";
 import { useDispatch } from "react-redux";
 import s from "./style.module.scss";
-import { UnderlineLink } from "ui/underline-link/UnderlineLink";
 import { handleErrorMessage } from "modules/auth-form/store/authActions";
 import { TFormHeaderProps } from "./types";
+import { FormLink } from "modules/auth-form/components/form-link/FormLink";
 
 export const FormHeader = ({ title, text, link, headerLink, textLink }: TFormHeaderProps) => {
 
@@ -18,7 +17,7 @@ export const FormHeader = ({ title, text, link, headerLink, textLink }: TFormHea
             <h2 className={s.header__title}>{title}</h2>
             {text && <p className={s.header__text}>{text}</p>}
             <p className={s.header__extra__text}>{headerLink}</p>
-            <UnderlineLink link={link} textLink={textLink} onClick={resetErrorMessage} />
+            <FormLink link={link} textLink={textLink} onClick={resetErrorMessage} />
         </div>
     )
 }
