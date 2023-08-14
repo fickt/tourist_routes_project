@@ -10,7 +10,7 @@ const LoginPage = () => {
             <FormHeader
                 title="Добро пожаловать"
                 text="Чтобы продолжить, пожалуйста, войдите в аккаунт"
-                link="/registration"
+                link={RoutePath[AppRoutes.REGISTRATION]}
                 headerLink="Ещё не зарегистрированы?"
                 textLink="Зарегистрируйтесь здесь."
             />

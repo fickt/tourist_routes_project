@@ -91,7 +91,7 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
             onValuesChange={handleFormChange}
         >
             <div className={s.form__inputs}>
-                {type === "registration" && <FormInput name="name" rules={nicknameRules} placeholder="Имя пользователя" />}
+                {type === RoutePath[AppRoutes.REGISTRATION] && <FormInput name="name" rules={nicknameRules} placeholder="Имя пользователя" />}
                 <FormInput name="email" rules={emailRules} placeholder="E-mail" />
                 <PasswordInput type={type} />
                 <FormButton
@@ -102,7 +102,7 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
                     }
                 />
             </div>
-            {type === "login" && <FormLink link="/forgotPassword" textLink="Забыли пароль?" onClick={null} />}
+            {type === RoutePath[AppRoutes.LOGIN] && <FormLink link="/forgotPassword" textLink="Забыли пароль?" onClick={null} />}
             {loader && <PreloaderCar />}
             {!loader && (error && <ErrorMessage errorText="Ошибка авторизации" />)}
         </Form>

@@ -9,7 +9,7 @@ const RegistrationPage = () => {
         <div className={s.auth}>
             <FormHeader
                 title="Регистрация"
-                link="/login"
+                link={RoutePath[AppRoutes.LOGIN]}
                 headerLink="Уже зарегистрированы?"
                 textLink="Войдите в аккаунт."
             />
