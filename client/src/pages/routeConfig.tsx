@@ -15,6 +15,7 @@ export enum AppRoutes {
     REGISTRATION = "registration",
     FORGOT_PASSWORD = "forgotPassword",
     NOT_FOUND = "not_found",
+    LOGOUT = "logout"
 }
 
 export const RoutePath = {
@@ -25,6 +26,7 @@ export const RoutePath = {
     [AppRoutes.REGISTRATION]: "/registration",
     [AppRoutes.FORGOT_PASSWORD]: "/forgotPassword",
     [AppRoutes.NOT_FOUND]: "*",
+    [AppRoutes.LOGOUT]: "/logout"
 }
 
 export const mainRoutes: TRoutes[] = [
