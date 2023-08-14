@@ -1,3 +1,3 @@
-export type AuthFormProps = {
+export type TAuthFormProps = {
     type: string;
 }

@@ -11,12 +11,12 @@ import { PasswordInput } from "modules/auth-form/components/form-input/PasswordI
 import { FormButton } from "modules/auth-form/components/form-button/FormButton";
 import { handleErrorMessage, handleLoaderActive, handleSetUser, handleUserAuth, handleUserReg } from "modules/auth-form/store/authActions";
 import { useAppSelector, useAppDispatch } from "storage/hook-types";
-import { TFormData } from "modules/auth-form/types/authTypes";
+import { TFormData } from "modules/auth-form/store/types/authTypes";
 import { authError, authLoader, isUserReg } from "modules/auth-form/store/authSelectors";
 import { ErrorMessage } from "ui/error-message/ErrorMessage";
-import { AuthFormProps } from "modules/auth-form/components/auth-form/types";
+import { TAuthFormProps } from "./types";
 
-export const AuthForm = ({ type }: AuthFormProps) => {
+export const AuthForm = ({ type }: TAuthFormProps) => {
 
     const dispatch = useAppDispatch();
     const loader = useAppSelector(authLoader);

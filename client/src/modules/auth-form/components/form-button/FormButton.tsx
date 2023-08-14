@@ -1,9 +1,9 @@
 import React, { MouseEvent } from "react";
 import s from "./style.module.scss";
 import { Button, Form } from "antd";
-import { FormButtonProps } from "modules/auth-form/components/form-button/types";
+import { TFormButtonProps } from "./types";
 
-export const FormButton = ({ value, onClick, disabled }: FormButtonProps) => {
+export const FormButton = ({ value, onClick, disabled }: TFormButtonProps) => {
 
     return (
         <Form.Item>

@@ -1,4 +1,4 @@
-export type AuthResponse = {
+export type TAuthResponse = {
     accessToken: string,
     refreshToken: string,
     user: TUser,
@@ -23,4 +23,10 @@ export type TUser = {
     email: string,
     isActivated: boolean,
     id: string,
+}
+
+export type TAction = {
+    type: string;
+    payload: string;
+    user: TUser | null;
 }

@@ -5,8 +5,6 @@ import { UnderlineLink } from "ui/underline-link/UnderlineLink";
 import { handleErrorMessage } from "modules/auth-form/store/authActions";
 import { TFormHeaderProps } from "./types";
 
-
-
 export const FormHeader = ({ title, text, link, headerLink, textLink }: TFormHeaderProps) => {
 
     const dispatch = useDispatch();

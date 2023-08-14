@@ -2,12 +2,9 @@ import React from "react";
 import s from "./style.module.scss";
 import { Form, Input } from "antd";
 import { passwordRules } from "modules/auth-form/constants/formRules";
+import { TPasswordInputProps } from "./types";
 
-type Props = {
-    type: string;
-}
-
-export const PasswordInput = ({ type }: Props) => {
+export const PasswordInput = ({ type }: TPasswordInputProps) => {
 
     return (
         <>
