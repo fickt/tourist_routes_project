@@ -1,11 +1,6 @@
-import React, { ReactNode, memo } from "react";
+import React, { memo } from "react";
 import { Route, Routes } from "react-router-dom";
 import { mainRoutes } from "./routeConfig";
-
-export type TRoutes = {
-    path: string,
-    element: ReactNode,
-}
 
 const AppRouter = () => {
 

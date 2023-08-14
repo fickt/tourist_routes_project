@@ -1,13 +1,11 @@
-import { TRoutes } from "./AppRouter";
 import HomePage from "pages/home-page/HomePage";
 import SpotsPage from "./spots-page/SpotsPage";
-import { RouteProps } from "react-router-dom";
 import SpotPage from "./spot-page/SpotPage";
 import LoginPage from "./login-page/LoginPage";
 import RegistrationPage from "./registration-page/RegistrationPage";
 import ForgotPasswordPage from "./forgot-password/ForgotPasswordPage";
 import NotFoundPage from "./not-found-page/NotFoundPage";
-
+import { TRoutes } from "./AppRouterTypes";
 
 export enum AppRoutes {
     HOME = "home",
@@ -38,3 +36,4 @@ export const mainRoutes: TRoutes[] = [
     { path: RoutePath.forgotPassword, element: <ForgotPasswordPage /> },
     { path: RoutePath.not_found, element: <NotFoundPage /> },
 ]
+

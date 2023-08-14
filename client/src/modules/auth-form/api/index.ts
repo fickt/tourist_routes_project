@@ -33,4 +33,5 @@ $api.interceptors.response.use((config) => {
     throw error;
 })
 
+
 export default $api;

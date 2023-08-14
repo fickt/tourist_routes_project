@@ -5,6 +5,7 @@ import { getLocalSpotsAction } from "modules/card-list/store/spotsActions";
 import { useAppDispatch } from "storage/hookTypes";
 import { Header } from "modules/header";
 import { markers } from "components/ymap/constants/markers";
+import { MobileHeader } from "modules/mobile-header";
 
 const App = () => {
 
@@ -21,6 +22,7 @@ const App = () => {
                 <AppRouter />
             </main>
             <Footer><h2>Путешествия по Томску от стажеров Спутника</h2></Footer>
+            <MobileHeader />
         </>
     )
 }
