@@ -4,7 +4,7 @@ import s from "./style.module.scss";
 import Cookies from "js-cookie";
 import AuthService from "modules/auth-form/api/AuthService";
 import { UnderlineLink } from "ui/underline-link/UnderlineLink";
-import { Spinner } from "ui/spinner/Spinner";
+import { PreloaderCar } from "ui/spinner/PreloaderCar";
 import { FormInput } from "modules/auth-form/components/form-input/FormInput";
 import { emailRules, nicknameRules } from "modules/auth-form/constants/formRules";
 import { PasswordInput } from "modules/auth-form/components/form-input/PasswordInput";
@@ -100,7 +100,7 @@ export const AuthForm = ({ type }: Props) => {
                 />
             </div>
             {type === "login" && <UnderlineLink link="/forgotPassword" textLink="Забыли пароль?" onClick={null} />}
-            {loader && <Spinner />}
+            {loader && <PreloaderCar />}
             {!loader && (error && <ErrorMessage errorText="Ошибка авторизации" />)}
         </Form>
     )

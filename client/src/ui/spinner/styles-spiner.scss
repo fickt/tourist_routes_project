@@ -43,33 +43,6 @@
     }
 }
 
-
-
-.car {
-    &__body {
-        animation: shake 0.2s ease-in-out infinite alternate;
-    }
-
-    &__line {
-        transform-origin: center right;
-        stroke-dasharray: 22;
-        animation: line 0.8s ease-in-out infinite;
-        animation-fill-mode: both;
-
-        &--top {
-            animation-delay: 0s;
-        }
-
-        &--middle {
-            animation-delay: 0.2s;
-        }
-
-        &--bottom {
-            animation-delay: 0.4s;
-        }
-    }
-}
-
 @keyframes shake {
     0% {
         transform: translateY(-1%);

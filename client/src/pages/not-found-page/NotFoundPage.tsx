@@ -4,7 +4,7 @@ const NotFoundPage = () => {
     
     return (
         <div className="content container">
-            <NotFound title="Страница не найдена" buttonText="На главную"></NotFound>
+            <NotFound title="Страница не найдена" buttonText="На главную" />
         </div>
     );
 }
