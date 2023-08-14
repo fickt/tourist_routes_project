@@ -1,4 +1,3 @@
-import { TRoutes } from "./AppRouter";
 import HomePage from "pages/home-page/HomePage";
 import SpotsPage from "./spots-page/SpotsPage";
 import SpotPage from "./spot-page/SpotPage";
@@ -6,6 +5,7 @@ import LoginPage from "./login-page/LoginPage";
 import RegistrationPage from "./registration-page/RegistrationPage";
 import ForgotPasswordPage from "./forgot-password/ForgotPasswordPage";
 import NotFoundPage from "./not-found-page/NotFoundPage";
+import { TRoutes } from "pages/AppRouterTypes";
 
 export enum AppRoutes {
     HOME = "home",

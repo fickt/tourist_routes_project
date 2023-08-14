@@ -9,13 +9,13 @@ import { emailRules, nicknameRules } from "modules/auth-form/constants/formRules
 import { PasswordInput } from "modules/auth-form/components/form-input/PasswordInput";
 import { FormButton } from "modules/auth-form/components/form-button/FormButton";
 import { handleErrorMessage, handleLoaderActive, handleSetUser, handleUserAuth, handleUserReg } from "modules/auth-form/store/authActions";
-import { useAppDispatch, useAppSelector } from "storage/hook-types";
 import { TFormData } from "modules/auth-form/store/types/authTypes";
 import { authError, authLoader, isUserReg } from "modules/auth-form/store/authSelectors";
 import { ErrorMessage } from "ui/error-message/ErrorMessage";
 import { TAuthFormProps } from "./types";
 import { FormLink } from "modules/auth-form/components/form-link/FormLink";
 import { AppRoutes, RoutePath } from "pages/routeConfig";
+import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 
 export const AuthForm = ({ type }: TAuthFormProps) => {
 
