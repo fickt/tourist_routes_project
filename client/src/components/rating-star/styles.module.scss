@@ -1,9 +1,11 @@
 .star_wrapper {
     min-width: max-content;
-
-    .rating_number {
-        font-size: 24px;
-        font-weight: 600;
+    display: flex;
+    gap: 8px;
+    
+    .star {
+        width: 16px;
+        height: 16px;
     }
 }
 

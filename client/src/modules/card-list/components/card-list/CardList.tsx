@@ -3,6 +3,7 @@ import { memo } from "react";
 import Card from "components/card/Card";
 import { useAppSelector } from "storage/hookTypes";
 import { spotsSelectors } from "modules/card-list/store/spotsSelectors";
+import InstaCard from "components/instaCard/InstaCard";
 
 export const CardList = memo(() => {
 
@@ -10,7 +11,7 @@ export const CardList = memo(() => {
 
     return (
         <div className={s.cards}>
-            {spots?.map((spot) => <Card key={spot.id} {...spot} />)}
+            {spots?.map((spot) => <InstaCard key={spot.id} {...spot} />)}
         </div>
     );
 });

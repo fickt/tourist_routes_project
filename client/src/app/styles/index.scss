@@ -31,6 +31,7 @@ h1, h2, h3, h4, h5, p {
 
 .container {
     max-width: 1000px;
+    width: 100%;
     margin: 0 auto;
     padding-left: var(--container-padding);
     padding-right: var(--container-padding);
@@ -44,6 +45,10 @@ h1, h2, h3, h4, h5, p {
 main {
     flex: 1;
 };
+
+.content-section {
+    width: 100%;
+}
 
 [class*="copyrights-pane"] {
     display: none !important;
