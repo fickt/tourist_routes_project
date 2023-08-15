@@ -3,6 +3,7 @@ import s from "./styles.module.scss";
 import { SearchForm } from "ui/search/SearchForm";
 import { CardList } from "modules/card-list";
 import backImage from "./assets/map_bg.jpg";
+import classNames from "classnames";
 
 export const MainContent = () => {
 
@@ -19,7 +20,7 @@ export const MainContent = () => {
 
     return (
         <>
-            <section className={s.map_section} style={{backgroundImage: `url(${backImage})`}}>
+            <section className={classNames("content-section", s.map_section)} style={{backgroundImage: `url(${backImage})`}}>
                 <div className={s.main__header}>
                     <h1 className={s.header__title}>Отправьтесь<br />в чудесное путешествие</h1>
                     <p className={s.header__text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -30,7 +31,7 @@ export const MainContent = () => {
                     handleFormSubmit={handleSearchClick}
                     handleInputChange={handleInputChange} />
             </section>
-            <section className={s.routes}>
+            <section className={classNames("content-section", s.routes)}>
                 <div className="container content">
                     <h2 className={s.section__title}>Наши маршруты</h2>
                     <CardList />

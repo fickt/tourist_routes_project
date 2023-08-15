@@ -2,7 +2,7 @@ import { TStarIconProps } from "./types"
 
 export const StarIcon = ({ rating, id }: TStarIconProps) => {
     return (
-        <svg width="32" height="32" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id={`progress-${id}`}>
                     <stop id={`stop1-${id}`} offset={rating} stopColor={"#FFAA0D"} />
