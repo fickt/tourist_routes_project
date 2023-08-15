@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\RouteController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,5 +34,8 @@ Route::group(['middleware' => 'api'], function () {
     /* Routes */
     Route::group(['prefix' => 'routes'], function () {
         Route::get('', [RouteController::class, 'index']);
+        Route::get('/{routeId}', [RouteController::class, 'show']);
     });
+
+    Route::get('/images/{filename}', [ImageController::class, 'show']);
 });

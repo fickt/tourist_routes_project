@@ -15,7 +15,12 @@
 						"exec": [
 							"pm.test(\"Status code is 201\", function () {\r",
 							"    pm.response.to.have.status(201);\r",
-							"});"
+							"});\r",
+							"\r",
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if(jsonData.access_token) {\r",
+							"    pm.collectionVariables.set(\"token\", jsonData.access_token)\r",
+							"}"
 						],
 						"type": "text/javascript"
 					}
@@ -36,7 +41,11 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
+<<<<<<< HEAD:tourist_routes_project_sputnik.postman_collection.json
 					"raw": "{\r\n    \"nickname\":\"vasya228\",\r\n    \"email\":\"andrei2ivanovich@gmail.com\",\r\n    \"password\":\"password\",\r\n    \"password_confirmation\":\"password\"\r\n}",
+=======
+					"raw": "{\r\n    \"nickname\":\"вася228\",\r\n    \"email\":\"andrei2ivanovich@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+>>>>>>> 91ea69edba1ba1b5a417d9a3d6e62bdd909ce5a3:tourist_routes_project_sputnik.postman_collection.v1.2.json
 					"options": {
 						"raw": {
 							"language": "json"
@@ -142,6 +151,19 @@
 		{
 			"name": "Get all routes",
 			"request": {
+<<<<<<< HEAD:tourist_routes_project_sputnik.postman_collection.json
+=======
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+>>>>>>> 91ea69edba1ba1b5a417d9a3d6e62bdd909ce5a3:tourist_routes_project_sputnik.postman_collection.v1.2.json
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -157,6 +179,9 @@
 			"response": []
 		}
 	],
+	"auth": {
+		"type": "bearer"
+	},
 	"event": [
 		{
 			"listen": "prerequest",

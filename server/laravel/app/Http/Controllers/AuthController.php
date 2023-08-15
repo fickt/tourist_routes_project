@@ -4,30 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
-
-use App\Http\Resources\LoginResource;
+use App\Http\Resources\AuthUserResource;
 use App\Http\Resources\LogoutResource;
-use App\Http\Resources\UserRegisterResource;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AuthController extends Controller
 {
-    public function register(UserRegisterRequest $request): UserRegisterResource
+    public function register(UserRegisterRequest $request): AuthUserResource
     {
-        $user = User::query()->create($request->validated());
+        User::query()->create($request->validated());
+        if (!$token = auth()->attempt($request->only(['email', 'password']))) {
+            throw new HttpException(Response::HTTP_UNAUTHORIZED, 'Authentication failed!');
+        }
 
-        return new UserRegisterResource($user);
+        return new AuthUserResource($token);
     }
 
-    public function login(UserLoginRequest $request): LoginResource
+    public function login(UserLoginRequest $request): AuthUserResource
     {
         if (!$token = auth()->attempt($request->validated())) {
             throw new HttpException(Response::HTTP_UNAUTHORIZED, 'Incorrect email or password');
         }
 
-        return new LoginResource($token);
+        return new AuthUserResource($token);
     }
 
     public function logout(): LogoutResource

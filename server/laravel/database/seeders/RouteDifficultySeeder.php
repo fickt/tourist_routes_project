@@ -14,6 +14,7 @@ class RouteDifficultySeeder extends Seeder
     public static function run(): void
     {
         RouteDifficulty::query()->create([
+<<<<<<< HEAD
             'name' => 'easy'
         ]);
         RouteDifficulty::query()->create([
@@ -21,6 +22,15 @@ class RouteDifficultySeeder extends Seeder
         ]);
         RouteDifficulty::query()->create([
             'name' => 'hard'
+=======
+            'name' => 'новичок'
+        ]);
+        RouteDifficulty::query()->create([
+            'name' => 'знающий'
+        ]);
+        RouteDifficulty::query()->create([
+            'name' => 'опытный'
+>>>>>>> 91ea69edba1ba1b5a417d9a3d6e62bdd909ce5a3
         ]);
     }
 }

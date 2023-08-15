@@ -22,7 +22,7 @@ def stem(text):
 data["tags"] = data["tags"].apply(stem)
 
 
-def recommend_on_survey(list_of_answers: list) -> list:
+def recommend_on_survey(list_of_answers: list, vectors) -> list:
     likes = list(filter(lambda x: x != "", list_of_answers))
     to_recommend = []
     try:
@@ -45,7 +45,7 @@ def recommend_on_survey(list_of_answers: list) -> list:
         print(ex)
 
 
-def recommend_on_image(caption: str) -> list:
+def recommend_on_image(caption: str, vectors) -> list:
     to_recommend = []
     try:
         vector = cv.transform([caption]).toarray()
@@ -65,4 +65,5 @@ def recommend_on_image(caption: str) -> list:
 
 
 if __name__ == '__main__':
-    print(recommend_on_survey(['воды']))
+    print(data['caption'][0])
+    print(data['tags'][0])

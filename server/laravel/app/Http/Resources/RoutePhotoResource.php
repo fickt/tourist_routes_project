@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class RoutePhotoResource extends JsonResource
 {
+<<<<<<< HEAD
+=======
+    private const PATH_IMAGE_FOLDER = '/images/';
+
+>>>>>>> 91ea69edba1ba1b5a417d9a3d6e62bdd909ce5a3
     /**
      * Transform the resource into an array.
      *
@@ -16,6 +21,7 @@ class RoutePhotoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+<<<<<<< HEAD
         //header('Content-Type: image/png');
         return [
             base64_encode(File::get(public_path() . '/images/test_photo.jpg'))
@@ -23,4 +29,12 @@ class RoutePhotoResource extends JsonResource
     }
 
 
+=======
+        return [
+                $request->getSchemeAndHttpHost()
+                . self::PATH_IMAGE_FOLDER
+                . $this->photo_path
+        ];
+    }
+>>>>>>> 91ea69edba1ba1b5a417d9a3d6e62bdd909ce5a3
 }

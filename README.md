@@ -7,7 +7,7 @@
 Вводим в терминал:
 1) docker compose build (только если в первый раз разворачиваете контейнеры)
 2) docker compose up
-3) docker exec app php artisan migrate:fresh (Накатит таблицы в базу данных и снесёт старые записи, 
+3) docker exec app php artisan migrate:fresh --seed (Накатит таблицы в базу данных и снесёт старые записи, 
    если они были конечно... Вводить, если в первый раз разворачиваете контейнеры, 
    если введете повторно, ничего страшного не произойдет, просто перезапишет БД)
 
@@ -27,7 +27,11 @@
 
 2) Если нужны постман тесты, в корне лежит файлик tourist_routes_project_sputnik.postman_collection.json
 
-## Баги
+## Баги и их решения
 
-Если вдруг вылезет Fatal error: Uncaught Error: Failed opening required 'var/www/vendor/autoload.php'
-пропишите в терминал docker exec app composer update --no-scripts --ignore-platform-req=ext-sockets
+1) Fatal error: Uncaught Error: Failed opening required 'var/www/vendor/autoload.php'
+   Решение: пропишите в терминал docker exec app composer update --no-scripts --ignore-platform-req=ext-sockets
+
+2) "There is no existing directory at \storage\logs\" and it could not be created: No such file or directory"
+    Решение: пропишите в терминал две команды 1) docker exec app php artisan cache:clear
+                                              2) docker exec app php artisan optimize       
