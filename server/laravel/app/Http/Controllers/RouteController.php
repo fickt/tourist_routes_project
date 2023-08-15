@@ -19,18 +19,20 @@ class RouteController extends Controller
         );
     }
 
-    public function show(int $routeId)
+    public function show(int $routeId): RouteResource
     {
-        $route = Route::query()
-            ->find($routeId)
-            ->with(['difficulty', 'photoPaths', 'categories'])
-            ->first();
-
-        return $route !== null
-            ? RouteResource::make($route)
-            : throw new HttpException(
+        try {
+            $route = Route::query()
+                ->findOrFail($routeId)
+                ->with(['difficulty', 'photoPaths', 'categories'])
+                ->first();
+        } catch (\Exception) {
+            throw new HttpException(
                 Response::HTTP_NOT_FOUND,
                 'Route with id:' . $routeId . ' has not been found!'
             );
+        }
+
+        return RouteResource::make($route);
     }
 }
