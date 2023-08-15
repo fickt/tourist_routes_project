@@ -180,7 +180,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "http://localhost:8000/api",
+			"value": "http://localhost:8080/api",
 			"type": "string"
 		},
 		{
