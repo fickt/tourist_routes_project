@@ -3,9 +3,8 @@ import s from "./style.module.scss";
 import { Form, Input } from "antd";
 import { passwordRules } from "modules/auth-form/constants/formRules";
 import { TPasswordInputProps } from "./types";
-import { AppRoutes, RoutePath } from "pages/routeConfig";
 
-export const PasswordInput = ({ type }: TPasswordInputProps) => {
+export const PasswordInput = ({ isRegister }: TPasswordInputProps) => {
 
     return (
         <>
@@ -16,7 +15,7 @@ export const PasswordInput = ({ type }: TPasswordInputProps) => {
                     className={s.form__input}
                 />
             </Form.Item>
-            {type === RoutePath[AppRoutes.REGISTRATION] && (
+            {isRegister && (
                 <Form.Item
                     name="confirm"
                     hasFeedback

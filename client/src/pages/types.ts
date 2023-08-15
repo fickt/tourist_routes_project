@@ -4,3 +4,7 @@ export type TRoutes = {
     path: string,
     element: ReactNode,
 }
+
+export type TAuthPageProps = {
+    isRegister: boolean;
+}

@@ -14,10 +14,9 @@ import { authError, authLoader, isUserReg } from "modules/auth-form/store/authSe
 import { ErrorMessage } from "ui/error-message/ErrorMessage";
 import { TAuthFormProps } from "./types";
 import { FormLink } from "modules/auth-form/components/form-link/FormLink";
-import { AppRoutes, RoutePath } from "pages/routeConfig";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 
-export const AuthForm = ({ type }: TAuthFormProps) => {
+export const AuthForm = ({ isRegister }: TAuthFormProps) => {
 
     const dispatch = useAppDispatch();
     const loader = useAppSelector(authLoader);
@@ -101,18 +100,18 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
             onValuesChange={handleFormChange}
         >
             <div className={s.form__inputs}>
-                {type === RoutePath[AppRoutes.REGISTRATION] && <FormInput name="nickname" rules={nicknameRules} placeholder="Имя пользователя" />}
+                {isRegister && <FormInput name="nickname" rules={nicknameRules} placeholder="Имя пользователя" />}
                 <FormInput name="email" rules={emailRules} placeholder="E-mail" />
-                <PasswordInput type={type} />
+                <PasswordInput isRegister={isRegister} />
                 <FormButton
-                    value={type === RoutePath[AppRoutes.LOGIN] ? "Войти" : "Зарегистрироваться"}
+                    value={isRegister ? "Зарегистрироваться" : "Войти"}
                     onClick={handleButtonClick}
                     disabled={!form.isFieldsTouched(true) || form.getFieldsError()
                         .filter(({errors}) => errors.length).length > 0
                     }
                 />
             </div>
-            {type === RoutePath[AppRoutes.LOGIN] && <FormLink link="/forgotPassword" textLink="Забыли пароль?" onClick={null} />}
+            {!isRegister && <FormLink link="/forgotPassword" textLink="Забыли пароль?" onClick={null} />}
             {loader && <PreloaderCar />}
             {!loader && (error && <ErrorMessage errorText={error} />)}
         </Form>
