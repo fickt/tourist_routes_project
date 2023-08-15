@@ -1,22 +1,20 @@
-import $api from "../api/index";
 import { AxiosResponse } from "axios";
-import { AuthResponse } from "../types/AuthResponse";
-import { API_URL} from "../api/index";
+import { AppRoutes, RoutePath } from "pages/routeConfig";
+import { TAuthResponse } from "modules/auth-form/store/types/authTypes";
+import $api from "modules/auth-form/api/index";
 
 export default class AuthService {
-    static async login(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post<AuthResponse>("/login", { email, password });
+    static async login(email: string, password: string): Promise<AxiosResponse<TAuthResponse>> {
+        return $api.post<TAuthResponse>(RoutePath[AppRoutes.LOGIN], { email, password });
     }
 
-    static async registration(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post<AuthResponse>("/registration", { email, password })
+    static async register(nickname: string, email: string, password: string): Promise<AxiosResponse<TAuthResponse>> {
+        const requestData = { nickname, email, password };
+        console.log('Register Request:', requestData);
+        return $api.post<TAuthResponse>(RoutePath[AppRoutes.REGISTRATION], { nickname, email, password })
     }
 
     static async logout(): Promise<void> {
-        return $api.post("/logout");
-    }
-
-    static async checkAuth(): Promise<AxiosResponse<AuthResponse>> {
-        return $api.get<AuthResponse>(`${API_URL}/refresh`, { withCredentials: true });
+        return $api.post(RoutePath[AppRoutes.LOGOUT]);
     }
 }

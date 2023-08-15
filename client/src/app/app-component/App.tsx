@@ -1,10 +1,11 @@
 import { Footer } from "antd/es/layout/layout";
 import AppRouter from "pages/AppRouter";
-import { markers } from "modules/ymap/constants/markers";
 import { useEffect, memo } from "react";
-import { getLocalSpotsAction } from "modules/card-list/store/spots-actions";
-import { useAppDispatch } from "storage/hook-types";
+import { getLocalSpotsAction } from "modules/card-list/store/spotsActions";
+import { useAppDispatch } from "storage/hookTypes";
 import { Header } from "modules/header";
+import { markers } from "components/ymap/constants/markers";
+import { MobileHeader } from "modules/mobile-header";
 
 const App = () => {
 
@@ -16,11 +17,11 @@ const App = () => {
 
     return (
         <>
-            <Header />
-            <main className='container content'>
+            <main>
                 <AppRouter />
             </main>
             <Footer><h2>Путешествия по Томску от стажеров Спутника</h2></Footer>
+            <MobileHeader />
         </>
     )
 }

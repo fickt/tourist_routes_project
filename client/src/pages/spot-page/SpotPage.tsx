@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "storage/hook-types";
+import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import s from "./styles.module.scss"
-import { getLocalSpotsAction } from "modules/card-list/store/spots-actions";
-import { TMarker, markers } from "modules/ymap/constants/markers";
-import { YMapComponent } from "modules/ymap";
-import Card from "components/card/Card";
+import { getLocalSpotsAction } from "modules/card-list/store/spotsActions";
 import { ContentHeader } from "ui/content-header/ContentHeader";
-import { ReviewBlock } from "modules/review-block/components/review-block/ReviewBlock";
+import { SpotItem } from "modules/spot-item";
+import { TMarker, markers } from "components/ymap/constants/markers";
 
 const SpotPage = () => {
 
     const { spotId } = useParams();
     const spots = useAppSelector(state => state?.spots?.data);
-    const [spotItem, setSpotItem] = useState<TMarker[]>(null);
+    const [spotItem, setSpotItem] = useState<TMarker>(null);
 
     const dispatch = useAppDispatch();
 
     const getSpotById = (spotId: string) => {
 
         if (spots) {
-            setSpotItem(spots?.filter(spot => spot.id === Number(spotId)));
+            // setSpotItem(spots?.filter(spot => spot.id === Number(spotId)));
+            setSpotItem(spots.find(spot => {
+                if (spot.id === Number(spotId))
+                    return true
+                else
+                    return false
+            }))
         }
     }
 
@@ -35,21 +39,16 @@ const SpotPage = () => {
 
     if (spotItem) {
 
-        const spot = {...spotItem[0]}
-
         return (
             <div className={s.wrapper}>
-                <ContentHeader textButton="назад" title={spot.name} />
-                <Card {...spotItem[0]}>
-                    <YMapComponent markers={spotItem} />
-                    <ReviewBlock id={spot.id}/>
-                </Card>
-                
+                <div className="content container">
+                    <ContentHeader textButton="назад" title={spotItem.name} />
+                    <SpotItem spotItem={spotItem} />
+                </div>
             </div>
         );
     }
 
-        
 }
 
 export default SpotPage;

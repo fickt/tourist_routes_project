@@ -1,6 +1,5 @@
 .loader {
-/*     position: absolute;
-    transform: translate(-50%); временно, для отображения спинера*/
+
     top: 50%;
     left: 50%;    
     z-index: 100;
@@ -40,33 +39,6 @@
         .loading-text {
             text-align: center;
             font-size: 20px;
-        }
-    }
-}
-
-
-
-.car {
-    &__body {
-        animation: shake 0.2s ease-in-out infinite alternate;
-    }
-
-    &__line {
-        transform-origin: center right;
-        stroke-dasharray: 22;
-        animation: line 0.8s ease-in-out infinite;
-        animation-fill-mode: both;
-
-        &--top {
-            animation-delay: 0s;
-        }
-
-        &--middle {
-            animation-delay: 0.2s;
-        }
-
-        &--bottom {
-            animation-delay: 0.4s;
         }
     }
 }

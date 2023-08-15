@@ -40,9 +40,6 @@
 .search__btn svg {
 	fill: var(--color-gray);
 }
-.search__btn_disabled svg {
-	fill: var(--color-gray);
-}
 .search__btn:focus svg{
 	fill: var(--background-color-blue);
 }
@@ -50,7 +47,7 @@
 	fill: var(--background-color-blue);
 }
 
-@media (max-width: 350px) {
+@media (min-width: 350px) {
 	.search__input {
 		max-width: 400px;
 	}

@@ -1,19 +1,11 @@
-import s from './styles.module.scss';
-import StarIcon from './img/star.svg';
-import { useActionData } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import classNames from 'classnames';
+import s from "./styles.module.scss";
+import StarIcon from "./img/star.svg";
+import { useEffect, useState } from "react";
+import classNames from "classnames";
+import { MAX_COUNT_RATING } from "./constants";
+import { TRatingProps } from "./types";
 
-const MAX_COUNT_RATING = 5;
-
-interface IRatingProps {
-    isEditable?: boolean, 
-    currentRating: number, 
-    setCurrentRating?: (number:number) => void,
-    error?: any
-}
-
-function Rating({isEditable = false, currentRating, setCurrentRating, error}: IRatingProps) {
+function Rating({isEditable = false, currentRating, setCurrentRating, error}: TRatingProps) {
 
     const [ratingArray, setRatingArray] = useState(new Array(MAX_COUNT_RATING).fill(<></>)) //новый пассив из 5 звезд
 
@@ -23,20 +15,20 @@ function Rating({isEditable = false, currentRating, setCurrentRating, error}: IR
             let starValue = i + 1
             return (
                 /* с помощью classNames добавляю класс заливки при true */
-                <StarIcon className={classNames(s.star,
+                <StarIcon className={classNames(
                     {
                         [s.filled]: filledRating > i,
                         [s.editable]: isEditable
                     
                     })}
-                    onMouseEnter={() => changeDisplay(starValue)}
-                    onMouseLeave={() => changeDisplay(currentRating)}
-                    onClick={() => changeRating(starValue)}
+                    onMouseEnter={changeDisplay(starValue)}
+                    onMouseLeave={changeDisplay(currentRating)}
+                    onClick={changeRating(starValue)}
                 />
             )
         } )
         
-        setRatingArray(updateRatingArray)
+        setRatingArray(updateRatingArray);
     }
 
     function changeDisplay(rating:number) {
@@ -52,9 +44,9 @@ function Rating({isEditable = false, currentRating, setCurrentRating, error}: IR
     useEffect(() => constructRating(currentRating), [currentRating])
 
     return ( 
-    <div className='rating__container'>        
+    <div className="rating__container">        
         {ratingArray.map((star, i) => <span key={i} className={s.spn}>{star}</span>)}
-        {error && <p className='error-message'>{error.message}</p>}
+        {error && <p className="error-message">{error.message}</p>}
     </div>
      );
 }

@@ -1,9 +1,10 @@
 import Review from "components/review/Review";
-import { reviews } from "../../constants/reviews";
-import { ReviewForm } from "../review-form/ReviewForm";
 import s from "./styles.module.scss"
+import { reviews } from "modules/review-block/constants/reviews";
+import { ReviewForm } from "modules/review-block/components/review-form/ReviewForm";
+import { TReviewBlockProps } from "./types";
 
-export const ReviewBlock = ({id}:{id: number}) => {
+export const ReviewBlock = ({id}:TReviewBlockProps) => {
 
     return (
         <div className={s.reviews_wrapper}>

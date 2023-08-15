@@ -6,7 +6,6 @@ const Review = ({author, text, rating}: TReview) => {
 
     return (
         <div className={s.review}>
-            <div className={s.review__header}></div>
             <div className={s.review__name}>{author}</div>
             <div className={s.review__date}>10.08.2023</div>
             <Rating currentRating={rating} />

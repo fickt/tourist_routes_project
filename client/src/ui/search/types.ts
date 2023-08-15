@@ -1,7 +1,8 @@
 import { FormEvent } from "react";
 
-export type  ISearchProps = {
-    handleFormSubmit: (e: FormEvent<HTMLFormElement>) => void, 
+export type TSearchProps = {
+    handleFormSubmit: (e: FormEvent) => void, 
     handleInputChange: (value: string) => void, 
-    placeholder: string
+    placeholder: string,
+    searchValue: string
   }

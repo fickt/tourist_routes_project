@@ -1,18 +1,22 @@
 import React from "react";
 import s from "./style.module.scss";
 import { Form, Input } from "antd";
-import { FormInput, passwordRules } from "modules/auth-form";
+import { passwordRules } from "modules/auth-form/constants/formRules";
+import { TPasswordInputProps } from "./types";
+import { AppRoutes, RoutePath } from "pages/routeConfig";
 
-type Props = {
-    type: string;
-}
-
-export const PasswordInput = ({ type }: Props) => {
+export const PasswordInput = ({ type }: TPasswordInputProps) => {
 
     return (
         <>
-            <FormInput name="password" rules={passwordRules} placeholder="Пароль"/>
-            {type === "registration" && (
+            <Form.Item name="password" rules={passwordRules} hasFeedback>
+                <Input.Password
+                    type="password"
+                    placeholder="Пароль"
+                    className={s.form__input}
+                />
+            </Form.Item>
+            {type === RoutePath[AppRoutes.REGISTRATION] && (
                 <Form.Item
                     name="confirm"
                     hasFeedback

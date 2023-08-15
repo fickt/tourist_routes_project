@@ -4,12 +4,12 @@ import { ContentHeader } from "ui/content-header/ContentHeader";
 
 const SpotsPage = () => {
 
-    return ( 
+    return (
         <div className={s.wrapper}>
-            <ContentHeader textButton="назад" title="Интересные места" />          
-            <CardList />            
+            <ContentHeader textButton="назад" title="Интересные места" />
+            <CardList />
         </div>
-     );
+    );
 }
 
 export default SpotsPage;

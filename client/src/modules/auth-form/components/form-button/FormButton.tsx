@@ -1,14 +1,8 @@
-import React, { MouseEvent } from "react";
 import s from "./style.module.scss";
 import { Button, Form } from "antd";
+import { TFormButtonProps } from "./types";
 
-type Props = {
-    value: string;
-    onClick: () => void;
-    disabled: boolean;
-}
-
-export const FormButton = ({ value, onClick, disabled }: Props) => {
+export const FormButton = ({ value, onClick, disabled }: TFormButtonProps) => {
 
     return (
         <Form.Item>
@@ -16,7 +10,7 @@ export const FormButton = ({ value, onClick, disabled }: Props) => {
                 className={s.form__button}
                 type="primary"
                 htmlType="submit"
-                onClick={(e: MouseEvent<HTMLButtonElement>) => e.preventDefault && onClick}
+                onClick={onClick}
                 disabled={disabled}
             >
                 {value}

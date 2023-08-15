@@ -1,3 +1,4 @@
-export type TRatingProps = {
-    rating: number
+export type TRatingStarProps = {
+    rating: number,
+    id: number
 }
