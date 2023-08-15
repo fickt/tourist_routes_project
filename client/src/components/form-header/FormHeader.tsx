@@ -9,7 +9,7 @@ export const FormHeader = ({ title, text, link, headerLink, textLink }: TFormHea
     const dispatch = useDispatch();
 
     const resetErrorMessage = () => {
-        dispatch(handleErrorMessage(""));
+        dispatch(handleErrorMessage(null));
     };
 
     return (

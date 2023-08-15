@@ -14,10 +14,9 @@ import { authError, authLoader, isUserReg } from "modules/auth-form/store/authSe
 import { ErrorMessage } from "ui/error-message/ErrorMessage";
 import { TAuthFormProps } from "./types";
 import { FormLink } from "modules/auth-form/components/form-link/FormLink";
-import { AppRoutes, RoutePath } from "pages/routeConfig";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 
-export const AuthForm = ({ type }: TAuthFormProps) => {
+export const AuthForm = ({ isRegister }: TAuthFormProps) => {
 
     const dispatch = useAppDispatch();
     const loader = useAppSelector(authLoader);
@@ -30,7 +29,7 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
 
     const [form] = Form.useForm<FormInstance>();
 
-    // собрана информация из инпутов, которую ввёл user
+    // информация из инпутов, которую ввёл user
     const [formData, setFormData] = useState<TFormData | null>(null);
 
     // отслеживание полей формы
@@ -49,26 +48,30 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
 
     // отправка запроса (login или reg)
     const sendForm = async (values: any) => {
-        console.log(formData);
         userReg
             ? await performAuth(values.nickname, values.email, values.password, false)
             : await performAuth(values.nickname, values.email, values.password, true)
     }
 
-    // структура запроса (login или reg)
-    const performAuth = async (nickname:string, email: string, password: string, isRegistration: boolean) => {
+    // запрос (login или reg)
+    const performAuth = async (
+        nickname: string,
+        email: string,
+        password: string,
+        isRegistration: boolean
+    ) => {
         dispatch(handleLoaderActive(true));
         try {
             const response = isRegistration
                 ? await AuthService.register(nickname, email, password) //reg
                 : await AuthService.login(email, password); // login
-            Cookies.set("token", response.data.accessToken);
-            Cookies.set("login", response.data.user.email);
+            Cookies.set("token", response.data.access_token);
             setUserAuth(isRegistration);
             setSuccessMessage(isRegistration, response);
             dispatch(handleSetUser(response.data.user));
+            console.log(response.data.user);
         } catch (e) {
-            dispatch(handleErrorMessage("Произошла ошибка"));
+            dispatch(handleErrorMessage(e.message));
         } finally {
             dispatch(handleLoaderActive(false));
         }
@@ -77,9 +80,7 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
     // сообщение об успешной авторизации (login или reg)
     const setSuccessMessage = (isRegistration: boolean, response: any) => {
         dispatch(
-            isRegistration
-                ? handleErrorMessage(`Пользователь ${response.data.user.email} зарегистрирован`)
-                : handleErrorMessage(`Вы вошли как ${response.data.user.email}`)
+            isRegistration && handleErrorMessage(`Пользователь ${response.data.user.nickname} зарегистрирован`)
         )
     }
 
@@ -99,20 +100,20 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
             onValuesChange={handleFormChange}
         >
             <div className={s.form__inputs}>
-                {type === RoutePath[AppRoutes.REGISTRATION] && <FormInput name="nickname" rules={nicknameRules} placeholder="Имя пользователя" />}
+                {isRegister && <FormInput name="nickname" rules={nicknameRules} placeholder="Имя пользователя" />}
                 <FormInput name="email" rules={emailRules} placeholder="E-mail" />
-                <PasswordInput type={type} />
+                <PasswordInput isRegister={isRegister} />
                 <FormButton
-                    value={type === RoutePath[AppRoutes.LOGIN] ? "Войти" : "Зарегистрироваться"}
+                    value={isRegister ? "Зарегистрироваться" : "Войти"}
                     onClick={handleButtonClick}
                     disabled={!form.isFieldsTouched(true) || form.getFieldsError()
                         .filter(({errors}) => errors.length).length > 0
                     }
                 />
             </div>
-            {type === RoutePath[AppRoutes.LOGIN] && <FormLink link="/forgotPassword" textLink="Забыли пароль?" onClick={null} />}
+            {!isRegister && <FormLink link="/forgotPassword" textLink="Забыли пароль?" onClick={null} />}
             {loader && <PreloaderCar />}
-            {!loader && (error && <ErrorMessage errorText="Ошибка авторизации" />)}
+            {!loader && (error && <ErrorMessage errorText={error} />)}
         </Form>
     )
 }
