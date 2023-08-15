@@ -15,7 +15,9 @@ class RouteSeeder extends Seeder
      */
     public static function run(): void
     {
-        $route_difficulty = RouteDifficulty::query()->where('name', '=', 'easy')->first();
+        $route_difficulty = RouteDifficulty::query()
+            ->where('name', '=', 'новичок')
+            ->first();
 
         $route = Route::query()->create(
             [

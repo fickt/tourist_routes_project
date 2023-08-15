@@ -16,5 +16,7 @@ class DatabaseSeeder extends Seeder
         RouteDifficultySeeder::run();
         RouteSeeder::run();
         RoutePhotoSeeder::run();
+        RouteCategorySeeder::run();
+        RouteCategoryToRouteSeeder::run();
     }
 }
