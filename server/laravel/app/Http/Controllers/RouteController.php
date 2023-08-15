@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\RouteResource;
 use App\Models\Route;
-use Illuminate\Http\Request;
+use Exception;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RouteController extends Controller
 {
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
         return RouteResource::collection(
             Route::query()
@@ -26,7 +27,7 @@ class RouteController extends Controller
                 ->findOrFail($routeId)
                 ->with(['difficulty', 'photoPaths', 'categories'])
                 ->first();
-        } catch (\Exception) {
+        } catch (Exception) {
             throw new HttpException(
                 Response::HTTP_NOT_FOUND,
                 'Route with id:' . $routeId . ' has not been found!'
