@@ -1,7 +1,7 @@
 import { IS_USER_REG, IS_USER_AUTH, SET_USER, ERROR_MESSAGE, IS_LOADER_ACTIVE } from "./authActionsTypes";
 import { TUser } from "modules/auth-form/store/types/authTypes";
 
-export const handleErrorMessage = (payload: string) => ({
+export const handleErrorMessage = (payload: string | null) => ({
     type: ERROR_MESSAGE,
     payload: payload,
 });
