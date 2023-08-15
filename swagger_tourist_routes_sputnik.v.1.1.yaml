@@ -5,16 +5,44 @@ info:
     Описание пока не придумал :) Ну типа платишь денежку, а тебе генерят интересные маршруты исходя из всяких там твоих хотелок, маршруты эти пока вроде как только по Хакасии...пока что...Но это ненадолго ;)
   version: 1.0.0
 servers:
-  - url: https://localhost:8080/api
+  - url: http://localhost:8080/api
 tags:
   - name: auth
     description: Authorization/Login/Logout
     externalDocs:
       description: Find out more about our store
       url: http://swagger.io
-  - name: user
-    description: Operations about user
+  - name: routes
+    description: Туристические маршруты
 paths:
+  /routes:
+    get:
+      tags:
+        - routes
+      description: На вход прилетит массив из объектов    
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteResponse'          
+        '500':
+          description: Internal server error
+  /routes/{routeId}:
+    get:
+      tags:
+        - routes
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteResponse'          
+        '500':
+          description: Internal server error
+  
   /auth/register:
     post:
       tags:
@@ -35,7 +63,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'          
+                $ref: '#/components/schemas/LoginResponse'          
         '500':
           description: The email has already been taken! || The password field confirmation does not match.
   /auth/login:
@@ -43,7 +71,6 @@ paths:
       tags:
         - auth
       requestBody:
-        description: Register new user
         content:
           application/json:
             schema:
@@ -60,20 +87,14 @@ paths:
     post:
       tags:
         - auth
-      requestBody:
-        description: Register new user
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserLogout'  
-        required: true
+       
       responses:
         '201':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LoginResponse'                 
+                $ref: '#/components/schemas/UserLogout'                 
         
    
 components:
@@ -82,21 +103,15 @@ components:
       type: object
       properties:
   
-        first_name:
+        nickname:
           type: string
           example: theUser
-        last_name:
-          type: string
-          example: James
         email:
           type: string
           example: john@email.com
         password:
           type: string
           example: '12345'
-        password_confirmation:
-          type: string
-          example: '12345'  
       xml:
         name: user
     UserResponse:
@@ -106,12 +121,9 @@ components:
         id:
           type: integer
           example: 2
-        first_name:
+        nickname:
           type: string
           example: theUser
-        last_name:
-          type: string
-          example: James
         email:
           type: string
           example: john@email.com
@@ -137,8 +149,18 @@ components:
         message:
           type: string
           example: User has logged out!
-        user:
+        user: 
           type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            email:
+              type: string
+              example: john@email.com
+            nickname: 
+              type: string
+              example: theUser
       xml:
         name: user       
     
@@ -157,6 +179,62 @@ components:
           example: 3600
         user: 
           type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            email:
+              type: string
+              example: john@email.com
+            nickname: 
+              type: string
+              example: theUser
       xml:
-        name: user        
+        name: user
+        
+    RouteResponse:
+      type: object
+      properties:
+        id: 
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: 'Саяно-Шушенская ГЭС'
+        description:
+          type: string
+          example: 'Ну типа описание, ну типа там красиво и всё такое'
+        difficulty:
+          type: object
+          properties:
+            id: 
+              type: integer
+              example: 1
+            name:
+              type: string
+              example: 'новичок'
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: 'Озёра'
+        longitude:
+          type: number
+          example: 23.34
+        latitude:
+          type: number
+          example: 32.12
+        rating:
+          type: number
+          example: 4.2
+        photos:
+          type: object
+      xml:
+        name: user          
         
