@@ -8,8 +8,10 @@ export default class AuthService {
         return $api.post<TAuthResponse>(RoutePath[AppRoutes.LOGIN], { email, password });
     }
 
-    static async registration(email: string, password: string): Promise<AxiosResponse<TAuthResponse>> {
-        return $api.post<TAuthResponse>(RoutePath[AppRoutes.REGISTRATION], { email, password })
+    static async register(nickname: string, email: string, password: string): Promise<AxiosResponse<TAuthResponse>> {
+        const requestData = { nickname, email, password };
+        console.log('Register Request:', requestData);
+        return $api.post<TAuthResponse>(RoutePath[AppRoutes.REGISTRATION], { nickname, email, password })
     }
 
     static async logout(): Promise<void> {
