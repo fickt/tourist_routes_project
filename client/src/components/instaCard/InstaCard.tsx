@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import s from "./styles.module.scss"
-import Button from "ui/button/Button";
 import RatingStar from "components/rating-star/RatingStar";
 import { TCardProps } from "./types";
 import classNames from "classnames";
@@ -10,7 +9,7 @@ import CommentsIcon from "modules/mobile-header/components/mobile-header/assets/
 
 
 
-const InstaCard = ({ id, name, description, coordinates, picture, children, rating }: TCardProps) => {
+const InstaCard = ({ id, name, picture, rating }: TCardProps) => {
 
     return (
         <article className={s.card}>
@@ -31,7 +30,7 @@ const InstaCard = ({ id, name, description, coordinates, picture, children, rati
                 <button className={s.favorites_btn}><FavoritesIcon /></button>
             </div>
             <div className={s.card__title}>
-                    <h3 className={s.card__name}>{name}</h3>
+                <h3 className={s.card__name}>{name}</h3>
             </div>
         </article>
     );
