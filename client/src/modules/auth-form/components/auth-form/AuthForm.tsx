@@ -49,17 +49,18 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
 
     // отправка запроса (login или reg)
     const sendForm = async (values: any) => {
+        console.log(formData);
         userReg
-            ? await performAuth(values.email, values.password, false)
-            : await performAuth(values.email, values.password, true)
+            ? await performAuth(values.nickname, values.email, values.password, false)
+            : await performAuth(values.nickname, values.email, values.password, true)
     }
 
     // структура запроса (login или reg)
-    const performAuth = async (email: string, password: string, isRegistration: boolean) => {
+    const performAuth = async (nickname:string, email: string, password: string, isRegistration: boolean) => {
         dispatch(handleLoaderActive(true));
         try {
             const response = isRegistration
-                ? await AuthService.registration(email, password) //reg
+                ? await AuthService.register(nickname, email, password) //reg
                 : await AuthService.login(email, password); // login
             Cookies.set("token", response.data.accessToken);
             Cookies.set("login", response.data.user.email);
@@ -98,7 +99,7 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
             onValuesChange={handleFormChange}
         >
             <div className={s.form__inputs}>
-                {type === RoutePath[AppRoutes.REGISTRATION] && <FormInput name="name" rules={nicknameRules} placeholder="Имя пользователя" />}
+                {type === RoutePath[AppRoutes.REGISTRATION] && <FormInput name="nickname" rules={nicknameRules} placeholder="Имя пользователя" />}
                 <FormInput name="email" rules={emailRules} placeholder="E-mail" />
                 <PasswordInput type={type} />
                 <FormButton
