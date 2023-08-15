@@ -17,7 +17,7 @@ const Logo = () => {
 
     return (
         <Link to={"/"} className={s.logo} onClick={handleClick}>
-            <Title level={2} className={s.text}>Travel</Title>
+            <Title level={2} className={s.text}>LOGO</Title>
         </Link>
     );
 }

@@ -9,7 +9,6 @@ export const Header = () => {
         <header className={s.wrapper}>
             <div className={cn("container", s.header)}>
                 <Logo />
-                <Menu />
             </div>
         </header>
     );
