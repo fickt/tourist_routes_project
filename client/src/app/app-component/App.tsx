@@ -17,7 +17,6 @@ const App = () => {
 
     return (
         <>
-            <Header />
             <main>
                 <AppRouter />
             </main>
