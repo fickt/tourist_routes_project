@@ -30,7 +30,7 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
 
     const [form] = Form.useForm<FormInstance>();
 
-    // собрана информация из инпутов, которую ввёл user
+    // информация из инпутов, которую ввёл user
     const [formData, setFormData] = useState<TFormData | null>(null);
 
     // отслеживание полей формы
@@ -49,26 +49,30 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
 
     // отправка запроса (login или reg)
     const sendForm = async (values: any) => {
-        console.log(formData);
         userReg
             ? await performAuth(values.nickname, values.email, values.password, false)
             : await performAuth(values.nickname, values.email, values.password, true)
     }
 
-    // структура запроса (login или reg)
-    const performAuth = async (nickname:string, email: string, password: string, isRegistration: boolean) => {
+    // запрос (login или reg)
+    const performAuth = async (
+        nickname: string,
+        email: string,
+        password: string,
+        isRegistration: boolean
+    ) => {
         dispatch(handleLoaderActive(true));
         try {
             const response = isRegistration
                 ? await AuthService.register(nickname, email, password) //reg
                 : await AuthService.login(email, password); // login
-            Cookies.set("token", response.data.accessToken);
-            Cookies.set("login", response.data.user.email);
+            Cookies.set("token", response.data.access_token);
             setUserAuth(isRegistration);
             setSuccessMessage(isRegistration, response);
             dispatch(handleSetUser(response.data.user));
+            console.log(response.data.user);
         } catch (e) {
-            dispatch(handleErrorMessage("Произошла ошибка"));
+            dispatch(handleErrorMessage(e.message));
         } finally {
             dispatch(handleLoaderActive(false));
         }
@@ -77,9 +81,7 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
     // сообщение об успешной авторизации (login или reg)
     const setSuccessMessage = (isRegistration: boolean, response: any) => {
         dispatch(
-            isRegistration
-                ? handleErrorMessage(`Пользователь ${response.data.user.email} зарегистрирован`)
-                : handleErrorMessage(`Вы вошли как ${response.data.user.email}`)
+            isRegistration && handleErrorMessage(`Пользователь ${response.data.user.nickname} зарегистрирован`)
         )
     }
 
@@ -112,7 +114,7 @@ export const AuthForm = ({ type }: TAuthFormProps) => {
             </div>
             {type === RoutePath[AppRoutes.LOGIN] && <FormLink link="/forgotPassword" textLink="Забыли пароль?" onClick={null} />}
             {loader && <PreloaderCar />}
-            {!loader && (error && <ErrorMessage errorText="Ошибка авторизации" />)}
+            {!loader && (error && <ErrorMessage errorText={error} />)}
         </Form>
     )
 }
