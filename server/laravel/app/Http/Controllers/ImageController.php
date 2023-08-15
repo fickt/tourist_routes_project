@@ -9,6 +9,12 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 class ImageController extends Controller
 {
+    /**
+     * Возвращает картинки по названию
+     *
+     * @param string $filename
+     * @return \Illuminate\Http\Response|JsonResponse
+     */
     public function show(string $filename): \Illuminate\Http\Response|JsonResponse
     {
         $path = public_path() . '\images\\' . $filename;
