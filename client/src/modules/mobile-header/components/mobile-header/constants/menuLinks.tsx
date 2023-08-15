@@ -8,6 +8,6 @@ import ProfileIcon from "modules/mobile-header/components/mobile-header/assets/p
 export const menuLinks = [
     {path: RoutePath.home, icon: <HomeIcon />},
     {path: RoutePath.spots, icon: <SearchIcon />},
-    {path: "#", icon: <FavoritesIcon />},
+    {path: RoutePath.favorites, icon: <FavoritesIcon />},
     {path: RoutePath.login, icon: <ProfileIcon />},
 ]
