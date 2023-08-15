@@ -76,7 +76,8 @@ def recommend_on_survey(likes: str):
                 'difficulty': route_difficulties.iloc[routes.iloc[to_recommend[i]]['difficulty_id'] - 1]['name'],
                 'longitude': routes.iloc[to_recommend[i]]['longitude'],
                 'latitude': routes.iloc[to_recommend[i]]['latitude'],
-                'distance_from_nearest_city': routes.iloc[to_recommend[i]]['distance_from_nearest_city']
+                'distance_from_nearest_city': routes.iloc[to_recommend[i]]['distance_from_nearest_city'],
+                'rating': routes.iloc[to_recommend[i]]['rating']
             }
 
         return result
