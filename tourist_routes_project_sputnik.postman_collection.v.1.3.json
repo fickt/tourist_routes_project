@@ -170,6 +170,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get route by id: 1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/routes/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
