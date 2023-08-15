@@ -34,6 +34,7 @@ Route::group(['middleware' => 'api'], function () {
     /* Routes */
     Route::group(['prefix' => 'routes'], function () {
         Route::get('', [RouteController::class, 'index']);
+        Route::get('/{routeId}', [RouteController::class, 'show']);
     });
 
     Route::get('/images/{filename}', [ImageController::class, 'show']);
