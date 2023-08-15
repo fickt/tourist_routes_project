@@ -1,13 +1,13 @@
 .card {
+	max-width: 400px;
 	position: relative;
 	display: flex;
+	flex-wrap: nowrap;
+	gap: 12px;
 	flex-direction: column;
 	align-items: flex-start;
 	padding: 24px 24px 16px 24px;
 	background-color: lightgray;
-	gap: 12px;
-	flex-wrap: nowrap;
-	max-width: 400px;
 	
 	&:hover {
 		box-shadow: 0 2px 4px rgba(40, 41, 61, 0.04), 0 8px 16px rgba(96, 97, 112, 0.16);
@@ -42,13 +42,6 @@
 			}
 		}
 	}
-
-	&__desc {
-		font-size: 16px;
-		padding-top: 14px;
-		position: relative;
-		text-align: left;
-	}
 	
 	&__image {
 		width: 100%;
@@ -79,9 +72,7 @@
 			.comments_count{
 				font-size: inherit;
 			}
-		}
-
-		
+		}		
 
 		.favorites_btn {
 			background: none;
@@ -105,16 +96,8 @@
 	&__link {
 		display: block;
 	}
-
 }
 
-.button {
-    font-size: 11px;
-    line-height: normal;
-    height: auto;
-    padding: 4px 12px;
-    border-radius: 10px;
-}
 
 
 
