@@ -1,14 +1,20 @@
+import React, { useEffect } from "react";
 import s from "./styles.module.scss";
 import { AuthForm } from "modules/auth-form/components/auth-form/AuthForm";
 import { FormHeader } from "components/form-header/FormHeader";
 import { AppRoutes, RoutePath } from "pages/routeConfig";
 import { TAuthPageProps } from "pages/types";
 import Cookies from "js-cookie";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AuthPage = ({ isRegister }: TAuthPageProps) => {
 
-    const token = Cookies.get("token");
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        Cookies.get("token") && navigate(RoutePath[AppRoutes.SPOTS]);
+    }, [])
+
     const title = isRegister ? "Регистрация" : "Добро пожаловать";
     const text = isRegister
         ? "Уже зарегистрированы? Войдите в аккаунт."
@@ -19,7 +25,6 @@ const AuthPage = ({ isRegister }: TAuthPageProps) => {
 
     return (
         <div className={s.auth}>
-            {token && <Navigate to={RoutePath[AppRoutes.SPOTS]} />}
             <FormHeader
                 title={title}
                 text={text}
