@@ -1,10 +1,10 @@
 import axios from "axios";
-import { handleErrorMessage } from "../store/authActions";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
-import { TAuthResponse } from "../store/types/authTypes";
+import { TAuthResponse } from "modules/auth-form/store/types/authTypes";
+import { handleErrorMessage } from "modules/auth-form/store/authActions";
 
-export const API_URL = `http://localhost:5000/api`;
+export const API_URL = `http://localhost:8080/api/auth`;
 export const $api = axios.create({
     withCredentials: true,
     baseURL: API_URL,
@@ -27,7 +27,7 @@ $api.interceptors.response.use((config) => {
             return $api.request(originalRequest);
         } catch (e) {
             const dispatch = useDispatch();
-            dispatch(handleErrorMessage('Пользователь не авторизован'));
+            dispatch(handleErrorMessage("Пользователь не авторизован"));
         }
     }
     throw error;
