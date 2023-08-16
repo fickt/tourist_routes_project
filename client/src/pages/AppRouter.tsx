@@ -8,7 +8,6 @@ const AppRouter = () => {
         <Routes >
             {mainRoutes.map(({path, element}) => <Route path={path} element={element} key={path} />)}
         </Routes>)
-
 }
 
 export default memo(AppRouter);

@@ -12,6 +12,7 @@ $api.interceptors.request.use((config) => {
     return config;
 })
 
+// проверяет, авторизирован ли user
 $api.interceptors.response.use((config) => {
     return config;
 },async (error) => {
@@ -20,11 +21,11 @@ $api.interceptors.response.use((config) => {
         originalRequest._isRetry = true;
         try {
             const response = await axios.get<TAuthResponse>(`${API_URL}/refresh`, { withCredentials: true })
-            Cookies.set("token", response.data.accessToken);
+            Cookies.set("token", response.data.access_token);
             return $api.request(originalRequest);
         } catch (e) {
             const dispatch = useDispatch();
-            dispatch(handleErrorMessage("Пользователь не авторизован"));
+            dispatch(handleErrorMessage(e.message));
         }
     }
     throw error;

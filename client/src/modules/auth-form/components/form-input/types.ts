@@ -5,5 +5,5 @@ export type TFormInputProps = {
 }
 
 export type TPasswordInputProps = {
-    type: string;
+    isRegister: boolean;
 }

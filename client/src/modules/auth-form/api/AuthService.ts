@@ -9,8 +9,6 @@ export default class AuthService {
     }
 
     static async register(nickname: string, email: string, password: string): Promise<AxiosResponse<TAuthResponse>> {
-        const requestData = { nickname, email, password };
-        console.log('Register Request:', requestData);
         return $api.post<TAuthResponse>(RoutePath[AppRoutes.REGISTRATION], { nickname, email, password })
     }
 

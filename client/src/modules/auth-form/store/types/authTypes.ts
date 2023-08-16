@@ -1,6 +1,6 @@
 export type TAuthResponse = {
-    accessToken: string,
-    refreshToken: string,
+    access_token: string,
+    refresh_token: string,
     user: TUser,
 }
 
@@ -12,7 +12,7 @@ export type TFormData = {
 }
 
 export type TState = {
-    error_message: string;
+    error_message: string | null;
     is_loader_active: boolean;
     user: TUser | null;
     user_auth: boolean;

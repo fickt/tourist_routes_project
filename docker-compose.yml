@@ -31,6 +31,16 @@ services:
     env_file:
       - .env
 
+  ml-service:
+    container_name: ml-service
+    build:
+      context: ./ml-service
+      dockerfile: Dockerfile
+    volumes:
+      - ./ml-service:/usr/src/app
+    ports:
+      - "9000:9000"
+
   #NGINX
   web:
     build:
