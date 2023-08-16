@@ -26,13 +26,15 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
     const error = useAppSelector(authError);
     const isUserReg= useAppSelector(authUser);
     const [form] = Form.useForm<FormInstance>();
+    const token = Cookies.get("token");
 
     useEffect(() => {
         dispatch(handleErrorMessage(null)); // затирает ошибку
-        isRegister
-            ? (isUserReg && navigate(RoutePath[AppRoutes.SPOTS])) // перенаправляет на страницу мест
-            : (isUserAuth && navigate(RoutePath[AppRoutes.FAVORITES])) // перенаправляет на страницу избранного
-    }, [Cookies.get("token")])
+        if (token) {
+            isUserReg && navigate(RoutePath[AppRoutes.SPOTS]) // перенаправляет на страницу мест
+            isUserAuth && navigate(RoutePath[AppRoutes.FAVORITES]) // перенаправляет на страницу избранного
+        }
+    }, [token])
 
     useEffect(() => {
         form.resetFields(["email", "password"]); // При переключении окна логин-регистрация, inputs зачищаются
