@@ -10,7 +10,7 @@ import { PasswordInput } from "modules/auth-form/components/form-input/PasswordI
 import { FormButton } from "modules/auth-form/components/form-button/FormButton";
 import { handleErrorMessage, handleLoaderActive, handleSetUser, handleUserAuth, handleUserReg } from "modules/auth-form/store/authActions";
 import { TFormData } from "modules/auth-form/store/types/authTypes";
-import { authError, authLoader, authUser } from "modules/auth-form/store/authSelectors";
+import { authError, authLoader, authUser, isUserAuth } from "modules/auth-form/store/authSelectors";
 import { ErrorMessage } from "ui/error-message/ErrorMessage";
 import { TAuthFormProps } from "./types";
 import { FormLink } from "modules/auth-form/components/form-link/FormLink";
@@ -28,12 +28,18 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
     const [form] = Form.useForm<FormInstance>();
 
     useEffect(() => {
-        dispatch(handleErrorMessage(null));
-        isRegister && isUserReg && navigate(RoutePath[AppRoutes.SPOTS])
+        dispatch(handleErrorMessage(null)); // затирает ошибку
+        isRegister
+            ? (isUserReg && navigate(RoutePath[AppRoutes.SPOTS])) // перенаправляет на страницу мест
+            : (isUserAuth && navigate(RoutePath[AppRoutes.FAVORITES])) // перенаправляет на страницу избранного
     }, [Cookies.get("token")])
 
+    useEffect(() => {
+        form.resetFields(["email", "password"]); // При переключении окна логин-регистрация, inputs зачищаются
+    }, [isRegister])
+
     // отслеживание полей формы
-    const handleFormChange = (changedFields: TFormData) => (prevFormData: TFormData) => ({
+    const handleFormChange = (changedFields: TFormData | null) => (prevFormData: TFormData | null) => ({
         ...prevFormData,
         ...changedFields
     });
@@ -54,35 +60,19 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
 
     // запрос (login или reg)
     const performAuth = async (nickname: string, email: string, password: string, isRegistration: boolean) => {
-        dispatch(handleLoaderActive("true"));
+        dispatch(handleLoaderActive("true")); // включение лоадера
         try {
             const response = isRegistration
-                ? await AuthService.register(nickname, email, password) //reg
-                : await AuthService.login(email, password); // login
-            Cookies.set("token", response.data.access_token);
-            setUserAuth(isRegistration);
-            setSuccessMessage(isRegistration, response);
-            dispatch(handleSetUser(response.data.user));
-            console.log(response);
+                ? await AuthService.register(nickname, email, password) // запрос reg
+                : await AuthService.login(email, password); // запрос login
+            Cookies.set("token", response.data.access_token); // установка токена в куки
+            isRegistration ? handleUserReg(true) : handleUserAuth(true) // установка флага что произошла регистрация или логин
+            dispatch(handleSetUser(response.data.user)); // установка пользователя
         } catch (e) {
-            e.response.data.error
-                ? dispatch(handleErrorMessage(e.response.data.error))
-                : dispatch(handleErrorMessage("Произошла ошибка"))
+            dispatch(handleErrorMessage(e.response.data.error)) // установка ошибки
         } finally {
-            dispatch(handleLoaderActive("false"));
+            dispatch(handleLoaderActive("false")); // выключение лоадера
         }
-    }
-
-    // сообщение об успешной авторизации (login или reg)
-    const setSuccessMessage = (isRegistration: boolean, response: any) => {
-        dispatch(
-            isRegistration && handleErrorMessage(`Пользователь ${response.data.user.nickname} зарегистрирован`)
-        )
-    }
-
-    // пользователь авторизован (login или reg)
-    const setUserAuth = (isRegistration: boolean) => {
-        dispatch(isRegistration ? handleUserReg(true) : handleUserAuth(true))
     }
 
     return (
@@ -102,7 +92,6 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
                 <FormButton
                     value={isRegister ? "Зарегистрироваться" : "Войти"}
                     onClick={handleButtonClick}
-                    form={form}
                     loader={loader}
                 />
             </div>
