@@ -1,4 +1,4 @@
-export const sortTabs = {
+const sortTabs = {
     rating: {
         category: "Рейтинг",
         fromUp: {
@@ -49,29 +49,31 @@ export const sortTabs = {
     },
 }
 
+const {rating, spots, vocationType, difficulty} = sortTabs;
+
 export const sortOptions = [
-    { label: sortTabs.rating.category, value: sortTabs.rating.fromUp.value },
+    { label: rating.category, value: rating.fromUp.value },
     {
-        label: sortTabs.spots.category,
+        label: spots.category,
         options: [
-            { label: sortTabs.spots.lakes.label, value: sortTabs.spots.lakes.value },
-            { label: sortTabs.spots.mountains.label, value: sortTabs.spots.mountains.value },
+            { label: spots.lakes.label, value: spots.lakes.value },
+            { label: spots.mountains.label, value: spots.mountains.value },
         ],
     },
     {
-        label: sortTabs.vocationType.category,
+        label: vocationType.category,
         options: [
-            { label: sortTabs.vocationType.family.label, value: sortTabs.vocationType.family.value },
-            { label: sortTabs.vocationType.friends.label, value: sortTabs.vocationType.friends.value },
-            { label: sortTabs.vocationType.alone.label, value: sortTabs.vocationType.alone.value },
+            { label: vocationType.family.label, value: vocationType.family.value },
+            { label: vocationType.friends.label, value: vocationType.friends.value },
+            { label: vocationType.alone.label, value: vocationType.alone.value },
         ],
     },
     {
-        label: sortTabs.difficulty.category,
+        label: difficulty.category,
         options: [
-            { label: sortTabs.difficulty.easy.label, value: sortTabs.difficulty.easy.value },
-            { label: sortTabs.difficulty.middle.label, value: sortTabs.difficulty.middle.value },
-            { label: sortTabs.difficulty.hard.label, value: sortTabs.difficulty.hard.value },
+            { label: difficulty.easy.label, value: difficulty.easy.value },
+            { label: difficulty.middle.label, value: difficulty.middle.value },
+            { label: difficulty.hard.label, value: difficulty.hard.value },
         ],
     },
 ]
