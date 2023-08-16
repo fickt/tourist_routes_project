@@ -4,7 +4,7 @@ import ArrowIcon from "./img/arrow.svg";
 import { IContentHeaderProps } from "./types";
 import { PREV_PAGE } from "./constants";
 
-export const ContentHeader = ({ title, subtitle, children, to, textButton }: IContentHeaderProps) => {
+export const ContentHeader = ({ title, subtitle, children, to, textButton="назад" }: IContentHeaderProps) => {
 
     return (
         <>

@@ -4,10 +4,9 @@ import SearchIcon from "modules/mobile-header/components/mobile-header/assets/se
 import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets/favorites.svg";
 import ProfileIcon from "modules/mobile-header/components/mobile-header/assets/profile.svg";
 
-
 export const menuLinks = [
     {path: RoutePath.home, icon: <HomeIcon />},
     {path: RoutePath.spots, icon: <SearchIcon />},
-    {path: "#", icon: <FavoritesIcon />},
-    {path: RoutePath.login, icon: <ProfileIcon />},
+    {path: RoutePath.favorites, icon: <FavoritesIcon />},
+    {path: RoutePath.auth_login, icon: <ProfileIcon />},
 ]

@@ -2,7 +2,7 @@ import { ERROR_MESSAGE, IS_LOADER_ACTIVE, IS_USER_AUTH, IS_USER_REG, SET_USER } 
 import { TState, TAction } from "./types/authTypes";
 
 const initialState: TState = {
-    error_message: "",
+    error_message: null,
     is_loader_active: false,
     user: null,
     user_auth: false,

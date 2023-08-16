@@ -5,16 +5,14 @@ import { TAuthResponse } from "modules/auth-form/store/types/authTypes";
 import { handleErrorMessage } from "modules/auth-form/store/authActions";
 
 export const API_URL = `http://localhost:8080/api/auth`;
-export const $api = axios.create({
-    withCredentials: true,
-    baseURL: API_URL,
-})
+export const $api = axios.create({baseURL: API_URL})
 
 $api.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${Cookies.get("token")}`;
     return config;
 })
 
+// проверяет, авторизирован ли user
 $api.interceptors.response.use((config) => {
     return config;
 },async (error) => {
@@ -23,11 +21,11 @@ $api.interceptors.response.use((config) => {
         originalRequest._isRetry = true;
         try {
             const response = await axios.get<TAuthResponse>(`${API_URL}/refresh`, { withCredentials: true })
-            Cookies.set("token", response.data.accessToken);
+            Cookies.set("token", response.data.access_token);
             return $api.request(originalRequest);
         } catch (e) {
             const dispatch = useDispatch();
-            dispatch(handleErrorMessage("Пользователь не авторизован"));
+            dispatch(handleErrorMessage(e.message));
         }
     }
     throw error;
