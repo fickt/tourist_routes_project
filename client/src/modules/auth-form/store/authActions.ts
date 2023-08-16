@@ -6,7 +6,7 @@ export const handleErrorMessage = (payload: string | null) => ({
     payload: payload,
 });
 
-export const handleLoaderActive = (payload: boolean) => ({
+export const handleLoaderActive = (payload: string) => ({
     type: IS_LOADER_ACTIVE,
     payload: payload,
 });
