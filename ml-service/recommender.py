@@ -6,7 +6,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 import random
 import nltk
 
-nltk.download("russian")
+nltk.download("stopwords")
 
 
 class PlaceRecommender:
