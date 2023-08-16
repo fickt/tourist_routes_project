@@ -10,7 +10,7 @@ import { PasswordInput } from "modules/auth-form/components/form-input/PasswordI
 import { FormButton } from "modules/auth-form/components/form-button/FormButton";
 import { handleErrorMessage, handleLoaderActive, handleSetUser, handleUserAuth, handleUserReg } from "modules/auth-form/store/authActions";
 import { TFormData } from "modules/auth-form/store/types/authTypes";
-import { authError, authLoader, authUser, isUserAuth } from "modules/auth-form/store/authSelectors";
+import { authError, authLoader } from "modules/auth-form/store/authSelectors";
 import { ErrorMessage } from "ui/error-message/ErrorMessage";
 import { TAuthFormProps } from "./types";
 import { FormLink } from "modules/auth-form/components/form-link/FormLink";
@@ -24,7 +24,6 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
     const dispatch = useAppDispatch();
     const loader = useAppSelector(authLoader);
     const error = useAppSelector(authError);
-    const isUserReg= useAppSelector(authUser);
     const [form] = Form.useForm<FormInstance>();
     const token = Cookies.get("token");
 
