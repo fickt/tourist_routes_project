@@ -2,7 +2,7 @@ import s from "./style.module.scss";
 import { Button, Form } from "antd";
 import { TFormButtonProps } from "./types";
 
-export const FormButton = ({ value, onClick, form, loader }: TFormButtonProps) => {
+export const FormButton = ({ value, onClick, loader }: TFormButtonProps) => {
 
     return (
         <Form.Item>
@@ -11,11 +11,7 @@ export const FormButton = ({ value, onClick, form, loader }: TFormButtonProps) =
                 type="primary"
                 htmlType="submit"
                 onClick={onClick}
-                disabled={loader === "true"
-                    || !form.isFieldsTouched(true)
-                    || form.getFieldsError()
-                        .filter(({ errors }) => errors.length).length > 0
-                }
+                disabled={loader === "true"}
             >
                 {value}
             </Button>
