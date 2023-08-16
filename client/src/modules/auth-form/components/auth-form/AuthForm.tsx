@@ -31,8 +31,7 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
     useEffect(() => {
         dispatch(handleErrorMessage(null)); // затирает ошибку
         if (token) {
-            isUserReg && navigate(RoutePath[AppRoutes.SPOTS]) // перенаправляет на страницу мест
-            isUserAuth && navigate(RoutePath[AppRoutes.FAVORITES]) // перенаправляет на страницу избранного
+            isRegister ? navigate(RoutePath[AppRoutes.SPOTS]) : navigate(RoutePath[AppRoutes.FAVORITES])
         }
     }, [token])
 
@@ -71,7 +70,9 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
             isRegistration ? handleUserReg(true) : handleUserAuth(true) // установка флага что произошла регистрация или логин
             dispatch(handleSetUser(response.data.user)); // установка пользователя
         } catch (e) {
-            dispatch(handleErrorMessage(e.response.data.error)) // установка ошибки
+            e.response
+                ? dispatch(handleErrorMessage(e.response.data.error)) // Ошибки полученные с сервера
+                : dispatch(handleErrorMessage("Попробуйте снова")) // Ошибка 504
         } finally {
             dispatch(handleLoaderActive("false")); // выключение лоадера
         }
