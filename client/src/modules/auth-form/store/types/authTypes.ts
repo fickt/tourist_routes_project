@@ -8,12 +8,12 @@ export type TFormData = {
     nickname: string;
     email: string;
     password: string;
-    confirmPassword: string;
+    confirm: string;
 }
 
 export type TState = {
     error_message: string | null;
-    is_loader_active: boolean;
+    is_loader_active: string;
     user: TUser | null;
     user_auth: boolean;
     user_reg: boolean;
