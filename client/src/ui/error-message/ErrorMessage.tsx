@@ -1,4 +1,3 @@
-import React from "react";
 import s from "./style.module.scss";
 import { Alert } from "antd";
 import { TErrorMessageProps } from "./types";
