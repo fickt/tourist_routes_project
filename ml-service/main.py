@@ -5,7 +5,7 @@ from recommender import PlaceRecommender
 
 app = FastAPI(title = 'Recommender System')
 
-alchemy_engine = create_engine('postgresql+psycopg2://root:root@127.0.0.1:5432/postgres')
+alchemy_engine = create_engine('postgresql+psycopg2://root:root@db:5432/postgres')
 
 connection = alchemy_engine.connect()
 
