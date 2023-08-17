@@ -11,7 +11,7 @@ export const FormButton = ({ value, onClick, loader }: TFormButtonProps) => {
                 type="primary"
                 htmlType="submit"
                 onClick={onClick}
-                disabled={loader === "true"}
+                disabled={loader}
             >
                 {value}
             </Button>

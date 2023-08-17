@@ -60,7 +60,7 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
 
     // запрос (login или reg)
     const performAuth = async (nickname: string, email: string, password: string, isRegistration: boolean) => {
-        dispatch(handleLoaderActive("true")); // включение лоадера
+        dispatch(handleLoaderActive(true)); // включение лоадера
         try {
             const response = isRegistration
                 ? await AuthService.register(nickname, email, password) // запрос reg
@@ -73,7 +73,7 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
                 ? dispatch(handleErrorMessage(e.response.data.error)) // Ошибки полученные с сервера
                 : dispatch(handleErrorMessage("Попробуйте снова")) // Ошибка 504
         } finally {
-            dispatch(handleLoaderActive("false")); // выключение лоадера
+            dispatch(handleLoaderActive(false)); // выключение лоадера
         }
     }
 
@@ -94,12 +94,12 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
                 <FormButton
                     value={isRegister ? "Зарегистрироваться" : "Войти"}
                     onClick={handleButtonClick}
-                    loader={loader}
+                    loader={loader as boolean}
                 />
             </div>
             {!isRegister && <FormLink link="/forgotPassword" textLink="Забыли пароль?" onClick={null} />}
-            {loader === "true" && <PreloaderCar />}
-            {loader === "false" && (error && <ErrorMessage errorText={error} />)}
+            {loader && <PreloaderCar />}
+            {!loader && (error && <ErrorMessage errorText={error} />)}
         </Form>
     )
 }
