@@ -7,7 +7,7 @@ import { TAuthPageProps } from "pages/types";
 const AuthPage = ({ isRegister }: TAuthPageProps) => {
 
     const title = isRegister ? "Регистрация" : "Добро пожаловать";
-    const text = isRegister ? "Уже зарегистрированы? Войдите в аккаунт." : "Чтобы продолжить, пожалуйста, войдите в аккаунт";
+    const text = isRegister ? "" : "Чтобы продолжить, пожалуйста, войдите в аккаунт";
     const linkPath = isRegister ? RoutePath.auth_login : RoutePath.auth_register;
     const headerLink = isRegister ? "Уже зарегистрированы?" : "Ещё не зарегистрированы?";
     const textLink = isRegister ? "Войдите в аккаунт." : "Зарегистрируйтесь здесь.";
