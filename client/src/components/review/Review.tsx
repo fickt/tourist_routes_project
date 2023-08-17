@@ -1,6 +1,6 @@
-import Rating from 'components/rating-five-stars/Rating';
 import s from './styles.module.scss';
 import { TReview } from './types';
+import { Rating } from "components/rating-five-stars/Rating";
 
 const Review = ({author, text, rating}: TReview) => {
 
