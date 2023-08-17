@@ -13,7 +13,7 @@ import { TAuthFormProps } from "./types";
 import { FormLink } from "modules/auth-form/components/form-link/FormLink";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { useNavigate } from "react-router-dom";
-import { AppRoutes, RoutePath } from "pages/routeConfig";
+import { RoutePath } from "pages/routeConfig";
 import { handleErrorMessage } from "modules/auth-form/store/authActions";
 import { useAuthentication  } from "modules/auth-form/api/useAuthHook";
 import { authError } from "modules/auth-form/store/authSelectors";
@@ -31,8 +31,8 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
         dispatch(handleErrorMessage(null)); // затирает ошибку
         if (token) {
             isRegister
-                ? navigate(RoutePath[AppRoutes.SPOTS])
-                : navigate(RoutePath[AppRoutes.FAVORITES])
+                ? navigate(RoutePath.spots)
+                : navigate(RoutePath.favorites)
         }
     }, [token]);
 
