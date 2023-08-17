@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { MAX_COUNT_RATING } from "./constants";
 import { TRatingProps } from "./types";
 
-function Rating({isEditable = false, currentRating, setCurrentRating, error}: TRatingProps) {
+export const Rating = ({isEditable = false, currentRating, setCurrentRating, error}: TRatingProps) => {
 
     const [ratingArray, setRatingArray] = useState(new Array(MAX_COUNT_RATING).fill(<></>)) //новый пассив из 5 звезд
 
@@ -44,11 +44,9 @@ function Rating({isEditable = false, currentRating, setCurrentRating, error}: TR
     useEffect(() => constructRating(currentRating), [currentRating])
 
     return ( 
-    <div className="rating__container">        
-        {ratingArray.map((star, i) => <span key={i} className={s.spn}>{star}</span>)}
-        {error && <p className="error-message">{error.message}</p>}
-    </div>
+        <div className="rating__container">
+            {ratingArray.map((star, i) => <span key={i} className={s.spn}>{star}</span>)}
+            {error && <p className="error-message">{error.message}</p>}
+        </div>
      );
 }
-
-export default Rating;
