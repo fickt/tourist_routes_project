@@ -5,7 +5,7 @@ import { Typography } from "antd";
 
 const { Title } = Typography;
 
-const Logo = () => {
+export const Logo = () => {
 
     const location = useLocation();
     const handleClick = (e: SyntheticEvent<HTMLAnchorElement>) => {
@@ -20,6 +20,4 @@ const Logo = () => {
             <Title level={2} className={s.text}>LOGO</Title>
         </Link>
     );
-}
-
-export default memo(Logo);
+};

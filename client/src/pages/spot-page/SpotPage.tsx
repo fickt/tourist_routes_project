@@ -7,7 +7,7 @@ import { ContentHeader } from "ui/content-header/ContentHeader";
 import { SpotItem } from "modules/spot-item";
 import { TMarker, markers } from "components/ymap/constants/markers";
 
-const SpotPage = () => {
+export const SpotPage = () => {
 
     const { spotId } = useParams();
     const spots = useAppSelector(state => state?.spots?.data);
@@ -50,5 +50,3 @@ const SpotPage = () => {
     }
 
 }
-
-export default SpotPage;

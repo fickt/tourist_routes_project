@@ -1,6 +1,6 @@
-import NotFound from "components/not-found/NotFound";
+import { NotFound } from "components/not-found/NotFound";
 
-const NotFoundPage = () => {
+export const NotFoundPage = () => {
     
     return (
         <div className="content container">
@@ -8,5 +8,3 @@ const NotFoundPage = () => {
         </div>
     );
 }
-
-export default NotFoundPage;

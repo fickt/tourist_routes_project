@@ -3,7 +3,7 @@ import { RoutePath } from "pages/routeConfig";
 import { TAuthResponse } from "modules/auth-form/store/types/authTypes";
 import $api from "modules/auth-form/api/index";
 
-export default class AuthService {
+export class AuthService {
     static async login(email: string, password: string): Promise<AxiosResponse<TAuthResponse>> {
         return $api.post(RoutePath.login, { email, password });
     }

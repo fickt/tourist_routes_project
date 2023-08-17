@@ -2,7 +2,7 @@ import s from "./styles.module.scss";
 import { ContentHeader } from "ui/content-header/ContentHeader";
 import { SpotRouteList } from "modules/card-list";
 
-const SpotsPage = () => {
+export const SpotsPage = () => {
 
     return (
         <div className={s.wrapper}>
@@ -11,5 +11,3 @@ const SpotsPage = () => {
         </div>
     );
 }
-
-export default SpotsPage;

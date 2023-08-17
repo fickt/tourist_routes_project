@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "antd";
 import { TNotFoundProps } from "./types";
 
-const NotFound = ({children, title, buttonText = "На главную"}: TNotFoundProps) => {
+export const NotFound = ({children, title, buttonText = "На главную"}: TNotFoundProps) => {
 
     return (
         <div className={s.notfound}>
@@ -14,6 +14,4 @@ const NotFound = ({children, title, buttonText = "На главную"}: TNotFou
             <Link to="/"><Button type="link">{buttonText}</Button></Link>
         </div>
     )
-}
-
-export default NotFound;
+};

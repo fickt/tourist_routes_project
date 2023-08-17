@@ -1,4 +1,4 @@
-import Button from "ui/button/Button";
+import { Button } from "ui/button/Button";
 import { Form, Input, Rate } from "antd";
 import { IFormReviewProps, TFormValues } from "./types";
 import s from "./styles.module.scss"

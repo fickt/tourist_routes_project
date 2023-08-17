@@ -1,5 +1,5 @@
 import s from "./styles.module.scss";
-import Button from "ui/button/Button";
+import { Button } from "ui/button/Button";
 import { ReviewBlock } from "modules/review-block";
 import { YMapComponent } from "components/ymap/YMapComponent";
 import { TSpotItemProps } from "./types";

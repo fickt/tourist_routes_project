@@ -1,8 +1,8 @@
-import AuthService from "modules/auth-form/api/AuthService";
 import { handleErrorMessage, handleLoaderActive, handleSetUser, handleUserAuth, handleUserReg } from "modules/auth-form/store/authActions";
 import { authLoader } from "modules/auth-form/store/authSelectors";
 import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
+import { AuthService } from "./AuthService";
 
 export const useAuthentication = () => {
 

@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { spotRoutesSelector } from "modules/card-list/store/spotsSelectors";
 import { apiSpots } from "modules/card-list/api/SpotsServise";
 import { getSpotRoutes } from "modules/card-list/store/spotsActions";
-import SpotRoute from "components/spot-route/SpotRoute";
+import { SpotRoute } from "components/spot-route/SpotRoute";
 
 export const SpotRouteList = memo(() => {
 
@@ -16,7 +16,7 @@ export const SpotRouteList = memo(() => {
             .then(data => {
                 dispatch(getSpotRoutes(data.data))
             })
-    }, [])
+    }, [spotRoutes])
 
     return (
         <>

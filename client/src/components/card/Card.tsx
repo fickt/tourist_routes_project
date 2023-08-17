@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import s from "./styles.module.scss"
-import Button from "ui/button/Button";
 import { TCardProps } from "./types";
 import { RatingStar } from "components/rating-star/RatingStar";
+import { Button } from "ui/button/Button";
 
 export const Card = ({id, name, description, coordinates, picture, children, rating}: TCardProps) => {
 

@@ -3,7 +3,7 @@ import { TButtonProps } from "./types";
 import { MouseEvent } from "react";
 import classNames from "classnames";
 
-const Button = ({ children, type, target, href, extraClass, htmlType, action }: TButtonProps) => {
+export const Button = ({ children, type, target, href, extraClass, htmlType, action }: TButtonProps) => {
 
     const onclick = (e: MouseEvent<HTMLAnchorElement>) => {
         href && e.preventDefault();
@@ -23,5 +23,3 @@ const Button = ({ children, type, target, href, extraClass, htmlType, action }: 
         </ButtonAntd>
     )
 }
-
-export default Button;

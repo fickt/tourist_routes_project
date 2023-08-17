@@ -6,7 +6,7 @@ import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets
 import CommentsIcon from "modules/mobile-header/components/mobile-header/assets/comments.svg";
 import { RatingStar } from "components/rating-star/RatingStar";
 
-const SpotRoute = ({ id, name, difficulty, categories, rating, photos }: any) => {
+export const SpotRoute = ({ id, name, difficulty, categories, rating, photos }: any) => {
 
     return (
         <article className={s.card}>
@@ -31,6 +31,4 @@ const SpotRoute = ({ id, name, difficulty, categories, rating, photos }: any) =>
             </div>
         </article>
     );
-}
-
-export default SpotRoute;
+};

@@ -1,12 +1,12 @@
-import HomePage from "pages/home-page/HomePage";
-import SpotsPage from "./spots-page/SpotsPage";
-import SpotPage from "./spot-page/SpotPage";
-import ForgotPasswordPage from "./forgot-password/ForgotPasswordPage";
-import NotFoundPage from "./not-found-page/NotFoundPage";
-import ProfilePage from "./profile-page/ProfilePage";
-import FavoritesPage from "./favorites-page/FavoritesPage";
-import AuthPage from "pages/auth-page/AuthPage";
 import { TRoutes } from "pages/types";
+import { HomePage } from "./home-page/HomePage";
+import { ProfilePage } from "./profile-page/ProfilePage";
+import { FavoritesPage } from "./favorites-page/FavoritesPage";
+import { SpotsPage } from "./spots-page/SpotsPage";
+import { AuthPage } from "./auth-page/AuthPage";
+import { SpotPage } from "./spot-page/SpotPage";
+import { ForgotPasswordPage } from "./forgot-password/ForgotPasswordPage";
+import { NotFoundPage } from "./not-found-page/NotFoundPage";
 
 export enum AppRoutes {
     HOME = "home",

@@ -4,7 +4,7 @@ import { FormHeader } from "components/form-header/FormHeader";
 import { RoutePath } from "pages/routeConfig";
 import { TAuthPageProps } from "pages/types";
 
-const AuthPage = ({ isRegister }: TAuthPageProps) => {
+export const AuthPage = ({ isRegister }: TAuthPageProps) => {
 
     const title = isRegister ? "Регистрация" : "Добро пожаловать";
     const text = isRegister ? "" : "Чтобы продолжить, пожалуйста, войдите в аккаунт";
@@ -24,6 +24,4 @@ const AuthPage = ({ isRegister }: TAuthPageProps) => {
             <AuthForm isRegister={isRegister} />
         </div>
     );
-}
-
-export default AuthPage;
+};

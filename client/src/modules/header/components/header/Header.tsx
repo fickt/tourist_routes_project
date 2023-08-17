@@ -1,7 +1,7 @@
-import Logo from "components/logo/Logo";
+import { Logo } from "components/logo/Logo";
 import s from "./styles.module.scss"
 import cn from "classnames";
-import Menu from "components/menu/Menu";
+import { Menu } from "components/menu/Menu";
 
 export const Header = () => {   
     

@@ -13,5 +13,3 @@ export const StarIcon = ({ rating, id }: TStarIconProps) => {
         </svg>
     )
 }
-
-

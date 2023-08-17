@@ -1,10 +1,8 @@
 import { ContentHeader } from "ui/content-header/ContentHeader"
 
-const FavoritesPage = () => {
+export const FavoritesPage = () => {
 
     return (
         <ContentHeader title="Избранные маршруты" />
     )
-}
-
-export default FavoritesPage;
+};

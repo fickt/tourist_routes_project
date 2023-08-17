@@ -1,4 +1,4 @@
-import Review from "components/review/Review";
+import { Review } from "components/review/Review";
 import s from "./styles.module.scss"
 import { reviews } from "modules/review-block/constants/reviews";
 import { ReviewForm } from "modules/review-block/components/review-form/ReviewForm";
