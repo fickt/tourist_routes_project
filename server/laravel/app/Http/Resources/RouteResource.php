@@ -20,7 +20,7 @@ class RouteResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'difficulty' => RouteDifficultyResource::make($this->whenLoaded('difficulty'))->resource->name,
-            'categories' => $this->whenLoaded('categories'),
+            'categories' => RouteCategoryResource::collection($this->whenLoaded('categories')),
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
             'rating' => $this->rating,
