@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import s from "./styles.module.scss"
-import RatingStar from "components/rating-star/RatingStar";
 import { TCardProps } from "./types";
 import classNames from "classnames";
 import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets/favorites.svg";
 import CommentsIcon from "modules/mobile-header/components/mobile-header/assets/comments.svg";
+import { RatingStar } from "components/rating-star/RatingStar";
 
 const InstaCard = ({ id, name, picture, rating }: TCardProps) => {
 
@@ -15,7 +15,9 @@ const InstaCard = ({ id, name, picture, rating }: TCardProps) => {
                 <Link to={`/spots/${id}`} className={s.card__link} >
                     <img className={s.card__image} src={picture} alt={name} />
                 </Link>
-                <span className={classNames(s.card__features, s.card__features_rating)}><RatingStar rating={rating} id={id} /></span>
+                <span className={classNames(s.card__features, s.card__features_rating)}>
+                    <RatingStar rating={rating} id={id} />
+                </span>
             </div>
             <div className={s.card__options}>
                 <Link to={"#"} className={s.comments_link}>
