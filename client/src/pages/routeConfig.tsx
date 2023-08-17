@@ -15,7 +15,7 @@ export enum AppRoutes {
     SPOTS = "spots",
     SPOT_ID = "spotId",
     LOGIN = "login",
-    REGISTRATION = "register",
+    REGISTER = "register",
     FORGOT_PASSWORD = "forgotPassword",    
     LOGOUT = "logout",
     AUTH_LOGIN = "auth_login",
@@ -32,7 +32,7 @@ export const RoutePath = {
     [AppRoutes.AUTH_LOGIN]: "/auth/login",
     [AppRoutes.AUTH_REGISTER]: "/auth/register",
     [AppRoutes.LOGIN]: "/login",
-    [AppRoutes.REGISTRATION]: "/register",
+    [AppRoutes.REGISTER]: "/register",
     [AppRoutes.FORGOT_PASSWORD]: "/forgotPassword",
     [AppRoutes.LOGOUT]: "/logout",
     [AppRoutes.NOT_FOUND]: "*", //в конце

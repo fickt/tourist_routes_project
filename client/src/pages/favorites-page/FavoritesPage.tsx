@@ -3,9 +3,7 @@ import { ContentHeader } from "ui/content-header/ContentHeader"
 const FavoritesPage = () => {
 
     return (
-        <>
-            <ContentHeader title="Избранные маршруты" />
-        </>
+        <ContentHeader title="Избранные маршруты" />
     )
 }
 

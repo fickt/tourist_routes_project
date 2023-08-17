@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import s from "./styles.module.scss";
 import ymaps from "ymaps";
 import { removeControls } from "./helpers/ymap-options";

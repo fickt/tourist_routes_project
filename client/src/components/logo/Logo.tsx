@@ -1,7 +1,7 @@
+import React, { SyntheticEvent, memo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import s from "./styles.module.scss";
 import { Typography } from "antd";
-import React, { SyntheticEvent } from "react";
 
 const { Title } = Typography;
 
@@ -22,4 +22,4 @@ const Logo = () => {
     );
 }
 
-export default React.memo(Logo);
+export default memo(Logo);

@@ -13,7 +13,7 @@ export type TFormData = {
 
 export type TState = {
     error_message: string | null;
-    is_loader_active: string;
+    is_loader_active: boolean;
     user: TUser | null;
     user_auth: boolean;
     user_reg: boolean;

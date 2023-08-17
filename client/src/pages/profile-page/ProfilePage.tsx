@@ -3,9 +3,7 @@ import { ContentHeader } from "ui/content-header/ContentHeader"
 const ProfilePage = () => {
 
     return (
-        <>
-            <ContentHeader title="Профиль" />
-        </>
+        <ContentHeader title="Профиль" />
     )
 }
 

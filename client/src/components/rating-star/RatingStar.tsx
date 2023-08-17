@@ -3,7 +3,7 @@ import { MAX_RATE } from "./constants";
 import s from "./styles.module.scss";
 import { TRatingStarProps } from "./types";
 
-const RatingStar = ({rating=5, id=0}:TRatingStarProps) => {    
+export const RatingStar = ({rating = 5, id = 0}: TRatingStarProps) => {
 
     const calculateRating = (rating:number, MAX_RATE:number) => {
 
@@ -12,13 +12,11 @@ const RatingStar = ({rating=5, id=0}:TRatingStarProps) => {
     }
 
     return (
-        <>
-            <span className={s.star_wrapper}>
-                <span className={s.star}><StarIcon rating={calculateRating(rating, MAX_RATE)} id={id}/></span>
-                <span>{rating.toFixed(1)}</span>
+        <span className={s.star_wrapper}>
+            <span className={s.star}>
+                <StarIcon rating={calculateRating(rating, MAX_RATE)} id={id}/>
             </span>
-        </>
+            <span>{rating.toFixed(1)}</span>
+        </span>
     )
 }
-
-export default RatingStar;
