@@ -6,13 +6,7 @@ import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets
 import CommentsIcon from "modules/mobile-header/components/mobile-header/assets/comments.svg";
 import { RatingStar } from "components/rating-star/RatingStar";
 
-<<<<<<<< HEAD:client/src/components/localCard/LocalCard.tsx
-
-
 const LocalCard = ({ id, name, picture, rating }: TCardProps) => {
-========
-export const InstaCard = ({ id, name, picture, rating }: TCardProps) => {
->>>>>>>> 2728cce6f3531b503c1f24f5ca76276ad6240a10:client/src/components/insta-сard/InstaCard.tsx
 
     return (
         <article className={s.card}>
@@ -40,8 +34,6 @@ export const InstaCard = ({ id, name, picture, rating }: TCardProps) => {
         </article>
     );
 }
-<<<<<<<< HEAD:client/src/components/localCard/LocalCard.tsx
 
 export default LocalCard;
-========
->>>>>>>> 2728cce6f3531b503c1f24f5ca76276ad6240a10:client/src/components/insta-сard/InstaCard.tsx
+
