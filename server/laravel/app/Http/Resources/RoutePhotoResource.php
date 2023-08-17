@@ -16,12 +16,10 @@ class RoutePhotoResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request): array
+    public function toArray(Request $request): string
     {
-        return [
-                $request->getSchemeAndHttpHost()
-                . self::PATH_IMAGE_FOLDER
-                . $this->photo_path
-        ];
+        return $request->getSchemeAndHttpHost()
+            . self::PATH_IMAGE_FOLDER
+            . $this->photo_path;
     }
 }
