@@ -15,20 +15,20 @@ export const useAuthentication = () => {
         password: string,
         isRegistration: boolean
     ) => {
-        dispatch(handleLoaderActive(true)); // Enable loader
+        dispatch(handleLoaderActive(true)); // включить loader
         try {
             const response = isRegistration
-                ? await AuthService.register(nickname, email, password)
-                : await AuthService.login(email, password);
-            Cookies.set("token", response.data.access_token);
-            isRegistration ? handleUserReg(true) : handleUserAuth(true);
-            dispatch(handleSetUser(response.data.user));
+                ? await AuthService.register(nickname, email, password) // отправка запроса на регистрацию
+                : await AuthService.login(email, password); // отправка запроса на логин
+            Cookies.set("token", response.data.access_token); // установка токена в куки
+            isRegistration ? handleUserReg(true) : handleUserAuth(true); // установка флага, что произошло: регистрация или логин
+            dispatch(handleSetUser(response.data.user)); // установка пользователя
         } catch (e) {
             e.response
                 ? dispatch(handleErrorMessage(e.response.data.error))
-                : dispatch(handleErrorMessage("Попробуйте снова"));
+                : dispatch(handleErrorMessage("Попробуйте снова")); // ошибка 504 (отвалились докер-контейнеры)
         } finally {
-            dispatch(handleLoaderActive(false)); // Disable loader
+            dispatch(handleLoaderActive(false)); // выключить loader
         }
     };
 
