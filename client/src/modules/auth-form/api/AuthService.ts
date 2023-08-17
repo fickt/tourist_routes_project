@@ -5,14 +5,14 @@ import $api from "modules/auth-form/api/index";
 
 export default class AuthService {
     static async login(email: string, password: string): Promise<AxiosResponse<TAuthResponse>> {
-        return $api.post<TAuthResponse>(RoutePath[AppRoutes.LOGIN], { email, password });
+        return $api.post(RoutePath.login, { email, password });
     }
 
     static async register(nickname: string, email: string, password: string): Promise<AxiosResponse<TAuthResponse>> {
-        return $api.post<TAuthResponse>(RoutePath[AppRoutes.REGISTRATION], { nickname, email, password })
+        return $api.post(RoutePath.register, { nickname, email, password });
     }
 
     static async logout(): Promise<void> {
-        return $api.post(RoutePath[AppRoutes.LOGOUT]);
+        return $api.post<typeof RoutePath.logout, null, void>(RoutePath[AppRoutes.LOGOUT]);
     }
 }
