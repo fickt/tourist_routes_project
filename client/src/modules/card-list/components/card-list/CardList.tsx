@@ -2,7 +2,7 @@ import s from "./styles.module.scss";
 import { memo } from "react";
 import { useAppSelector } from "storage/hookTypes";
 import { spotsSelectors } from "modules/card-list/store/spotsSelectors";
-import InstaCard from "components/instaCard/InstaCard";
+import InstaCard from "components/insta-сard/InstaCard";
 import { Sorting } from "modules/card-list/components/Sorting/Sorting";
 import { sortOptions } from "modules/card-list/constants/sortOptions";
 

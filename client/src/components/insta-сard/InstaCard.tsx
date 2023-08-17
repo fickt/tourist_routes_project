@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import s from "./styles.module.scss"
 import RatingStar from "components/rating-star/RatingStar";
@@ -6,8 +5,6 @@ import { TCardProps } from "./types";
 import classNames from "classnames";
 import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets/favorites.svg";
 import CommentsIcon from "modules/mobile-header/components/mobile-header/assets/comments.svg";
-
-
 
 const InstaCard = ({ id, name, picture, rating }: TCardProps) => {
 
