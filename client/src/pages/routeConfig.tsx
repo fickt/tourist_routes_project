@@ -27,7 +27,7 @@ export const RoutePath = {
     [AppRoutes.HOME]: "/",
     [AppRoutes.PROFILE]: "/profile",
     [AppRoutes.FAVORITES]: "/favorites",
-    [AppRoutes.SPOTS]: "/spots",
+    [AppRoutes.SPOTS]: "/routes",
     [AppRoutes.SPOT_ID]: "/spots/:spotId/*",
     [AppRoutes.AUTH_LOGIN]: "/auth/login",
     [AppRoutes.AUTH_REGISTER]: "/auth/register",

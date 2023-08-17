@@ -1,7 +1,7 @@
-import s from './styles.module.scss';
-import { useState } from 'react';
-import { Select } from 'antd';
-import { TSortingProps } from './types';
+import s from "./styles.module.scss";
+import { useState } from "react";
+import { Select } from "antd";
+import { TSortingProps } from "./types";
 
 export const Sorting = ({ options }: TSortingProps) => {
 
