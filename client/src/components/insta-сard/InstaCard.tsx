@@ -6,7 +6,7 @@ import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets
 import CommentsIcon from "modules/mobile-header/components/mobile-header/assets/comments.svg";
 import { RatingStar } from "components/rating-star/RatingStar";
 
-const InstaCard = ({ id, name, picture, rating }: TCardProps) => {
+export const InstaCard = ({ id, name, picture, rating }: TCardProps) => {
 
     return (
         <article className={s.card}>
@@ -34,5 +34,3 @@ const InstaCard = ({ id, name, picture, rating }: TCardProps) => {
         </article>
     );
 }
-
-export default InstaCard;
