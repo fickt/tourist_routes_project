@@ -39,7 +39,7 @@ class PlaceRecommender:
         """
             descriptions: String of image descriptions
         """
-        arr = list(filter(lambda x: x != "", descriptions.split(',')))
+        arr = list(filter(lambda x: x != "", descriptions.split('|')))
         to_recommend = []
         for caption in arr:
             vector = self.cv.transform([caption]).toarray()
