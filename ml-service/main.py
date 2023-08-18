@@ -25,13 +25,13 @@ def recommend(likes: str):
         for i in range(len(to_recommend)):
             result[f'place{i}'] = {
                 'index': to_recommend[i] + 1,
-                'name': routes.iloc[to_recommend[i]]['name'],
-                'description': routes.iloc[to_recommend[i]]['description'],
-                'difficulty': route_difficulties.iloc[routes.iloc[to_recommend[i]]['difficulty_id'] - 1]['name'],
-                'longitude': routes.iloc[to_recommend[i]]['longitude'],
-                'latitude': routes.iloc[to_recommend[i]]['latitude'],
-                'distance_from_nearest_city': routes.iloc[to_recommend[i]]['distance_from_nearest_city'],
-                'rating': routes.iloc[to_recommend[i]]['rating']
+                # 'name': routes.iloc[to_recommend[i]]['name'],
+                # 'description': routes.iloc[to_recommend[i]]['description'],
+                # 'difficulty': route_difficulties.iloc[routes.iloc[to_recommend[i]]['difficulty_id'] - 1]['name'],
+                # 'longitude': routes.iloc[to_recommend[i]]['longitude'],
+                # 'latitude': routes.iloc[to_recommend[i]]['latitude'],
+                # 'distance_from_nearest_city': routes.iloc[to_recommend[i]]['distance_from_nearest_city'],
+                # 'rating': routes.iloc[to_recommend[i]]['rating']
             }
 
         return result
