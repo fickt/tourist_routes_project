@@ -3,6 +3,7 @@ import { authLoader } from "modules/auth-form/store/authSelectors";
 import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { AuthService } from "modules/auth-form/api/AuthService";
+import { TServerResponse } from "modules/auth-form/store/types/authTypes";
 
 export const useAuthentication = () => {
 
@@ -10,7 +11,7 @@ export const useAuthentication = () => {
     const loader = useAppSelector(authLoader);
 
     // Сообщение об успехе
-    const setSuccessMessage = (isRegistration: boolean, response: any) => {
+    const setSuccessMessage = (isRegistration: boolean, response: TServerResponse) => {
         isRegistration
             ? dispatch(handleErrorMessage(`Пользователь ${response.data.user.nickname} успешно зарегистрирован`))
             : dispatch(handleErrorMessage(`Пользователь ${response.data.user.nickname} авторизирован`))
@@ -21,7 +22,7 @@ export const useAuthentication = () => {
         isRegistration ? handleUserReg(true) : handleUserAuth(true);
     }
 
-    const setError = (e: Error | any) => {
+    const setError = (e: Error | TServerResponse) => {
         e.response
             ? dispatch(handleErrorMessage(e.response.data.error))
             : dispatch(handleErrorMessage("Попробуйте снова")); // ошибка 504 (отвалились докер-контейнеры)
