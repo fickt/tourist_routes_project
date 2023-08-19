@@ -2,12 +2,30 @@ import { handleErrorMessage, handleLoaderActive, handleSetUser, handleUserAuth, 
 import { authLoader } from "modules/auth-form/store/authSelectors";
 import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
-import { AuthService } from "./AuthService";
+import { AuthService } from "modules/auth-form/api/AuthService";
 
 export const useAuthentication = () => {
 
     const dispatch = useAppDispatch();
     const loader = useAppSelector(authLoader);
+
+    // Сообщение об успехе
+    const setSuccessMessage = (isRegistration: boolean, response: any) => {
+        isRegistration
+            ? dispatch(handleErrorMessage(`Пользователь ${response.data.user.nickname} успешно зарегистрирован`))
+            : dispatch(handleErrorMessage(`Пользователь ${response.data.user.nickname} авторизирован`))
+    }
+
+    // Установка события, которое произошло: регистрация или логин
+    const setAction = (isRegistration: boolean) => {
+        isRegistration ? handleUserReg(true) : handleUserAuth(true);
+    }
+
+    const setError = (e: Error | any) => {
+        e.response
+            ? dispatch(handleErrorMessage(e.response.data.error))
+            : dispatch(handleErrorMessage("Попробуйте снова")); // ошибка 504 (отвалились докер-контейнеры)
+    }
 
     const authenticate = async (
         nickname: string,
@@ -21,12 +39,11 @@ export const useAuthentication = () => {
                 ? await AuthService.register(nickname, email, password) // отправка запроса на регистрацию
                 : await AuthService.login(email, password); // отправка запроса на логин
             Cookies.set("token", response.data.access_token); // установка токена в куки
-            isRegistration ? handleUserReg(true) : handleUserAuth(true); // установка флага, что произошло: регистрация или логин
             dispatch(handleSetUser(response.data.user)); // установка пользователя
-        } catch (e) {
-            e.response
-                ? dispatch(handleErrorMessage(e.response.data.error))
-                : dispatch(handleErrorMessage("Попробуйте снова")); // ошибка 504 (отвалились докер-контейнеры)
+            setAction(isRegistration);
+            setSuccessMessage(isRegistration, response);
+        } catch (e: Error | any) {
+            setError(e);
         } finally {
             dispatch(handleLoaderActive(false)); // выключить loader
         }
