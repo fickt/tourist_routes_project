@@ -17,7 +17,7 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
             params: {}
         });
 
-        removeControls(myMap, mapControls)
+        removeControls(myMap, mapControls);
 
         const setMarkers = (markers: TMarker[]) => {
 
@@ -81,7 +81,7 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
                 myMap.geoObjects.add(newMarker);
             })
         }
-        setMarkers(markers)
+        setMarkers(markers);
     }
 
     useEffect(() => {

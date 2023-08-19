@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import s from "./styles.module.scss"
+import s from "./styles.module.scss";
 import { TCardProps } from "./types";
 import { RatingStar } from "components/rating-star/RatingStar";
 import { Button } from "ui/button/Button";
@@ -9,7 +9,7 @@ export const Card = ({id, name, description, coordinates, picture, children, rat
     return (
         <article className={s.card}>
             <div className={s.card__image_wrapper}>
-                <img className={s.card__image} src={picture} alt={name}/>
+                <img className={s.card__image} src={picture} alt={name} />
             </div>
             <div className={s.card__text_block}>
                 <Link to={`/spots/${id}`} className={s.card__link}>
@@ -18,12 +18,12 @@ export const Card = ({id, name, description, coordinates, picture, children, rat
                         <span>{description}</span>
                     </div>
                 </Link>
-                <Button extraClass={s.button} type="primary"
-                        href={`https://yandex.ru/maps/?rtext=~${coordinates[0]},${coordinates[1]}`} target="_blank">
+                <Button extraClass={s.button} type="primary" target="_blank"
+                        href={`https://yandex.ru/maps/?rtext=~${coordinates[0]},${coordinates[1]}`}>
                     Лучший маршрут
                 </Button>
             </div>
-            <RatingStar rating={rating} id={id}/>
+            <RatingStar rating={rating} id={id} />
             {children}
         </article>
     );

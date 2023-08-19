@@ -1,4 +1,4 @@
-import { ContentHeader } from "ui/content-header/ContentHeader"
+import { ContentHeader } from "ui/content-header/ContentHeader";
 
 export const ProfilePage = () => {
 

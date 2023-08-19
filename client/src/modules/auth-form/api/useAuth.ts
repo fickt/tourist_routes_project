@@ -21,11 +21,12 @@ export const useAuth = () => {
             : dispatch(handleErrorMessage(`Пользователь ${response.data.user.nickname} авторизирован`))
     }
 
-    // Установка события, которое произошло: регистрация или логин
+    // Что произошло: регистрация или логин
     const setAction = (isRegistration: boolean) => {
         isRegistration ? handleUserReg(true) : handleUserAuth(true);
     }
 
+    // Установка ошибки
     const setError = (e: Error | TServerResponse) => {
         e.response
             ? dispatch(handleErrorMessage(e.response.data.error))
