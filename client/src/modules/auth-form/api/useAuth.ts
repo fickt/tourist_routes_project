@@ -4,7 +4,6 @@ import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { TServerResponse } from "modules/auth-form/store/types/authTypes";
 import { authService } from "modules/auth-form/api/authService";
-import { AxiosError } from "axios";
 
 export const useAuth = () => {
 
