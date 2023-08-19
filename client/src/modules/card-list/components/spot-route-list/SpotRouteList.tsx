@@ -12,11 +12,13 @@ export const SpotRouteList = memo(() => {
     const spotRoutes = useAppSelector(spotRoutesSelector); 
     
     useEffect(() => {
-        apiSpots.fetchSpots()
+        if (!spotRoutes) {
+            apiSpots.fetchSpots()
             .then(data => {
                 dispatch(getSpotRoutes(data.data))
             })
-    }, [spotRoutes])
+        }
+    }, [])
 
     return (
         <>
