@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { TServerResponse } from "modules/auth-form/store/types/authTypes";
 import { authService } from "modules/auth-form/api/authService";
+import { AxiosError } from "axios";
 
 export const useAuth = () => {
 
@@ -43,7 +44,7 @@ export const useAuth = () => {
             dispatch(handleSetUser(response.data.user)); // установка пользователя
             setAction(isRegistration);
             setSuccessMessage(isRegistration, response);
-        } catch (e: Error | any) {
+        } catch (e: Error | TServerResponse) {
             setError(e);
         } finally {
             dispatch(handleLoaderActive(false)); // выключить loader
