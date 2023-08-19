@@ -1,6 +1,8 @@
+import { Rule } from "antd/lib/form";
+
 export type TFormInputProps = {
     name: string;
-    rules: any[];
+    rules: Rule[];
     placeholder: string;
 }
 

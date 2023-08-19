@@ -1,19 +1,23 @@
 import { handleErrorMessage, handleLoaderActive, handleSetUser, handleUserAuth, handleUserReg } from "modules/auth-form/store/authActions";
-import { authLoader } from "modules/auth-form/store/authSelectors";
+import { authLoader, authUser } from "modules/auth-form/store/authSelectors";
 import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
-import { AuthService } from "modules/auth-form/api/AuthService";
 import { TServerResponse } from "modules/auth-form/store/types/authTypes";
+import { authService } from "modules/auth-form/api/authService";
+import { useNavigate } from "react-router-dom";
+import { RoutePath } from "pages/routeConfig";
 
-export const useAuthentication = () => {
+export const useAuth = () => {
 
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const loader = useAppSelector(authLoader);
+    const user = useAppSelector(authUser);
 
     // Сообщение об успехе
     const setSuccessMessage = (isRegistration: boolean, response: TServerResponse) => {
         isRegistration
-            ? dispatch(handleErrorMessage(`Пользователь ${response.data.user.nickname} успешно зарегистрирован`))
+            ? dispatch(handleErrorMessage(`Пользователь ${response.data.user.nickname} зарегистрирован`))
             : dispatch(handleErrorMessage(`Пользователь ${response.data.user.nickname} авторизирован`))
     }
 
@@ -36,19 +40,23 @@ export const useAuthentication = () => {
     ) => {
         dispatch(handleLoaderActive(true)); // включить loader
         try {
-            const response = isRegistration
-                ? await AuthService.register(nickname, email, password) // отправка запроса на регистрацию
-                : await AuthService.login(email, password); // отправка запроса на логин
+            const response: TServerResponse = isRegistration
+                ? await authService.register(nickname, email, password) // отправка запроса на регистрацию
+                : await authService.login(email, password); // отправка запроса на логин
+            dispatch(handleSetUser({ // установка пользователя
+                nickname: response.data.user.nickname,
+                email: response.data.user.email,
+            }));
             Cookies.set("token", response.data.access_token); // установка токена в куки
-            dispatch(handleSetUser(response.data.user)); // установка пользователя
             setAction(isRegistration);
             setSuccessMessage(isRegistration, response);
-        } catch (e: Error | any) {
+            navigate(RoutePath.profile);
+        } catch (e: Error | TServerResponse) {
             setError(e);
         } finally {
             dispatch(handleLoaderActive(false)); // выключить loader
         }
     };
 
-    return { loader, authenticate };
+    return { user, loader, authenticate };
 };
