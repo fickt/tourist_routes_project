@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { MAX_COUNT_RATING } from "./constants";
 import { TRatingProps } from "./types";
 
-export const Rating = ({isEditable = false, currentRating, setCurrentRating, error}: TRatingProps) => {
+export const Rating = ({isEditable = false, currentRating, setCurrentRating}: TRatingProps) => {
 
     const [ratingArray, setRatingArray] = useState(new Array(MAX_COUNT_RATING).fill(<></>)) //новый пассив из 5 звезд
 
@@ -46,7 +46,6 @@ export const Rating = ({isEditable = false, currentRating, setCurrentRating, err
     return ( 
         <div className="rating__container">
             {ratingArray.map((star, i) => <span key={i}>{star}</span>)}
-            {error && <p className="error-message">{error.message}</p>}
         </div>
      );
 }
