@@ -22,10 +22,8 @@ export type TState = {
 }
 
 export type TUser = {
-    nickname?: string,
+    nickname: string,
     email: string,
-    isActivated: boolean,
-    id: string,
 }
 
 export type TAction = {
