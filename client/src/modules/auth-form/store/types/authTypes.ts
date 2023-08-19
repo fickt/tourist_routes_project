@@ -4,6 +4,8 @@ export type TAuthResponse = {
     user: TUser,
 }
 
+export type TServerResponse = any;
+
 export type TFormData = {
     nickname: string;
     email: string;
