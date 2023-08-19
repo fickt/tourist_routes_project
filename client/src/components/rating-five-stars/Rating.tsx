@@ -45,7 +45,7 @@ export const Rating = ({isEditable = false, currentRating, setCurrentRating, err
 
     return ( 
         <div className="rating__container">
-            {ratingArray.map((star, i) => <span key={i} className={s.spn}>{star}</span>)}
+            {ratingArray.map((star, i) => <span key={i}>{star}</span>)}
             {error && <p className="error-message">{error.message}</p>}
         </div>
      );

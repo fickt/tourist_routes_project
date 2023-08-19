@@ -4,7 +4,6 @@ import { SyntheticEvent } from "react";
 import { menuLinks } from "./constants/menuLinks";
 import classNames from "classnames";
 
-
 export const MobileHeader = () => {
 
     const location = useLocation();
@@ -33,13 +32,3 @@ export const MobileHeader = () => {
         </div>
     )
 }
-
-/*                     <Link to={RoutePath.home} onClick={(e) => handleClick(e, RoutePath.home)}>
-                        <span className={classNames({ [s.menu__icon_filled]: pathname === RoutePath.home })}>
-                            <HomeIcon />
-                        </span>
-                    </Link>
-                    <Link to={RoutePath.home} ><span className={classNames({ [s.menu__icon_filled]: pathname === RoutePath.spots })}><SearchIcon /></span></Link>
-                    <Link to={RoutePath.home} ><span className={classNames({ [s.menu__icon_filled]: false })}><FavoritesIcon /></span></Link>
-                    <Link to={RoutePath.home} ><span className={classNames({ [s.menu__icon_filled]: false })}><ProfileIcon /></span></Link>
-                 */

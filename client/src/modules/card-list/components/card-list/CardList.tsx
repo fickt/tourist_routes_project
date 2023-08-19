@@ -6,7 +6,6 @@ import { Sorting } from "modules/card-list/components/Sorting/Sorting";
 import { sortOptions } from "modules/card-list/constants/sortOptions";
 import { LocalCard } from "components/localCard/LocalCard";
 
-
 export const CardList = memo(() => {
     
     const spots = useAppSelector(spotsSelector);

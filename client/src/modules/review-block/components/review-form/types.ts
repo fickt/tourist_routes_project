@@ -1,5 +1,5 @@
 export type IFormReviewProps = {
-    title: string,
+    title?: string,
     productId: number,
 }
 

@@ -1,4 +1,5 @@
-const sortTabs = {
+//настройки для компонента сортировки
+export const sortTabs = {
     rating: {
         category: "Рейтинг",
         fromUp: {
@@ -15,7 +16,7 @@ const sortTabs = {
         mountains: {
             label: "Горы",
             value: "mountains"
-        }, 
+        },
     },
     vocationType: {
         category: "Тип отдыха",
@@ -30,7 +31,7 @@ const sortTabs = {
         alone: {
             label: "В одиночку",
             value: "alone"
-        }, 
+        },
     },
     difficulty: {
         category: "Сложность",
@@ -45,11 +46,11 @@ const sortTabs = {
         hard: {
             label: "Опытный",
             value: "hard"
-        }, 
+        },
     },
 }
 
-const {rating, spots, vocationType, difficulty} = sortTabs;
+const { rating, spots, vocationType, difficulty } = sortTabs;
 
 export const sortOptions = [
     { label: rating.category, value: rating.fromUp.value },

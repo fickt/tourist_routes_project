@@ -5,8 +5,9 @@ import classNames from "classnames";
 import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets/favorites.svg";
 import CommentsIcon from "modules/mobile-header/components/mobile-header/assets/comments.svg";
 import { RatingStar } from "components/rating-star/RatingStar";
+import { TSpotRoute } from "modules/card-list/types/spotRoutes";
 
-export const SpotRoute = ({ id, name, difficulty, categories, rating, photos }: any) => {
+export const SpotRoute = ({ id, name, difficulty, rating, photos }: TSpotRoute) => {
 
     return (
         <article className={s.card}>

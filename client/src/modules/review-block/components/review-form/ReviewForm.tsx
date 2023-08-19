@@ -9,7 +9,6 @@ export const ReviewForm = ({ title = "Отзыв о месте" }: IFormReviewPr
     const [form] = Form.useForm();
 
     const onFinish = (values: TFormValues) => {
-        //some code
         form.resetFields();
     };
 

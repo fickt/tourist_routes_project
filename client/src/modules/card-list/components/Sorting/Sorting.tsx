@@ -2,13 +2,13 @@ import s from "./styles.module.scss";
 import { useState } from "react";
 import { Select } from "antd";
 import { TSortingProps } from "./types";
+import { sortTabs } from "modules/card-list/constants/sortOptions";
 
 export const Sorting = ({ options }: TSortingProps) => {
 
     const [currentSort, setCurrentSort] = useState<string>();
 
     const handleChange = (value:string) => {
-        console.log(value);
         setCurrentSort(value)        
     }
 
@@ -16,7 +16,7 @@ export const Sorting = ({ options }: TSortingProps) => {
         <div className={s.sort}>
             <span>Сортировка:</span>
             <Select 
-                defaultValue="По умолчанию"
+                defaultValue={sortTabs.rating.category}
                 onChange={handleChange}
                 options={options}
                 className={s.selector}
