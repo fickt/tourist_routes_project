@@ -1,14 +1,18 @@
 import { handleErrorMessage, handleLoaderActive, handleSetUser, handleUserAuth, handleUserReg } from "modules/auth-form/store/authActions";
-import { authLoader } from "modules/auth-form/store/authSelectors";
+import { authLoader, authUser } from "modules/auth-form/store/authSelectors";
 import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { TServerResponse } from "modules/auth-form/store/types/authTypes";
 import { authService } from "modules/auth-form/api/authService";
+import { useNavigate } from "react-router-dom";
+import { RoutePath } from "pages/routeConfig";
 
 export const useAuth = () => {
 
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const loader = useAppSelector(authLoader);
+    const user = useAppSelector(authUser);
 
     // Сообщение об успехе
     const setSuccessMessage = (isRegistration: boolean, response: TServerResponse) => {
@@ -36,13 +40,17 @@ export const useAuth = () => {
     ) => {
         dispatch(handleLoaderActive(true)); // включить loader
         try {
-            const response = isRegistration
+            const response: TServerResponse = isRegistration
                 ? await authService.register(nickname, email, password) // отправка запроса на регистрацию
                 : await authService.login(email, password); // отправка запроса на логин
+            dispatch(handleSetUser({ // установка пользователя
+                nickname: response.data.user.nickname,
+                email: response.data.user.email,
+            }));
             Cookies.set("token", response.data.access_token); // установка токена в куки
-            dispatch(handleSetUser(response.data.user)); // установка пользователя
             setAction(isRegistration);
             setSuccessMessage(isRegistration, response);
+            navigate(RoutePath.profile);
         } catch (e: Error | TServerResponse) {
             setError(e);
         } finally {
@@ -50,5 +58,5 @@ export const useAuth = () => {
         }
     };
 
-    return { loader, authenticate };
+    return { user, loader, authenticate };
 };
