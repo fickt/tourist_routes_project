@@ -24,7 +24,7 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
 
     useEffect(() => {
         dispatch(handleErrorMessage(null));
-        form.resetFields(["email", "password"]); // При переключении окна логин-регистрация, inputs зачищаются
+        form.resetFields();
     }, [isRegister]);
 
     // отслеживание полей формы
