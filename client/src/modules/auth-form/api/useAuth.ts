@@ -2,10 +2,10 @@ import { handleErrorMessage, handleLoaderActive, handleSetUser, handleUserAuth, 
 import { authLoader } from "modules/auth-form/store/authSelectors";
 import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
-import { AuthService } from "modules/auth-form/api/AuthService";
 import { TServerResponse } from "modules/auth-form/store/types/authTypes";
+import { authService } from "modules/auth-form/api/authService";
 
-export const useAuthentication = () => {
+export const useAuth = () => {
 
     const dispatch = useAppDispatch();
     const loader = useAppSelector(authLoader);
@@ -13,7 +13,7 @@ export const useAuthentication = () => {
     // Сообщение об успехе
     const setSuccessMessage = (isRegistration: boolean, response: TServerResponse) => {
         isRegistration
-            ? dispatch(handleErrorMessage(`Пользователь ${response.data.user.nickname} успешно зарегистрирован`))
+            ? dispatch(handleErrorMessage(`Пользователь ${response.data.user.nickname} зарегистрирован`))
             : dispatch(handleErrorMessage(`Пользователь ${response.data.user.nickname} авторизирован`))
     }
 
@@ -37,8 +37,8 @@ export const useAuthentication = () => {
         dispatch(handleLoaderActive(true)); // включить loader
         try {
             const response = isRegistration
-                ? await AuthService.register(nickname, email, password) // отправка запроса на регистрацию
-                : await AuthService.login(email, password); // отправка запроса на логин
+                ? await authService.register(nickname, email, password) // отправка запроса на регистрацию
+                : await authService.login(email, password); // отправка запроса на логин
             Cookies.set("token", response.data.access_token); // установка токена в куки
             dispatch(handleSetUser(response.data.user)); // установка пользователя
             setAction(isRegistration);
