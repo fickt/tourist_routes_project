@@ -1,5 +1,5 @@
 import s from "./style.module.scss";
-import { PreloaderCar } from "ui/spinner/PreloaderCar";
+import { PreloaderCar } from "ui/preloader/PreloaderCar";
 
 export const ForgotPasswordPage = () => {
 

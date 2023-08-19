@@ -1,7 +1,7 @@
 import React, { MouseEvent, useEffect } from "react";
 import { Form, FormInstance } from "antd";
 import s from "./style.module.scss";
-import { PreloaderCar } from "ui/spinner/PreloaderCar";
+import { PreloaderCar } from "ui/preloader/PreloaderCar";
 import { FormInput } from "modules/auth-form/components/form-input/FormInput";
 import { emailRules, nicknameRules } from "modules/auth-form/constants/formRules";
 import { PasswordInput } from "modules/auth-form/components/form-input/PasswordInput";

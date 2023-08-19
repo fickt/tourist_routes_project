@@ -1,4 +1,4 @@
-import "./styles-spiner.scss";
+import "./stylePreloaderCar.scss";
 import CloudIcon from "./assets/cloud-xmark-svgrepo-com.svg";
 import CarSvg from "./assets/car.svg"
 
