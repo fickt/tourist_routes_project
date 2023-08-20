@@ -13,7 +13,7 @@ export type TFormData = {
     confirm: string;
 }
 
-export type TState = {
+export type TAuthState = {
     error_message: string | null;
     is_loader_active: boolean;
     user: TUser | null;
@@ -26,7 +26,7 @@ export type TUser = {
     email: string,
 }
 
-export type TAction = {
+export type TAuthAction = {
     type: string;
     payload: string;
     user: TUser | null;
