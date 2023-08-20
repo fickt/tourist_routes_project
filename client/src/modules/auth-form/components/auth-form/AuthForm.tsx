@@ -11,9 +11,10 @@ import { ErrorMessage } from "ui/error-message/ErrorMessage";
 import { TAuthFormProps } from "./types";
 import { FormLink } from "modules/auth-form/components/form-link/FormLink";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
-import { handleErrorMessage } from "modules/auth-form/store/authActions";
+import { handleAuthError } from "modules/auth-form/store/authActions";
 import { authError } from "modules/auth-form/store/authSelectors";
 import { useAuth } from "modules/auth-form/api/useAuth";
+import { RoutePath } from "pages/routeConfig";
 
 export const AuthForm = ({ isRegister }: TAuthFormProps) => {
 
@@ -23,7 +24,7 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
     const { loader, authenticate  } = useAuth();
 
     useEffect(() => {
-        dispatch(handleErrorMessage(null));
+        dispatch(handleAuthError(null));
         form.resetFields();
     }, [isRegister]);
 
@@ -47,6 +48,10 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
             : await authenticate(values.nickname, values.email, values.password, false)
     }
 
+    const onFinish = () => {
+        sendForm(form);
+    }
+
     return (
         <Form
             form={form}
@@ -54,7 +59,7 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
             className={s.form}
             initialValues={{remember: true}}
             autoComplete="off"
-            onFinish={() => sendForm(form)}
+            onFinish={onFinish}
             onValuesChange={handleFormChange}
         >
             <div className={s.form__inputs}>
@@ -67,7 +72,7 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
                     loader={loader as boolean}
                 />
             </div>
-            {!isRegister && <FormLink link="/forgotPassword" textLink="Забыли пароль?" onClick={null} />}
+            {!isRegister && <FormLink link={RoutePath.forgotPassword} textLink="Забыли пароль?" onClick={null} />}
             {loader && <PreloaderCar />}
             {!loader && (error && <ErrorMessage errorText={error} />)}
         </Form>
