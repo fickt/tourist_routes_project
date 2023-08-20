@@ -1,13 +1,13 @@
-import { IS_USER_REG, IS_USER_AUTH, SET_USER, ERROR_MESSAGE, IS_LOADER_ACTIVE } from "./authActionsTypes";
+import { IS_USER_REG, IS_USER_AUTH, SET_USER, AUTH_ERROR, AUTH_LOADER_ACTIVE } from "./authActionsTypeNames";
 import { TUser } from "modules/auth-form/store/types/authTypes";
 
-export const handleErrorMessage = (payload: string | null) => ({
-    type: ERROR_MESSAGE,
+export const handleAuthError = (payload: string | null) => ({
+    type: AUTH_ERROR,
     payload: payload,
 });
 
-export const handleLoaderActive = (payload: boolean) => ({
-    type: IS_LOADER_ACTIVE,
+export const handleAuthLoader = (payload: boolean) => ({
+    type: AUTH_LOADER_ACTIVE,
     payload: payload,
 });
 
