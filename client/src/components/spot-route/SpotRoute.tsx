@@ -1,6 +1,5 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import s from "./styles.module.scss"
+import s from "./styles.module.scss";
 import classNames from "classnames";
 import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets/favorites.svg";
 import CommentsIcon from "modules/mobile-header/components/mobile-header/assets/comments.svg";
@@ -16,7 +15,9 @@ export const SpotRoute = ({ id, name, difficulty, rating, photos }: TSpotRoute) 
                 <Link to={`/spots/${id}`} className={s.card__link} >
                     <img className={s.card__image} src={photos[0]} alt={name} />
                 </Link>
-                <span className={classNames(s.card__features, s.card__features_rating)}><RatingStar rating={+rating} id={id} /></span>
+                <span className={classNames(s.card__features, s.card__features_rating)}>
+                    <RatingStar rating={+rating} id={id} />
+                </span>
             </div>
             <div className={s.card__options}>
                 <Link to={"#"} className={s.comments_link}>

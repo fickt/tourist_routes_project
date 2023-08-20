@@ -18,12 +18,8 @@ export const SpotPage = () => {
     const getSpotById = (spotId: string) => {
 
         if (spots) {
-            // setSpotItem(spots?.filter(spot => spot.id === Number(spotId)));
             setSpotItem(spots.find(spot => {
-                if (spot.id === Number(spotId))
-                    return true
-                else
-                    return false
+                return spot.id === Number(spotId)
             }))
         }
     }
@@ -35,18 +31,19 @@ export const SpotPage = () => {
             getSpotById(spotId);
         }
 
-    }, [spotId, spots])
+    }, [spotId, spots, spotItem])
 
-    if (spotItem) {
+    return (
+        <>
+            {spotItem &&
+                <div className={s.wrapper}>
+                    <div className="content container">
+                        <ContentHeader textButton="назад" title={spotItem.name} />
+                        <SpotItem spotItem={spotItem} />
+                    </div>
+                </div>}
+        </>
+    );
 
-        return (
-            <div className={s.wrapper}>
-                <div className="content container">
-                    <ContentHeader textButton="назад" title={spotItem.name} />
-                    <SpotItem spotItem={spotItem} />
-                </div>
-            </div>
-        );
-    }
 
 }

@@ -1,6 +1,6 @@
 import { Footer } from "antd/es/layout/layout";
 import AppRouter from "pages/AppRouter";
-import { useEffect, memo } from "react";
+import React, { useEffect, memo } from "react";
 import { getLocalSpotsAction } from "modules/card-list/store/spotsActions";
 import { useAppDispatch } from "storage/hookTypes";
 import { Header } from "modules/header";
@@ -12,11 +12,11 @@ const App = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(getLocalSpotsAction(markers))
+        dispatch(getLocalSpotsAction(markers));
     }, []);
 
     return (
-        <>  
+        <>
             <Header />
             <main>
                 <AppRouter />

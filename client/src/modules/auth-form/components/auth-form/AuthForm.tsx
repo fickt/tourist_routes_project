@@ -12,15 +12,15 @@ import { TAuthFormProps } from "./types";
 import { FormLink } from "modules/auth-form/components/form-link/FormLink";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { handleErrorMessage } from "modules/auth-form/store/authActions";
-import { useAuthentication  } from "modules/auth-form/api/useAuthHook";
 import { authError } from "modules/auth-form/store/authSelectors";
+import { useAuth } from "modules/auth-form/api/useAuth";
 
 export const AuthForm = ({ isRegister }: TAuthFormProps) => {
 
     const dispatch = useAppDispatch();
     const [form] = Form.useForm<FormInstance>();
     const error = useAppSelector(authError);
-    const { loader, authenticate  } = useAuthentication();
+    const { loader, authenticate  } = useAuth();
 
     useEffect(() => {
         dispatch(handleErrorMessage(null));

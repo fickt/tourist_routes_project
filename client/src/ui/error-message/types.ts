@@ -1,3 +1,3 @@
 export type TErrorMessageProps = {
-    errorText: string;
+    errorText: string,
 }

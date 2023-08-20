@@ -7,7 +7,8 @@ const AppRouter = () => {
     return (
         <Routes >
             {mainRoutes.map(({path, element}) => <Route path={path} element={element} key={path} />)}
-        </Routes>)
+        </Routes>
+    )
 }
 
 export default memo(AppRouter);

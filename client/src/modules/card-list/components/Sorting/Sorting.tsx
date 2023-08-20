@@ -1,5 +1,5 @@
 import s from "./styles.module.scss";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Select } from "antd";
 import { TSortingProps } from "./types";
 import { sortTabs } from "modules/card-list/constants/sortOptions";

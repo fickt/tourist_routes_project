@@ -1,4 +1,4 @@
-import s from "./styles.module.scss"
+import s from "./styles.module.scss";
 import { MainContent } from "modules/main-content/MainContent";
 
 export const HomePage = () => {

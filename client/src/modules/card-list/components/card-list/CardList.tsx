@@ -1,5 +1,5 @@
+import React, { memo } from "react";
 import s from "./styles.module.scss";
-import { memo} from "react";
 import { useAppSelector } from "storage/hookTypes";
 import { spotsSelector } from "modules/card-list/store/spotsSelectors";
 import { Sorting } from "modules/card-list/components/Sorting/Sorting";

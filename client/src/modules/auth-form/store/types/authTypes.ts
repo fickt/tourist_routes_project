@@ -4,7 +4,7 @@ export type TAuthResponse = {
     user: TUser,
 }
 
-export type TServerResponse = any;
+export type TServerResponse = any; //пока не утвердился тип с бэком
 
 export type TFormData = {
     nickname: string;
@@ -22,10 +22,8 @@ export type TState = {
 }
 
 export type TUser = {
-    nickname?: string,
+    nickname: string,
     email: string,
-    isActivated: boolean,
-    id: string,
 }
 
 export type TAction = {

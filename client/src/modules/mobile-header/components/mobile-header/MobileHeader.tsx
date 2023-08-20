@@ -18,7 +18,7 @@ export const MobileHeader = () => {
 
     return (
         <div className={s.container}>
-            <nav className={s.mobile_menu}>
+            <nav className={s.menu}>
                 <div className={s.menu__wrapper}>
                     {menuLinks.map((link, index) => (
                         <Link key={index} to={link.path} onClick={(e) => handleClick(e, link.path)}>

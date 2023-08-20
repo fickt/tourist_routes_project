@@ -1,5 +1,5 @@
 import s from "./styles.module.scss";
-import { memo, useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { spotRoutesSelector } from "modules/card-list/store/spotsSelectors";
 import { apiSpots } from "modules/card-list/api/SpotsServise";

@@ -1,4 +1,4 @@
-import { TStarIconProps } from "./types"
+import { TStarIconProps } from "./types";
 
 export const StarIcon = ({ rating, id }: TStarIconProps) => {
     return (
