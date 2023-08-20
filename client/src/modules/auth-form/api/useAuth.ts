@@ -1,4 +1,4 @@
-import { handleErrorMessage, handleLoaderActive, handleSetUser, handleUserAuth, handleUserReg } from "modules/auth-form/store/authActions";
+import { handleAuthError, handleAuthLoader, handleSetUser, handleUserAuth, handleUserReg } from "modules/auth-form/store/authActions";
 import { authLoader, authUser } from "modules/auth-form/store/authSelectors";
 import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
@@ -17,8 +17,8 @@ export const useAuth = () => {
     // Сообщение об успехе
     const setSuccessMessage = (isRegistration: boolean, response: TServerResponse) => {
         isRegistration
-            ? dispatch(handleErrorMessage(`Пользователь ${response.data.user.nickname} зарегистрирован`))
-            : dispatch(handleErrorMessage(`Пользователь ${response.data.user.nickname} авторизирован`))
+            ? dispatch(handleAuthError(`Пользователь ${response.data.user.nickname} зарегистрирован`))
+            : dispatch(handleAuthError(`Пользователь ${response.data.user.nickname} авторизирован`))
     }
 
     // Что произошло: регистрация или логин
@@ -29,8 +29,8 @@ export const useAuth = () => {
     // Установка ошибки
     const setError = (e: Error | TServerResponse) => {
         e.response
-            ? dispatch(handleErrorMessage(e.response.data.error))
-            : dispatch(handleErrorMessage("Попробуйте снова")); // ошибка 504 (отвалились докер-контейнеры)
+            ? dispatch(handleAuthError(e.response.data.error))
+            : dispatch(handleAuthError("Попробуйте снова")); // ошибка 504 (отвалились докер-контейнеры)
     }
 
     const authenticate = async (
@@ -39,7 +39,7 @@ export const useAuth = () => {
         password: string,
         isRegistration: boolean
     ) => {
-        dispatch(handleLoaderActive(true)); // включить loader
+        dispatch(handleAuthLoader(true)); // включить loader
         try {
             const response: TServerResponse = isRegistration
                 ? await authService.register(nickname, email, password) // отправка запроса на регистрацию
@@ -55,7 +55,7 @@ export const useAuth = () => {
         } catch (e: Error | TServerResponse) {
             setError(e);
         } finally {
-            dispatch(handleLoaderActive(false)); // выключить loader
+            dispatch(handleAuthLoader(false)); // выключить loader
         }
     };
 
