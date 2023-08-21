@@ -20,6 +20,6 @@ class RouteCommentController extends Controller
                 'Route with id: ' . $routeId . 'has not been found!'
             );
         }
-        
+
     }
 }
