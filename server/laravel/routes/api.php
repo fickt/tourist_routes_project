@@ -35,7 +35,14 @@ Route::group(['middleware' => 'api'], function () {
     Route::group(['prefix' => 'routes'], function () {
         Route::get('', [RouteController::class, 'index']);
         Route::get('/{routeId}', [RouteController::class, 'show']);
+
+        Route::group(['prefix' => '/{routeId}/comment'], function () {
+           Route::get('', [RouteCommentController::class, 'store']);
+        });
     });
+
+
+
 
     Route::get('/images/{filename}', [ImageController::class, 'show']);
 });
