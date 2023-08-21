@@ -7,6 +7,7 @@ import { AuthPage } from "./auth-page/AuthPage";
 import { SpotPage } from "./spot-page/SpotPage";
 import { ForgotPasswordPage } from "./forgot-password/ForgotPasswordPage";
 import { NotFoundPage } from "./not-found-page/NotFoundPage";
+import { ProtectedRoute } from "components/protected-route/ProtectedRoute";
 
 export enum AppRoutes {
     HOME = "home",
@@ -40,12 +41,12 @@ export const RoutePath = {
 
 export const mainRoutes: TRoutes[] = [
     { path: RoutePath.home, element: <HomePage /> },
-    { path: RoutePath.profile, element: <ProfilePage /> },
+    { path: RoutePath.profile, element: <ProtectedRoute><ProfilePage /></ProtectedRoute> },
     { path: RoutePath.favorites, element: <FavoritesPage /> },
     { path: RoutePath.spots, element: <SpotsPage /> },
     { path: RoutePath.spotId, element: <SpotPage /> },
-    { path: RoutePath.auth_register, element: <AuthPage isRegister={true} /> },
-    { path: RoutePath.auth_login, element: <AuthPage isRegister={false} /> },
-    { path: RoutePath.forgotPassword, element: <ForgotPasswordPage /> },
+    { path: RoutePath.auth_register, element: <ProtectedRoute onlyOnAuth><AuthPage isRegister={true} /></ProtectedRoute> },
+    { path: RoutePath.auth_login, element: <ProtectedRoute onlyOnAuth><AuthPage isRegister={false} /></ProtectedRoute> },
+    { path: RoutePath.forgotPassword, element: <ProtectedRoute onlyOnAuth><ForgotPasswordPage /></ProtectedRoute> },
     { path: RoutePath.not_found, element: <NotFoundPage /> },
 ]

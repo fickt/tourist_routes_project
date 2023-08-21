@@ -8,5 +8,5 @@ export const menuLinks = [
     {path: RoutePath.home, icon: <HomeIcon />},
     {path: RoutePath.spots, icon: <SearchIcon />},
     {path: RoutePath.favorites, icon: <FavoritesIcon />},
-    {path: RoutePath.auth_login, icon: <ProfileIcon />},
+    {path: RoutePath.profile, icon: <ProfileIcon />},
 ]
