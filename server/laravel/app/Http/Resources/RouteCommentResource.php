@@ -16,6 +16,7 @@ class RouteCommentResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'content' => $this->content,
             'rating' => $this->rating,
             'user' => Auth::user()
