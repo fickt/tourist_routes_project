@@ -24,7 +24,8 @@ class RouteResource extends JsonResource
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
             'rating' => $this->rating,
-            'photos' => RoutePhotoResource::collection($this->whenLoaded('photoPaths'))
+            'photos' => RoutePhotoResource::collection($this->whenLoaded('photoPaths')),
+            'comments' => $this->whenLoaded('comments')
         ];
     }
 }

@@ -15,7 +15,7 @@ class RouteController extends Controller
     {
         return RouteResource::collection(
             Route::query()
-                ->with(['difficulty', 'photoPaths', 'categories'])
+                ->with(['difficulty', 'photoPaths', 'categories', 'comments'])
                 ->get()
         );
     }
@@ -25,7 +25,7 @@ class RouteController extends Controller
         try {
             $route = Route::query()
                 ->findOrFail($routeId)
-                ->with(['difficulty', 'photoPaths', 'categories'])
+                ->with(['difficulty', 'photoPaths', 'categories', 'comments'])
                 ->first();
         } catch (Exception) {
             throw new HttpException(

@@ -14,7 +14,6 @@ class RouteCommentController extends Controller
 {
     public function store(int $routeId, RouteCommentRequest $request): RouteCommentResource
     {
-        //var_dump($request->validated());
         Route::query()->find($routeId)
             ? $comment = RouteComment::query()->create(
             array_merge($request->validated(),
