@@ -38,7 +38,7 @@ Route::group(['middleware' => 'api'], function () {
         Route::get('/{routeId}', [RouteController::class, 'show']);
 
         Route::group(['prefix' => '/{routeId}/comment'], function () {
-           Route::get('', [RouteCommentController::class, 'store']);
+           Route::post('', [RouteCommentController::class, 'store']);
         });
     });
 
