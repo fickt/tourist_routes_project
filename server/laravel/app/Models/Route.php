@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\FloatRound;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,6 +25,10 @@ class Route extends Model
 
     protected $guarded = [
         'rating'
+    ];
+
+    protected $casts = [
+        'rating' => FloatRound::class
     ];
 
     /**

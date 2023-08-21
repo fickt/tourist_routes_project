@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\FloatRound;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +23,10 @@ class RouteComment extends Model
         'user_id',
         'route_id',
         'rating'
+    ];
+
+    protected $casts = [
+        'rating' => FloatRound::class
     ];
 
     public function user(): BelongsTo
