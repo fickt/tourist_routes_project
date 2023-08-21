@@ -1,13 +1,10 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import s from "./styles.module.scss"
-import Button from "ui/button/Button";
-import RatingStar from "components/rating-star/RatingStar";
+import s from "./styles.module.scss";
 import { TCardProps } from "./types";
+import { RatingStar } from "components/rating-star/RatingStar";
+import { Button } from "ui/button/Button";
 
-
-
-const Card = ({ id, name, description, coordinates, picture, children, rating }: TCardProps) => {
+export const Card = ({id, name, description, coordinates, picture, children, rating}: TCardProps) => {
 
     return (
         <article className={s.card}>
@@ -15,13 +12,14 @@ const Card = ({ id, name, description, coordinates, picture, children, rating }:
                 <img className={s.card__image} src={picture} alt={name} />
             </div>
             <div className={s.card__text_block}>
-                <Link to={`/spots/${id}`} className={s.card__link} >
+                <Link to={`/spots/${id}`} className={s.card__link}>
                     <div className={s.card__desc}>
                         <h3 className={s.card__name}>{name}</h3>
                         <span>{description}</span>
                     </div>
                 </Link>
-                <Button extraClass={s.button} type="primary" href={`https://yandex.ru/maps/?rtext=~${coordinates[0]},${coordinates[1]}`} target="_blank">
+                <Button extraClass={s.button} type="primary" target="_blank"
+                        href={`https://yandex.ru/maps/?rtext=~${coordinates[0]},${coordinates[1]}`}>
                     Лучший маршрут
                 </Button>
             </div>
@@ -30,5 +28,3 @@ const Card = ({ id, name, description, coordinates, picture, children, rating }:
         </article>
     );
 }
-
-export default Card;

@@ -1,12 +1,12 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import s from "./styles.module.scss";
 import ymaps from "ymaps";
 import { removeControls } from "./helpers/ymap-options";
 import { mapControls, mapState } from "./constants/constants";
-import { TYMapprops } from "./types";
 import { TMarker } from "./constants/markers";
+import { TYMapProps } from "./types";
 
-export const YMapComponent = ({ markers }: TYMapprops) => {
+export const YMapComponent = ({ markers }: TYMapProps) => {
 
     const init = () => {
 
@@ -17,7 +17,7 @@ export const YMapComponent = ({ markers }: TYMapprops) => {
             params: {}
         });
 
-        removeControls(myMap, mapControls)
+        removeControls(myMap, mapControls);
 
         const setMarkers = (markers: TMarker[]) => {
 
@@ -81,7 +81,7 @@ export const YMapComponent = ({ markers }: TYMapprops) => {
                 myMap.geoObjects.add(newMarker);
             })
         }
-        setMarkers(markers)
+        setMarkers(markers);
     }
 
     useEffect(() => {

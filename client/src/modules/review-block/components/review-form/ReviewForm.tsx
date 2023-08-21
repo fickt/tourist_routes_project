@@ -1,15 +1,14 @@
-import Button from "ui/button/Button";
+import { Button } from "ui/button/Button";
 import { Form, Input, Rate } from "antd";
-import { IFormReviewProps, TFormValues } from "./types";
-import s from "./styles.module.scss"
+import { TFormReviewProps } from "./types";
+import s from "./styles.module.scss";
 
 const { TextArea } = Input;
 
-export const ReviewForm = ({ title = "Отзыв о месте" }: IFormReviewProps) => {
+export const ReviewForm = ({ title = "Отзыв о месте" }: TFormReviewProps) => {
     const [form] = Form.useForm();
 
-    const onFinish = (values: TFormValues) => {
-        //some code
+    const onFinish = () => { // аргумент для обработки значений: (values: TFormValues)
         form.resetFields();
     };
 

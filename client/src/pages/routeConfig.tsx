@@ -1,12 +1,12 @@
-import HomePage from "pages/home-page/HomePage";
-import SpotsPage from "./spots-page/SpotsPage";
-import SpotPage from "./spot-page/SpotPage";
-import ForgotPasswordPage from "./forgot-password/ForgotPasswordPage";
-import NotFoundPage from "./not-found-page/NotFoundPage";
-import ProfilePage from "./profile-page/ProfilePage";
-import FavoritesPage from "./favorites-page/FavoritesPage";
-import AuthPage from "pages/auth-page/AuthPage";
 import { TRoutes } from "pages/types";
+import { HomePage } from "./home-page/HomePage";
+import { ProfilePage } from "./profile-page/ProfilePage";
+import { FavoritesPage } from "./favorites-page/FavoritesPage";
+import { SpotsPage } from "./spots-page/SpotsPage";
+import { AuthPage } from "./auth-page/AuthPage";
+import { SpotPage } from "./spot-page/SpotPage";
+import { ForgotPasswordPage } from "./forgot-password/ForgotPasswordPage";
+import { NotFoundPage } from "./not-found-page/NotFoundPage";
 
 export enum AppRoutes {
     HOME = "home",
@@ -15,7 +15,7 @@ export enum AppRoutes {
     SPOTS = "spots",
     SPOT_ID = "spotId",
     LOGIN = "login",
-    REGISTRATION = "register",
+    REGISTER = "register",
     FORGOT_PASSWORD = "forgotPassword",    
     LOGOUT = "logout",
     AUTH_LOGIN = "auth_login",
@@ -27,12 +27,12 @@ export const RoutePath = {
     [AppRoutes.HOME]: "/",
     [AppRoutes.PROFILE]: "/profile",
     [AppRoutes.FAVORITES]: "/favorites",
-    [AppRoutes.SPOTS]: "/spots",
+    [AppRoutes.SPOTS]: "/routes",
     [AppRoutes.SPOT_ID]: "/spots/:spotId/*",
     [AppRoutes.AUTH_LOGIN]: "/auth/login",
     [AppRoutes.AUTH_REGISTER]: "/auth/register",
     [AppRoutes.LOGIN]: "/login",
-    [AppRoutes.REGISTRATION]: "/register",
+    [AppRoutes.REGISTER]: "/register",
     [AppRoutes.FORGOT_PASSWORD]: "/forgotPassword",
     [AppRoutes.LOGOUT]: "/logout",
     [AppRoutes.NOT_FOUND]: "*", //в конце

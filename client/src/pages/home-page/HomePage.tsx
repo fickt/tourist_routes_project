@@ -1,7 +1,7 @@
-import s from "./styles.module.scss"
+import s from "./styles.module.scss";
 import { MainContent } from "modules/main-content/MainContent";
 
-const HomePage = () => {
+export const HomePage = () => {
  
     return (
         <div className={s.wrapper}>
@@ -9,5 +9,3 @@ const HomePage = () => {
         </div>
     );
 }
-
-export default HomePage; 

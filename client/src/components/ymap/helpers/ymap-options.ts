@@ -1,5 +1,5 @@
-export const removeControls = (myMap:ymaps.Map, controls:string[]) => {
+export const removeControls = (myMap: ymaps.Map, controls: string[]) => {
     controls.forEach(control => {
-        myMap.controls.remove(control)
+        myMap.controls.remove(control);
     });
 };

@@ -1,5 +1,5 @@
 import s from "./styles.module.scss";
-import Button from "ui/button/Button";
+import { Button } from "ui/button/Button";
 import { ReviewBlock } from "modules/review-block";
 import { YMapComponent } from "components/ymap/YMapComponent";
 import { TSpotItemProps } from "./types";
@@ -16,10 +16,10 @@ export const SpotItem = ({ spotItem }: TSpotItemProps) => {
             <section className={s.section}>
                 <h2 className={s.section__title}>О Маршруте</h2>
                 <div className={s.card__text_block}>
-                    <div className={s.card__desc}>
-                        <span>{description}</span>
+                    <div className={s.card__description}>
+                        {description}
                     </div>
-                    <Button extraClass={s.button} type="primary">Лучшие отзывы</Button>
+                    <Button type="primary">Лучшие отзывы</Button>
                 </div>
             </section>
             <section className={s.section}>

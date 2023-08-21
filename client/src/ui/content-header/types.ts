@@ -1,9 +1,9 @@
-import { ReactNode } from "react"
+import { ReactNode } from "react";
 
-export type IContentHeaderProps = {
-    title:string,
+export type TContentHeaderProps = {
+    title: string,
     subtitle?: string, 
     children?: ReactNode, 
-    to?:string, 
-    textButton?:string
+    to?: string,
+    textButton?: string
   }

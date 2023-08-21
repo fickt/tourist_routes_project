@@ -1,12 +1,8 @@
-import { ContentHeader } from "ui/content-header/ContentHeader"
+import { ContentHeader } from "ui/content-header/ContentHeader";
 
-const ProfilePage = () => {
+export const ProfilePage = () => {
 
     return (
-        <>
-            <ContentHeader title="Профиль" />
-        </>
+        <ContentHeader title="Профиль" />
     )
 }
-
-export default ProfilePage;

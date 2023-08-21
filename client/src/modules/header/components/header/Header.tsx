@@ -1,13 +1,12 @@
-import Logo from "components/logo/Logo";
-import s from "./styles.module.scss"
-import cn from "classnames";
-import Menu from "components/menu/Menu";
+import { Logo } from "components/logo/Logo";
+import s from "./styles.module.scss";
+import classnames from "classnames";
 
 export const Header = () => {   
     
     return (
         <header className={s.wrapper}>
-            <div className={cn("container", s.header)}>
+            <div className={classnames("container", s.header)}>
                 <Logo />
             </div>
         </header>

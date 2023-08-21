@@ -1,10 +1,10 @@
 import { Link, To } from "react-router-dom";
 import s from "./styles.module.scss";
 import ArrowIcon from "./img/arrow.svg";
-import { IContentHeaderProps } from "./types";
+import { TContentHeaderProps } from "./types";
 import { PREV_PAGE } from "./constants";
 
-export const ContentHeader = ({ title, subtitle, children, to, textButton="назад" }: IContentHeaderProps) => {
+export const ContentHeader = ({ title, subtitle, children, to, textButton="назад" }: TContentHeaderProps) => {
 
     return (
         <>

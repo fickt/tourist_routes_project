@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import s from "./styles.module.scss";
 
-const Menu = () => {
+export const Menu = () => {
     
     return (
         <nav>
@@ -12,7 +12,4 @@ const Menu = () => {
             </ul>
         </nav>
     );
-}
-
-export default Menu;
-
+};

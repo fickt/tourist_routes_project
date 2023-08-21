@@ -1,7 +1,7 @@
-import { ERROR_MESSAGE, IS_LOADER_ACTIVE, IS_USER_AUTH, IS_USER_REG, SET_USER } from "./authActionsTypes";
-import { TState, TAction } from "./types/authTypes";
+import { AUTH_ERROR, AUTH_LOADER_ACTIVE, IS_USER_AUTH, IS_USER_REG, SET_USER } from "./authActionsTypeNames";
+import { TAuthState, TAuthAction } from "./types/authTypes";
 
-const initialState: TState = {
+const initialState: TAuthState = {
     error_message: null,
     is_loader_active: false,
     user: null,
@@ -9,14 +9,14 @@ const initialState: TState = {
     user_reg: false,
 }
 
-export const authReducer = (state = initialState, action: TAction) => {
+export const authReducer = (state = initialState, action: TAuthAction) => {
     switch(action.type) {
-        case ERROR_MESSAGE:
+        case AUTH_ERROR:
             return {
                 ...state,
                 error_message: action.payload,
             }
-        case IS_LOADER_ACTIVE:
+        case AUTH_LOADER_ACTIVE:
             return {
                 ...state,
                 is_loader_active: action.payload,

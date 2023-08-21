@@ -5,14 +5,14 @@ import icon4 from "../img/stoneBridge.jpg";
 import icon5 from "../img/lunevTower.jpg";
 
 export type TMarker = {
-        id: number,
-        coordinates: [number, number],
-        name: string,
-        description: string,
-        iconImageSize: [number, number],
-        iconImageOffset: [number, number],
-        picture: string,
-        rating: number
+    id: number,
+    coordinates: [number, number],
+    name: string,
+    description: string,
+    iconImageSize: [number, number],
+    iconImageOffset: [number, number],
+    picture: string,
+    rating: number
 }
 
 export const markers:TMarker[] = [

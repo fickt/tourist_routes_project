@@ -1,1 +1,1 @@
-export type TReviewBlockProps = {id: number}
+export type TReviewBlockProps = {id: number};

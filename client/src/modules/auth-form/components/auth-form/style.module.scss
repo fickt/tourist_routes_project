@@ -13,16 +13,8 @@
   flex-direction: column;
   row-gap: 32px;
   align-items: flex-start;
-}
 
-.form__inputs {
-  width: 343px;
-}
-
-.forgot__button {
-  font-family: "Inter", sans-serif;
-  font-size: 14px;
-  text-decoration: underline;
-  border: none;
-  cursor: pointer;
+  &__inputs {
+    width: 343px;
+  }
 }

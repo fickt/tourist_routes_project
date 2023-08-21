@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import s from "./style.module.scss";
-import { handleErrorMessage } from "modules/auth-form/store/authActions";
+import { handleAuthError } from "modules/auth-form/store/authActions";
 import { TFormHeaderProps } from "./types";
 import { FormLink } from "modules/auth-form/components/form-link/FormLink";
 
@@ -9,7 +9,7 @@ export const FormHeader = ({ title, text, link, headerLink, textLink }: TFormHea
     const dispatch = useDispatch();
 
     const resetErrorMessage = () => {
-        dispatch(handleErrorMessage(null));
+        dispatch(handleAuthError(null));
     };
 
     return (

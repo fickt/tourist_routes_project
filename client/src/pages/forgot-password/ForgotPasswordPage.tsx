@@ -1,8 +1,7 @@
-import React from "react";
 import s from "./style.module.scss";
-import { PreloaderCar } from "ui/spinner/PreloaderCar";
+import { PreloaderCar } from "ui/preloader/PreloaderCar";
 
-const ForgotPasswordPage = () => {
+export const ForgotPasswordPage = () => {
 
     return (
         <div className={s.wrapper}>
@@ -11,5 +10,3 @@ const ForgotPasswordPage = () => {
         </div>
     );
 }
-
-export default ForgotPasswordPage;

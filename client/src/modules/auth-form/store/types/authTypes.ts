@@ -4,14 +4,16 @@ export type TAuthResponse = {
     user: TUser,
 }
 
+export type TServerResponse = any; //пока не утвердился тип с бэком
+
 export type TFormData = {
     nickname: string;
     email: string;
     password: string;
-    confirmPassword: string;
+    confirm: string;
 }
 
-export type TState = {
+export type TAuthState = {
     error_message: string | null;
     is_loader_active: boolean;
     user: TUser | null;
@@ -20,12 +22,11 @@ export type TState = {
 }
 
 export type TUser = {
+    nickname: string,
     email: string,
-    isActivated: boolean,
-    id: string,
 }
 
-export type TAction = {
+export type TAuthAction = {
     type: string;
     payload: string;
     user: TUser | null;

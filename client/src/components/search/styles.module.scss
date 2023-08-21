@@ -1,0 +1,41 @@
+.search {
+	display: flex;
+	align-items: center;
+	position: relative;
+	flex: 1;
+	
+	&:focus {
+		background: var(--color-white);
+		border: 1px solid var(--background-color-blue);
+	};
+	
+	&::placeholder {
+		color: var(--color-gray);
+	};
+
+	&__btn {
+		background-color: transparent;
+		outline: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+		position: absolute;	
+		display: flex;
+
+		svg {
+			fill: var(--color-gray);
+		}
+		&:focus svg{
+			fill: var(--background-color-blue);
+		}
+		&:hover svg{
+			fill: var(--background-color-blue);
+		}
+	};
+
+	&__magnifier_btn{
+		right: 20px;
+	};	
+}
+
+

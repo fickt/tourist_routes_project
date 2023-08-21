@@ -1,5 +1,5 @@
 import { TMarker } from "./constants/markers";
 
-export type TYMapprops = {
+export type TYMapProps = {
     markers: TMarker[]
 }

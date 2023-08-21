@@ -1,3 +1,4 @@
 import { RootState } from "storage/reduxTypes";
 
-export const spotsSelectors = (state:RootState) => state.spots.data
+export const spotsSelector = (state:RootState) => state.spots.data;
+export const spotRoutesSelector = (state:RootState) => state.spots.dataDb;

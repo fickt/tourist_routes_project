@@ -1,10 +1,14 @@
-// import { AxiosResponse } from "axios";
-// import { AppRoutes, RoutePath } from "pages/routeConfig";
-// import $api from "modules/auth-form/api/index"; //нужно создать свой $api по аналогии с авторизацией
-// import { TSpotsState } from "modules/card-list/store/types/spotsReducerTypes";
-//
-// export default class SpotsService {
-//     static fetchSpots(): Promise<AxiosResponse<TSpotsState>> {
-//         return $api.get<TSpotsState>(RoutePath[AppRoutes.SPOTS]);
-//     }
-// }
+import { AxiosResponse } from "axios";
+import { RoutePath } from "pages/routeConfig";
+import { TSpotsState } from "modules/card-list/store/types/spotsReducerTypes";
+import { api } from "utils/api";
+import { TSpotRoutes } from "modules/card-list//types/spotRoutes";
+
+export class SpotsService {
+    
+    fetchSpots(): Promise<AxiosResponse<TSpotRoutes>> {
+        return api.get<TSpotsState>(RoutePath.spots);
+    }
+}
+
+export const apiSpots = new SpotsService();
