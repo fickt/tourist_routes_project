@@ -54,4 +54,12 @@ class Route extends Model
             'category_id',
             'route_id');
     }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(
+            RouteComment::class,
+            'route_id'
+        );
+    }
 }
