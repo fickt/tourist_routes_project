@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RouteCommentController extends Controller
 {
-    public function store(int $routeId, RouteCommentRequest $request)
+    public function store(int $routeId, RouteCommentRequest $request): RouteCommentResource
     {
         Route::query()->find($routeId)
             ? $comment = RouteComment::query()->create([

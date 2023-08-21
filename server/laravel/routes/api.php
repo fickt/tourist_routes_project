@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\RouteCommentController;
 use App\Http\Controllers\RouteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -40,9 +41,6 @@ Route::group(['middleware' => 'api'], function () {
            Route::get('', [RouteCommentController::class, 'store']);
         });
     });
-
-
-
 
     Route::get('/images/{filename}', [ImageController::class, 'show']);
 });
