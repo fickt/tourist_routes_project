@@ -13,7 +13,7 @@ class RouteCommentController extends Controller
 {
     public function store(int $routeId, RouteCommentRequest $request)
     {
-        return Route::query()->find($routeId)->exists()
+        return Route::query()->find($routeId)
             ? RouteComment::query()->create([
                 $request->validated(),
                 ['route_id' => $routeId],
