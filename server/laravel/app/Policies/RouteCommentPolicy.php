@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\RouteComment;
 use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
 class RouteCommentPolicy
@@ -13,7 +14,7 @@ class RouteCommentPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +22,7 @@ class RouteCommentPolicy
      */
     public function view(User $user, RouteComment $routeComment): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +30,7 @@ class RouteCommentPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +38,7 @@ class RouteCommentPolicy
      */
     public function update(User $user, RouteComment $routeComment): bool
     {
-        //
+        return $user->id === $routeComment->user_id;
     }
 
     /**
@@ -45,7 +46,7 @@ class RouteCommentPolicy
      */
     public function delete(User $user, RouteComment $routeComment): bool
     {
-        //
+        return $user->id === $routeComment->user_id;
     }
 
     /**
@@ -53,7 +54,7 @@ class RouteCommentPolicy
      */
     public function restore(User $user, RouteComment $routeComment): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -61,6 +62,6 @@ class RouteCommentPolicy
      */
     public function forceDelete(User $user, RouteComment $routeComment): bool
     {
-        //
+        return false;
     }
 }
