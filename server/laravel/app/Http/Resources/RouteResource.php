@@ -25,7 +25,7 @@ class RouteResource extends JsonResource
             'latitude' => $this->latitude,
             'rating' => $this->rating,
             'photos' => RoutePhotoResource::collection($this->whenLoaded('photoPaths')),
-            'comments' => $this->whenLoaded('comments')
+            'comments' => RouteCommentResource::collection($this->whenLoaded('comments'))
         ];
     }
 }

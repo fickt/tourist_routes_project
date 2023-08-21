@@ -4,9 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Auth;
 
-class RouteCommentResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +16,8 @@ class RouteCommentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'content' => $this->content,
-            'rating' => $this->rating,
-            'user' => UserResource::make(Auth::user())
+            'email' => $this->email,
+            'nickname' => $this->nickname
         ];
     }
 }
