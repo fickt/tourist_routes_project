@@ -1,13 +1,13 @@
 import { TRoutes } from "pages/types";
 import { HomePage } from "./home-page/HomePage";
-import { ProfilePage } from "./profile-page/ProfilePage";
 import { FavoritesPage } from "./favorites-page/FavoritesPage";
 import { SpotsPage } from "./spots-page/SpotsPage";
 import { AuthPage } from "./auth-page/AuthPage";
 import { SpotPage } from "./spot-page/SpotPage";
 import { ForgotPasswordPage } from "./forgot-password/ForgotPasswordPage";
 import { NotFoundPage } from "./not-found-page/NotFoundPage";
-import { ProtectedRoute } from "components/protected-route/ProtectedRoute";
+import { ProfilePage } from "pages/profile-page/ProfilePage";
+import { PrivateProfileRoute } from "pages/profile-page/PrivateProfileRoute";
 
 export enum AppRoutes {
     HOME = "home",
@@ -41,7 +41,7 @@ export const RoutePath = {
 
 export const mainRoutes: TRoutes[] = [
     { path: RoutePath.home, element: <HomePage /> },
-    { path: RoutePath.profile, element: <ProtectedRoute><ProfilePage /></ProtectedRoute> },
+    { path: RoutePath.profile, element: <PrivateProfileRoute children={<ProfilePage />} />},
     { path: RoutePath.favorites, element: <FavoritesPage /> },
     { path: RoutePath.spots, element: <SpotsPage /> },
     { path: RoutePath.spotId, element: <SpotPage /> },
