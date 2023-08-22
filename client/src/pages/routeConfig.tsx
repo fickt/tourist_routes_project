@@ -47,13 +47,16 @@ export const RoutePath = {
 
 export const mainRoutes: TRoutes[] = [
     { path: RoutePath.home, element: <HomePage /> },
-    { path: RoutePath.profile, element: <PrivateProfileRoute children={<ProfilePage />} />},
     { path: RoutePath.favorites, element: <FavoritesPage /> },
     { path: RoutePath.spots, element: <SpotsPage /> },
     { path: RoutePath.location, element: <LocationPage /> },
     { path: RoutePath.spotId, element: <SpotPage /> },
+    { path: RoutePath.not_found, element: <NotFoundPage /> },
+]
+
+export const privateRoutes: TRoutes[] = [
+    { path: RoutePath.profile, element: <PrivateProfileRoute children={<ProfilePage />} />},
     { path: RoutePath.auth_register, element: <ProtectedRoute onlyOnAuth><AuthPage isRegister={true} /></ProtectedRoute> },
     { path: RoutePath.auth_login, element: <ProtectedRoute onlyOnAuth><AuthPage isRegister={false} /></ProtectedRoute> },
     { path: RoutePath.forgotPassword, element: <ProtectedRoute onlyOnAuth><ForgotPasswordPage /></ProtectedRoute> },
-    { path: RoutePath.not_found, element: <NotFoundPage /> },
-]
+] 

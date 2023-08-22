@@ -1,12 +1,16 @@
 import React, { memo } from "react";
 import { Route, Routes } from "react-router-dom";
-import { mainRoutes } from "./routeConfig";
+import { mainRoutes, privateRoutes } from "./routeConfig";
+import { TRoutes } from "./types";
 
 const AppRouter = () => {
 
+    const routeMap = ({path, element}:TRoutes) => <Route path={path} element={element} key={path} />
+
     return (
         <Routes >
-            {mainRoutes.map(({path, element}) => <Route path={path} element={element} key={path} />)}
+            {mainRoutes.map(routeMap)}
+            {privateRoutes.map(routeMap)}
         </Routes>
     )
 }
