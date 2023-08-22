@@ -6,6 +6,8 @@ use App\Http\Resources\RouteResource;
 use App\Models\Route;
 use Exception;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+
+use Illuminate\Support\Facades\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -13,11 +15,24 @@ class RouteController extends Controller
 {
     public function index(): AnonymousResourceCollection
     {
-        return RouteResource::collection(
-            Route::query()
-                ->with(['difficulty', 'photoPaths', 'categories', 'comments.user'])
-                ->get()
-        );
+
+        $query = Route::query()->with(['difficulty', 'photoPaths', 'categories', 'comments.user']);
+
+        if (Request::query('difficulty')) {
+            $difficulty = explode(',', Request::query('difficulty'));
+            $query->whereHas('difficulty', function ($q) use ($difficulty) {
+                $q->whereIn('name', $difficulty);
+            });
+        }
+
+        if (Request::query('category')) {
+            $category = explode(',', Request::query('category'));
+            $query->whereHas('categories', function ($q) use ($category) {
+                $q->whereIn('name', $category);
+            });
+        }
+
+        return RouteResource::collection($query->get());
     }
 
     public function show(int $routeId): RouteResource

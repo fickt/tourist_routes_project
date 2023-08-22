@@ -38,7 +38,18 @@ paths:
     get:
       tags:
         - routes
-      description: На вход прилетит массив из объектов    
+      description: На вход прилетит массив из объектов
+      parameters:
+        - in: query
+          name: difficulty
+          schema:
+            type: string
+          description: Вывести маршруты с заданными уровнями сложности /routes?difficulty=новичок,знающий
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: Вывести маршруты с заданными категориями /routes?category=озёра 
       responses:
         '200':
           description: Successful operation
@@ -245,7 +256,12 @@ components:
             nickname:
               type: string
               example: TheUser123
-    
+        created_at:
+          type: string
+          example: 2023-08-22T14:50:15.000000Z
+        updated_at: 
+          type: string
+          example: 2023-08-22T14:50:15.000000Z
     
         
     RouteResponse:
@@ -317,6 +333,12 @@ components:
                   nickname:
                     type: string
                     example: TheUser123
+              created_at:
+                type: string
+                example: 2023-08-22T14:50:15.000000Z
+              updated_at: 
+                type: string
+                example: 2023-08-22T14:50:15.000000Z
       xml:
         name: user          
         
