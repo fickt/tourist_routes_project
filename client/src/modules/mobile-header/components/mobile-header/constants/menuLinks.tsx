@@ -1,12 +1,12 @@
 import { RoutePath } from "pages/routeConfig";
 import HomeIcon from "modules/mobile-header/components/mobile-header/assets/home.svg";
-import SearchIcon from "modules/mobile-header/components/mobile-header/assets/search.svg";
+import LocationIcon from "modules/mobile-header/components/mobile-header/assets/location.svg";
 import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets/favorites.svg";
 import ProfileIcon from "modules/mobile-header/components/mobile-header/assets/profile.svg";
 
 export const menuLinks = [
     {path: RoutePath.home, icon: <HomeIcon />},
-    {path: RoutePath.spots, icon: <SearchIcon />},
+    {path: RoutePath.location, icon: <LocationIcon />},
     {path: RoutePath.favorites, icon: <FavoritesIcon />},
     {path: RoutePath.profile, icon: <ProfileIcon />},
 ]

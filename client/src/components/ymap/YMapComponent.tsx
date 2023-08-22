@@ -1,63 +1,71 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import s from "./styles.module.scss";
 import ymaps from "ymaps";
 import { removeControls } from "./helpers/ymap-options";
 import { mapControls, mapState } from "./constants/constants";
 import { TMarker } from "./constants/markers";
 import { TYMapProps } from "./types";
+import { useNavigate, useParams } from "react-router-dom";
+import { getLocation } from "./helpers/location";
+import locationIcon from "./img/location.png"
 
 export const YMapComponent = ({ markers }: TYMapProps) => {
 
+    const navigate = useNavigate();
+    const { spotId } = useParams(); //проверяем на какой странице мы находимся, если есть spotId, то на странице места, иначе на страницу общей карты    
     const init = () => {
+        //создание компонентов карты
+        const mapInition = (pos: GeolocationPosition, err?: GeolocationPositionError ) => {
+            if (err) {
+                console.log('er');                
+            }
+            const geoPosition = pos && [pos.coords.latitude, pos.coords.longitude];
+            console.log(111, geoPosition);
+            
 
-        let myMap = new ymaps.Map("mapId", mapState);
-        //задаем пустой объект маршрута, нужен для перерисовки
-        let multiRoute = new ymaps.multiRouter.MultiRoute({
-            referencePoints: [],
-            params: {}
-        });
+            let myMap = new ymaps.Map("mapId", { ...mapState, center: geoPosition || mapState.center }); //если есть геолокация меняем центр карты на него
+            //задаем пустой объект маршрута, нужен для перерисовки
+            let multiRoute = new ymaps.multiRouter.MultiRoute({
+                referencePoints: [],
+                params: {}
+            });
 
-        removeControls(myMap, mapControls);
+            removeControls(myMap, mapControls); //удаляем лишние виджеты управления на карте
 
-        const setMarkers = (markers: TMarker[]) => {
+            const setLocationMarker = () => {
 
-            markers.forEach(marker => {
-                //параметры для внутренности баллуна
-                const balloonInner = markers.length > 1 && 
-                {
-                    hintContent: marker.name,
-                    balloonContent: marker.description,
-                    balloonContentHeader: marker.name,
-                    balloonContentBody: marker.description + `<img class="balloon-image" src=${marker.picture} alt="img" />`,
-                    balloonContentFooter: `<a  target="_blank" href="https://yandex.ru/maps/?rtext=~${marker.coordinates[0]},${marker.coordinates[1]}">Проложить маршрут</a>`,
-                }
-                //параметры для картинки на карте
                 const iconSets = {
                     iconLayout: "default#image",
-                    iconImageHref: marker.picture,
-                    iconImageSize: marker.iconImageSize,
-                    iconImageOffset: marker.iconImageOffset,
+                    iconImageHref: locationIcon,
                 }
 
-                let newMarker = new ymaps.Placemark(marker.coordinates, balloonInner, iconSets)
+                let locationMarker = new ymaps.Placemark(geoPosition, {}, iconSets);
+                myMap.geoObjects.add(locationMarker);
+            };
 
-                newMarker.events.add("click", () => {
+            const setMarkers = (markers: TMarker[]) => {
 
-                    const options = {
-                        enableHighAccuracy: true,
-                        timeout: 5000,
-                        maximumAge: 0,
-                    };
-                    //Определение геолокации
-                    function success(pos: GeolocationPosition) {
+                markers.forEach(marker => {
+                    //параметры для внутренности баллуна
+                    const balloonInner = {}
+                    //параметры для картинки на карте
+                    const iconSets = {
+                        iconLayout: "default#image",
+                        iconImageHref: marker.picture,
+                        iconImageSize: marker.iconImageSize,
+                        iconImageOffset: marker.iconImageOffset,
+                    }
+
+                    let newMarker = new ymaps.Placemark(marker.coordinates, balloonInner, iconSets);
+
+                    const buildRouteInSpot = () => { //функция для прокладывания маршрута
 
                         myMap.geoObjects.remove(multiRoute) //очищаем маршрут перед созданием нового
-                        const crd = pos.coords; //получаем объект с координатами
                         multiRoute = new ymaps.multiRouter.MultiRoute({
                             // Описание опорных точек мультимаршрута.
                             referencePoints: [
-                                [crd.latitude, crd.longitude],
-                                marker.coordinates
+                                geoPosition, //точка А
+                                marker.coordinates //точка Б
                             ],
                             // Параметры маршрутизации.
                             params: {
@@ -68,20 +76,21 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
                             // Автоматически устанавливать границы карты так, чтобы маршрут был виден целиком.
                             boundsAutoApply: true
                         });
-
                         myMap.geoObjects.add(multiRoute); //прокладываем новый созданный маршрут
                     }
-
-                    function error(err: GeolocationPositionError) {
-                        console.warn(`ERROR(${err.code}): ${err.message}`);
-                    }
-                    navigator.geolocation.getCurrentPosition(success, error, options);
+                    //действия при клике на маркет
+                    newMarker.events.add("click", () => {
+                        spotId ? buildRouteInSpot() : navigate(`/spots/${marker.id}/`)
+                    })
+                    //добавление маркера на карту
+                    myMap.geoObjects.add(newMarker);
                 })
+            };
 
-                myMap.geoObjects.add(newMarker);
-            })
+            setLocationMarker(); //устанавливаем иконку геопозиции
+            setMarkers(markers); //устанавливаем маркеры мест
         }
-        setMarkers(markers);
+        getLocation((pos) => mapInition(pos), (err) => mapInition(null, err)) //определяем геопозицию зачем выполняем mapInition
     }
 
     useEffect(() => {

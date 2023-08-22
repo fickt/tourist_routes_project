@@ -56,7 +56,7 @@ export const useAuth = () => {
             Cookies.set("nickname", userData.nickname);
             setAction(isRegistration);
             setSuccessMessage(isRegistration, response);
-            navigate(RoutePath.profile);
+            isRegistration ? navigate(RoutePath.profile) : navigate(RoutePath.home);
         } catch (e: Error | TServerResponse) {
             setError(e);
         } finally {

@@ -7,13 +7,17 @@ import { SpotPage } from "./spot-page/SpotPage";
 import { ForgotPasswordPage } from "./forgot-password/ForgotPasswordPage";
 import { NotFoundPage } from "./not-found-page/NotFoundPage";
 import { ProfilePage } from "pages/profile-page/ProfilePage";
-import { PrivateProfileRoute } from "pages/profile-page/PrivateProfileRoute";
+import { MySpotsPage } from "pages/my-spots-page/MySpotsPage";
+import { ProtectedRoute } from "components/protected-route/ProtectedRoute";
+import { LocationPage } from "./location-page/LocationPage";
 
 export enum AppRoutes {
     HOME = "home",
     PROFILE = "profile",
     FAVORITES = "favorites",
+    MY_SPOTS = "mySpots",
     SPOTS = "spots",
+    LOCATION = "location",
     SPOT_ID = "spotId",
     LOGIN = "login",
     REGISTER = "register",
@@ -21,6 +25,7 @@ export enum AppRoutes {
     LOGOUT = "logout",
     AUTH_LOGIN = "auth_login",
     AUTH_REGISTER = "auth_register",
+    AUTH_LOGOUT = "auth_logout",
     NOT_FOUND = "not_found", //в конце
 }
 
@@ -28,10 +33,13 @@ export const RoutePath = {
     [AppRoutes.HOME]: "/",
     [AppRoutes.PROFILE]: "/profile",
     [AppRoutes.FAVORITES]: "/favorites",
+    [AppRoutes.MY_SPOTS]: "/mySpots",
     [AppRoutes.SPOTS]: "/routes",
-    [AppRoutes.SPOT_ID]: "/spots/:spotId/*",
+    [AppRoutes.LOCATION]: "/location",
+    [AppRoutes.SPOT_ID]: "/spots/:spotId",
     [AppRoutes.AUTH_LOGIN]: "/auth/login",
     [AppRoutes.AUTH_REGISTER]: "/auth/register",
+    [AppRoutes.AUTH_LOGOUT]: "/auth/logout",
     [AppRoutes.LOGIN]: "/login",
     [AppRoutes.REGISTER]: "/register",
     [AppRoutes.FORGOT_PASSWORD]: "/forgotPassword",
@@ -41,12 +49,17 @@ export const RoutePath = {
 
 export const mainRoutes: TRoutes[] = [
     { path: RoutePath.home, element: <HomePage /> },
-    { path: RoutePath.profile, element: <PrivateProfileRoute children={<ProfilePage />} />},
-    { path: RoutePath.favorites, element: <FavoritesPage /> },
     { path: RoutePath.spots, element: <SpotsPage /> },
+    { path: RoutePath.location, element: <LocationPage /> },
     { path: RoutePath.spotId, element: <SpotPage /> },
-    { path: RoutePath.auth_register, element: <AuthPage isRegister={true} /> },
-    { path: RoutePath.auth_login, element: <AuthPage isRegister={false} /> },
-    { path: RoutePath.forgotPassword, element: <ForgotPasswordPage /> },
     { path: RoutePath.not_found, element: <NotFoundPage /> },
+]
+
+export const privateRoutes: TRoutes[] = [
+    { path: RoutePath.profile, element: <ProtectedRoute><ProfilePage /></ProtectedRoute> },
+    { path: RoutePath.mySpots, element: <ProtectedRoute><MySpotsPage /></ProtectedRoute> },
+    { path: RoutePath.favorites, element: <ProtectedRoute><FavoritesPage /></ProtectedRoute> },
+    { path: RoutePath.auth_register, element: <ProtectedRoute onlyOnAuth><AuthPage isRegister={true} /></ProtectedRoute> },
+    { path: RoutePath.auth_login, element: <ProtectedRoute onlyOnAuth><AuthPage isRegister={false} /></ProtectedRoute> },
+    { path: RoutePath.forgotPassword, element: <ProtectedRoute onlyOnAuth><ForgotPasswordPage /></ProtectedRoute> },
 ]

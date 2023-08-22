@@ -15,7 +15,6 @@ export const SearchForm = ({ handleFormSubmit, handleInputChange, placeholder, s
         <form className={s.search} onSubmit={handleFormSubmit}>
             <Input                
                 value={searchValue}
-                className={s.search__input}
                 onChange={onChange}
                 placeholder={placeholder} 
             />

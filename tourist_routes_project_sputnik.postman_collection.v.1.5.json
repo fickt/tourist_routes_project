@@ -217,6 +217,33 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get all routes with difficulty=новичок&category=озёра",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/routes?difficulty=новичок&category=озёра",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes"
+					],
+					"query": [
+						{
+							"key": "difficulty",
+							"value": "новичок"
+						},
+						{
+							"key": "category",
+							"value": "озёра"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
