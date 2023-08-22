@@ -9,7 +9,8 @@ export const ProtectedRoute = ({ onlyOnAuth, children }: TProtectedRouteProps) =
     const location = useLocation();
     const user = useAppSelector(authUser);
 
-    //если это компонент авторизации и пользователь залогинился => редирект на главную или куда заходили по прямому url  
+    //если это компонент авторизации и пользователь залогинился => редирект на главную или куда заходили по прямому url
+    //пользователь не может попасть на страницы авторизации  
     if (onlyOnAuth && user) {
 
         const from = location?.state?.from || { pathname: RoutePath.home }; //создаем путь для возврата после авторизации (либо тот который хранится в стейте либо свой)
@@ -20,7 +21,10 @@ export const ProtectedRoute = ({ onlyOnAuth, children }: TProtectedRouteProps) =
     if (!onlyOnAuth && !user) {
         
         return (
-            <Navigate replace to={{ pathname: RoutePath.auth_login }} state={{ from: location }} />
+            <Navigate 
+                replace to={{ pathname: RoutePath.auth_login }} 
+                state={{ from: location }} 
+            />
         )
     }
 

@@ -5,8 +5,12 @@ import { removeControls } from "./helpers/ymap-options";
 import { mapControls, mapState } from "./constants/constants";
 import { TMarker } from "./constants/markers";
 import { TYMapProps } from "./types";
+import { useNavigate, useParams } from "react-router-dom";
 
-export const YMapComponent = ({ markers }: TYMapProps) => {
+export const YMapComponent = ({ markers }: TYMapProps) => {    
+
+    const navigate = useNavigate();
+    const { spotId } = useParams(); //проверяем на какой странице мы находимся, если есть spotId, то на странице места, иначе на страницу общей карты
 
     const init = () => {
 
@@ -23,14 +27,7 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
 
             markers.forEach(marker => {
                 //параметры для внутренности баллуна
-                const balloonInner = markers.length > 1 && 
-                {
-                    hintContent: marker.name,
-                    balloonContent: marker.description,
-                    balloonContentHeader: marker.name,
-                    balloonContentBody: marker.description + `<img class="balloon-image" src=${marker.picture} alt="img" />`,
-                    balloonContentFooter: `<a  target="_blank" href="https://yandex.ru/maps/?rtext=~${marker.coordinates[0]},${marker.coordinates[1]}">Проложить маршрут</a>`,
-                }
+                const balloonInner = {}
                 //параметры для картинки на карте
                 const iconSets = {
                     iconLayout: "default#image",
@@ -39,10 +36,9 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
                     iconImageOffset: marker.iconImageOffset,
                 }
 
-                let newMarker = new ymaps.Placemark(marker.coordinates, balloonInner, iconSets)
+                let newMarker = new ymaps.Placemark(marker.coordinates, balloonInner, iconSets);
 
-                newMarker.events.add("click", () => {
-
+                const buildRouteInSpot = () => { //функция для прокладывания маршрута
                     const options = {
                         enableHighAccuracy: true,
                         timeout: 5000,
@@ -76,8 +72,12 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
                         console.warn(`ERROR(${err.code}): ${err.message}`);
                     }
                     navigator.geolocation.getCurrentPosition(success, error, options);
+                }
+                //действия при клике на маркет
+                newMarker.events.add("click", () => {
+                    spotId ? buildRouteInSpot() : navigate(`/spots/${marker.id}/`)                                
                 })
-
+                //добавление маркера на карту
                 myMap.geoObjects.add(newMarker);
             })
         }
