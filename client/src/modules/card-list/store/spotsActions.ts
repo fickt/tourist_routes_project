@@ -3,7 +3,7 @@ import { GET_LOCAL_SPOTS, GET_SPOT_ROUTES, IS_SPOTS_LOADING, SPOTS_ERROR } from 
 import { TLocalSpotsDataAction, TSpotsDataError, TSpotsDataLoading } from "modules/card-list/store/types/spotsActionTypes";
 import { TSpotRoutes } from "modules/card-list/types/spotRoutes";
 
-export const getLocalSpotsAction = (data:TMarker[]):TLocalSpotsDataAction => {
+export const getLocalSpotsAction = (data: TMarker[]): TLocalSpotsDataAction => {
     return {
         type: GET_LOCAL_SPOTS,
         payload: data,
