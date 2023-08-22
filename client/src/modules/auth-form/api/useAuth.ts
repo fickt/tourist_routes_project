@@ -2,7 +2,7 @@ import { handleAuthError, handleAuthLoader, handleSetUser, handleUserAuth, handl
 import { authLoader, authUser } from "modules/auth-form/store/authSelectors";
 import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
-import { TServerResponse } from "modules/auth-form/store/types/authTypes";
+import { TServerResponse, TUser } from "modules/auth-form/store/types/authTypes";
 import { authService } from "modules/auth-form/api/authService";
 import { useNavigate } from "react-router-dom";
 import { RoutePath } from "pages/routeConfig";
@@ -44,11 +44,16 @@ export const useAuth = () => {
             const response: TServerResponse = isRegistration
                 ? await authService.register(nickname, email, password) // отправка запроса на регистрацию
                 : await authService.login(email, password); // отправка запроса на логин
-            dispatch(handleSetUser({ // установка пользователя
+            const userData: TUser = {
+                id: response.data.user.id,
                 nickname: response.data.user.nickname,
                 email: response.data.user.email,
-            }));
-            Cookies.set("token", response.data.access_token); // установка токена в куки
+            }
+            dispatch(handleSetUser(userData));
+            // Сохранение значений в куках
+            Cookies.set("token", response.data.access_token);
+            Cookies.set("email", userData.email);
+            Cookies.set("nickname", userData.nickname);
             setAction(isRegistration);
             setSuccessMessage(isRegistration, response);
             navigate(RoutePath.profile);

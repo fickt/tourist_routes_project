@@ -3,15 +3,16 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class UserRegisterRequest extends FormRequest
+class RouteCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -22,16 +23,8 @@ class UserRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nickname' => 'required|string|min:1|max:255',
-            'email' => 'required|string|unique:users|min:1|max:255',
-            'password' => 'required|string|min:1|max:255'
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'email.unique' => 'Аккаунт с такой почтой уже зарегистрирован!'
+            'content' => 'required|string|min:1|max:5000',
+            'rating' => 'required|numeric|between:1,5'
         ];
     }
 }

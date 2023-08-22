@@ -198,6 +198,25 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Comment route with id: 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/routes/1/comment",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes",
+						"1",
+						"comment"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
