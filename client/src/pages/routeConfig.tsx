@@ -8,11 +8,13 @@ import { ForgotPasswordPage } from "./forgot-password/ForgotPasswordPage";
 import { NotFoundPage } from "./not-found-page/NotFoundPage";
 import { ProfilePage } from "pages/profile-page/ProfilePage";
 import { PrivateProfileRoute } from "pages/profile-page/PrivateProfileRoute";
+import { MySpotsPage } from "pages/my-spots-page/MySpotsPage";
 
 export enum AppRoutes {
     HOME = "home",
     PROFILE = "profile",
     FAVORITES = "favorites",
+    MY_SPOTS = "mySpots",
     SPOTS = "spots",
     SPOT_ID = "spotId",
     LOGIN = "login",
@@ -28,6 +30,7 @@ export const RoutePath = {
     [AppRoutes.HOME]: "/",
     [AppRoutes.PROFILE]: "/profile",
     [AppRoutes.FAVORITES]: "/favorites",
+    [AppRoutes.MY_SPOTS]: "/mySpots",
     [AppRoutes.SPOTS]: "/routes",
     [AppRoutes.SPOT_ID]: "/spots/:spotId/*",
     [AppRoutes.AUTH_LOGIN]: "/auth/login",
@@ -43,6 +46,7 @@ export const mainRoutes: TRoutes[] = [
     { path: RoutePath.home, element: <HomePage /> },
     { path: RoutePath.profile, element: <PrivateProfileRoute children={<ProfilePage />} />},
     { path: RoutePath.favorites, element: <FavoritesPage /> },
+    { path: RoutePath.mySpots, element: <MySpotsPage /> },
     { path: RoutePath.spots, element: <SpotsPage /> },
     { path: RoutePath.spotId, element: <SpotPage /> },
     { path: RoutePath.auth_register, element: <AuthPage isRegister={true} /> },
