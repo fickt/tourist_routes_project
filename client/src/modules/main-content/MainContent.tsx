@@ -33,7 +33,6 @@ export const MainContent = () => {
             </section>
             <section className={classNames("content-section", s.routes)}>
                 <div className="container content">
-                    <h2 className={s.routes__title}>Наши маршруты</h2>
                     <CardList />
                 </div>
             </section>

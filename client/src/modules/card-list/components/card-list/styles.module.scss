@@ -1,9 +1,34 @@
+.header {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.filterTags{
+
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+
+	.filterTags__item {
+		padding: 4px 16px;
+		border-radius: 20px;
+		background: #CFEDED;
+		/* fonts */
+		font-size: 12px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 20px; 
+	}
+}
+
 .cards {
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);	
 	row-gap: 26px;
 	column-gap: 16px;
 }
+
 
 @media (min-width: 768px) {
 	.cards {

@@ -1,5 +1,6 @@
 @import "~normalize.css";
 @import url("variables.scss");
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,600&family=Raleway:wght@400;500&display=swap');
 
 *,
 *::after,
@@ -25,9 +26,14 @@ body {
     height: 100%;
 };
 
-h1, h2, h3, h4, h5, p {
+h1, h2, h3, h4, h5 {
     margin: 0;
+    font-family: 'Nunito Sans', sans-serif; 
 };
+
+p, span {
+    font-family: 'Raleway', sans-serif;
+}
 
 .container {
     max-width: 1000px;
