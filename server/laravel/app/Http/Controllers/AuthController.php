@@ -16,7 +16,7 @@ class AuthController extends Controller
     {
         User::query()->create($request->validated());
         if (!$token = auth()->attempt($request->only(['email', 'password']))) {
-            throw new HttpException(Response::HTTP_UNAUTHORIZED, 'Authentication failed!');
+            throw new HttpException(Response::HTTP_UNAUTHORIZED, 'Аутентификация не выполнена!');
         }
 
         return new AuthUserResource($token);
@@ -25,7 +25,7 @@ class AuthController extends Controller
     public function login(UserLoginRequest $request): AuthUserResource
     {
         if (!$token = auth()->attempt($request->validated())) {
-            throw new HttpException(Response::HTTP_UNAUTHORIZED, 'Incorrect email or password');
+            throw new HttpException(Response::HTTP_UNAUTHORIZED, 'Неправильный логин или пароль!');
         }
 
         return new AuthUserResource($token);
