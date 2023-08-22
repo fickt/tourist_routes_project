@@ -13,11 +13,13 @@
 }
 
 .wrapper {
+  max-width: 328px;
   font-family: "Inter", sans-serif;
   font-size: 14px;
   font-weight: 400;
   row-gap: 26px;
   padding: 26px 16px 86px 16px;
+  margin: 0 auto;
 }
 
 .header {
@@ -86,11 +88,6 @@
   }
 }
 
-.recommendations,
-.logout__button {
-  max-width: 328px;
-}
-
 .recommendations {
   row-gap: 20px;
   padding: 20px;
@@ -110,4 +107,9 @@
   font-size: 16px;
   font-weight: 500;
   padding: 16px 12px;
+}
+
+.logout__button {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-black);
 }
