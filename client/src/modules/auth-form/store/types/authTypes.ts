@@ -25,7 +25,7 @@ export type TAuthState = {
 
 export type TUser = {
     email: string,
-    id: number,
+    id?: number,
     nickname: string,
 }
 
