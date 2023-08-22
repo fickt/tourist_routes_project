@@ -7,7 +7,7 @@ import { SpotPage } from "./spot-page/SpotPage";
 import { ForgotPasswordPage } from "./forgot-password/ForgotPasswordPage";
 import { NotFoundPage } from "./not-found-page/NotFoundPage";
 import { ProfilePage } from "pages/profile-page/ProfilePage";
-import { PrivateProfileRoute } from "pages/profile-page/PrivateProfileRoute";
+import { MySpotsPage } from "pages/my-spots-page/MySpotsPage";
 import { ProtectedRoute } from "components/protected-route/ProtectedRoute";
 import { LocationPage } from "./location-page/LocationPage";
 
@@ -15,6 +15,7 @@ export enum AppRoutes {
     HOME = "home",
     PROFILE = "profile",
     FAVORITES = "favorites",
+    MY_SPOTS = "mySpots",
     SPOTS = "spots",
     LOCATION = "location",
     SPOT_ID = "spotId",
@@ -32,6 +33,7 @@ export const RoutePath = {
     [AppRoutes.HOME]: "/",
     [AppRoutes.PROFILE]: "/profile",
     [AppRoutes.FAVORITES]: "/favorites",
+    [AppRoutes.MY_SPOTS]: "/mySpots",
     [AppRoutes.SPOTS]: "/routes",
     [AppRoutes.LOCATION]: "/location",
     [AppRoutes.SPOT_ID]: "/spots/:spotId",
@@ -55,8 +57,9 @@ export const mainRoutes: TRoutes[] = [
 ]
 
 export const privateRoutes: TRoutes[] = [
-    { path: RoutePath.profile, element: <PrivateProfileRoute children={<ProfilePage />} />},
+    { path: RoutePath.profile, element: <ProtectedRoute><ProfilePage /></ProtectedRoute> },
+    { path: RoutePath.mySpots, element: <ProtectedRoute><MySpotsPage /></ProtectedRoute> },
     { path: RoutePath.auth_register, element: <ProtectedRoute onlyOnAuth><AuthPage isRegister={true} /></ProtectedRoute> },
     { path: RoutePath.auth_login, element: <ProtectedRoute onlyOnAuth><AuthPage isRegister={false} /></ProtectedRoute> },
     { path: RoutePath.forgotPassword, element: <ProtectedRoute onlyOnAuth><ForgotPasswordPage /></ProtectedRoute> },
-] 
+]
