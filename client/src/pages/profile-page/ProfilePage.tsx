@@ -1,4 +1,3 @@
-import ArrowRightIcon from "./images/arrow-right.svg";
 import s from "./styles.module.scss";
 import { useAppSelector } from "storage/hookTypes";
 import { authUser } from "modules/auth-form/store/authSelectors";
@@ -21,7 +20,6 @@ export const ProfilePage = () => {
                         <p>Управление аккаунтом</p>
                     </div>
                 </div>
-                <ArrowRightIcon className={s.icon__right} />
             </div>
             <div className={s.main}>
                 <a className={s.main__fav} href={RoutePath.mySpots}>
