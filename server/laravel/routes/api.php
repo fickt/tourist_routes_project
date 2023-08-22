@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\RouteCommentController;
 use App\Http\Controllers\RouteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -35,6 +36,11 @@ Route::group(['middleware' => 'api'], function () {
     Route::group(['prefix' => 'routes'], function () {
         Route::get('', [RouteController::class, 'index']);
         Route::get('/{routeId}', [RouteController::class, 'show']);
+
+        /* Comments */
+        Route::group(['prefix' => '/{routeId}/comment'], function () {
+           Route::post('', [RouteCommentController::class, 'store']);
+        });
     });
 
     Route::get('/images/{filename}', [ImageController::class, 'show']);

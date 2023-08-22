@@ -15,6 +15,25 @@ tags:
   - name: routes
     description: Туристические маршруты
 paths:
+  /routes/{routeId}/comment:
+    post:
+      tags:
+        - routes
+      description: Оставить коммент под маршрутом. ОБЯЗАТЕЛЬНО НУЖНО БЫТЬ АВТОРИЗОВАННЫМ!!!
+      requestBody:
+        description: Рейтинг от 1 до 5!! Число с плавающей запятой
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteCommentRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteCommentResponse' 
+        
   /routes:
     get:
       tags:
@@ -54,7 +73,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserRegistrationRequest'
     
         required: true
       responses:
@@ -99,7 +118,7 @@ paths:
    
 components:
   schemas:
-    User:
+    UserRegistrationRequest:
       type: object
       properties:
   
@@ -114,7 +133,7 @@ components:
           example: '12345'
       xml:
         name: user
-    UserResponse:
+    UserRegistrationResponse:
     
       type: object
       properties:
@@ -191,6 +210,43 @@ components:
               example: theUser
       xml:
         name: user
+    
+    RouteCommentRequest:
+      type: object
+      properties:
+        content: 
+          type: string
+          example: Маршрут просто топ 10 из 10 всем рекомендую!!!
+        rating:
+          type: number
+          example: 4.5
+    
+    RouteCommentResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        content: 
+          type: string
+          example: Маршрут просто топ 10 из 10 всем рекомендую!!!
+        rating:
+          type: number
+          example: 4.5  
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            email:
+              type: string
+              example: email112@gmail.com
+            nickname:
+              type: string
+              example: TheUser123
+    
+    
         
     RouteResponse:
       type: object
@@ -235,6 +291,32 @@ components:
           example: 4.2
         photos:
           type: object
+        comments:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1  
+              content: 
+                type: string
+                example: Маршрут просто топ 10 из 10 всем рекомендую!!!
+              rating:
+                type: number
+                example: 4.5  
+              user:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  email:
+                    type: string
+                    example: email112@gmail.com
+                  nickname:
+                    type: string
+                    example: TheUser123
       xml:
         name: user          
         
