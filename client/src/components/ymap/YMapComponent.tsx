@@ -16,12 +16,8 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
     const init = () => {
         //создание компонентов карты
         const mapInition = (pos: GeolocationPosition, err?: GeolocationPositionError ) => {
-            if (err) {
-                console.log('er');                
-            }
-            const geoPosition = pos && [pos.coords.latitude, pos.coords.longitude];
-            console.log(111, geoPosition);
-            
+
+            const geoPosition = pos && [pos.coords.latitude, pos.coords.longitude];           
 
             let myMap = new ymaps.Map("mapId", { ...mapState, center: geoPosition || mapState.center }); //если есть геолокация меняем центр карты на него
             //задаем пустой объект маршрута, нужен для перерисовки
