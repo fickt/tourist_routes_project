@@ -39,7 +39,14 @@ Route::group(['middleware' => 'api'], function () {
 
         /* Comments */
         Route::group(['prefix' => '/{routeId}/comment'], function () {
-           Route::post('', [RouteCommentController::class, 'store']);
+            Route::post('', [RouteCommentController::class, 'store']);
+        });
+
+        /* Favorite routes */
+        Route::group(['prefix' => '/favorites'], function () {
+            Route::get('', [RouteFavoriteController::class, 'index']);
+            Route::patch('/{routeId}', [RouteFavoriteController::class, 'update']);
+            Route::delete('/{routeId}', [RouteFavoriteController::class, 'destroy']);
         });
     });
 
