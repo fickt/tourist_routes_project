@@ -1,0 +1,353 @@
+openapi: 3.0.3
+info: 
+  title: Tourist routes sputnik App
+  description: |-
+    Описание пока не придумал :) Ну типа платишь денежку, а тебе генерят интересные маршруты исходя из всяких там твоих хотелок, маршруты эти пока вроде как только по Хакасии...пока что...Но это ненадолго ;)
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api
+tags:
+  - name: auth
+    description: Authorization/Login/Logout
+    externalDocs:
+      description: Find out more about our store
+      url: http://swagger.io
+  - name: routes
+    description: Туристические маршруты
+paths:
+  /routes/{routeId}/comment:
+    post:
+      tags:
+        - routes
+      summary: Оставить коммент под маршрутом  
+      description: Оставить коммент под маршрутом. ОБЯЗАТЕЛЬНО НУЖНО БЫТЬ АВТОРИЗОВАННЫМ!!!
+      requestBody:
+        description: Рейтинг от 1 до 5!! Число с плавающей запятой
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteCommentRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteResponse' 
+        '404':
+          description: Route with id 1 has not been found!        
+        
+  /routes:
+    get:
+      tags:
+        - routes
+      description: На вход прилетит массив из объектов
+      summary: Получить все маршруты 
+      parameters:
+        - in: query
+          name: difficulty
+          schema:
+            type: string
+          description: Вывести маршруты с заданными уровнями сложности /routes?difficulty=новичок,знающий
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: Вывести маршруты с заданными категориями /routes?category=озёра 
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteResponse'          
+        '500':
+          description: Internal server error
+  /routes/{routeId}:
+    get:
+      tags:
+        - routes
+      summary: Получить конкретный маршрут по id   
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteResponse'          
+        '500':
+          description: Internal server error
+        '404':
+          description: Route with id 1 has not been found!
+  
+  /auth/register:
+    post:
+      tags:
+        - auth
+      description: Register new user
+      summary: Зарегистрировать пользователя 
+      operationId: updatePet
+      requestBody:
+        description: Register new user
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistrationRequest'
+    
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'          
+        '500':
+          description: The email has already been taken! || The password field confirmation does not match.
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Залогинить пользователя  
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'  
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+  /auth/logout:
+    post:
+      tags:
+        - auth
+      summary: Логаут пользователя 
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserLogout'                 
+        
+   
+components:
+  schemas:
+    UserRegistrationRequest:
+      type: object
+      properties:
+  
+        nickname:
+          type: string
+          example: theUser
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: '12345'
+      xml:
+        name: user
+    UserRegistrationResponse:
+    
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 2
+        nickname:
+          type: string
+          example: theUser
+        email:
+          type: string
+          example: john@email.com
+        
+      xml:
+        name: user   
+    UserLogin:
+    
+      type: object
+      properties:
+        email:
+          type: string
+          example: john@email.com
+        password:  
+          type: string
+          example: password
+      xml:
+        name: user
+    
+    UserLogout:
+      type: object
+      properties:
+        message:
+          type: string
+          example: User has logged out!
+        user: 
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            email:
+              type: string
+              example: john@email.com
+            nickname: 
+              type: string
+              example: theUser
+      xml:
+        name: user       
+    
+    LoginResponse:
+      type: object
+      properties:
+  
+        access_token:
+          type: string
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
+        token_type:
+          type: string
+          example: bearer
+        expires_in:
+          type: integer
+          example: 3600
+        user: 
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            email:
+              type: string
+              example: john@email.com
+            nickname: 
+              type: string
+              example: theUser
+      xml:
+        name: user
+    
+    RouteCommentRequest:
+      type: object
+      properties:
+        content: 
+          type: string
+          example: Маршрут просто топ 10 из 10 всем рекомендую!!!
+        rating:
+          type: number
+          example: 4.5
+    
+    RouteCommentResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        content: 
+          type: string
+          example: Маршрут просто топ 10 из 10 всем рекомендую!!!
+        rating:
+          type: number
+          example: 4.5  
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            email:
+              type: string
+              example: email112@gmail.com
+            nickname:
+              type: string
+              example: TheUser123
+        created_at:
+          type: string
+          example: 2023-08-22T14:50:15.000000Z
+        updated_at: 
+          type: string
+          example: 2023-08-22T14:50:15.000000Z
+    
+        
+    RouteResponse:
+      type: object
+      properties:
+        id: 
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: 'Саяно-Шушенская ГЭС'
+        description:
+          type: string
+          example: 'Ну типа описание, ну типа там красиво и всё такое'
+        difficulty:
+          type: object
+          properties:
+            id: 
+              type: integer
+              example: 1
+            name:
+              type: string
+              example: 'новичок'
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: 'Озёра'
+        longitude:
+          type: number
+          example: 23.34
+        latitude:
+          type: number
+          example: 32.12
+        rating:
+          type: number
+          example: 4.2
+        photos:
+          type: object
+        comments:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1  
+              content: 
+                type: string
+                example: Маршрут просто топ 10 из 10 всем рекомендую!!!
+              rating:
+                type: number
+                example: 4.5  
+              user:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  email:
+                    type: string
+                    example: email112@gmail.com
+                  nickname:
+                    type: string
+                    example: TheUser123
+              created_at:
+                type: string
+                example: 2023-08-22T14:50:15.000000Z
+              updated_at: 
+                type: string
+                example: 2023-08-22T14:50:15.000000Z
+      xml:
+        name: user          
+        
