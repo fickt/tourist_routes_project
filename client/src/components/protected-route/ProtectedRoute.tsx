@@ -4,7 +4,7 @@ import { RoutePath } from "pages/routeConfig";
 import { authUser } from "modules/auth-form/store/authSelectors";
 import { useAppSelector } from "storage/hookTypes";
 
-export const ProtectedRoute = ({ onlyOnAuth, children }: TProtectedRouteProps) => {
+export const ProtectedRoute = ({ onlyOnAuth, isRegister, children }: TProtectedRouteProps) => {
 
     const location = useLocation();
     const user = useAppSelector(authUser);
@@ -13,8 +13,13 @@ export const ProtectedRoute = ({ onlyOnAuth, children }: TProtectedRouteProps) =
     //пользователь не может попасть на страницы авторизации  
     if (onlyOnAuth && user) {
 
-        const from = location?.state?.from || { pathname: RoutePath.home }; //создаем путь для возврата после авторизации (либо тот который хранится в стейте либо свой)
+        const from = location?.state?.from || { pathname: RoutePath.questions }; //создаем путь для возврата после авторизации (либо тот который хранится в стейте либо свой)
         return <Navigate replace to={from} />
+    }
+
+    //если регистрация, то редирект на страницу анкеты
+    if (isRegister && user) {
+        return <Navigate replace to={{ pathname: RoutePath.questions }} />;
     }
 
     //если компонент защищен то редирект на страницу логина

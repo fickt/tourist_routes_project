@@ -4,22 +4,12 @@ import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { TServerResponse, TUser } from "modules/auth-form/store/types/authTypes";
 import { authService } from "modules/auth-form/api/authService";
-import { useNavigate } from "react-router-dom";
-import { RoutePath } from "pages/routeConfig";
 
 export const useAuth = () => {
 
-    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const loader = useAppSelector(authLoader);
     const user = useAppSelector(authUser);
-
-    // Сообщение об успехе
-    const setSuccessMessage = (isRegistration: boolean, response: TServerResponse) => {
-        isRegistration
-            ? dispatch(handleAuthError(`Пользователь ${response.data.user.nickname} зарегистрирован`))
-            : dispatch(handleAuthError(`Пользователь ${response.data.user.nickname} авторизирован`))
-    }
 
     // Что произошло: регистрация или логин
     const setAction = (isRegistration: boolean) => {
@@ -55,8 +45,6 @@ export const useAuth = () => {
             Cookies.set("email", userData.email);
             Cookies.set("nickname", userData.nickname);
             setAction(isRegistration);
-            setSuccessMessage(isRegistration, response);
-            isRegistration ? navigate(RoutePath.profile) : navigate(RoutePath.home);
         } catch (e: Error | TServerResponse) {
             setError(e);
         } finally {

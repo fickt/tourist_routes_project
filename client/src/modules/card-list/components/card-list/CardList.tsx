@@ -2,9 +2,9 @@ import React, { memo } from "react";
 import s from "./styles.module.scss";
 import { useAppSelector } from "storage/hookTypes";
 import { spotsSelector } from "modules/card-list/store/spotsSelectors";
-import { Sorting } from "modules/card-list/components/Sorting/Sorting";
 import { sortOptions } from "modules/card-list/constants/sortOptions";
-import { LocalCard } from "components/localCard/LocalCard";
+import { LocalCard } from "components/local-card/LocalCard";
+import { Sorting } from "modules/card-list/components/sorting/Sorting";
 
 export const CardList = memo(() => {
     

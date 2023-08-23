@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class RoutePhotoResource extends JsonResource
 {
-    private const PATH_IMAGE_FOLDER = '/images/';
+    private const PATH_IMAGE_FOLDER = '/assets/';
 
     /**
      * Transform the resource into an array.
