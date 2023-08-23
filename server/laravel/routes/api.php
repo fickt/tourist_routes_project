@@ -5,9 +5,8 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\RouteCommentController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RouteFavoriteController;
+use App\Http\Middleware\IsAuthenticated;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,7 +47,7 @@ Route::group(['middleware' => 'api'], function () {
             Route::get('', [RouteFavoriteController::class, 'index']);
             Route::patch('/{routeId}', [RouteFavoriteController::class, 'update']);
             Route::delete('/{routeId}', [RouteFavoriteController::class, 'destroy']);
-        });
+        })->middleware(IsAuthenticated::class);
     });
 
     Route::get('/assets/{filename}', [ImageController::class, 'show']);
