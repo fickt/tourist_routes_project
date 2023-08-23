@@ -19,6 +19,7 @@ paths:
     post:
       tags:
         - routes
+      summary: Оставить коммент под маршрутом  
       description: Оставить коммент под маршрутом. ОБЯЗАТЕЛЬНО НУЖНО БЫТЬ АВТОРИЗОВАННЫМ!!!
       requestBody:
         description: Рейтинг от 1 до 5!! Число с плавающей запятой
@@ -33,12 +34,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RouteCommentResponse' 
+        '404':
+          description: Route with id 1 has not been found!        
         
   /routes:
     get:
       tags:
         - routes
       description: На вход прилетит массив из объектов
+      summary: Получить все маршруты 
       parameters:
         - in: query
           name: difficulty
@@ -63,6 +67,7 @@ paths:
     get:
       tags:
         - routes
+      summary: Получить конкретный маршрут по id   
       responses:
         '200':
           description: Successful operation
@@ -72,12 +77,15 @@ paths:
                 $ref: '#/components/schemas/RouteResponse'          
         '500':
           description: Internal server error
+        '404':
+          description: Route with id 1 has not been found!
   
   /auth/register:
     post:
       tags:
         - auth
       description: Register new user
+      summary: Зарегистрировать пользователя 
       operationId: updatePet
       requestBody:
         description: Register new user
@@ -100,6 +108,7 @@ paths:
     post:
       tags:
         - auth
+      summary: Залогинить пользователя  
       requestBody:
         content:
           application/json:
@@ -117,7 +126,7 @@ paths:
     post:
       tags:
         - auth
-       
+      summary: Логаут пользователя 
       responses:
         '201':
           description: Successful operation
