@@ -33,7 +33,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RouteCommentResponse' 
+                $ref: '#/components/schemas/RouteResponse' 
         '404':
           description: Route with id 1 has not been found!        
         
