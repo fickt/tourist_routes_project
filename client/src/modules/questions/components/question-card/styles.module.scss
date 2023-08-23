@@ -1,0 +1,39 @@
+.questionCard {
+  display: flex;
+  flex-direction: column;
+  max-width: 328px;
+  row-gap: 40px;
+  margin: 0 auto;
+  font-family: "Inter", sans-serif;
+
+  &__text {
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  &__image {
+    width: 288px;
+    height: 288px;
+    background-color: var(--color-dark-grey);
+    position: relative;
+  }
+
+  &__dislike,
+  &__like {
+    position: absolute;
+    top: 45%;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-light-grey);
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  &__dislike {
+    left: -5%;
+  }
+
+  &__like {
+    right: -5%;
+  }
+}

@@ -43,5 +43,5 @@ Route::group(['middleware' => 'api'], function () {
         });
     });
 
-    Route::get('/images/{filename}', [ImageController::class, 'show']);
+    Route::get('/assets/{filename}', [ImageController::class, 'show']);
 });
