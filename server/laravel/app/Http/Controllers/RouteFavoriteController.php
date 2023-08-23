@@ -14,15 +14,19 @@ class RouteFavoriteController extends Controller
     {
         $route = Route::query()->find($routeId) ??
             throw new HttpException(
-            Response::HTTP_NOT_FOUND,
-            "Route with id: $routeId has not been found!");
+                Response::HTTP_NOT_FOUND,
+                "Route with id: $routeId has not been found!");
 
-        auth()->user()->favoriteRoutes()->attach($route->first());
-
+        try {
+            auth()->user()->favoriteRoutes()->attach($route->first());
+        } catch (\Exception) {
+            auth()->user()->favoriteRoutes()->detach($route->first());
+        }
         return RouteResource::collection(
             auth()->user()->favoriteRoutes()->get()
         );
     }
+
     public function index(): AnonymousResourceCollection
     {
         return RouteResource::collection(
