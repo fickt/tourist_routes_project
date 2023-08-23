@@ -46,7 +46,8 @@ class Route extends Model
     {
         return $this->belongsTo(
             RouteDifficulty::class,
-            'difficulty_id', 'id');
+            'difficulty_id',
+            'id');
     }
 
     /**
@@ -54,7 +55,8 @@ class Route extends Model
      */
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(RouteCategory::class,
+        return $this->belongsToMany(
+            RouteCategory::class,
             'routes_route_categories',
             'category_id',
             'route_id');

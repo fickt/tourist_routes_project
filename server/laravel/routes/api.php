@@ -34,6 +34,13 @@ Route::group(['middleware' => 'api'], function () {
 
     /* Routes */
     Route::group(['prefix' => 'routes'], function () {
+        /* Favorite routes */
+        Route::group(['prefix' => '/favorites', 'middleware' => IsAuthenticated::class], function () {
+            Route::get('', [RouteFavoriteController::class, 'index']);
+            Route::patch('/{routeId}', [RouteFavoriteController::class, 'update']);
+            Route::delete('/{routeId}', [RouteFavoriteController::class, 'destroy']);
+        });
+
         Route::get('', [RouteController::class, 'index']);
         Route::get('/{routeId}', [RouteController::class, 'show']);
 
@@ -42,12 +49,6 @@ Route::group(['middleware' => 'api'], function () {
             Route::post('', [RouteCommentController::class, 'store']);
         });
 
-        /* Favorite routes */
-        Route::group(['prefix' => '/favorites'], function () {
-            Route::get('', [RouteFavoriteController::class, 'index']);
-            Route::patch('/{routeId}', [RouteFavoriteController::class, 'update']);
-            Route::delete('/{routeId}', [RouteFavoriteController::class, 'destroy']);
-        })->middleware(IsAuthenticated::class);
     });
 
     Route::get('/assets/{filename}', [ImageController::class, 'show']);
