@@ -63,7 +63,7 @@ class User extends Authenticatable implements JWTSubject
             'user_route_favorites',
             'route_id',
             'user_id'
-        );
+        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user']);
     }
 
     public function getJWTIdentifier()
