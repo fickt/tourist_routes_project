@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Route;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RouteFavoriteController extends Controller
@@ -18,11 +15,9 @@ class RouteFavoriteController extends Controller
             Response::HTTP_NOT_FOUND,
             "Route with id: $routeId has not been found!");
 
-        $route = $route->first();
-        $user = auth()->user();
-        $user->favoriteRoutes()->attach($route);
+        auth()->user()->favoriteRoutes()->attach($route->first());
 
-        return $user->favoriteRoutes()->get();
+        return auth()->user()->favoriteRoutes()->get();
     }
     public function index()
     {
