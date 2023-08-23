@@ -40,6 +40,7 @@ Route::group(['middleware' => 'api'], function () {
             Route::patch('/{routeId}', [RouteFavoriteController::class, 'update']);
         });
 
+        /*Fetch all routes or by id */
         Route::get('', [RouteController::class, 'index']);
         Route::get('/{routeId}', [RouteController::class, 'show']);
 
@@ -47,7 +48,6 @@ Route::group(['middleware' => 'api'], function () {
         Route::group(['prefix' => '/{routeId}/comment'], function () {
             Route::post('', [RouteCommentController::class, 'store']);
         });
-
     });
 
     Route::get('/assets/{filename}', [ImageController::class, 'show']);
