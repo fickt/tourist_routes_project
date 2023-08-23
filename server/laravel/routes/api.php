@@ -38,7 +38,6 @@ Route::group(['middleware' => 'api'], function () {
         Route::group(['prefix' => '/favorites', 'middleware' => IsAuthenticated::class], function () {
             Route::get('', [RouteFavoriteController::class, 'index']);
             Route::patch('/{routeId}', [RouteFavoriteController::class, 'update']);
-            Route::delete('/{routeId}', [RouteFavoriteController::class, 'destroy']);
         });
 
         Route::get('', [RouteController::class, 'index']);
