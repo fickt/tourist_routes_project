@@ -38,7 +38,7 @@ export const SpotPage = () => {
             {spotItem &&
                 <div className={s.wrapper}>
                     <div className="content container">
-                        <ContentHeader textButton="назад" title={spotItem.name} />
+                        <ContentHeader title={spotItem.name} />
                         <SpotItem spotItem={spotItem} />
                     </div>
                 </div>}

@@ -1,0 +1,1 @@
+export const IS_RECOMMENDED = "IS_RECOMMENDED";

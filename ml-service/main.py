@@ -1,74 +1,55 @@
-from fastapi import FastAPI
+import cv2
+from fastapi import FastAPI, File, UploadFile
 import pandas as pd
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.feature_extraction.text import CountVectorizer
-from nltk.stem.porter import PorterStemmer
-import random
-from sqlalchemy import create_engine, text
-from nlp_rake import Rake
-import nltk
-from nltk.corpus import stopwords
+from sqlalchemy import create_engine
+from recommender import PlaceRecommender
+from PIL import Image
+import base64
+import io
+import keras
+import numpy as np
 
 app = FastAPI(title = 'Recommender System')
 
-alchemy_engine = create_engine('postgresql+psycopg2://root:root@127.0.0.1:5432/postgres')
+alchemy_engine = create_engine('postgresql+psycopg2://root:root@0.0.0.0:5432/postgres')
 
 connection = alchemy_engine.connect()
 
 routes = pd.read_sql('select * from routes', connection).set_index('id')
 route_difficulties = pd.read_sql('select * from route_difficulties', connection).set_index('id')
 
-nltk.download("russian")
-stops = list(set(stopwords.words("russian")))
+place_recommender = PlaceRecommender(routes['description'])
+image_classifier = keras.models.load_model('model.keras')
 
-rake = Rake(stopwords = stops, max_words = 5)
+def read_image(file):
+    image = Image.open(io.BytesIO(file))
+    return image
 
-key_words = (
-    routes["description"].apply(rake.apply).apply(lambda x: " ".join([e[0] for e in x]))
-)
-routes['key_words'] = key_words
-
-cv = CountVectorizer(max_features = 1500)
-
-vectors = cv.fit_transform(routes["key_words"]).toarray()
-
-ps = PorterStemmer()
-
-
-def stem(text):
-    y = []
-    for e in text.split():
-        y.append(ps.stem(e))
-    return " ".join(y)
-
-
-routes["key_words"] = routes["key_words"].apply(stem)
+def predict(image):
+    pred = np.argmax(image_classifier.predict(np.expand_dims(image, 0))[0])
+    match pred:
+        case 0:
+            return 'высокие горы вершины высота'
+        case 1:
+            return 'старинные здания музеи архитектура'
+        case 2:
+            return 'ледники белый снег'
+        case 3:
+            return 'зеленые леса деревья'
+        case 4:
+            return 'реки озера водоемы берега'
+        case 5:
+            return 'улицы парки скверы культура кафе магазин'
 
 
 @app.post('/recommend-on-servey')
-def recommend_on_survey(likes: str):
-    arr = likes.split(',')
-    likes = list(filter(lambda x: x != "", arr))
-    to_recommend = []
+def recommend_on_servey(likes: str):
     try:
-        for caption in likes:
-            vector = cv.transform([caption]).toarray()
-            distances = []
-            for e in vectors:
-                distances.append(cosine_similarity(vector, [list(e)]))
-
-            distances = sorted(
-                list(enumerate(distances)), reverse = True, key = lambda x: x[1]
-            )[0:5]
-            to_recommend.extend([place[0] for place in distances])
-
-        to_recommend = random.sample(sorted(set(to_recommend)), 5)
+        to_recommend = place_recommender.recommend(likes)
 
         result = {}
-        print(to_recommend)
-        for i in range(len(to_recommend)):
-            print(routes.iloc[to_recommend[i]]['difficulty_id'] - 1)
 
+        for i in range(len(to_recommend)):
             result[f'place{i}'] = {
                 'index': to_recommend[i] + 1,
                 'name': routes.iloc[to_recommend[i]]['name'],
@@ -83,9 +64,26 @@ def recommend_on_survey(likes: str):
         return result
 
     except Exception as ex:
-        print(ex)
-
+        return ex
 
 @app.post('/recommend-on-image')
-def recommend_on_image(caption: str):
-    pass
+async def recommend_on_image(file: UploadFile = File(...)):
+    image = np.array(read_image(await file.read()))
+    image = cv2.resize(image, (150,150))
+    caption = predict(image)
+    to_recommend = place_recommender.recommend(caption)
+
+    result = {}
+
+    for i in range(len(to_recommend)):
+        result[f'place{i}'] = {
+            'index': to_recommend[i] + 1,
+            'name': routes.iloc[to_recommend[i]]['name'],
+            'description': routes.iloc[to_recommend[i]]['description'],
+            'difficulty': route_difficulties.iloc[routes.iloc[to_recommend[i]]['difficulty_id'] - 1]['name'],
+            'longitude': routes.iloc[to_recommend[i]]['longitude'],
+            'latitude': routes.iloc[to_recommend[i]]['latitude'],
+            'distance_from_nearest_city': routes.iloc[to_recommend[i]]['distance_from_nearest_city'],
+            'rating': routes.iloc[to_recommend[i]]['rating']
+        }
+    return result

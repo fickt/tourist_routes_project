@@ -6,7 +6,7 @@ export const SpotsPage = () => {
 
     return (
         <div className={s.wrapper}>
-            <ContentHeader textButton="назад" title="Интересные места" />
+            <ContentHeader title="Интересные места" />
             <SpotRouteList />
         </div>
     );

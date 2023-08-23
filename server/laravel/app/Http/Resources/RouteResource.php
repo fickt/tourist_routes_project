@@ -21,8 +21,8 @@ class RouteResource extends JsonResource
             'description' => $this->description,
             'difficulty' => RouteDifficultyResource::make($this->whenLoaded('difficulty'))->resource->name,
             'categories' => RouteCategoryResource::collection($this->whenLoaded('categories')),
-            'longitude' => $this->longitude,
-            'latitude' => $this->latitude,
+            'longitude' => (float) $this->longitude,
+            'latitude' => (float) $this->latitude,
             'rating' => $this->rating,
             'photos' => RoutePhotoResource::collection($this->whenLoaded('photoPaths')),
             'comments' => RouteCommentResource::collection($this->whenLoaded('comments'))

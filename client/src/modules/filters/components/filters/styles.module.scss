@@ -1,0 +1,51 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    height: 100%;
+    padding: 24px 26px;
+}
+
+.filters {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.buttons__wrapper {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 10px 10px 0px 0px;
+    background: var(--background-02);
+    /* тень */
+    box-shadow: 0px 0px 6px 0px rgba(90, 90, 90, 0.20);
+    /* отступы до краев */
+    margin-left: -26px;
+    margin-right: -26px;
+    margin-bottom: -24px;
+
+    .button {
+        padding: 14px 32px;
+        border-radius: 10px;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+        height: auto;
+
+        &_apply {
+            color: var(--text-02);
+            background-color: var(--background-06);
+        }
+
+        &_cancel {
+            color: var(--text-01);
+            background-color: var(--background-02);
+            box-shadow: 0px 0px 6px 0px rgba(90, 90, 90, 0.20);
+        }
+    }
+}

@@ -21,7 +21,6 @@ const App = () => {
             <main>
                 <AppRouter />
             </main>
-            <Footer><h2>Путешествия по Томску от стажеров Спутника</h2></Footer>
             <MobileHeader />
         </>
     )

@@ -32,6 +32,12 @@ class RouteController extends Controller
             });
         }
 
+        if ($search = Request::query('search')) {
+            $query
+                ->where('name', 'LIKE', "%$search%")
+                ->orWhere('description', 'LIKE', "%$search%");
+        }
+
         return RouteResource::collection($query->get());
     }
 
