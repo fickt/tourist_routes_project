@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('route_id')->constrained('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+            $table->unique(['route_id', 'user_id']);
             $table->timestamps();
         });
     }
