@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Route;
+use App\Models\RoutePhoto;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,7 +17,7 @@ class RouteSeederFromCsv extends Seeder
         if (($open = fopen(storage_path() . "/routes" . "/data_for_db.csv", "r")) !== FALSE) {
             fgetcsv($open, 1000, ",");
             while (($data = fgetcsv($open, 1000, ",")) !== FALSE) {
-                Route::query()->create(
+                $route = Route::query()->create(
                     [
                         'name' => $data[0],
                         'description' => $data[1],
@@ -27,6 +28,11 @@ class RouteSeederFromCsv extends Seeder
                         'rating' => 0
                     ]
                 );
+                RoutePhoto::query()->create(
+                    [
+                        'route_id' => $route->id,
+                        'photo_path' => 'image_route_zaglushka.jpg'
+                    ]);
             }
             fclose($open);
         }
