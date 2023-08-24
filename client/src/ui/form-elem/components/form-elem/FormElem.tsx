@@ -1,17 +1,17 @@
 import React, { MouseEvent, useEffect } from "react";
 import s from "./styles.module.scss";
-import { FormInput } from "modules/auth-form/components/form-input/FormInput";
-import { FormButton } from "modules/auth-form/components/form-button/FormButton";
 import { PreloaderCar } from "ui/preloader/PreloaderCar";
 import { ErrorMessage } from "ui/error-message/ErrorMessage";
 import { Form, FormInstance } from "antd";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { authError, authLoader } from "modules/auth-form/store/authSelectors";
-import { TFormData, TFormProps } from "./types";
-import { PasswordInput } from "modules/auth-form/components/form-input/PasswordInput";
+import { PasswordInput } from "ui/form-elem/components/form-input/PasswordInput";
 import { useAuth } from "modules/auth-form/api/useAuth";
 import { handleAuthError } from "modules/auth-form/store/authActions";
 import { emailRules, nicknameRules } from "ui/form-elem/constants/formRules";
+import { FormInput } from "ui/form-elem/components/form-input/FormInput";
+import { FormButton } from "ui/form-elem/components/form-button/FormButton";
+import { TFormData, TFormProps } from "ui/form-elem/types";
 
 export const FormElem = ({ isRegister, isSettings }: TFormProps) => {
 
@@ -44,7 +44,6 @@ export const FormElem = ({ isRegister, isSettings }: TFormProps) => {
         isRegister
             ? await authenticate(values.nickname, values.email, values.password, true)
             : await authenticate(values.nickname, values.email, values.password, false)
-        isSettings && (console.log(values));
     }
 
     const onFinish = () => {

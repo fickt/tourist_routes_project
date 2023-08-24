@@ -1,6 +1,6 @@
 export type TFormProps = {
     isRegister?: boolean,
-    isSettings: boolean,
+    isSettings?: boolean,
 }
 
 export type TFormData = {

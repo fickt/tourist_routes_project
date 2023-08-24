@@ -10,7 +10,7 @@ export const PasswordInput = ({ isRegister }: TPasswordInputProps) => {
             <Form.Item name="password" rules={passwordRules} hasFeedback>
                 <Input.Password
                     type="password"
-                    placeholder="Пароль"
+                    placeholder="Введите пароль"
                     className={s.form__input}
                 />
             </Form.Item>
