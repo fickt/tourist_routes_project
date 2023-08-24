@@ -13,10 +13,10 @@ export const ProfileHeader = ({ text, path }: TProfileHeaderProps) => {
         <div className={s.profileHeader}>
             <div className={s.profileInfo}>
                 <div className={s.profileInfo__wrapper}>
-                    {user && <span className={s.profileInfo__text}>{user.nickname[0]}</span>}
+                    <span className={s.profileInfo__text}>{user.nickname[0]}</span>
                 </div>
                 <div className={s.profileInfo__settings}>
-                    {user && <h2 className={s.profileInfo__settings__title}>{user.nickname}</h2>}
+                    <h2 className={s.profileInfo__settings__title}>{user.nickname}</h2>
                     <p>{text}</p>
                 </div>
             </div>

@@ -46,6 +46,7 @@ export const useAuth = () => {
             Cookies.set("nickname", userData.nickname);
             setAction(isRegistration);
         } catch (e: Error | TServerResponse) {
+            console.log(e)
             setError(e);
         } finally {
             dispatch(handleAuthLoader(false)); // выключить loader

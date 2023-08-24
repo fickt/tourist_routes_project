@@ -1,7 +1,7 @@
 import s from "./style.module.scss";
 import { Form, Input } from "antd";
-import { passwordRules } from "modules/auth-form/constants/formRules";
 import { TPasswordInputProps } from "./types";
+import { passwordRules } from "ui/form-elem/constants/formRules";
 
 export const PasswordInput = ({ isRegister }: TPasswordInputProps) => {
 

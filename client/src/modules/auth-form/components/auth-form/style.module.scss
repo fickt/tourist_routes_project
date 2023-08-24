@@ -1,20 +1,37 @@
-.form input:-webkit-autofill,
-.form input:-webkit-autofill:hover,
-.form input:-webkit-autofill:focus,
-.form input:-webkit-autofill:active {
-  transition: background-color 5000s ease-in-out 0s;
-  -webkit-box-shadow: 0 0 0 30px white inset !important;
-  background-color: white !important;
-  color: #212529;
-}
-
-.form {
+.auth {
   display: flex;
   flex-direction: column;
-  row-gap: 32px;
-  align-items: flex-start;
+  align-items: center;
+};
 
-  &__inputs {
-    width: 343px;
+.form__header {
+  padding: 32px 0;
+  width: 343px;
+
+  &__title,
+  &__text_extra,
+  &__text{
+    font-family: "Inter", sans-serif;
+    margin: 0;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  &__title,
+  &__text {
+    padding-bottom: 12px;
+  }
+
+  &__text_extra {
+    font-size: 14px;
+    padding-top: 12px;
+  }
+
+  &__text {
+    font-size: 14px;
+    font-weight: 400;
   }
 }

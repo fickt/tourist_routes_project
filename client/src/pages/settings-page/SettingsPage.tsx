@@ -11,7 +11,7 @@ export const SettingsPage = () => {
 
     return (
         <div className={s.settings}>
-            <ProfileHeader text="Никнейм" path={RoutePath.settings_info}/>
+            <ProfileHeader text="Никнейм" path={RoutePath.settings_info} />
             <h3 className={s.settings__title}>Учетные данные</h3>
             <div className={s.settings__fields}>
                 <label className={s.field}>E-mail
