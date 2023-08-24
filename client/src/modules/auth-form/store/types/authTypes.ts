@@ -8,13 +8,6 @@ export type TAuthResponse = {
 
 export type TServerResponse = any; //пока не утвердился тип с бэком
 
-export type TFormData = {
-    nickname: string,
-    email: string,
-    password: string,
-    confirm: string,
-}
-
 export type TAuthState = {
     error_message: string | null,
     is_loader_active: boolean,
