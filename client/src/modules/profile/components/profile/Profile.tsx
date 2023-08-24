@@ -3,30 +3,17 @@ import { Link } from "react-router-dom";
 import { RoutePath } from "pages/routeConfig";
 import { Button } from "ui/button/Button";
 import { useAppSelector} from "storage/hookTypes";
-import { authUser } from "modules/auth-form/store/authSelectors";
-import ArrowRightIcon from "./assets/arrow-right.svg";
 import { isRecommended } from "modules/questions/store/questionsSelectors";
 import { QuestionsPopup } from "modules/questions/components/questions-popup/QuestionsPopup";
+import { ProfileHeader } from "modules/profile/components/profile-header/ProfileHeader";
 
 export const Profile = () => {
 
-    const user = useAppSelector(authUser);
     const recommended = useAppSelector(isRecommended);
 
     return (
         <div className={s.wrapper}>
-            <div className={s.header}>
-                <div className={s.header__info}>
-                    <div className={s.header__info_wrapper}>
-                        {user && <span className={s.header__info_text}>{user.nickname[0]}</span>}
-                    </div>
-                    <div className={s.settings}>
-                        {user && <h2 className={s.title}>{user.nickname}</h2>}
-                        <p>Управление аккаунтом</p>
-                    </div>
-                </div>
-                <ArrowRightIcon className={s.icon__right} />
-            </div>
+            <ProfileHeader text="Управление аккаунтом" path={RoutePath.settings} />
             <div className={s.main}>
                 <Link className={s.main__fav} to={RoutePath.mySpots}>
                     <span className={s.main__fav_text}>Мои места</span>
