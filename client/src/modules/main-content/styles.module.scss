@@ -1,35 +1,17 @@
-.map_section {
+.section {
   font-family: "Inter", sans-serif;
   flex-direction: column;
   display: flex;
   background: lightgray 50% / cover no-repeat;
   width: 100%;
-  padding: 32px 16px;
-
-  .main__header {
-    display: flex;
-    flex-direction: column;
-    row-gap: 12px;
-    margin-top: 70px;
-    margin-bottom: 104px;
-  
-    &_title {
-      font-size: 24px;
-      line-height: 30px;
-      font-weight: 500;
-      margin: 0;
-    }
-  
-    &_text {
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 18px;
-      margin: 0;
-    }
-  }
+  height: 280px;
+  padding: 32px 16px;  
 }
 
 .routes {
-  color: inherit; 
-  
+  color: inherit;
+  position: relative;
+  top: -28px;
+  border-radius: 30px 30px 0px 0px;
+  background: var(--background-02);  
 }

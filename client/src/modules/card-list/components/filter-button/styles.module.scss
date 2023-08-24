@@ -1,6 +1,9 @@
 .button {
     width: 40px;
     height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: inherit;
     padding: 8px;
     border: none;

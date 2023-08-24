@@ -17,16 +17,19 @@
         .tags__item {
             padding: 12px 20px;
             border-radius: 10px;
-            background: var(--background-04);
+            background-color: var(--background-04);
             /* fonts */
             font-size: 14px;
             font-style: normal;
             font-weight: 500;
             line-height: 20px;
+            transition: background-color 0.15s;
 
             &_active {
-                background: var(--background-tag);
+                background-color: var(--background-tag);
             }
+            
         }
+        
     }
 }

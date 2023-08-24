@@ -1,24 +1,29 @@
-import { GET_LOCAL_SPOTS, GET_SPOT_ROUTES, IS_SPOTS_LOADING, SPOTS_ERROR } from "./filtersActionTypeNames";
+import { DELETE_FILTER_CATEGORY, DELETE_FILTER_DIFFICULTY, RESET_FILTERS, SET_FILTER_CATEGORY, SET_FILTER_DIFFICULTY } from "./filtersActionTypeNames";
 import { TFiltersActions } from "./types/filtersActionTypes";
 import { TFiltersState } from "./types/filtersReducerTypes";
 
 const initialState: TFiltersState = {
-    title: null,
-    
+    categories: [],
+    difficulties: [],
 };
 
-export function filtersReducer(state = initialState, action:TFiltersActions) {
+export function filtersReducer(state = initialState, action: TFiltersActions) {
 
-    // switch (action.type) {
-    //     case GET_SPOT_ROUTES: 
-    //         return {...state, dataDb: action.payload}
-    //     case GET_LOCAL_SPOTS: 
-    //         return {...state, data: action.payload, total: action.payload.length}         
-    //     case SPOTS_ERROR:
-    //         return {...state, error: action.payload}
-    //     case IS_SPOTS_LOADING:
-    //         return {...state, loading: action.payload}
-    //     default:
-    //         return state
-    // }
+    switch (action.type) {
+        case SET_FILTER_CATEGORY:
+            state.categories.push(action.payload)
+            return state
+        case SET_FILTER_DIFFICULTY:
+            state.difficulties.push(action.payload)
+            return state
+        case DELETE_FILTER_CATEGORY:
+            return { ...state, categories: state.categories.filter(tag => tag !== action.payload) }
+        case DELETE_FILTER_DIFFICULTY:
+            return { ...state, difficulties: state.difficulties.filter(tag => tag !== action.payload) }
+        case RESET_FILTERS:
+            return {...state, categories: [], difficulties: []}
+
+        default:
+            return state
+    }
 }

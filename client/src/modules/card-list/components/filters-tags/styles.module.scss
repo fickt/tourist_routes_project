@@ -1,0 +1,18 @@
+.wrapper {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px;
+
+	.tag {
+		padding: 4px 16px;
+		border-radius: 20px;
+		background: var(--background-tag);
+		/* fonts */
+		font-size: 12px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 20px;
+
+	}
+}

@@ -1,14 +1,36 @@
-import { SyntheticEvent, useState } from "react";
 import s from "./styles.module.scss";
 import { TFilterItemProps } from "./types"
 import classNames from "classnames";
+import { useAppDispatch, useAppSelector } from "storage/hookTypes";
+import { deleteFilterCaterogyAction, deleteFilterDifficultyAction, setFilterCaterogyAction, setFilterDifficultyAction } from "modules/filters/store/filtersActions";
+import { filterValues } from "modules/filters/constants/filterValues";
+import { filterCategories, filterDifficulties } from "modules/filters/store/filtersSelectors";
+import { useState } from "react";
 
 export const FilterItem = ({ title, list }: TFilterItemProps) => {
+    
+    const categories = useAppSelector(filterCategories);
+    const difficulties = useAppSelector(filterDifficulties);
+    const filters = categories && difficulties && [...categories, ...difficulties];
+    const dispatch = useAppDispatch();
+    const [activeTag, setActiveTag] = useState(false);
 
-    const [activeTag, setActiveTag] = useState(false)
-
-    const handleClickTag = (i:number) => {
-        setActiveTag(!activeTag)
+    const handleClickTag = (item: string) => {
+        setActiveTag(!activeTag)      
+        switch (title) {
+            case filterValues.category:               
+                categories.includes(item)
+                    ? dispatch(deleteFilterCaterogyAction(item))
+                    : dispatch(setFilterCaterogyAction(item))
+                break;
+            case filterValues.difficulty:
+                difficulties.includes(item)
+                    ? dispatch(deleteFilterDifficultyAction(item))
+                    : dispatch(setFilterDifficultyAction(item))                
+                break;
+            default:
+                break;
+        }
     }
 
     return (
@@ -18,9 +40,9 @@ export const FilterItem = ({ title, list }: TFilterItemProps) => {
                 {list.map((item, i) => (
                     <span
                         key={i}
-                        className={classNames(s.tags__item, {[s.tags__item_active]: activeTag})}
-                        onClick={() => handleClickTag(i)}
-                    >{item}
+                        className={classNames(s.tags__item, { [s.tags__item_active]: filters.includes(item) })}
+                        onClick={() => handleClickTag(item)}
+                    >{item}                    
                     </span>
                 ))}
             </div>

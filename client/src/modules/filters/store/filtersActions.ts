@@ -1,27 +1,37 @@
-// export const getLocalSpotsAction = (data: TMarker[]): TLocalSpotsDataAction => {
-//     return {
-//         type: GET_LOCAL_SPOTS,
-//         payload: data,
-//     }
-// }
+import { DELETE_FILTER_CATEGORY, DELETE_FILTER_DIFFICULTY, RESET_FILTERS, SET_FILTER_CATEGORY, SET_FILTER_DIFFICULTY } from "./filtersActionTypeNames"
+import { TFiltersResetAction, TFiltersTagAction } from "./types/filtersActionTypes"
 
-// export const spotsError = (error: string): TSpotsDataError => {
-//     return {
-//         type: SPOTS_ERROR,
-//         payload: error        
-//     }
-// }
+export const setFilterCaterogyAction = (tag: string): TFiltersTagAction => {
+    return {
+        type: SET_FILTER_CATEGORY,
+        payload: tag,
+    }
+}
 
-// export const isSpotsLoading = (isLoading: boolean): TSpotsDataLoading => {
-//     return {
-//         type: IS_SPOTS_LOADING,
-//         payload: isLoading        
-//     }
-// }
+export const setFilterDifficultyAction = (tag: string): TFiltersTagAction => {
+    return {
+        type: SET_FILTER_DIFFICULTY,
+        payload: tag        
+    }
+}
 
-// export const getSpotRoutes = (data: TSpotRoutes) => {
-//     return {
-//         type: GET_SPOT_ROUTES,
-//         payload: data
-//     }
-// }
+export const deleteFilterCaterogyAction = (tag: string): TFiltersTagAction => {
+    return {
+        type: DELETE_FILTER_CATEGORY,
+        payload: tag,
+    }
+}
+
+export const deleteFilterDifficultyAction = (tag: string): TFiltersTagAction => {
+    return {
+        type: DELETE_FILTER_DIFFICULTY,
+        payload: tag        
+    }
+}
+
+export const resetFiltersAction = (): TFiltersResetAction => {
+    return {
+        type: RESET_FILTERS,
+    }
+}
+

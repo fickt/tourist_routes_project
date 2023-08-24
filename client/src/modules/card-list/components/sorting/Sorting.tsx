@@ -14,7 +14,7 @@ export const Sorting = ({ options }: TSortingProps) => {
 
     return (
         <div className={s.sort}>
-            <span>Сортировка:</span>
+            <span className={s.sort__title}>Сортировка:</span>
             <Select 
                 defaultValue={sortTabs.rating.category}
                 onChange={handleChange}

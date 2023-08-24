@@ -1,27 +1,12 @@
-// import { TMarker } from "components/ymap/constants/markers";
-// import { SPOTS_ERROR, IS_SPOTS_LOADING, GET_LOCAL_SPOTS, GET_SPOT_ROUTES } from "modules/card-list/store/spotsActionTypeNames";
-// import { TSpotRoutes } from "modules/card-list/types/spotRoutes";
+import { RESET_FILTERS } from "../filtersActionTypeNames";
 
-// //spots-data actions
-// export type TFiltersActions =  TSpotsDataLoading | TSpotsDataError | TLocalSpotsDataAction | TGetRoutesAction;
+export type TFiltersActions = TFiltersTagAction | TFiltersResetAction;
 
-// export type TLocalSpotsDataAction = {
-//     type: typeof GET_LOCAL_SPOTS,
-//     payload: TMarker[]   
-// }
+export type TFiltersTagAction = {
+    type: string,
+    payload: string  
+}
 
-// export type TSpotsDataError = {
-//     type: typeof SPOTS_ERROR,
-//     payload: string
-// }
-
-// export type TSpotsDataLoading = {
-//     type: typeof IS_SPOTS_LOADING,
-//     payload: boolean
-// }
-
-// export type TGetRoutesAction = {
-//     type: typeof GET_SPOT_ROUTES,
-//     payload: TSpotRoutes
-// }
-
+export type TFiltersResetAction = {
+    type: typeof RESET_FILTERS
+}
