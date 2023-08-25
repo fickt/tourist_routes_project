@@ -53,7 +53,13 @@ paths:
           name: category
           schema:
             type: string
-          description: Вывести маршруты с заданными категориями /routes?category=озёра 
+          description: Вывести маршруты с заданными категориями /routes?category=озёра
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: Вывести все маршруты, которые в названии или описании содержат введённое слово/строку /routes?search=пейзаж
+          
       responses:
         '200':
           description: Successful operation
@@ -79,6 +85,37 @@ paths:
           description: Internal server error
         '404':
           description: Route with id 1 has not been found!
+  /routes/favorites:
+    get:
+      tags:
+        - routes
+      description: Нужно быть авторизованным!
+      summary: Получить избранные маршруты
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteResponse'
+        '401':
+          description: Требуется авторизация!
+          
+  /routes/favorites/{routeId}:
+    patch:
+      tags:
+        - routes
+      description: Нужно быть авторизованным! Если добавить в избранное маршрут, который уже есть в избранном, он удалится из избранного. В ответ придут все избранные маршруты + новый избранный маршрут
+      summary: Добавить маршрут в избранные
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteResponse'
+        '401':
+           description: Требуется авторизация!
   
   /auth/register:
     post:
@@ -286,25 +323,13 @@ components:
           type: string
           example: 'Ну типа описание, ну типа там красиво и всё такое'
         difficulty:
-          type: object
-          properties:
-            id: 
-              type: integer
-              example: 1
-            name:
-              type: string
-              example: 'новичок'
+          type: string
+          example: 'новичок'
         categories:
           type: array
           items:
-            type: object
-            properties:
-              id:
-                type: integer
-                example: 1
-              name:
-                type: string
-                example: 'Озёра'
+            type: string
+            example: 'озёра'
         longitude:
           type: number
           example: 23.34
