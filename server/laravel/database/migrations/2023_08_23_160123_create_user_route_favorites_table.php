@@ -17,7 +17,7 @@ return new class extends Migration
             ->cascadeOnDelete()
             ->cascadeOnUpdate();
 
-            $table->foreignId('route_id')->constrained('users')
+            $table->foreignId('route_id')->constrained('routes')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->unique(['route_id', 'user_id']);
