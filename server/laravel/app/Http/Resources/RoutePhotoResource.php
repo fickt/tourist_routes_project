@@ -4,8 +4,6 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 class RoutePhotoResource extends JsonResource
 {
@@ -19,7 +17,13 @@ class RoutePhotoResource extends JsonResource
     public function toArray(Request $request): string
     {
         return $request->getSchemeAndHttpHost()
+            . '/api'
             . self::PATH_IMAGE_FOLDER
             . $this->photo_path;
     }
+
+    /*public function withResponse($request, $response)
+    {
+        $response->setEncodingOptions(JSON_UNESCAPED_SLASHES);
+    }*/
 }

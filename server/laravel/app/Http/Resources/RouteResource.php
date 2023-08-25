@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Response;
 
 class RouteResource extends JsonResource
 {
@@ -28,4 +27,9 @@ class RouteResource extends JsonResource
             'comments' => RouteCommentResource::collection($this->whenLoaded('comments'))
         ];
     }
+
+    /*public function withResponse($request, $response)
+    {
+        $response->setEncodingOptions(JSON_UNESCAPED_SLASHES);
+    }*/
 }

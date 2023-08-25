@@ -240,6 +240,16 @@
 		{
 			"name": "Get all routes with difficulty=новичок&category=озёра",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -259,6 +269,96 @@
 							"key": "category",
 							"value": "озёра"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get route by ?search=Тестовый",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/routes?search=Тестовый",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "Тестовый"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get favorites routes of User with id: 1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/routes/favorites",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes",
+						"favorites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add favorite route id: 1 to user id: 1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/routes/favorites/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes",
+						"favorites",
+						"1"
 					]
 				}
 			},

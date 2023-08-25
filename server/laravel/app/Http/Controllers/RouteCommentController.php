@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RouteCommentRequest;
-use App\Http\Resources\RouteCommentResource;
 use App\Http\Resources\RouteResource;
 use App\Models\Route;
 use App\Models\RouteComment;
@@ -15,21 +14,20 @@ class RouteCommentController extends Controller
 {
     public function store(int $routeId, RouteCommentRequest $request): RouteResource
     {
-        Route::query()->find($routeId)
-            ? RouteComment::query()->create(
+        $route = Route::query()->find($routeId) ??
+            throw new HttpException(
+                Response::HTTP_NOT_FOUND,
+                'Route with id: ' . $routeId . ' has not been found!');
+
+        RouteComment::query()->create(
             array_merge($request->validated(),
                 ['route_id' => $routeId],
                 ['user_id' => Auth::id()]
             )
-        )
-            : throw new HttpException(
-            Response::HTTP_NOT_FOUND,
-            'Route with id: ' . $routeId . ' has not been found!'
         );
 
         return RouteResource::make(
-            Route::query()
-                ->find($routeId)
+            $route
                 ->with(['difficulty', 'photoPaths', 'categories', 'comments.user'])
                 ->first()
         );
