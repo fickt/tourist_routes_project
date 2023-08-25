@@ -1,13 +1,19 @@
 import { ProfileHeader } from "modules/profile/components/profile-header/ProfileHeader";
 import s from "./styles.module.scss";
 import { useAppSelector } from "storage/hookTypes";
-import { authUser } from "modules/auth-form/store/authSelectors";
 import { Button } from "ui/button/Button";
 import { RoutePath } from "pages/routeConfig";
+import { useNavigate } from "react-router-dom";
+import { authUser } from "modules/auth-form";
 
 export const SettingsPage = () => {
 
     const user = useAppSelector(authUser);
+    const navigate = useNavigate();
+
+    const redirectToChangePassword = () => {
+        navigate(RoutePath.settings_password);
+    }
 
     return (
         <div className={s.settings}>
@@ -19,7 +25,7 @@ export const SettingsPage = () => {
                 </label>
                 <div className={s.field}>
                     <span className={s.settings__title}>Пароль</span>
-                    <Button>Изменить пароль</Button>
+                    <Button action={redirectToChangePassword}>Изменить пароль</Button>
                 </div>
             </div>
         </div>

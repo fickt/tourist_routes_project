@@ -11,8 +11,9 @@ import { MySpotsPage } from "pages/my-spots-page/MySpotsPage";
 import { ProtectedRoute } from "components/protected-route/ProtectedRoute";
 import { LocationPage } from "./location-page/LocationPage";
 import { QuestionsPage } from "pages/questions-page/QuestionsPage";
-import { SettingsPage } from "pages/settings-page/SettingsPage";
+import { SettingsPage } from "pages/settings-page/settings-page/SettingsPage";
 import { SettingsInfoPage } from "pages/settings-page/settings-info-page/SettingsInfoPage";
+import {SettingsPasswordPage} from "pages/settings-page/settings-password-page/SettingsPasswordPage";
 
 export enum AppRoutes {
     HOME = "home",
@@ -67,6 +68,7 @@ export const privateRoutes: TRoutes[] = [
     { path: RoutePath.questions, element: <ProtectedRoute><QuestionsPage /></ProtectedRoute> },
     { path: RoutePath.settings, element: <ProtectedRoute><SettingsPage /></ProtectedRoute> },
     { path: RoutePath.settings_info, element: <ProtectedRoute><SettingsInfoPage /></ProtectedRoute> },
+    { path: RoutePath.settings_password, element: <ProtectedRoute><SettingsPasswordPage /></ProtectedRoute> },
     { path: RoutePath.auth_register, element: <ProtectedRoute onlyOnAuth isRegister={true}><AuthPage isRegister={true} /></ProtectedRoute> },
     { path: RoutePath.auth_login, element: <ProtectedRoute onlyOnAuth><AuthPage isRegister={false} /></ProtectedRoute> },
     { path: RoutePath.forgotPassword, element: <ProtectedRoute onlyOnAuth><ForgotPasswordPage /></ProtectedRoute> },

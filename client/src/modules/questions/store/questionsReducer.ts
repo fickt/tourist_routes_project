@@ -1,5 +1,5 @@
-import { TQuestionsAction, TRecommended } from "modules/questions/store/types/questionsTypes";
-import { IS_RECOMMENDED } from "modules/questions/store/questionsActionsTypeNames";
+import { TQuestionsAction, TRecommended } from "./types/questionsTypes";
+import { IS_RECOMMENDED } from "./questionsActionsTypeNames";
 
 const initialState: TRecommended = {
     isRecommended: false,
