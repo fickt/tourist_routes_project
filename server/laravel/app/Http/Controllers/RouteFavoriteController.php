@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\RouteResource;
 use App\Models\Route;
+use App\Models\User;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RouteFavoriteController extends Controller
 {
+    /**
+     * Добавляет маршрут в избранные
+     * Если у пользователя уже был в избранных данный маршрут
+     * он удалится из списка избранных
+     */
     public function update(int $routeId): AnonymousResourceCollection
     {
         $route = Route::query()->find($routeId) ??
@@ -17,13 +23,13 @@ class RouteFavoriteController extends Controller
                 Response::HTTP_NOT_FOUND,
                 "Route with id: $routeId has not been found!");
 
-        try {
-            auth()->user()->favoriteRoutes()->attach($route->first());
-        } catch (\Exception) {
-            auth()->user()->favoriteRoutes()->detach($route->first());
-        }
+            $user = auth()->user();
+            $user->favoriteRoutes()->find($routeId)
+                ? $user->favoriteRoutes()->detach($route->first())
+                : $user->favoriteRoutes()->attach($route->first());
+
         return RouteResource::collection(
-            auth()->user()->favoriteRoutes()->get()
+            $user->favoriteRoutes()->get()
         );
     }
 
