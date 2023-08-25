@@ -4,9 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response as ResponseAlias;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class IsAuthenticated

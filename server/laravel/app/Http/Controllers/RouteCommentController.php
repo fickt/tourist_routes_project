@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RouteCommentRequest;
-use App\Http\Resources\RouteCommentResource;
 use App\Http\Resources\RouteResource;
 use App\Models\Route;
 use App\Models\RouteComment;
