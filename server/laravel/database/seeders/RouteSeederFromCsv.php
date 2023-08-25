@@ -13,7 +13,7 @@ class RouteSeederFromCsv extends Seeder
     private const NUMBER_OF_ROUTES = 30;
 
     /**
-     * Run the database seeds.
+     * Считывает данные из csv файла и заполняет БД маршрутами
      */
     public static function run(): void
     {
