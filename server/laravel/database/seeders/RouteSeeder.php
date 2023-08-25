@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\RouteDifficultyEnum;
 use App\Models\Route;
 use App\Models\RouteDifficulty;
 use App\Models\RoutePhoto;
@@ -16,7 +17,7 @@ class RouteSeeder extends Seeder
     public static function run(): void
     {
         $route_difficulty = RouteDifficulty::query()
-            ->where('name', '=', 'новичок')
+            ->where('name', '=', RouteDifficultyEnum::Easy->value)
             ->first();
 
         Route::query()->create(
