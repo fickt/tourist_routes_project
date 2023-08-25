@@ -61,8 +61,8 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(
             Route::class,
             'user_route_favorites',
-            'route_id',
-            'user_id'
+            'user_id',
+            'route_id'
         )->with(['difficulty', 'photoPaths', 'categories', 'comments.user']);
     }
 

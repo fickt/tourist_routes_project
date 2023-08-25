@@ -24,8 +24,8 @@ class RouteFavoriteController extends Controller
 
             $user = auth()->user();
             $user->favoriteRoutes()->find($routeId)
-                ? $user->favoriteRoutes()->detach($route->first())
-                : $user->favoriteRoutes()->attach($route->first());
+                ? $user->favoriteRoutes()->detach($route)
+                : $user->favoriteRoutes()->attach($route);
 
         return RouteResource::collection(
             $user->favoriteRoutes()->get()

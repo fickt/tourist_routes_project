@@ -58,8 +58,8 @@ class Route extends Model
         return $this->belongsToMany(
             RouteCategory::class,
             'routes_route_categories',
-            'category_id',
-            'route_id');
+            'route_id',
+            'category_id');
     }
 
     public function comments(): HasMany
