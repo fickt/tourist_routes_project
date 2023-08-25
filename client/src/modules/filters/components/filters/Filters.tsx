@@ -30,6 +30,7 @@ export const Filters = () => {
         dispatch(resetFiltersAction())
     }
 
+    //убрать
     const categoriesTags = ["озёра", "Горы", "Реки", "Исторические места", "Пещеры", "Парки", "Заповедники", "Горнолыжные комплексы", "Курганы", "Леса"]
     const difficultyTags = ["Новичок", "Знающий", "Опытный"]
 

@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { deleteFilterCaterogyAction, deleteFilterDifficultyAction, setFilterCaterogyAction, setFilterDifficultyAction } from "modules/filters/store/filtersActions";
 import { filterValues } from "modules/filters/constants/filterValues";
 import { filterCategories, filterDifficulties } from "modules/filters/store/filtersSelectors";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const FilterItem = ({ title, list }: TFilterItemProps) => {
     
@@ -32,6 +32,10 @@ export const FilterItem = ({ title, list }: TFilterItemProps) => {
                 break;
         }
     }  
+
+    useEffect(() => {
+
+    }, [filters])
 
     return (
         <div className={s.filters__item}>

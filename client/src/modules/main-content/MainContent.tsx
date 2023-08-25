@@ -8,8 +8,6 @@ import { useDebounce } from "hooks/useDebounce";
 import { apiSpots } from "modules/card-list/api/SpotsServise";
 import { useAppDispatch } from "storage/hookTypes";
 import { getSpotRoutes } from "modules/card-list/store/spotsActions";
-import { TSpotRoutes } from "modules/card-list/types/spotRoutes";
-import { AxiosResponse } from "axios";
 
 export const MainContent = () => {
 
