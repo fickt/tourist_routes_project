@@ -1,7 +1,7 @@
 import s from "./styles.module.scss";
 import { IFormInputProps } from "./types";
 
-export const Input = ({value, onChange, placeholder, type="text"}:IFormInputProps) => {
+export const Input = ({ value, onChange, placeholder, type="text" }: IFormInputProps) => {
 
     return (
         <input

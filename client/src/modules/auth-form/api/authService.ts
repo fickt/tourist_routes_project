@@ -13,6 +13,6 @@ export class authService {
     }
 
     static async logout(): Promise<void> {
-        return api.post<typeof RoutePath.logout, null, void>(RoutePath.auth_logout);
+        return api.post<typeof RoutePath.auth_logout, null, void>(RoutePath.auth_logout);
     }
 }

@@ -1,0 +1,31 @@
+.form__header {
+  padding: 32px 0;
+  width: 343px;
+
+  &__title,
+  &__text_extra,
+  &__text{
+    font-family: "Inter", sans-serif;
+    margin: 0;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  &__title,
+  &__text {
+    padding-bottom: 12px;
+  }
+
+  &__text_extra {
+    font-size: 14px;
+    padding-top: 12px;
+  }
+
+  &__text {
+    font-size: 14px;
+    font-weight: 400;
+  }
+}

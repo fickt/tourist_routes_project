@@ -1,0 +1,32 @@
+.settings {
+  max-width: 328px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  row-gap: 26px;
+  padding: 26px 16px;
+  margin: 0 auto;
+
+  &__title {
+    font-weight: 500;
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    row-gap: 45px;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+
+  &__input {
+    padding: 12px;
+    background: var(--color-input-grey);
+    border: none;
+  }
+}

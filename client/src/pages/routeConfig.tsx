@@ -12,6 +12,9 @@ import { ProtectedRoute } from "components/protected-route/ProtectedRoute";
 import { LocationPage } from "./location-page/LocationPage";
 import { QuestionsPage } from "pages/questions-page/QuestionsPage";
 import { FiltersPage } from "./filters-page/FiltersPage";
+import { SettingsPage } from "pages/settings-page/SettingsPage";
+import { SettingsInfoPage } from "pages/settings-page/settings-info-page/SettingsInfoPage";
+
 
 export enum AppRoutes {
     HOME = "home",
@@ -19,14 +22,14 @@ export enum AppRoutes {
     FAVORITES = "favorites",
     MY_SPOTS = "mySpots",
     QUESTIONS = "questions",
+    SETTINGS = "settings",
+    SETTINGS_INFO = "settings_info",
+    SETTINGS_PASSWORD = "settings_password",
     SPOTS = "spots",
     FILTERS = "filters",
     LOCATION = "location",
     SPOT_ID = "spotId",
-    LOGIN = "login",
-    REGISTER = "register",
-    FORGOT_PASSWORD = "forgotPassword",    
-    LOGOUT = "logout",
+    FORGOT_PASSWORD = "forgotPassword",
     AUTH_LOGIN = "auth_login",
     AUTH_REGISTER = "auth_register",
     AUTH_LOGOUT = "auth_logout",
@@ -40,16 +43,16 @@ export const RoutePath = {
     [AppRoutes.MY_SPOTS]: "/mySpots",
     [AppRoutes.FILTERS]: "/filters",
     [AppRoutes.QUESTIONS]: "/questions",
+    [AppRoutes.SETTINGS]: "/settings",
+    [AppRoutes.SETTINGS_INFO]: "/settings/info",
+    [AppRoutes.SETTINGS_PASSWORD]: "/settings/password",
     [AppRoutes.SPOTS]: "/routes",
     [AppRoutes.LOCATION]: "/location",
     [AppRoutes.SPOT_ID]: "/spots/:spotId",
     [AppRoutes.AUTH_LOGIN]: "/auth/login",
     [AppRoutes.AUTH_REGISTER]: "/auth/register",
     [AppRoutes.AUTH_LOGOUT]: "/auth/logout",
-    [AppRoutes.LOGIN]: "/login",
-    [AppRoutes.REGISTER]: "/register",
     [AppRoutes.FORGOT_PASSWORD]: "/forgotPassword",
-    [AppRoutes.LOGOUT]: "/logout",
     [AppRoutes.NOT_FOUND]: "*", //в конце
 }
 
@@ -68,6 +71,8 @@ export const privateRoutes: TRoutes[] = [
     { path: RoutePath.mySpots, element: <ProtectedRoute><MySpotsPage /></ProtectedRoute> },
     { path: RoutePath.favorites, element: <ProtectedRoute><FavoritesPage /></ProtectedRoute> },
     { path: RoutePath.questions, element: <ProtectedRoute><QuestionsPage /></ProtectedRoute> },
+    { path: RoutePath.settings, element: <ProtectedRoute><SettingsPage /></ProtectedRoute> },
+    { path: RoutePath.settings_info, element: <ProtectedRoute><SettingsInfoPage /></ProtectedRoute> },
     { path: RoutePath.auth_register, element: <ProtectedRoute onlyOnAuth isRegister={true}><AuthPage isRegister={true} /></ProtectedRoute> },
     { path: RoutePath.auth_login, element: <ProtectedRoute onlyOnAuth><AuthPage isRegister={false} /></ProtectedRoute> },
     { path: RoutePath.forgotPassword, element: <ProtectedRoute onlyOnAuth><ForgotPasswordPage /></ProtectedRoute> },
