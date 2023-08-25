@@ -15,7 +15,6 @@ import { FiltersPage } from "./filters-page/FiltersPage";
 import { SettingsPage } from "pages/settings-page/SettingsPage";
 import { SettingsInfoPage } from "pages/settings-page/settings-info-page/SettingsInfoPage";
 
-
 export enum AppRoutes {
     HOME = "home",
     PROFILE = "profile",

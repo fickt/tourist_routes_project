@@ -14,9 +14,9 @@ export const FilterItem = ({ title, list }: TFilterItemProps) => {
     const filters = categories && difficulties && [...categories, ...difficulties];
     const dispatch = useAppDispatch();
     const [activeTag, setActiveTag] = useState(false);
-
+    
     const handleClickTag = (item: string) => {
-        setActiveTag(!activeTag)      
+        setActiveTag(!activeTag)   
         switch (title) {
             case filterValues.category:               
                 categories.includes(item)
@@ -31,7 +31,7 @@ export const FilterItem = ({ title, list }: TFilterItemProps) => {
             default:
                 break;
         }
-    }
+    }  
 
     return (
         <div className={s.filters__item}>

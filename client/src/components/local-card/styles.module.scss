@@ -1,5 +1,7 @@
 .link {
 	display: block;
+	text-decoration: none;
+	color: inherit;
 }
 
 .card {
@@ -12,6 +14,7 @@
 	justify-content: space-between;
 	aspect-ratio: 1 / 1;
 	background-size: cover;
+	background-color: var(--background-06);
 	padding: 20px;
 	border-radius: 30px;
 

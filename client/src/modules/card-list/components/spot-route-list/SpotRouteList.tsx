@@ -8,6 +8,7 @@ import { SpotRoute } from "components/spot-route/SpotRoute";
 import { TSpotRoute } from "modules/card-list/types/spotRoutes";
 import { ErrorMessage } from "ui/error-message/ErrorMessage";
 import { PreloaderCar } from "ui/preloader/PreloaderCar";
+import { LocalCard } from "components/local-card/LocalCard";
 
 export const SpotRouteList = memo(() => {
 
@@ -37,7 +38,7 @@ export const SpotRouteList = memo(() => {
         <>
             <h2>Серверный список мест</h2>
             <div className={s.cards}>
-                {spotRoutes?.map((spot: TSpotRoute) => <SpotRoute key={spot.id} {...spot} />)}
+                {spotRoutes?.map((spot: TSpotRoute) => <LocalCard key={spot.id} {...spot} />)}
             </div>
             {loading && <PreloaderCar />}
             {!loading && (error && <ErrorMessage errorText={error} />)}
