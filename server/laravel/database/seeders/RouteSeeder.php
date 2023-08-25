@@ -19,7 +19,7 @@ class RouteSeeder extends Seeder
             ->where('name', '=', 'новичок')
             ->first();
 
-        $route = Route::query()->create(
+        Route::query()->create(
             [
                 'name' => 'Тестовый маршрут',
                 'description' => 'Дон ли, Волга ли течёт — котомку на плечо
