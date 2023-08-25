@@ -1,16 +1,18 @@
 import s from "./styles.module.scss";
 import { redirectToProfile } from "modules/questions/constants/questionsRedirects";
-import { TQuestionsPreviewProps } from "modules/questions/components/questions-preview/type";
 import { useNavigate } from "react-router-dom";
 import { QuestionsButton } from "modules/questions/components/questions-buttons/QuestionsButton";
+import { useAppDispatch } from "storage/hookTypes";
+import { handleRecommended } from "modules/questions/store/questionsActions";
 
-export const QuestionsPreview = ({ setStartQuestions }: TQuestionsPreviewProps) => {
+export const QuestionsPreview = () => {
 
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const redirect = () => redirectToProfile(navigate);
 
     const redirectToQuestions = () => {
-        setStartQuestions(true);
+        dispatch(handleRecommended(true));
     }
 
     return (

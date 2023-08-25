@@ -4,8 +4,7 @@ import { mainRoutes, privateRoutes } from "./routeConfig";
 import { TRoutes } from "./types";
 import Cookies from "js-cookie";
 import { useAppDispatch } from "storage/hookTypes";
-import { TUser } from "modules/auth-form/store/types/authTypes";
-import { handleSetUser } from "modules/auth-form/store/authActions";
+import { handleSetUser, TUser } from "modules/auth-form";
 
 const AppRouter = () => {
 
