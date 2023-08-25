@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 
 class RouteSeederFromCsv extends Seeder
 {
-    private const PATH_ROUTES_FOR_DB = "/routes/data_for_db.csv";
+    private const PATH_ROUTES_CSV_FILE = "/routes/data_for_db.csv";
     private const NUMBER_OF_ROUTES = 30;
 
     /**
@@ -17,7 +17,7 @@ class RouteSeederFromCsv extends Seeder
      */
     public static function run(): void
     {
-        $open = fopen(storage_path() . self::PATH_ROUTES_FOR_DB, "r");
+        $open = fopen(storage_path() . self::PATH_ROUTES_CSV_FILE, "r");
         fgetcsv($open, 1000, ",");
 
         $count = 0;
