@@ -12,7 +12,7 @@ export const Profile = () => {
     const recommended = useAppSelector(isRecommended);
 
     return (
-        <div className={s.wrapper}>
+        <div className={s.profile}>
             <ProfileHeader text="Управление аккаунтом" path={RoutePath.settings} />
             <div className={s.main}>
                 <Link className={s.main__fav} to={RoutePath.mySpots}>

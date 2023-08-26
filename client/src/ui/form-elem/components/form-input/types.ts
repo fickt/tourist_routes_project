@@ -7,5 +7,8 @@ export type TFormInputProps = {
 }
 
 export type TPasswordInputProps = {
+    isAuthForm?: boolean,
     isRegister?: boolean,
+    isPasswordChange?: boolean,
+
 }

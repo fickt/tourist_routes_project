@@ -11,9 +11,9 @@ import { MySpotsPage } from "pages/my-spots-page/MySpotsPage";
 import { ProtectedRoute } from "components/protected-route/ProtectedRoute";
 import { LocationPage } from "./location-page/LocationPage";
 import { QuestionsPage } from "pages/questions-page/QuestionsPage";
-import { SettingsPage } from "pages/settings-page/settings-page/SettingsPage";
-import { SettingsInfoPage } from "pages/settings-page/settings-info-page/SettingsInfoPage";
-import {SettingsPasswordPage} from "pages/settings-page/settings-password-page/SettingsPasswordPage";
+import { SettingsPage } from "pages/settings-page/SettingsPage";
+import { SettingsInfoPage } from "pages/settings-info-page/SettingsInfoPage";
+import { SettingsPasswordPage } from "pages/settings-password-page/SettingsPasswordPage";
 
 export enum AppRoutes {
     HOME = "home",
@@ -41,8 +41,8 @@ export const RoutePath = {
     [AppRoutes.MY_SPOTS]: "/mySpots",
     [AppRoutes.QUESTIONS]: "/questions",
     [AppRoutes.SETTINGS]: "/settings",
-    [AppRoutes.SETTINGS_INFO]: "/settings/info",
-    [AppRoutes.SETTINGS_PASSWORD]: "/settings/password",
+    [AppRoutes.SETTINGS_INFO]: "/settings_info",
+    [AppRoutes.SETTINGS_PASSWORD]: "/settings_password",
     [AppRoutes.SPOTS]: "/routes",
     [AppRoutes.LOCATION]: "/location",
     [AppRoutes.SPOT_ID]: "/spots/:spotId",

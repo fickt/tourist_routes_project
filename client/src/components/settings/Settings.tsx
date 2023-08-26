@@ -1,17 +1,17 @@
-import { ProfileHeader } from "modules/profile/components/profile-header/ProfileHeader";
-import s from "./styles.module.scss";
-import { useAppSelector } from "storage/hookTypes";
-import { Button } from "ui/button/Button";
+import { ProfileHeader } from "modules/profile/components";
 import { RoutePath } from "pages/routeConfig";
+import s from "./styles.module.scss";
+import { Button } from "ui/button/Button";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "storage/hookTypes";
 import { authUser } from "modules/auth-form";
 
-export const SettingsPage = () => {
+export const Settings = () => {
 
-    const user = useAppSelector(authUser);
     const navigate = useNavigate();
+    const user = useAppSelector(authUser);
 
-    const redirectToChangePassword = () => {
+    const changePasswordRedirect = () => {
         navigate(RoutePath.settings_password);
     }
 
@@ -24,8 +24,8 @@ export const SettingsPage = () => {
                     <input className={s.field__input} placeholder={user.email} disabled={true} />
                 </label>
                 <div className={s.field}>
-                    <span className={s.settings__title}>Пароль</span>
-                    <Button action={redirectToChangePassword}>Изменить пароль</Button>
+                    <span className={s.title}>Пароль</span>
+                    <Button action={changePasswordRedirect}>Изменить пароль</Button>
                 </div>
             </div>
         </div>

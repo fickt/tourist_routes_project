@@ -1,21 +1,12 @@
-.wrapper {
+.profile {
   display: flex;
   flex-direction: column;
+  row-gap: 26px;
 }
 
 .main {
   display: flex;
   flex-direction: row;
-}
-
-.wrapper {
-  max-width: 328px;
-  font-family: "Inter", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  row-gap: 26px;
-  padding: 26px 16px 86px 16px;
-  margin: 0 auto;
 }
 
 .main__fav {
