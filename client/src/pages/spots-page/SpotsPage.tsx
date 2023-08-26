@@ -1,4 +1,3 @@
-import s from "./styles.module.scss";
 import { ContentHeader } from "ui/content-header/ContentHeader";
 import { SpotRouteList } from "modules/card-list";
 

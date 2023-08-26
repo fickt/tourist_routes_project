@@ -1,25 +1,23 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { TProtectedRouteProps } from "./types";
 import { RoutePath } from "pages/routeConfig";
-import { authUser } from "modules/auth-form/store/authSelectors";
 import { useAppSelector } from "storage/hookTypes";
+import { isRecommended } from "modules/questions";
+import { authUser } from "modules/auth-form";
 
 export const ProtectedRoute = ({ onlyOnAuth, isRegister, children }: TProtectedRouteProps) => {
 
-    const location = useLocation();
     const user = useAppSelector(authUser);
+    const recommended = useAppSelector(isRecommended);
 
-    //если это компонент авторизации и пользователь залогинился => редирект на главную или куда заходили по прямому url
-    //пользователь не может попасть на страницы авторизации  
     if (onlyOnAuth && user) {
-
-        const from = location?.state?.from || { pathname: RoutePath.questions }; //создаем путь для возврата после авторизации (либо тот который хранится в стейте либо свой)
-        return <Navigate replace to={from} />
-    }
-
-    //если регистрация, то редирект на страницу анкеты
-    if (isRegister && user) {
-        return <Navigate replace to={{ pathname: RoutePath.questions }} />;
+        // если логин и у пользователя есть рекомендации, то редирект на страницу home
+        if (!isRegister && user && recommended) {
+            return <Navigate replace to={{ pathname: RoutePath.home }} />;
+        // во всех остальных случаях редирект на анкету
+        } else {
+            return <Navigate replace to={{ pathname: RoutePath.questions }} />
+        }
     }
 
     //если компонент защищен то редирект на страницу логина
@@ -27,8 +25,7 @@ export const ProtectedRoute = ({ onlyOnAuth, isRegister, children }: TProtectedR
         
         return (
             <Navigate 
-                replace to={{ pathname: RoutePath.auth_login }} 
-                state={{ from: location }} 
+                replace to={{ pathname: RoutePath.auth_login }}
             />
         )
     }

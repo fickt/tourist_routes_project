@@ -5,7 +5,7 @@ export const LocationPage = () => {
 
     return (
         <>
-            <ContentHeader title="Ближайшие места"/>
+            <ContentHeader title="Ближайшие места" />
             <LocalSpotsMap />
         </>
     )
