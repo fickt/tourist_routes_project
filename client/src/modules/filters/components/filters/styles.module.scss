@@ -21,10 +21,10 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px 10px 0 0;
     background: var(--background-02);
     /* тень */
-    box-shadow: 0px 0px 6px 0px rgba(90, 90, 90, 0.20);
+    box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.20);
     /* отступы до краев */
     margin-left: -26px;
     margin-right: -26px;
@@ -51,7 +51,7 @@
             &_cancel {
                 color: var(--text-01);
                 background-color: var(--background-02);
-                box-shadow: 0px 0px 6px 0px rgba(90, 90, 90, 0.20);
+                box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.20);
             }
         }
     }

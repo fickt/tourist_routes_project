@@ -6,10 +6,8 @@ import { sortTabs } from "modules/card-list/constants/sortOptions";
 
 export const Sorting = ({ options }: TSortingProps) => {
 
-    const [currentSort, setCurrentSort] = useState<string>();
-
-    const handleChange = (value:string) => {
-        setCurrentSort(value)        
+    const handleChange = () => { // (value:string) 
+        //some code
     }
 
     return (

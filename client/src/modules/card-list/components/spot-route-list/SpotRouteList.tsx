@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { spotRoutesSelector } from "modules/card-list/store/spotsSelectors";
 import { apiSpots } from "modules/card-list/api/SpotsServise";
 import { getSpotRoutes } from "modules/card-list/store/spotsActions";
-import { SpotRoute } from "components/spot-route/SpotRoute";
 import { TSpotRoute } from "modules/card-list/types/spotRoutes";
 import { ErrorMessage } from "ui/error-message/ErrorMessage";
 import { PreloaderCar } from "ui/preloader/PreloaderCar";
