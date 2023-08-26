@@ -8,16 +8,18 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class RoutePhotoResource extends JsonResource
 {
     private const PATH_IMAGE_FOLDER = '/assets/';
+    private const PREFIX_API = '/api';
 
     /**
      * Transform the resource into an array.
      *
-     * @return array<string, mixed>
+     * @param Request $request
+     * @return string
      */
     public function toArray(Request $request): string
     {
         return $request->getSchemeAndHttpHost()
-            . '/api'
+            . self::PREFIX_API
             . self::PATH_IMAGE_FOLDER
             . $this->photo_path;
     }
