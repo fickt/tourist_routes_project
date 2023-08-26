@@ -1,29 +1,41 @@
 import cv2
 from fastapi import FastAPI, File, UploadFile
 import pandas as pd
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect
 from recommender import PlaceRecommender
 from PIL import Image
-import base64
 import io
 import keras
 import numpy as np
+import time
 
 app = FastAPI(title = 'Recommender System')
 
-alchemy_engine = create_engine('postgresql+psycopg2://root:root@0.0.0.0:5432/postgres')
+alchemy_engine = create_engine('postgresql+psycopg2://root:root@db:5432/postgres')
 
 connection = alchemy_engine.connect()
 
-routes = pd.read_sql('select * from routes', connection).set_index('id')
-route_difficulties = pd.read_sql('select * from route_difficulties', connection).set_index('id')
+while True:
+    if len(inspect(alchemy_engine).get_table_names()) == 0:
+        print('Make table migrations with following command: docker exec app php artisan migrate:fresh --seed')
+        time.sleep(5)
+    else:
+        break
 
-place_recommender = PlaceRecommender(routes['description'])
+try:
+    routes = pd.read_sql('select * from routes', connection).set_index('id')
+    route_difficulties = pd.read_sql('select * from route_difficulties', connection).set_index('id')
+    place_recommender = PlaceRecommender(routes['description'])
+except Exception as ex:
+    print(ex)
+
 image_classifier = keras.models.load_model('model.keras')
+
 
 def read_image(file):
     image = Image.open(io.BytesIO(file))
     return image
+
 
 def predict(image):
     pred = np.argmax(image_classifier.predict(np.expand_dims(image, 0))[0])
@@ -45,7 +57,7 @@ def predict(image):
 @app.post('/recommend-on-servey')
 def recommend_on_servey(likes: str):
     try:
-        to_recommend = place_recommender.recommend(likes)
+        to_recommend = place_recommender.recommend_on_description(likes)
 
         result = {}
 
@@ -53,37 +65,29 @@ def recommend_on_servey(likes: str):
             result[f'place{i}'] = {
                 'index': to_recommend[i] + 1,
                 'name': routes.iloc[to_recommend[i]]['name'],
-                'description': routes.iloc[to_recommend[i]]['description'],
-                'difficulty': route_difficulties.iloc[routes.iloc[to_recommend[i]]['difficulty_id'] - 1]['name'],
-                'longitude': routes.iloc[to_recommend[i]]['longitude'],
-                'latitude': routes.iloc[to_recommend[i]]['latitude'],
-                'distance_from_nearest_city': routes.iloc[to_recommend[i]]['distance_from_nearest_city'],
-                'rating': routes.iloc[to_recommend[i]]['rating']
             }
 
         return result
 
     except Exception as ex:
-        return ex
+        print(ex)
+
 
 @app.post('/recommend-on-image')
 async def recommend_on_image(file: UploadFile = File(...)):
-    image = np.array(read_image(await file.read()))
-    image = cv2.resize(image, (150,150))
-    caption = predict(image)
-    to_recommend = place_recommender.recommend(caption)
+    try:
+        image = np.array(read_image(await file.read()))
+        image = cv2.resize(image, (150, 150))
+        caption = predict(image)
+        to_recommend = place_recommender.recommend_on_description(caption)
 
-    result = {}
+        result = {}
 
-    for i in range(len(to_recommend)):
-        result[f'place{i}'] = {
-            'index': to_recommend[i] + 1,
-            'name': routes.iloc[to_recommend[i]]['name'],
-            'description': routes.iloc[to_recommend[i]]['description'],
-            'difficulty': route_difficulties.iloc[routes.iloc[to_recommend[i]]['difficulty_id'] - 1]['name'],
-            'longitude': routes.iloc[to_recommend[i]]['longitude'],
-            'latitude': routes.iloc[to_recommend[i]]['latitude'],
-            'distance_from_nearest_city': routes.iloc[to_recommend[i]]['distance_from_nearest_city'],
-            'rating': routes.iloc[to_recommend[i]]['rating']
-        }
-    return result
+        for i in range(len(to_recommend)):
+            result[f'place{i}'] = {
+                'index': to_recommend[i] + 1,
+                'name': routes.iloc[to_recommend[i]]['name'],
+            }
+        return result
+    except Exception as ex:
+        print(ex)

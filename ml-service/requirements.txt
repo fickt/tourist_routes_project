@@ -1,0 +1,15 @@
+fastapi
+keras
+nlp_rake
+nltk
+numpy
+opencv-python
+pandas
+Pillow
+scikit-learn
+scikit-image
+uvicorn
+tensorflow
+python-multipart
+sqlalchemy
+psycopg2
