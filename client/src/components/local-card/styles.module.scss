@@ -27,7 +27,6 @@
 			background: none;
 			color: inherit;
 			border: none;
-			padding: 0;
 			outline: inherit;
 			cursor: pointer;
 			border-radius: 10px;
@@ -47,10 +46,8 @@
 			border-radius: 10px;
 			background: rgba(251, 251, 251, 0.70);
 			backdrop-filter: blur(4px);
-
 			width: 108px;
 			height: 32px;
-
 			/* text */
 			font-size: 12px;
 			font-weight: 400;
@@ -75,6 +72,5 @@
 			font-size: 20px;
 			font-weight: 600;
 		}
-
 	}
 }

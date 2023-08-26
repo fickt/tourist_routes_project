@@ -2,8 +2,8 @@ import { Button } from "ui/button/Button";
 import s from "./styles.module.scss";
 import classNames from "classnames";
 import { ContentHeader } from "ui/content-header/ContentHeader";
-import { FilterItem } from "../filter-item/FilterItem";
-import { filterValues } from "modules/filters/constants/filterValues";
+import { FilterItem } from "modules/filters/components/filter-item/FilterItem";
+import { categoriesTags, difficultyTags, filterValues } from "modules/filters/constants/filterValues";
 import { Link } from "react-router-dom";
 import { RoutePath } from "pages/routeConfig";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
@@ -29,10 +29,6 @@ export const Filters = () => {
     const handleCancelFilters = () => {
         dispatch(resetFiltersAction())
     }
-
-    //убрать
-    const categoriesTags = ["озёра", "Горы", "Реки", "Исторические места", "Пещеры", "Парки", "Заповедники", "Горнолыжные комплексы", "Курганы", "Леса"]
-    const difficultyTags = ["Новичок", "Знающий", "Опытный"]
 
     return (
         <div className={classNames(s.wrapper)}>

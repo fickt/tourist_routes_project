@@ -29,8 +29,7 @@ export const MainContent = () => {
         debounceSearchValue &&        
             apiSpots.fetchSearchRequest(debounceSearchValue)
                 .then(data => dispatch(getSpotRoutes(data.data)))
-                .catch(err => console.warn(err))
-            
+                .catch(err => console.warn(err))            
     }
 
     useEffect(() => {

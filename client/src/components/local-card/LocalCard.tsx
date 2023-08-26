@@ -5,8 +5,7 @@ import classNames from "classnames";
 import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets/favorites.svg";
 import { Rate } from "antd";
 
-export const LocalCard = ({ id, name, photos, rating }: TCardProps) => {
-
+export const LocalCard = ({ id, name, photos }: TCardProps) => {
 
     return (
         <article className={s.card} style={{ backgroundImage: `url(${photos[0]})` }}>
@@ -26,6 +25,5 @@ export const LocalCard = ({ id, name, photos, rating }: TCardProps) => {
             </div>
 
         </article>
-
     );
 };

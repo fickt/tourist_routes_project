@@ -1,9 +1,11 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
-    height: 100%;
+    background-color: var(--background-02);
     padding: 24px 26px;
+    height: calc(100vh - 58px);
+    z-index: 100;
+    position: fixed;
 }
 
 .filters {
@@ -53,6 +55,4 @@
             }
         }
     }
-
-    
 }
