@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class FloatRound implements CastsAttributes
 {
+    private const DIGITS_AFTER_POINT = 2;
     /**
-     * Cast the given value.
+     * Округляет float данные до DIGITS_AFTER_POINT знаков после плавающей точки
      *
      * @param  array<string, mixed>  $attributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): float
     {
-        return round((float) $value, 2);
+        return round((float) $value, self::DIGITS_AFTER_POINT);
     }
 
     /**
