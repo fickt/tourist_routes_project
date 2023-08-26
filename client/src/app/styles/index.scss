@@ -42,6 +42,14 @@ h1, h2, h3, h4, h5, p {
     padding: var(--content-padding) 0;
 };
 
+.wrapper {
+    max-width: 328px;
+    display: flex;
+    flex-direction: column;
+    padding: 48px 16px;
+    margin: 0 auto;
+};
+
 main {
     flex: 1;
 };
