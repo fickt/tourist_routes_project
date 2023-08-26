@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 from nlp_rake import Rake
 from nltk.corpus import stopwords
@@ -5,8 +6,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 import random
 import nltk
+from keras.applications import vgg16
+from keras.models import Model
+from keras.applications.imagenet_utils import preprocess_input
 
 nltk.download("stopwords")
+
+vgg_model = vgg16.VGG16(weights = 'imagenet')
 
 
 class PlaceRecommender:
@@ -22,8 +28,8 @@ class PlaceRecommender:
         self.descriptions = descriptions
         self.cv = CountVectorizer(max_features = 1500)
         self.rake = Rake(stopwords = self.stops, max_words = 5)
-
         self.vectors = self.cv.fit_transform(self._extract_keywords()).toarray()
+        self.feat_extractor = Model(inputs = vgg_model.input, outputs = vgg_model.get_layer("fc2").output)
 
     def _extract_keywords(self) -> pd.Series:
         """
@@ -35,7 +41,7 @@ class PlaceRecommender:
 
         return keywords
 
-    def recommend(self, descriptions: str) -> list:
+    def recommend_on_description(self, descriptions: str) -> list:
         """
             descriptions: String of image descriptions
         """
@@ -53,4 +59,14 @@ class PlaceRecommender:
             to_recommend.extend([place[0] for place in distances])
 
         to_recommend = random.sample(sorted(set(to_recommend)), 5)
+        return to_recommend
+
+    def recommend_on_image(self, image, embeddings):
+        features = self.feat_extractor(preprocess_input(np.expand_dims(image, 0)))
+        to_recommend = []
+        for embedding in embeddings:
+            to_recommend.append(cosine_similarity(features, [eval(embedding)]))
+
+        to_recommend = sorted(list(enumerate(to_recommend)), reverse = True, key = lambda x: x[1])[0:5]
+        to_recommend = [place[0] for place in to_recommend]
         return to_recommend
