@@ -5,7 +5,7 @@
     width: 100%;
 
     .menu {
-        background-color: white;
+        background: var(--gradient-01);
         box-shadow: 0 2px 10px 0 rgba(0,0,0,.12);
 
         &__wrapper {
@@ -15,8 +15,12 @@
             padding: 16px;
         };
 
+        &__icon svg path{
+            stroke: var(--menu-icon);
+        }
+
         &__icon_filled svg path{
-            stroke: var(--color-black);
+            stroke: var(--background-02);
         }
     };    
 };
