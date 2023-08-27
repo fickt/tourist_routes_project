@@ -15,20 +15,4 @@
 
 .main {
   column-gap: 20px;
-
-  &__fav {
-    display: flex;
-    flex-direction: column-reverse;
-    width: 154px;
-    height: 154px;
-    padding: 10px;
-    background: var(--color-light-grey);
-    text-decoration: none;
-    color: var(--color-black);
-  }
-
-  &_text {
-    font-weight: 500;
-    align-items: end;
-  }
 }
