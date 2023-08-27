@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { filterCategories, filterDifficulties } from "modules/filters/store/filtersSelectors";
 import { deleteFilterCategoryAction, deleteFilterDifficultyAction, setFilterCategoryAction, setFilterDifficultyAction } from "modules/filters/store/filtersActions";
 import { filterValues } from "modules/filters/constants/filterValues";
-import { FilterTag } from "../filter-tag/FilterTag";
+import { FilterTag } from "modules/filters/components/filter-tag/FilterTag";
 
 export const TagList = memo(({list, title}:TTagListProps) => {
 
