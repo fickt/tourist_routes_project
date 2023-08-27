@@ -1,8 +1,10 @@
-export type TReview = {
+import { TUser } from "modules/auth-form";
+
+export type TReviewProps = {
+    id?: number,
     rating: number,
-    _id: number,
-    text: string,
-    author: string,
-    product?: string,
-    city?: string
+    content: string,
+    user: TUser,
+    created_at?: string,
+    updated_at?: string
 }

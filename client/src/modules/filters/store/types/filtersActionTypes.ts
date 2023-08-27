@@ -1,4 +1,4 @@
-import { RESET_FILTERS } from "../filtersActionTypeNames";
+import { RESET_FILTERS } from "modules/filters/store/filtersActionTypeNames";
 
 export type TFiltersActions = TFiltersTagAction | TFiltersResetAction;
 

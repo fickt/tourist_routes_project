@@ -18,9 +18,7 @@ export const LocalCard = ({ id, name, photos }: TCardProps) => {
                     <Rate defaultValue={5} disabled />
                 </span>
                 <Link to={`/spots/${id}`} className={s.link} >
-                    <div className={s.card__title}>
-                        <h2 className={s.card__name}>{name}</h2>
-                    </div>
+                    <h2 className={s.card__name}>{name}</h2>
                 </Link>
             </div>
 

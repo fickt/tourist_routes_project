@@ -1,6 +1,6 @@
 import s from "./styles.module.scss";
-/* import DislikeIcon from "./assets/dislike.svg";
-import LikeIcon from "./assets/like.svg"; */
+import DislikeIcon from "./assets/dislike.svg";
+import LikeIcon from "./assets/like.svg";
 import { redirectToProfile } from "modules/questions/constants/questionsRedirects";
 import { useAppDispatch } from "storage/hookTypes";
 import { handleRecommended } from "modules/questions/store/questionsActions";
@@ -22,8 +22,8 @@ export const QuestionCard = () => {
         <div className={s.questionCard}>
             <p className={s.questionCard__text}>Выберите понравившееся места.</p>
             <div className={s.questionCard__image}>
-{/*                 <DislikeIcon className={s.questionCard__dislike} />
-                <LikeIcon className={s.questionCard__like} /> */}
+                <DislikeIcon className={s.questionCard__dislike} />
+                <LikeIcon className={s.questionCard__like} />
             </div>
             <QuestionsButton title="Сохранить" redirect={redirect} action={saveResults} />
         </div>
