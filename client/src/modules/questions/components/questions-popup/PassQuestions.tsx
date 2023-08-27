@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "ui/button/Button";
 import { RoutePath } from "pages/routeConfig";
 
-export const QuestionsPopup = () => {
+export const PassQuestions = () => {
 
     const navigate = useNavigate();
 
@@ -12,8 +12,8 @@ export const QuestionsPopup = () => {
     }
 
     return (
-        <div className={s.questionsPopup}>
-            <p className={s.questionsPopup__text}>Рекомендаций пока нет, для того чтобы они появились необходимо заполнить анкету.</p>
+        <div className={s.passQuestions}>
+            <p className={s.passQuestions__text}>Рекомендаций пока нет, для того чтобы они появились необходимо заполнить анкету.</p>
             <Button action={redirectToQuestions}>Анкета</Button>
         </div>
     )

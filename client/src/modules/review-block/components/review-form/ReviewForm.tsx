@@ -6,6 +6,7 @@ import s from "./styles.module.scss";
 const { TextArea } = Input;
 
 export const ReviewForm = ({ title = "Отзыв о месте" }: TFormReviewProps) => {
+    
     const [form] = Form.useForm();
 
     const onFinish = () => { // аргумент для обработки значений: (values: TFormValues)

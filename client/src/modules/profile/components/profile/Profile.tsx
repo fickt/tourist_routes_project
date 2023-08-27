@@ -3,9 +3,9 @@ import { RoutePath } from "pages/routeConfig";
 import { Button } from "ui/button/Button";
 import { useAppSelector} from "storage/hookTypes";
 import { isRecommended } from "modules/questions/store/questionsSelectors";
-import { QuestionsPopup } from "modules/questions/components/questions-popup/QuestionsPopup";
 import { ProfileHeader } from "modules/profile/components/profile-header/ProfileHeader";
 import { ProfileSection } from "modules/profile/components/profile-section/ProfileSection";
+import { PassQuestions } from "modules/questions/components/questions-popup/PassQuestions";
 
 export const Profile = () => {
 
@@ -19,7 +19,7 @@ export const Profile = () => {
                 <ProfileSection path={RoutePath.favorites} title="Избранное" />
             </div>
             <h2 className={s.title}>Рекомендации</h2>
-            {recommended ? "Сюда будут подгружены рекомендации пользователя с сервера" : <QuestionsPopup />}
+            {recommended ? "Сюда будут подгружены рекомендации пользователя с сервера" : <PassQuestions />}
             <Button>Выйти из аккаунта</Button>
         </div>
     )
