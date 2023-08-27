@@ -63,7 +63,6 @@ export const mainRoutes: TRoutes[] = [
     { path: RoutePath.location, element: <LocationPage /> },
     { path: RoutePath.spotId, element: <SpotPage /> },
     { path: RoutePath.not_found, element: <NotFoundPage /> },
-    { path: RoutePath.not_found, element: <NotFoundPage /> },
 ]
 
 export const privateRoutes: TRoutes[] = [
