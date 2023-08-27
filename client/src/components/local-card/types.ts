@@ -1,4 +1,4 @@
-import { TMarker } from "components/ymap/constants/markers";
 import { ReactNode } from "react";
+import { TLocalRoute } from "utils/localRoutes";
 
-export type TCardProps = TMarker & { children?: ReactNode }
+export type TCardProps = TLocalRoute & { children?: ReactNode }

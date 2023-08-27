@@ -3,18 +3,19 @@ import { Form, Input } from "antd";
 import { TPasswordInputProps } from "./types";
 import { passwordRules } from "ui/form-elem/constants/formRules";
 
-export const PasswordInput = ({ isRegister }: TPasswordInputProps) => {
+export const PasswordInput = ({ isAuthForm, isRegister, isPasswordChange }: TPasswordInputProps) => {
 
     return (
         <>
             <Form.Item name="password" rules={passwordRules} hasFeedback>
                 <Input.Password
                     type="password"
-                    placeholder="Введите пароль"
+                    placeholder={isPasswordChange ? "Придумайте новый пароль" : "Введите пароль"}
                     className={s.form__input}
                 />
             </Form.Item>
-            {isRegister && (
+            {/*confirm password появляется на страницах: "Регистрация" и "Изменить пароль"*/}
+            {((isAuthForm && isRegister) || isPasswordChange) && (
                 <Form.Item
                     name="confirm"
                     hasFeedback
@@ -31,7 +32,10 @@ export const PasswordInput = ({ isRegister }: TPasswordInputProps) => {
                         }),
                     ]}
                 >
-                    <Input.Password placeholder="Повторите пароль" className={s.form__input} />
+                    <Input.Password
+                        placeholder={isPasswordChange ? "Повторите новый пароль" : "Повторите пароль"}
+                        className={s.form__input}
+                    />
                 </Form.Item>
             )}
         </>

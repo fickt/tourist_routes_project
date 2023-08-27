@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
-import s from "./styles.module.scss"
+import s from "./styles.module.scss";
 import { getLocalSpotsAction } from "modules/card-list/store/spotsActions";
 import { ContentHeader } from "ui/content-header/ContentHeader";
 import { SpotItem } from "modules/spot-item";
@@ -38,7 +38,7 @@ export const SpotPage = () => {
             {spotItem &&
                 <div className={s.wrapper}>
                     <div className="content container">
-                        <ContentHeader textButton="назад" title={spotItem.name} />
+                        <ContentHeader title={spotItem.name} />
                         <SpotItem spotItem={spotItem} />
                     </div>
                 </div>}

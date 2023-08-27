@@ -1,0 +1,35 @@
+.filters__item {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+
+    .item__title {
+        font-size: 20px;
+    }
+
+    .item__tags {
+
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+
+        .tags__item {
+            padding: 12px 20px;
+            border-radius: 10px;
+            background-color: var(--background-04);
+            /* fonts */
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20px;
+            transition: background-color 0.15s;
+
+            &_active {
+                background-color: var(--background-tag);
+            }
+            
+        }
+        
+    }
+}

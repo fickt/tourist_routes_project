@@ -8,7 +8,7 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
     return (
         <div className={s.auth}>
             <FormHeader isRegister={isRegister} />
-            <FormElem isRegister={isRegister} />
+            <FormElem isAuthForm={true} isRegister={isRegister} />
         </div>
     )
 }

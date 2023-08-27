@@ -3,6 +3,8 @@ import { ContentHeader } from "ui/content-header/ContentHeader";
 export const FavoritesPage = () => {
 
     return (
-        <ContentHeader title="Избранное" />
+        <div className="content container">
+            <ContentHeader title="Избранное" />
+        </div>
     )
 };

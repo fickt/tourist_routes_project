@@ -3,34 +3,27 @@ import s from "./styles.module.scss"
 import { TCardProps } from "./types";
 import classNames from "classnames";
 import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets/favorites.svg";
-import CommentsIcon from "modules/mobile-header/components/mobile-header/assets/comments.svg";
-import { RatingStar } from "components/rating-star/RatingStar";
+import { Rate } from "antd";
 
-export const LocalCard = ({ id, name, picture, rating }: TCardProps) => {
+export const LocalCard = ({ id, name, photos }: TCardProps) => {
 
     return (
-        <article className={s.card}>
-            <div className={s.card__main}>
-                <span className={classNames(s.card__features, s.card__features_difficulty)}>Сложность</span>
-                <Link to={`/spots/${id}`} className={s.card__link} >
-                    <img className={s.card__image} src={picture} alt={name} />
-                </Link>
-                <span className={classNames(s.card__features, s.card__features_rating)}>
-                    <RatingStar rating={rating} id={id} />
-                </span>
-            </div>
+        <article className={s.card} style={{ backgroundImage: `url(${photos[0]})` }}>
             <div className={s.card__options}>
-                <Link to={"#"} className={s.comments_link}>
-                    <span className={s.favorites_btn}>
-                        <CommentsIcon />
-                    </span>
-                    <span className={s.comments_count}>3</span>
+                <span className={classNames(s.card__option, s.card__options_difficulty)}>Новичок</span>
+                <button className={classNames(s.card__option, s.card__options_favorite)}><FavoritesIcon /></button>
+            </div>
+            <div className={s.card__main}>
+                <span className={s.card__rating}>
+                    <Rate defaultValue={5} disabled />
+                </span>
+                <Link to={`/spots/${id}`} className={s.link} >
+                    <div className={s.card__title}>
+                        <h2 className={s.card__name}>{name}</h2>
+                    </div>
                 </Link>
-                <button className={s.favorites_btn}><FavoritesIcon /></button>
             </div>
-            <div className={s.card__title}>
-                <h3 className={s.card__name}>{name}</h3>
-            </div>
+
         </article>
     );
 };

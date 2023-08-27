@@ -1,9 +1,17 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	padding: 24px 0;
+}
+
 .cards {
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);	
 	row-gap: 26px;
 	column-gap: 16px;
 }
+
 
 @media (min-width: 768px) {
 	.cards {

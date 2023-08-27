@@ -1,5 +1,5 @@
-import { YMapComponent } from "components/ymap/YMapComponent"
-import { markers } from "components/ymap/constants/markers"
+import { YMapComponent } from "components/ymap/YMapComponent";
+import { markers } from "components/ymap/constants/markers";
 
 export const LocalSpotsMap = () => {
 
