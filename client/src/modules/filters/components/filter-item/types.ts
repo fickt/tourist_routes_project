@@ -1,4 +1,4 @@
 export type TFilterItemProps = {
-    title: string;
+    title: string,
     list: string[]
 }

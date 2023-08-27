@@ -5,7 +5,7 @@ export const LocalSpotsMap = () => {
 
     return (
         <div>
-            <YMapComponent markers={markers}/>
+            <YMapComponent markers={markers} />
         </div>
     )
 }

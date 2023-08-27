@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import s from "./styles.module.scss";
 import { TFilterItemProps } from "./types"
 import classNames from "classnames";

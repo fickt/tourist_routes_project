@@ -1,0 +1,26 @@
+.settings,
+.settings__fields,
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings {
+  row-gap: 26px;
+
+  &__title {
+    font-weight: 500;
+  }
+
+  &__fields {
+    row-gap: 45px;
+  }
+
+  .field {
+    &__input {
+      padding: 12px;
+      background: var(--color-input-grey);
+      border: none;
+    }
+  }
+}

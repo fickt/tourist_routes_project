@@ -5,13 +5,13 @@ import { ErrorMessage } from "ui/error-message/ErrorMessage";
 import { Form, FormInstance } from "antd";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { authError, authLoader } from "modules/auth-form/store/authSelectors";
-import { PasswordInput } from "ui/form-elem/components/form-input/PasswordInput";
 import { useAuth } from "modules/auth-form/api/useAuth";
 import { handleAuthError } from "modules/auth-form/store/authActions";
-import { emailRules, nicknameRules, passwordRules } from "ui/form-elem/constants/formRules";
-import { FormInput } from "ui/form-elem/components/form-input/FormInput";
-import { FormButton } from "ui/form-elem/components/form-button/FormButton";
-import { TFormData, TFormProps } from "ui/form-elem/types";
+import { TFormData, TFormProps } from "components/form-elem/types";
+import { FormInput } from "components/form-elem/components/form-input/FormInput";
+import { emailRules, nicknameRules, passwordRules } from "components/form-elem/constants/formRules";
+import { PasswordInput } from "components/form-elem/components/form-input/PasswordInput";
+import { FormButton } from "components/form-elem/components/form-button/FormButton";
 
 export const FormElem = ({ isAuthForm, isRegister, isInfoChange, isPasswordChange }: TFormProps) => {
 
@@ -44,14 +44,32 @@ export const FormElem = ({ isAuthForm, isRegister, isInfoChange, isPasswordChang
         isRegister
             ? await authenticate(values.nickname, values.email, values.password, true)
             : await authenticate(values.nickname, values.email, values.password, false)
-        // Нужно дописать отправку запросов на сервер (ждём бэкендера)
-        // isPasswordChange && console.log("смена пароля");
-        // isInfoChange && console.log("смена инфо");
     }
 
-    const onFinish = () => {
-        sendForm(form);
-    }
+    const handleFormSubmit = async () => {
+        try {
+            await form.validateFields();
+            sendForm(form);
+        } catch (error) {
+            console.error("Form validation failed:", error);
+        }
+    };
+
+    const renderFormInputs = () => {
+        return (
+            <div className={s.form__inputs}>
+                {isInfoChange
+                    ? <FormInput name="nickname" rules={nicknameRules} placeholder="Никнейм" />
+                    : isRegister && <FormInput name="nickname" rules={nicknameRules} placeholder="Имя пользователя" />
+                }
+                {!isPasswordChange && <FormInput name="email" rules={emailRules} placeholder={isInfoChange ? "nik@vk.com" : "E-mail"} />}
+                {isPasswordChange && <FormInput name="password_old" rules={passwordRules} placeholder="Ваш прошлый пароль" />}
+                {(!isInfoChange || isPasswordChange)
+                    && <PasswordInput isAuthForm={isAuthForm} isRegister={isRegister} isPasswordChange={isPasswordChange} />
+                }
+            </div>
+        );
+    };
 
     return (
         <Form
@@ -59,23 +77,11 @@ export const FormElem = ({ isAuthForm, isRegister, isInfoChange, isPasswordChang
             name="basic"
             initialValues={{remember: true}}
             autoComplete="off"
-            onFinish={onFinish}
+            onFinish={handleFormSubmit}
             onValuesChange={handleFormChange}
         >
             <div className={s.form__inputs}>
-                {/*nickname появляется на страницах: "Изменить информацию" и "Логин"*/}
-                {isInfoChange
-                    ? <FormInput name="nickname" rules={nicknameRules} placeholder="Никнейм" />
-                    : isRegister && <FormInput name="nickname" rules={nicknameRules} placeholder="Имя пользователя" />
-                }
-                {/*email появляется на страницах: "Логин", "Регистрация", "Изменить информацию"*/}
-                {!isPasswordChange && <FormInput name="email" rules={emailRules} placeholder={isInfoChange ? "nik@vk.com" : "E-mail"} />}
-                {/*password_old появляется на странице: "Изменить пароль"*/}
-                {isPasswordChange && <FormInput name="password_old" rules={passwordRules} placeholder="Ваш прошлый пароль" />}
-                {/*password появляется на страницах: "Логин", "Регистрация", "Изменить пароль"*/}
-                {(!isInfoChange || isPasswordChange)
-                    && <PasswordInput isAuthForm={isAuthForm} isRegister={isRegister} isPasswordChange={isPasswordChange} />
-                }
+                {renderFormInputs()}
                 <FormButton
                     value={(isInfoChange || isPasswordChange)
                         ? "Сохранить"

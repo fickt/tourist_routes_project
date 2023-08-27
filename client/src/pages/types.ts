@@ -6,5 +6,5 @@ export type TRoutes = {
 }
 
 export type TAuthPageProps = {
-    isRegister: boolean,
+    isRegister?: boolean,
 }
