@@ -22,7 +22,6 @@ export const ProtectedRoute = ({ onlyOnAuth, isRegister, children }: TProtectedR
 
     //если компонент защищен то редирект на страницу логина
     if (!onlyOnAuth && !user) {
-        
         return (
             <Navigate 
                 replace to={{ pathname: RoutePath.auth_login }}

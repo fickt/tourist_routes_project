@@ -4,11 +4,7 @@ import { TFormLinkProps } from "./types";
 
 export const FormLink = ({ link, textLink, onClick }: TFormLinkProps) => {
     return (
-        <Link
-            to={link}
-            className={s.link}
-            onClick={onClick}
-        >
+        <Link to={link} className={s.link} onClick={onClick}>
             {textLink}
         </Link>
     )

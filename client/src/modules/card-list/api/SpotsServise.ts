@@ -9,9 +9,9 @@ export class SpotsService {
         return api.get(RoutePath.spots);
     }
 
-    fetchSpotFilter(difficulty:string, category:string): Promise<AxiosResponse<TSpotRoutes>> {
+    fetchSpotFilter(difficulty: string, category: string): Promise<AxiosResponse<TSpotRoutes>> {
 
-        const requestPath = (difficulty:string, category:string) => {
+        const requestPath = (difficulty: string, category: string) => {
             if (difficulty && category)
                 return `${RoutePath.spots}?difficulty=${difficulty}&category=${category}`
             if (!difficulty && category)
