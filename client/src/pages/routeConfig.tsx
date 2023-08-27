@@ -74,7 +74,7 @@ export const privateRoutes: TRoutes[] = [
     { path: RoutePath.settings, element: <ProtectedRoute><SettingsPage /></ProtectedRoute> },
     { path: RoutePath.settings_info, element: <ProtectedRoute><SettingsInfoPage /></ProtectedRoute> },
     { path: RoutePath.settings_password, element: <ProtectedRoute><SettingsPasswordPage /></ProtectedRoute> },
-    { path: RoutePath.auth_register, element: <ProtectedRoute onlyOnAuth isRegister={true}><AuthPage isRegister={true} /></ProtectedRoute> },
+    { path: RoutePath.auth_register, element: <ProtectedRoute onlyOnAuth isRegister><AuthPage isRegister={true} /></ProtectedRoute> },
     { path: RoutePath.auth_login, element: <ProtectedRoute onlyOnAuth><AuthPage /></ProtectedRoute> },
     { path: RoutePath.forgotPassword, element: <ProtectedRoute onlyOnAuth><ForgotPasswordPage /></ProtectedRoute> },
 ]

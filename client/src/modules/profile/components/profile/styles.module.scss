@@ -2,17 +2,10 @@
   display: flex;
   flex-direction: column;
   row-gap: 26px;
-}
 
-.main {
-  display: flex;
-  flex-direction: row;
-}
-
-.main__fav {
-  cursor: pointer;
-}
-
-.main {
-  column-gap: 20px;
+  &__main {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+  }
 }

@@ -1,4 +1,4 @@
-import s from "./style.module.scss";
+import s from "./styles.module.scss";
 import { Form, Input } from "antd";
 import { TFormInputProps } from "./types";
 
