@@ -1,5 +1,5 @@
-import { DELETE_FILTER_CATEGORY, DELETE_FILTER_DIFFICULTY, RESET_FILTERS, SET_FILTER_CATEGORY, SET_FILTER_DIFFICULTY } from "./filtersActionTypeNames"
-import { TFiltersResetAction, TFiltersTagAction } from "./types/filtersActionTypes"
+import { DELETE_FILTER_CATEGORY, DELETE_FILTER_DIFFICULTY, RESET_FILTERS, SET_FILTER_CATEGORY, SET_FILTER_DIFFICULTY } from "./filtersActionTypeNames";
+import { TFiltersResetAction, TFiltersTagAction } from "./types/filtersActionTypes";
 
 export const setFilterCategoryAction = (tag: string): TFiltersTagAction => {
     return {

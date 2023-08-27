@@ -2,7 +2,7 @@ import { Rate } from "antd";
 import s from "./styles.module.scss";
 import { TReview } from "./types";
 
-export const Review = ({author, text, rating}: TReview) => {
+export const Review = ({ author, text, rating }: TReview) => {
 
     return (
         <div className={s.review}>

@@ -11,7 +11,7 @@ export const CardList = memo(() => {
 
     return (
         <div className={s.wrapper}>
-            <CardListHeader title="Наши Маршруты"/>
+            <CardListHeader title="Наши Маршруты" />
             <div className={s.cards}>
                 {spots?.map((spot) => <LocalCard key={spot.id} {...spot} />)}
             </div>
