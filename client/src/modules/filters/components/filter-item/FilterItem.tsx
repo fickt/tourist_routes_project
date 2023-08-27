@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import s from "./styles.module.scss";
 import { TFilterItemProps } from "./types"
 import classNames from "classnames";
@@ -38,14 +38,21 @@ export const FilterItem = ({ title, list }: TFilterItemProps) => {
         <div className={s.filters__item}>
             <h2 className={s.item__title}>{title}</h2>
             <div className={s.item__tags}>
-                {list.map((item, i) => (
-                    <span
-                        key={i}
-                        className={classNames(s.tags__item, { [s.tags__item_active]: filters.includes(item) })}
-                        onClick={() => handleClickTag(item)}
-                    >{item}
-                    </span>
-                ))}
+                {list.map((item, i) => {
+                    
+                    const onClick = useCallback(() => {
+                        handleClickTag(item)
+                    }, [item])
+
+                    return (
+                        <span
+                            key={i}
+                            className={classNames(s.tags__item, { [s.tags__item_active]: filters.includes(item) })}
+                            onClick={onClick}
+                        >{item}
+                        </span>
+                    )
+                })}
             </div>
         </div>
     )
