@@ -8,7 +8,7 @@ export const ReviewBlock = ({id}: TReviewBlockProps) => {
 
     return (
         <div className={s.reviews_wrapper}>
-            {reviews?.length !== 0 && reviews?.map((reviewData) => <Review key={reviewData._id} {...reviewData}/>)}
+            {reviews?.length !== 0 && reviews?.map((reviewData) => <Review key={reviewData.id} {...reviewData}/>)}
             <ReviewForm productId={id}/>
         </div>
     )

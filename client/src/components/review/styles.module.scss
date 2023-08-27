@@ -6,47 +6,31 @@
 	width: 100%;
 	border-radius: 4px;
 	padding: 10px 10px 20px 10px;
+
+	&__name {
+		font-style: normal;
+		font-weight: 800;
+		font-size: 16px;
+		line-height: 20px;
+		color: var(--color-black);
+	}
+	
+	&__date {
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 20px;
+		color: var(--color-gray);
+	}
+	
+	&__content {
+		margin-top: 8px;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 20px;
+		color: var(--color-black);
+		margin-bottom: 0;
+	}
 }
 
-.review:last-child {
-	border-bottom: none;
-}
 
-.review__name {
-	font-style: normal;
-	font-weight: 800;
-	font-size: 16px;
-	line-height: 20px;
-	color: #1A1A1A;
-}
-
-.review__date {
-	font-weight: 400;
-	font-size: 14px;
-	line-height: 20px;
-	color: #7B8E98;
-}
-
-.review__city {
-	font-style: normal;
-	font-weight: 400;
-	font-size: 12px;
-	line-height: 14px;
-	color: #7B8E98;
-}
-
-.review__text {
-	margin-top: 8px;
-	font-style: normal;
-	font-weight: 400;
-	font-size: 14px;
-	line-height: 20px;
-	color: #1A1A1A;
-	margin-bottom: 0;
-}
-
-.review__header {
-	display: flex;
-	align-items: flex-end;
-	gap: 8px;
-}

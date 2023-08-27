@@ -22,7 +22,6 @@ export function filtersReducer(state = initialState, action: TFiltersActions) {
             return { ...state, difficulties: state.difficulties.filter(tag => tag !== action.payload) }
         case RESET_FILTERS:
             return {...state, categories: [], difficulties: []}
-
         default:
             return state
     }

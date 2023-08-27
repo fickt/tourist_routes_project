@@ -26,9 +26,7 @@
     /* тень */
     box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.20);
     /* отступы до краев */
-    margin-left: -26px;
-    margin-right: -26px;
-    margin-bottom: -24px;
+    margin: 0 -26px -24px -26px;
 
     .buttons__link {
         display: block;

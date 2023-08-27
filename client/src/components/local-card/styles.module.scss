@@ -23,12 +23,14 @@
 		display: flex;
 		justify-content: space-between;
 
+		&__option {
+			cursor: pointer;
+		}
+
 		&_favorite {
 			background: none;
-			color: inherit;
 			border: none;
-			outline: inherit;
-			cursor: pointer;
+			outline: inherit;			
 			border-radius: 10px;
 			background: var(--background-02);
 			padding: 12px;
