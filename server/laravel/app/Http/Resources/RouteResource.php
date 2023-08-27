@@ -27,9 +27,4 @@ class RouteResource extends JsonResource
             'comments' => RouteCommentResource::collection($this->whenLoaded('comments'))
         ];
     }
-
-    /*public function withResponse($request, $response)
-    {
-        $response->setEncodingOptions(JSON_UNESCAPED_SLASHES);
-    }*/
 }
