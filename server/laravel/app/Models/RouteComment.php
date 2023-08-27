@@ -9,8 +9,28 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @mixin Builder
+ * App\Models\RouteComment
  *
+ * @mixin Builder
+ * @property int $id
+ * @property string $content
+ * @property int $route_id
+ * @property int $user_id
+ * @property float $rating
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static Builder|RouteComment newModelQuery()
+ * @method static Builder|RouteComment newQuery()
+ * @method static Builder|RouteComment query()
+ * @method static Builder|RouteComment whereContent($value)
+ * @method static Builder|RouteComment whereCreatedAt($value)
+ * @method static Builder|RouteComment whereId($value)
+ * @method static Builder|RouteComment whereRating($value)
+ * @method static Builder|RouteComment whereRouteId($value)
+ * @method static Builder|RouteComment whereUpdatedAt($value)
+ * @method static Builder|RouteComment whereUserId($value)
+ * @mixin \Eloquent
  */
 class RouteComment extends Model
 {
