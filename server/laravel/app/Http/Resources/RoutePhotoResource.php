@@ -23,9 +23,4 @@ class RoutePhotoResource extends JsonResource
             . self::PATH_IMAGE_FOLDER
             . $this->photo_path;
     }
-
-    /*public function withResponse($request, $response)
-    {
-        $response->setEncodingOptions(JSON_UNESCAPED_SLASHES);
-    }*/
 }

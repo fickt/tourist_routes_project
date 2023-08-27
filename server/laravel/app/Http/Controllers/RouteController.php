@@ -12,6 +12,14 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RouteController extends Controller
 {
+    /**
+     * Получить все Route
+     *
+     * Доступные queries:
+     * ?difficulty= (отфильтровать по уровням сложности)
+     * ?category= (отфильтровать по категориям)
+     * ?search= (поиск по названию и описанию Route)
+     */
     public function index(): AnonymousResourceCollection
     {
 
