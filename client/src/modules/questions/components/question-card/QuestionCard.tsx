@@ -1,7 +1,7 @@
 import s from "./styles.module.scss";
 import DislikeIcon from "./assets/dislike.svg";
 import LikeIcon from "./assets/like.svg";
-import { QuestionsButton } from "modules/questions/components/questions-buttons/QuestionsButton";
+import { QuestionsButtons } from "modules/questions/components/questions-buttons/QuestionsButtons";
 
 export const QuestionCard = () => {
 
@@ -12,7 +12,7 @@ export const QuestionCard = () => {
                 <DislikeIcon className={s.questionCard__dislike} />
                 <LikeIcon className={s.questionCard__like} />
             </div>
-            <QuestionsButton title="Сохранить" />
+            <QuestionsButtons title="Сохранить" />
         </div>
     )
 }

@@ -92,6 +92,48 @@ main {
     }
 };
 
+.buttons__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 10px;
+    background: var(--background-02);
+}
+
+.buttons__link {
+    display: block;
+
+    .button {
+        &_green {
+            color: var(--text-02);
+            background-color: var(--background-06);
+        }
+
+        &_white {
+            color: var(--text-01);
+            background-color: var(--background-02);
+            box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.20);
+        }
+    }
+}
+
+.button,
+.form__button {
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    height: auto;
+    width: 100%;
+}
+
+.form__button {
+    color: var(--text-02);
+    background-color: var(--background-06);
+}
+
 @media (min-width: 760px) {
     .container {
         padding-left: calc(var(--container-padding) * 2);
