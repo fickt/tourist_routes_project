@@ -87,8 +87,7 @@ class RouteComment extends Model
             ->where('route_id', '=', $this->route_id)
             ->avg('rating');
 
-        $route = Route::query()
-            ->find($this->route_id);
+        $route = Route::query()->find($this->route_id);
 
         $route->rating = $averageRating;
         $route->save();
