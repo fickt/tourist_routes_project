@@ -42,7 +42,7 @@ class RouteComment extends Model
         'rating' => FloatRound::class
     ];
 
-    public function add_comment_to_route_by_id(int $routeId, $comment)
+    public function addCommentToRouteById(int $routeId, $comment)
     {
             Route::query()->find($routeId) ??
             throw new HttpException(

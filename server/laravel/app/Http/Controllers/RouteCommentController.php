@@ -20,8 +20,7 @@ class RouteCommentController extends Controller
 
     public function store(int $routeId, RouteCommentRequest $request): RouteResource
     {
-       $route = $this->routeComment->add_comment_to_route_by_id($routeId, $request->validated());
-
+        $route = $this->routeComment->addCommentToRouteById($routeId, $request->validated());
         return RouteResource::make($route);
     }
 }

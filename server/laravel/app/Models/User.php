@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Response;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -67,6 +69,25 @@ class User extends Authenticatable implements JWTSubject
             'user_id',
             'route_id'
         )->with(['difficulty', 'photoPaths', 'categories', 'comments.user']);
+    }
+
+    /**
+     * Добавляет маршрут в избранные
+     * Если у пользователя уже был в избранных данный маршрут
+     * он удалится из списка избранных
+     */
+    public function addRouteToFavoritesById(int $routeId)
+    {
+        $route = Route::query()->find($routeId) ??
+            throw new HttpException(
+                Response::HTTP_NOT_FOUND,
+                "Route with id: $routeId has not been found!");
+
+        $user = auth()->user();
+        $user->favoriteRoutes()->find($routeId)
+            ? $user->favoriteRoutes()->detach($route)
+            : $user->favoriteRoutes()->attach($route);
+        return auth()->user()->favoriteRoutes()->get();
     }
 
     public function getJWTIdentifier()

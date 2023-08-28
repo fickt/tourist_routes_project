@@ -66,7 +66,7 @@ class Route extends Model
      *
      * @return Collection
      */
-    public function get_routes(): Collection
+    public function getRoutes(): Collection
     {
         $query = self::query()->with(['difficulty', 'photoPaths', 'categories', 'comments.user']);
 
@@ -92,7 +92,7 @@ class Route extends Model
         return $query->get();
     }
 
-    public function get_route_by_id(int $routeId)
+    public function getRouteById(int $routeId)
     {
         try {
             $route = Route::query()
