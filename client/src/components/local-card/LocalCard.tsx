@@ -10,8 +10,8 @@ export const LocalCard = ({ id, name, photos }: TCardProps) => {
     return (
         <article className={s.card} style={{ backgroundImage: `url(${photos[0]})` }}>
             <div className={s.card__options}>
-                <span className={classNames(s.card__option, s.card__options_difficulty)}>Новичок</span>
-                <button className={classNames(s.card__option, s.card__options_favorite)}><FavoritesIcon /></button>
+                <span className={classNames(s.card__option, s.card__option_difficulty)}>Новичок</span>
+                <button className={classNames(s.card__option, s.card__option_favorite)}><FavoritesIcon /></button>
             </div>
             <div className={s.card__main}>
                 <span className={s.card__rating}>
