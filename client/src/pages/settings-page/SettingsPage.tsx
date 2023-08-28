@@ -1,10 +1,10 @@
-import { Settings } from "components/settings/Settings";
+import { ProfileSettings } from "modules/profile/components/profile-settings/ProfileSettings";
 
 export const SettingsPage = () => {
 
     return (
         <div className="wrapper">
-            <Settings />
+            <ProfileSettings />
         </div>
     )
 }

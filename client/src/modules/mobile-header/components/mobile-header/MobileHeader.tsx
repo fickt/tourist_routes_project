@@ -22,7 +22,7 @@ export const MobileHeader = () => {
                 <div className={s.menu__wrapper}>
                     {menuLinks.map((link, index) => (
                         <Link key={index} to={link.path} onClick={(e) => handleClick(e, link.path)}>
-                            <span className={classNames({ [s.menu__icon_filled]: pathname === link.path })}>
+                            <span className={classNames(s.menu__icon, { [s.menu__icon_filled]: pathname === link.path })}>
                                 {link.icon}
                             </span>
                         </Link>

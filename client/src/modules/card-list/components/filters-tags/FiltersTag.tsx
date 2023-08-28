@@ -4,7 +4,7 @@ import { filterCategories } from "modules/filters";
 
 export const FiltersTags = () => {
 
-    const tags = useAppSelector(filterCategories)
+    const tags = useAppSelector(filterCategories);
 
     return (
         <div className={s.wrapper}>

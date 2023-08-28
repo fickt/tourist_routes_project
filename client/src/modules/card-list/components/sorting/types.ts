@@ -9,7 +9,7 @@ export type TSortProps = {
 
 export type TSortOption = {
     label: string,
-    value?: string
+    value?: string,
     options?: { label: string, value: string }[]
 } 
 

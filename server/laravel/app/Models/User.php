@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Response;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -22,21 +24,6 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Route> $favoriteRoutes
- * @property-read int|null $favorite_routes_count
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
- * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
- * @property-read int|null $tokens_count
- * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
- * @method static Builder|User newModelQuery()
- * @method static Builder|User newQuery()
- * @method static Builder|User query()
- * @method static Builder|User whereCreatedAt($value)
- * @method static Builder|User whereEmail($value)
- * @method static Builder|User whereId($value)
- * @method static Builder|User whereNickname($value)
- * @method static Builder|User wherePassword($value)
- * @method static Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements JWTSubject
@@ -82,6 +69,25 @@ class User extends Authenticatable implements JWTSubject
             'user_id',
             'route_id'
         )->with(['difficulty', 'photoPaths', 'categories', 'comments.user']);
+    }
+
+    /**
+     * Добавляет маршрут в избранные
+     * Если у пользователя уже был в избранных данный маршрут
+     * он удалится из списка избранных
+     */
+    public function addRouteToFavoritesById(int $routeId)
+    {
+        $route = Route::query()->find($routeId) ??
+            throw new HttpException(
+                Response::HTTP_NOT_FOUND,
+                "Route with id: $routeId has not been found!");
+
+        $user = auth()->user();
+        $user->favoriteRoutes()->find($routeId)
+            ? $user->favoriteRoutes()->detach($route)
+            : $user->favoriteRoutes()->attach($route);
+        return auth()->user()->favoriteRoutes()->get();
     }
 
     public function getJWTIdentifier()

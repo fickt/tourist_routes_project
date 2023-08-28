@@ -1,12 +1,12 @@
 import { ContentHeader } from "ui/content-header/ContentHeader";
-import { FormElem } from "ui/form-elem/components/form-elem/FormElem";
+import { FormElem } from "components/form-elem/components/form-elem/FormElem";
 
 export const SettingsPasswordPage = () => {
 
     return (
         <div className="wrapper">
             <ContentHeader />
-            <FormElem isPasswordChange={true} />
+            <FormElem isPasswordChange />
         </div>
     )
 }

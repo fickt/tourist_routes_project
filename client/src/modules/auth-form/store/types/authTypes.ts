@@ -1,4 +1,5 @@
-import { IS_USER_REG, IS_USER_AUTH, SET_USER, AUTH_ERROR, AUTH_LOADER_ACTIVE } from "../authActionsTypeNames";
+import { AUTH_ERROR, AUTH_LOADER_ACTIVE, SET_USER, IS_USER_REG, IS_USER_AUTH } from "modules/auth-form/store/authActionsTypeNames";
+
 
 export type TAuthResponse = {
     access_token: string,

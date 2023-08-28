@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * App\Models\RouteComment
@@ -20,16 +23,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
- * @method static Builder|RouteComment newModelQuery()
- * @method static Builder|RouteComment newQuery()
- * @method static Builder|RouteComment query()
- * @method static Builder|RouteComment whereContent($value)
- * @method static Builder|RouteComment whereCreatedAt($value)
- * @method static Builder|RouteComment whereId($value)
- * @method static Builder|RouteComment whereRating($value)
- * @method static Builder|RouteComment whereRouteId($value)
- * @method static Builder|RouteComment whereUpdatedAt($value)
- * @method static Builder|RouteComment whereUserId($value)
  * @mixin \Eloquent
  */
 class RouteComment extends Model
@@ -48,6 +41,25 @@ class RouteComment extends Model
     protected $casts = [
         'rating' => FloatRound::class
     ];
+
+    public function addCommentToRouteById(int $routeId, $comment)
+    {
+            Route::query()->find($routeId) ??
+            throw new HttpException(
+                Response::HTTP_NOT_FOUND,
+                'Route with id: ' . $routeId . ' has not been found!');
+
+        RouteComment::query()->create(
+            array_merge(
+                $comment,
+                ['route_id' => $routeId],
+                ['user_id' => Auth::id()]
+            )
+        );
+        return Route::query()
+            ->with(['difficulty', 'photoPaths', 'categories', 'comments.user'])
+            ->find($routeId);
+    }
 
     public function user(): BelongsTo
     {
@@ -75,9 +87,7 @@ class RouteComment extends Model
             ->where('route_id', '=', $this->route_id)
             ->avg('rating');
 
-        $route = Route::query()
-            ->find($this->route_id)
-            ->first();
+        $route = Route::query()->find($this->route_id);
 
         $route->rating = $averageRating;
         $route->save();
