@@ -1,0 +1,19 @@
+.remember {
+  display: flex;
+  flex-direction: row;
+  column-gap: 16px;
+
+  &__checkbox {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid var(--text-03);
+
+    &__title {
+      font-family: "Raleway", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+    }
+  }
+}

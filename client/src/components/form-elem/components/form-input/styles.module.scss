@@ -1,9 +1,21 @@
-.form__input {
-  font-family: "Inter", sans-serif;
+.field {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  font-family: "Raleway", sans-serif;
   font-size: 14px;
-  color: var(--color-input);
-  border-radius: 20px;
-  border: 1px solid rgba(0, 0, 0, 0.40);
-  background: var(--color-white);
-  padding: 14px 0 13px 20px;
+  line-height: 20px;
+
+  &_title {
+    font-weight: 500;
+  }
+
+  &__input {
+    border-radius: 10px;
+    border: 1px solid var(--text-03);
+    color: var(--text-03);
+    background: var(--background-02);
+    padding: 12px;
+    font-weight: 600;
+  }
 }

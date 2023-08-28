@@ -3,6 +3,7 @@ export type TQuestionsAction = {
     payload: boolean
 }
 
-export type TRecommended = {
+export type TQuestions = {
     isRecommended: boolean,
+    startPassQuestions: boolean,
 }
