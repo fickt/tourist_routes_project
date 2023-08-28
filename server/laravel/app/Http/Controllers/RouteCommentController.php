@@ -6,30 +6,22 @@ use App\Http\Requests\RouteCommentRequest;
 use App\Http\Resources\RouteResource;
 use App\Models\Route;
 use App\Models\RouteComment;
+use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RouteCommentController extends Controller
 {
+
+    public function __construct(protected RouteComment $routeComment)
+    {
+    }
+
     public function store(int $routeId, RouteCommentRequest $request): RouteResource
     {
-        $route = Route::query()->find($routeId) ??
-            throw new HttpException(
-                Response::HTTP_NOT_FOUND,
-                'Route with id: ' . $routeId . ' has not been found!');
+       $route = $this->routeComment->add_comment_to_route_by_id($routeId, $request->validated());
 
-        RouteComment::query()->create(
-            array_merge($request->validated(),
-                ['route_id' => $routeId],
-                ['user_id' => Auth::id()]
-            )
-        );
-
-        return RouteResource::make(
-            $route
-                ->with(['difficulty', 'photoPaths', 'categories', 'comments.user'])
-                ->first()
-        );
+        return RouteResource::make($route);
     }
 }
