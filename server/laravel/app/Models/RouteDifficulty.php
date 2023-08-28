@@ -15,13 +15,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static Builder|RouteDifficulty newModelQuery()
- * @method static Builder|RouteDifficulty newQuery()
- * @method static Builder|RouteDifficulty query()
- * @method static Builder|RouteDifficulty whereCreatedAt($value)
- * @method static Builder|RouteDifficulty whereId($value)
- * @method static Builder|RouteDifficulty whereName($value)
- * @method static Builder|RouteDifficulty whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class RouteDifficulty extends Model

@@ -13,14 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $photo_path
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|RoutePhoto newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|RoutePhoto newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|RoutePhoto query()
- * @method static \Illuminate\Database\Eloquent\Builder|RoutePhoto whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RoutePhoto whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RoutePhoto wherePhotoPath($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RoutePhoto whereRouteId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RoutePhoto whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class RoutePhoto extends Model
