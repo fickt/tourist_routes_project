@@ -92,7 +92,7 @@ class Route extends Model
         return $query->get();
     }
 
-    public function get_route_by_id(int $routeId): Route
+    public function get_route_by_id(int $routeId)
     {
         try {
             $route = Route::query()
