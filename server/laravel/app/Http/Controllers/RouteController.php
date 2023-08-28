@@ -20,11 +20,11 @@ class RouteController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-        return RouteResource::collection($this->route->get_routes());
+        return RouteResource::collection($this->route->getRoutes());
     }
 
     public function show(int $routeId): RouteResource
     {
-        return RouteResource::make($this->route->get_route_by_id($routeId));
+        return RouteResource::make($this->route->getRouteById($routeId));
     }
 }

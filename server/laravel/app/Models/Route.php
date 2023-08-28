@@ -38,6 +38,7 @@ class Route extends Model
     use HasFactory;
 
     protected $table = 'routes';
+
     protected $fillable = [
         'name',
         'description',
@@ -65,7 +66,7 @@ class Route extends Model
      *
      * @return Collection
      */
-    public function get_routes(): Collection
+    public function getRoutes(): Collection
     {
         $query = self::query()->with(['difficulty', 'photoPaths', 'categories', 'comments.user']);
 
@@ -91,13 +92,13 @@ class Route extends Model
         return $query->get();
     }
 
-    public function get_route_by_id(int $routeId): Route
+    public function getRouteById(int $routeId)
     {
         try {
-            $route = self::query()
-                ->findOrFail($routeId)
+            $route = Route::query()
                 ->with(['difficulty', 'photoPaths', 'categories', 'comments.user'])
-                ->first();
+                ->findOrFail($routeId);
+
         } catch (Exception) {
             throw new HttpException(
                 Response::HTTP_NOT_FOUND,
