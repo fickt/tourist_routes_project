@@ -1,8 +1,9 @@
-import { TQuestionsAction, TRecommended } from "./types/questionsTypes";
-import { IS_RECOMMENDED } from "./questionsActionsTypeNames";
+import { TQuestionsAction, TQuestions } from "./types/questionsTypes";
+import { IS_RECOMMENDED, START_PASS_QUESTIONS } from "./questionsActionsTypeNames";
 
-const initialState: TRecommended = {
+const initialState: TQuestions = {
     isRecommended: false,
+    startPassQuestions: false,
 }
 
 export const questionsReducer = (state = initialState, action: TQuestionsAction) => {
@@ -11,6 +12,11 @@ export const questionsReducer = (state = initialState, action: TQuestionsAction)
             return {
                 ...state,
                 isRecommended: action.payload,
+            }
+        case START_PASS_QUESTIONS:
+            return {
+                ...state,
+                startPassQuestions: action.payload,
             }
         default:
             return state;

@@ -4,6 +4,8 @@ import { TAuthPageProps } from "pages/types";
 export const AuthPage = ({ isRegister }: TAuthPageProps) => {
 
     return (
-        <AuthForm isRegister={isRegister} />
+        <div className="wrapper">
+            <AuthForm isRegister={isRegister} />
+        </div>
     );
 };

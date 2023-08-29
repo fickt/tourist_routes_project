@@ -33,7 +33,7 @@ export enum AppRoutes {
     AUTH_LOGIN = "auth_login",
     AUTH_REGISTER = "auth_register",
     AUTH_LOGOUT = "auth_logout",
-    NOT_FOUND = "not_found", //в конце
+    NOT_FOUND = "not_found",
 }
 
 export const RoutePath = {
@@ -53,7 +53,7 @@ export const RoutePath = {
     [AppRoutes.AUTH_REGISTER]: "/auth/register",
     [AppRoutes.AUTH_LOGOUT]: "/auth/logout",
     [AppRoutes.FORGOT_PASSWORD]: "/forgotPassword",
-    [AppRoutes.NOT_FOUND]: "*", //в конце
+    [AppRoutes.NOT_FOUND]: "*",
 }
 
 export const mainRoutes: TRoutes[] = [
