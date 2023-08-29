@@ -9,7 +9,8 @@
 }
 
 .form,
-.form__inputs {
+.form__inputs,
+.form__button {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -22,4 +23,18 @@
   &__inputs {
     row-gap: 24px;
   }
+
+  &__button {
+    row-gap: 12px;
+  }
+}
+
+.forgotPassword {
+  color: var(--text-03);
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  text-decoration-line: underline;
+  align-self: end;
 }

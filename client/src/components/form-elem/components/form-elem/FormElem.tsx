@@ -14,6 +14,8 @@ import { PasswordInput } from "components/form-elem/components/form-input/Passwo
 import { FormButton } from "components/form-elem/components/form-button/FormButton";
 import { RememberMe } from "components/form-elem/components/remember-me/RememberMe";
 import { TServerResponse } from "modules/auth-form/store/types/authTypes";
+import { RoutePath } from "pages/routeConfig";
+import { Link } from "react-router-dom";
 
 export const FormElem = ({ isAuthForm, isRegister, isInfoChange, isPasswordChange }: TFormProps) => {
 
@@ -90,13 +92,16 @@ export const FormElem = ({ isAuthForm, isRegister, isInfoChange, isPasswordChang
         >
             <div className={s.form__inputs}>
                 {renderFormInputs()}
-                {!isRegister && <RememberMe />}
+                {isAuthForm && !isRegister && <RememberMe />}
             </div>
-            <FormButton
-                value={(isInfoChange || isPasswordChange) ? "Сохранить" : (isRegister ? "Зарегистрироваться" : "Войти")}
-                onClick={handleButtonClick}
-                loader={loader as boolean}
-            />
+            <div className={s.form__button}>
+                <FormButton
+                    value={(isInfoChange || isPasswordChange) ? "Сохранить" : (isRegister ? "Зарегистрироваться" : "Войти")}
+                    onClick={handleButtonClick}
+                    loader={loader as boolean}
+                />
+                {isAuthForm && !isRegister && <Link className={s.forgotPassword} to={RoutePath.auth_register}>Забыли пароль?</Link>}
+            </div>
             {loader && <PreloaderCar />}
             {!loader && (error && <ErrorMessage errorText={error} />)}
         </Form>
