@@ -1,11 +1,7 @@
 .questionsForm {
   display: flex;
   flex-direction: column;
-  max-width: 328px;
-  row-gap: 40px;
-  padding: 40px 16px;
-  margin: 0 auto;
-  font-family: "Inter", sans-serif;
+  row-gap: 24px;
 
   &__title {
     font-size: 24px;

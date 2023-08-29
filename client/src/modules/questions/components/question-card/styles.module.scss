@@ -1,19 +1,21 @@
 .questionCard {
   display: flex;
   flex-direction: column;
-  max-width: 328px;
-  row-gap: 40px;
-  margin: 0 auto;
+  align-items: center;
+  row-gap: 24px;
 
   &__text {
     font-size: 16px;
     font-weight: 400;
+    margin: 0;
+    padding: 0 20px;
+    align-self: center;
   }
 
   &__image {
     width: 288px;
     height: 288px;
-    background-color: var(--color-dark-grey);
+    border-radius: 30px;
     position: relative;
   }
 

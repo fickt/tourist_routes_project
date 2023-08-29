@@ -42,7 +42,7 @@ export const TagList = memo(({list, title}:TTagListProps) => {
         const isActive = filters.includes(item)
 
         return (
-            <FilterTag key={i} text={item} onClick={onClick} isActive={isActive}/>
+            <FilterTag key={i} text={item} onClick={onClick} isActive={isActive} />
         )
     })
 
