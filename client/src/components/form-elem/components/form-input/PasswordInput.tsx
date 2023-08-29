@@ -3,23 +3,31 @@ import { Form, Input } from "antd";
 import { TPasswordInputProps } from "./types";
 import { passwordRules } from "components/form-elem/constants/formRules";
 
-export const PasswordInput = ({ isAuthForm, isRegister, isPasswordChange }: TPasswordInputProps) => {
+export const PasswordInput = ({ title, isAuthForm, isRegister, isPasswordChange }: TPasswordInputProps) => {
+
+    const placeholderText = isPasswordChange ? "Придумайте новый пароль"
+        : isRegister ? "Придумайте пароль" : "Введите пароль";
 
     return (
         <>
-            <Form.Item name="password" rules={passwordRules} hasFeedback>
-                <Input.Password
-                    type="password"
-                    placeholder={isPasswordChange ? "Придумайте новый пароль" : "Введите пароль"}
-                    className={s.form__input}
-                />
+            <Form.Item className="custom__antd__item" name="password" rules={passwordRules} validateStatus={""} hasFeedback>
+                <div className={s.field}>
+                    <span className={s.field__title}>{title}</span>
+                    <Input.Password
+                        type="password"
+                        placeholder={placeholderText}
+                        className={s.field__input}
+                    />
+                </div>
             </Form.Item>
             {/*confirm password появляется на страницах: "Регистрация" и "Изменить пароль"*/}
             {((isAuthForm && isRegister) || isPasswordChange) && (
                 <Form.Item
+                    className="custom__antd__item"
                     name="confirm"
                     hasFeedback
                     dependencies={["password"]}
+                    validateStatus={""}
                     rules={[
                         {required: true, message: "Повторите пароль!"},
                         ({ getFieldValue }) => ({
@@ -32,10 +40,13 @@ export const PasswordInput = ({ isAuthForm, isRegister, isPasswordChange }: TPas
                         }),
                     ]}
                 >
-                    <Input.Password
-                        placeholder={isPasswordChange ? "Повторите новый пароль" : "Повторите пароль"}
-                        className={s.form__input}
-                    />
+                    <div className={s.field}>
+                        <span className={s.field__title}>Подтверждение пароля</span>
+                        <Input.Password
+                            placeholder={isPasswordChange ? "Повторите новый пароль" : "Повторите пароль"}
+                            className={s.field__input}
+                        />
+                    </div>
                 </Form.Item>
             )}
         </>

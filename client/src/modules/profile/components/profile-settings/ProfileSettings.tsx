@@ -13,14 +13,16 @@ export const ProfileSettings = () => {
 
     return (
         <div className={s.settings}>
-            <ProfileHeader text="Никнейм" path={RoutePath.settings_info} />
-            <h3 className={s.settings__title}>Учетные данные</h3>
+            <ProfileHeader path={RoutePath.settings_info} />
+            <span className={s.settings__title}>Учетные данные</span>
             <div className={s.settings__fields}>
-                <label className={s.field}>E-mail
-                    <input className={s.field__input} placeholder={user.email} disabled={true} />
-                </label>
                 <div className={s.field}>
-                    <span className={s.title}>Пароль</span>
+                    <label className={s.field__email}>E-mail
+                        <input className={s.field__email__input} placeholder={user.email} disabled={true} />
+                    </label>
+                </div>
+                <div className={s.field}>
+                    <span className={s.settings__title}>Пароль</span>
                     <div className="buttons__wrapper">
                         <Link className="buttons__link" to={RoutePath.settings_password}>
                             <Button extraClass={classNames("button", "button_white")}>Изменить пароль</Button>

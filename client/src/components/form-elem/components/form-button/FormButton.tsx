@@ -4,7 +4,7 @@ import { TFormButtonProps } from "./types";
 export const FormButton = ({ value, onClick, loader }: TFormButtonProps) => {
 
     return (
-        <Form.Item>
+        <Form.Item className="custom__antd__item">
             <Button
                 className="form__button"
                 type="primary"

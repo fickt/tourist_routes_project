@@ -52,10 +52,10 @@ a {
 };
 
 .wrapper {
-    max-width: 328px;
+    max-width: 360px;
     display: flex;
     flex-direction: column;
-    padding: 48px 16px;
+    padding: 24px 16px;
     margin: 0 auto;
 };
 
@@ -93,6 +93,7 @@ main {
 };
 
 .buttons__wrapper {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -102,6 +103,7 @@ main {
 
 .buttons__link {
     display: block;
+    width: 100%;
 
     .button {
         &_green {
@@ -132,6 +134,12 @@ main {
 .form__button {
     color: var(--text-02);
     background-color: var(--background-06);
+}
+
+// кастомизирует Input из antd
+.custom__antd__item {
+    width: 100%;
+    margin-bottom: 0;
 }
 
 @media (min-width: 760px) {

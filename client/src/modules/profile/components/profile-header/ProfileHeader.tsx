@@ -5,7 +5,7 @@ import { authUser } from "modules/auth-form/store/authSelectors";
 import { TProfileHeaderProps } from "./types";
 import { Link } from "react-router-dom";
 
-export const ProfileHeader = ({ text, path }: TProfileHeaderProps) => {
+export const ProfileHeader = ({ path }: TProfileHeaderProps) => {
 
     const user = useAppSelector(authUser);
 
@@ -17,7 +17,7 @@ export const ProfileHeader = ({ text, path }: TProfileHeaderProps) => {
                 </div>
                 <div className={s.profileInfo__settings}>
                     <h2 className={s.profileInfo__settings__title}>{user.nickname}</h2>
-                    <p>{text}</p>
+                    <p>Управление аккаунтом</p>
                 </div>
             </div>
             <Link to={path}>

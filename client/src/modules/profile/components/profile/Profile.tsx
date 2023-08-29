@@ -6,7 +6,7 @@ import { isRecommended } from "modules/questions/store/questionsSelectors";
 import { ProfileHeader } from "modules/profile/components/profile-header/ProfileHeader";
 import { ProfileSection } from "modules/profile/components/profile-section/ProfileSection";
 import { PassQuestions } from "modules/questions/components/pass-questions/PassQuestions";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import classNames from "classnames";
 
 export const Profile = () => {
@@ -15,7 +15,7 @@ export const Profile = () => {
 
     return (
         <div className={s.profile}>
-            <ProfileHeader text="Управление аккаунтом" path={RoutePath.settings} />
+            <ProfileHeader path={RoutePath.settings} />
             <div className={s.profile__main}>
                 <ProfileSection path={RoutePath.mySpots} title="Мои места" />
                 <ProfileSection path={RoutePath.favorites} title="Избранное" />
