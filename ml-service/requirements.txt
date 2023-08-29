@@ -1,7 +1,5 @@
 fastapi
 keras
-nlp_rake
-nltk
 numpy
 opencv-python
 pandas
@@ -13,3 +11,4 @@ tensorflow
 python-multipart
 sqlalchemy
 psycopg2
+sentence-transformers
