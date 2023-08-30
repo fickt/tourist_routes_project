@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\RouteQuestionnaireResource;
 use App\Models\RouteQuestionnaire;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,6 @@ class RouteQuestionnaireController extends Controller
 
     public function show()
     {
-        return $this->routeQuestionnaire->getQuestionnaire();
+        return RouteQuestionnaireResource::make($this->routeQuestionnaire->getQuestionnaire());
     }
 }
