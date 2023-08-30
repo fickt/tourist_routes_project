@@ -24,4 +24,9 @@ class RouteQuestionnaire extends Model
             'questionnaire_id'
         );
     }
+
+    public function getQuestionnaire()
+    {
+        return RouteQuestionnaire::query()->with('photos')->first();
+    }
 }
