@@ -12,8 +12,13 @@ return new class extends Migration {
     {
         Schema::create('route_questionnaire_photos', function (Blueprint $table) {
             $table->id();
+            $table->string('photo');
             $table->foreignId('questionnaire_id')
                 ->constrained('route_questionnaires')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId('category_id')
+                ->constrained('route_categories')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->timestamps();

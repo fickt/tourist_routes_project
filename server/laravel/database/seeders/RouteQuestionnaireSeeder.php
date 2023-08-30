@@ -13,7 +13,7 @@ class RouteQuestionnaireSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public static function run(): void
     {
         /**
          * @var RouteQuestionnaire $questionnaire
@@ -24,11 +24,10 @@ class RouteQuestionnaireSeeder extends Seeder
         );
         $mountainsPhoto = RouteQuestionnairePhoto::query()->create([
             'photo' => 'questionnaire_gori_photo',
-            'category_id' => RouteCategory::query()->where('name', '=', 'горы')->first()->id
-
+            'category_id' => RouteCategory::query()->where('name', '=', 'горы')->first()->id,
+            'questionnaire_id' => $questionnaire->id
         ]);
-        $questionnaire->photos()->save($mountainsPhoto);
-
+      //  $questionnaire->photos()->save($mountainsPhoto);
 
     }
 }
