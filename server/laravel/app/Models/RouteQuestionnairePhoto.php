@@ -12,6 +12,8 @@ class RouteQuestionnairePhoto extends Model
 {
     use HasFactory;
 
+    protected $table = 'route_questionnaire_photos';
+
     protected $fillable = [
         'photo',
         'category_id'
