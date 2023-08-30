@@ -11,6 +11,8 @@ class RouteQuestionnaire extends Model
 {
     use HasFactory;
 
+    protected $table = 'route_questionnaires';
+
     protected $fillable = [
         'name'
     ];
