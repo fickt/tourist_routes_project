@@ -5,6 +5,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\RouteCommentController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RouteFavoriteController;
+use App\Http\Controllers\RouteQuestionnaireController;
 use App\Http\Middleware\IsAuthenticated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,7 +37,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::group(['prefix' => 'routes'], function () {
         /* Recommendations */
         Route::group(['prefix' => '/recommendations', 'middleware' => IsAuthenticated::class], function () {
-            Route::get('', [RouteRecommendationController::class, 'index']);
+           // Route::get('', [RouteRecommendationController::class, 'index']);
 
             /* Questionnaire for generating recommendations */
             Route::group(['prefix' => '/questionnaire'], function () {
