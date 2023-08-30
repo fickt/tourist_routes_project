@@ -1,5 +1,4 @@
 .favorite {
-  background-color: var(--background-02);
   border: none;
   outline: inherit;
   border-radius: 10px;
@@ -12,6 +11,10 @@
 
 .favorite svg path {
   stroke: black;
+}
+
+.favorite_notActive {
+  background-color: var(--background-02);
 }
 
 .favorite_active {
