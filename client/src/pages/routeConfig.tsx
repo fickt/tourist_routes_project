@@ -56,7 +56,7 @@ export const RoutePath = {
     [AppRoutes.AUTH_LOGOUT]: "/auth/logout",
     [AppRoutes.FORGOT_PASSWORD]: "/forgotPassword",
     [AppRoutes.NOT_FOUND]: "*",
-    [AppRoutes.SPOT_MAP]: "/spotMap",
+    [AppRoutes.SPOT_MAP]: "/spotMap/:spotId",
 }
 
 export const mainRoutes: TRoutes[] = [
