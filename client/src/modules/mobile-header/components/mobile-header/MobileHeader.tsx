@@ -5,6 +5,7 @@ import { menuLinks } from "./constants/menuLinks";
 import classNames from "classnames";
 import {Button} from "ui/button/Button";
 import {RoutePath} from "pages/routeConfig";
+import {FavoriteMarker} from "ui/favorite-marker/FavoriteMarker";
 
 export const MobileHeader = () => {
 
@@ -34,6 +35,7 @@ export const MobileHeader = () => {
                         </Link>
                     )) : (
                         <>
+                            <FavoriteMarker/>
                             <Link to={RoutePath.spot_map}>
                                 <Button extraClass={s.menu__spot_btn} type="primary" >
                                     Построить маршрут
