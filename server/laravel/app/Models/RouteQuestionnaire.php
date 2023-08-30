@@ -27,6 +27,6 @@ class RouteQuestionnaire extends Model
 
     public function getQuestionnaire()
     {
-        return RouteQuestionnaire::query()->with('photos')->first();
+        return RouteQuestionnaire::query()->with('photos.category')->first();
     }
 }

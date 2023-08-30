@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RouteQuestionnaireResource extends JsonResource
+class RouteQuestionnairePhotoResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,8 +15,8 @@ class RouteQuestionnaireResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'name' => $this->name,
-            'photos' => RouteQuestionnairePhotoResource::collection($this->whenLoaded('photos'))
+            'photo_url' => $this->photo,
+            'category' => $this->category
         ];
     }
 }
