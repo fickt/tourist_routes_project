@@ -34,6 +34,17 @@ Route::group(['middleware' => 'api'], function () {
 
     /* Routes */
     Route::group(['prefix' => 'routes'], function () {
+        /* Recommendations */
+        Route::group(['prefix' => '/recommendations', 'middleware' => IsAuthenticated::class], function () {
+            Route::get('', [RouteRecommendationController::class, 'index']);
+
+            /* Questionnaire for generating recommendations */
+            Route::group(['prefix' => '/questionnaire'], function () {
+                Route::get('', [RouteQuestionnaireController::class, 'show']);
+                Route::post('', [RouteQuestionnaireController::class, 'store']);
+            });
+        });
+
         /* Favorite routes */
         Route::group(['prefix' => '/favorites', 'middleware' => IsAuthenticated::class], function () {
             Route::get('', [RouteFavoriteController::class, 'index']);
