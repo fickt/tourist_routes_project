@@ -1,11 +1,16 @@
 .input {
 	width: 100%;
-	border-radius: 24px;
-	border: 1px solid transparent;
-	outline: none;
-	padding: 13px 60px 13px 40px;
-	color: #000;
-	font-size: 16px;
+	height: 40px;
+	font-family: "Raleway", sans-serif;
+	color: var(--background-03);
+	font-size: 12px;
+	font-weight: 400;
 	line-height: 20px;
-	caret-color: var(--background-color-blue);
+	background: var(--background-02);
+	border: none;
+	outline: none;
+	border-radius: 10px;
+	padding: 8px 12px;
+	box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.20);
+	text-indent: 42px;
 };

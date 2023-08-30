@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import s from "./styles.module.scss";
-import FavoritesIcon from "./assets/favorites.svg";
-import classNames from "classnames";
+import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets/favorites.svg";
 
 export const FavoriteMarker = () => {
 
@@ -13,9 +12,9 @@ export const FavoriteMarker = () => {
 
     return (
         <button
-            className={classNames(s.favorite, isActive ? s.favorite_active : s.favorite_notActive)}
+            className={`${s.favorite} ${isActive && s.favorite_active}`}
             onClick={toggleClick}>
-            <FavoritesIcon />
+            <FavoritesIcon className={s.favorite_icon} />
         </button>
     )
 }

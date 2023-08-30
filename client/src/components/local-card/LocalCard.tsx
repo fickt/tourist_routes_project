@@ -1,27 +1,25 @@
 import { Link } from "react-router-dom";
 import s from "./styles.module.scss"
 import { TCardProps } from "./types";
-import classNames from "classnames";
-import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets/favorites.svg";
 import { Rate } from "antd";
+import { FavoriteMarker } from "ui/favorite-marker/FavoriteMarker";
 
 export const LocalCard = ({ id, name, photos }: TCardProps) => {
 
     return (
-        <article className={s.card} style={{ backgroundImage: `url(${photos[0]})` }}>
-            <div className={s.card__options}>
-                <span className={classNames(s.card__option, s.card__option_difficulty)}>Новичок</span>
-                <button className={classNames(s.card__option, s.card__option_favorite)}><FavoritesIcon /></button>
+        <div className={s.wrapper}>
+            <div className={s.favorite}>
+                <FavoriteMarker />
             </div>
-            <div className={s.card__main}>
-                <span className={s.card__rating}>
-                    <Rate defaultValue={5} disabled />
-                </span>
-                <Link to={`/spots/${id}`} className={s.link} >
-                    <h2 className={s.card__name}>{name}</h2>
-                </Link>
-            </div>
-
-        </article>
+            <Link to={`/spots/${id}`} className={s.card} style={{ backgroundImage: `url(${photos[0]})` }}>
+                <span className={s.card__difficulty}>Новичок</span>
+                <div className={s.card__main}>
+                    <span className={s.card__main__rating}>
+                        <Rate defaultValue={5} disabled />
+                    </span>
+                    <h2 className={s.card__main__name}>{name}</h2>
+                </div>
+            </Link>
+        </div>
     );
 };
