@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import s from "./styles.module.scss";
-import SearchIcon from "./assets/search-icon.svg";
+import SearchIcon from "./assets/searchIcon.svg";
 import classNames from "classnames";
 import { TSearchProps } from "./types";
 import { Input } from "ui/input/Input";
@@ -18,7 +18,9 @@ export const SearchForm = ({ handleFormSubmit, handleInputChange, placeholder, s
                 onChange={onChange}
                 placeholder={placeholder} 
             />
-            <button onClick={handleFormSubmit} className={classNames(s.search__btn, s.search__magnifier_btn)}><SearchIcon /></button>
+            <button onClick={handleFormSubmit} className={classNames(s.search__btn, s.search__magnifier_btn)}>
+                <SearchIcon />
+            </button>
         </form>
     )
 }

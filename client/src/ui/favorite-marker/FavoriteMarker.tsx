@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import s from "./styles.module.scss";
-import FavoritesIcon from "./assets/favorites.svg";
+import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets/favorites.svg";
 
 export const FavoriteMarker = () => {
 
