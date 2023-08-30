@@ -23,11 +23,9 @@ class RouteQuestionnaireSeeder extends Seeder
             ]
         );
         $mountainsPhoto = RouteQuestionnairePhoto::query()->create([
-            'photo' => 'questionnaire_gori_photo',
+            'photo' => 'questionnaire_gori_photo.jpg',
             'category_id' => RouteCategory::query()->where('name', '=', 'горы')->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
-      //  $questionnaire->photos()->save($mountainsPhoto);
-
     }
 }
