@@ -37,7 +37,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::group(['prefix' => 'routes'], function () {
         /* Recommendations */
         Route::group(['prefix' => '/recommendations', 'middleware' => IsAuthenticated::class], function () {
-            // Route::get('', [RouteRecommendationController::class, 'index']);
+             Route::get('', [RouteRecommendationController::class, 'index']);
 
             /* Questionnaire for generating recommendations */
             Route::group(['prefix' => '/questionnaire'], function () {
