@@ -4,7 +4,7 @@ import { TCardProps } from "./types";
 import { Rate } from "antd";
 import { FavoriteMarker } from "ui/favorite-marker/FavoriteMarker";
 
-export const LocalCard = ({ id, name, photos }: TCardProps) => {
+export const LocalCard = ({ id, name, photos, difficulty }: TCardProps) => {
 
     return (
         <div className={s.wrapper}>
@@ -12,7 +12,7 @@ export const LocalCard = ({ id, name, photos }: TCardProps) => {
                 <FavoriteMarker />
             </div>
             <Link to={`/spots/${id}`} className={s.card} style={{ backgroundImage: `url(${photos[0]})` }}>
-                <span className={s.card__difficulty}>Новичок</span>
+                <span className={s.card__difficulty}>{difficulty}</span>
                 <div className={s.card__main}>
                     <span className={s.card__main__rating}>
                         <Rate defaultValue={5} disabled />
