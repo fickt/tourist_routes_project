@@ -13,10 +13,10 @@ const initialState: TSpotsState = {
 export function spotsReducer(state = initialState, action:TSpotsActions) {
 
     switch (action.type) {
-        case GET_SPOT_ROUTES: 
+        case GET_SPOT_ROUTES:
             return {...state, dataDb: action.payload}
-        case GET_LOCAL_SPOTS: 
-            return {...state, data: action.payload, total: action.payload.length}         
+        case GET_LOCAL_SPOTS:
+            return {...state, data: action.payload, total: action.payload.length}
         case SPOTS_ERROR:
             return {...state, error: action.payload}
         case IS_SPOTS_LOADING:

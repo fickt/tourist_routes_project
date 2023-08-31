@@ -7,7 +7,7 @@ export type TSpotsActions =  TSpotsDataLoading | TSpotsDataError | TLocalSpotsDa
 
 export type TLocalSpotsDataAction = {
     type: typeof GET_LOCAL_SPOTS,
-    payload: TMarker[]   
+    payload: TMarker[]
 }
 
 export type TSpotsDataError = {
@@ -24,4 +24,3 @@ export type TGetRoutesAction = {
     type: typeof GET_SPOT_ROUTES,
     payload: TSpotRoutes
 }
-

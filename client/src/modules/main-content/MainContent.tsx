@@ -33,13 +33,13 @@ export const MainContent = () => {
     }
 
     const handleSearchRequest = () => {
-        debounceSearchValue &&        
-            apiSpots.fetchSearchRequest(debounceSearchValue)
-                .then(data => {
-                    dispatch(getSpotRoutes(data.data))
-                    console.log(data.data);
-                })
-                .catch(err => console.warn(err))
+        debounceSearchValue &&
+        apiSpots.fetchSearchRequest(debounceSearchValue)
+            .then(data => {
+                dispatch(getSpotRoutes(data.data))
+                console.log(data.data);
+            })
+            .catch(err => console.warn(err))
     }
 
     const openPopup = () => {

@@ -7,7 +7,7 @@ import { CardListHeader } from "modules/card-list/components/card-list-header/Ca
 
 export const CardList = memo(() => {
 
-    const spots = useAppSelector(spotRoutesSelector);  
+    const spots = useAppSelector(spotRoutesSelector);
 
     return (
         <div className={s.wrapper}>
