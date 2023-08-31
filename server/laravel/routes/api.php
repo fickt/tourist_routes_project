@@ -6,6 +6,7 @@ use App\Http\Controllers\RouteCommentController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RouteFavoriteController;
 use App\Http\Controllers\RouteQuestionnaireController;
+use App\Http\Controllers\RouteRecommendationController;
 use App\Http\Middleware\IsAuthenticated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
