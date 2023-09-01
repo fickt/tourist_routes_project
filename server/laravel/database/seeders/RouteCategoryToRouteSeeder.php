@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use app\Enums\RouteCategoryEnum;
 use App\Models\Route;
 use App\Models\RouteCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -19,7 +20,7 @@ class RouteCategoryToRouteSeeder extends Seeder
             ->first();
 
         $category = RouteCategory::query()
-            ->where('name', '=', 'озёра')
+            ->where('name', '=', RouteCategoryEnum::Lakes->value)
             ->first();
 
         /**

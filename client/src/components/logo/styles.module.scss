@@ -1,13 +1,29 @@
 .logo {
+    position: relative;
     text-decoration: none; 
     
     .text {
-        color: var(--color-white);
-        min-width: 85px
+        color: var(--background-07);
+        font-family: "Nunito Sans", sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
     }
 
     h2 {
         margin: 0;
-        padding: 10px;
+        padding: 16px;
     }
+}
+
+.back {
+    position: absolute;
+    top: 16px;
+    left: 10px;
+    cursor: pointer;
+}
+
+.back__icon {
+    width: 24px;
+    height: 24px;
 }

@@ -14,13 +14,13 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
 
     const navigate = useNavigate();
     const { spotId } = useParams(); //проверяем на какой странице мы находимся, если есть spotId, то на странице места, иначе на страницу общей карты
-    const [error, setError] = useState<string>(null);    
+    const [error, setError] = useState<string>(null);
+
     const init = () => {
         //создание компонентов карты
         const mapInit = (pos: GeolocationPosition, err?: GeolocationPositionError ) => {
-
             const geoPosition = pos && [pos.coords.latitude, pos.coords.longitude];
-            err && setError(err.message)                     
+            err && setError(err.message)
             const myMap = new ymaps.Map("mapId", { ...mapState, center: geoPosition || mapState.center }); //если есть геолокация меняем центр карты на него
             //задаем пустой объект маршрута, нужен для перерисовки
             let multiRoute = new ymaps.multiRouter.MultiRoute({
@@ -31,7 +31,6 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
             removeControls(myMap, mapControls); //удаляем лишние виджеты управления на карте
 
             const setLocationMarker = () => {
-
                 const iconSets = {
                     iconLayout: "default#image",
                     iconImageHref: locationIcon,
@@ -42,7 +41,6 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
             };
 
             const setMarkers = (markers: TMarker[]) => {
-
                 markers.forEach(marker => {
                     //параметры для внутренности баллуна
                     const balloonInner = {}
@@ -57,7 +55,6 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
                     const newMarker = new ymaps.Placemark(marker.coordinates, balloonInner, iconSets);
 
                     const buildRouteInSpot = () => { //функция для прокладывания маршрута
-
                         myMap.geoObjects.remove(multiRoute) //очищаем маршрут перед созданием нового
                         multiRoute = new ymaps.multiRouter.MultiRoute({
                             // Описание опорных точек мультимаршрута.
@@ -100,7 +97,5 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
             <div id="mapId" className={s.map} />
             <ErrorMessage errorText={error}/>
         </>
-        
     );
 }
-

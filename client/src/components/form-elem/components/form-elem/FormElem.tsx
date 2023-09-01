@@ -12,6 +12,10 @@ import { FormInput } from "components/form-elem/components/form-input/FormInput"
 import { emailRules, nicknameRules, passwordRules } from "components/form-elem/constants/formRules";
 import { PasswordInput } from "components/form-elem/components/form-input/PasswordInput";
 import { FormButton } from "components/form-elem/components/form-button/FormButton";
+import { RememberMe } from "components/form-elem/components/remember-me/RememberMe";
+import { TServerResponse } from "modules/auth-form/store/types/authTypes";
+import { RoutePath } from "pages/routeConfig";
+import { Link } from "react-router-dom";
 
 export const FormElem = ({ isAuthForm, isRegister, isInfoChange, isPasswordChange }: TFormProps) => {
 
@@ -50,8 +54,8 @@ export const FormElem = ({ isAuthForm, isRegister, isInfoChange, isPasswordChang
         try {
             await form.validateFields();
             sendForm(form);
-        } catch (error) {
-            console.error("Form validation failed:", error);
+        } catch (error: Error | TServerResponse) {
+            dispatch(handleAuthError(error.response.data.error))
         }
     };
 
@@ -59,13 +63,18 @@ export const FormElem = ({ isAuthForm, isRegister, isInfoChange, isPasswordChang
         return (
             <div className={s.form__inputs}>
                 {isInfoChange
-                    ? <FormInput name="nickname" rules={nicknameRules} placeholder="Никнейм" />
-                    : isRegister && <FormInput name="nickname" rules={nicknameRules} placeholder="Имя пользователя" />
+                    ? <FormInput name="nickname" title="Никнейм" rules={nicknameRules} placeholder="Никнейм" />
+                    : isRegister && <FormInput name="nickname" title="Никнейм" rules={nicknameRules} placeholder="Имя пользователя" />
                 }
-                {!isPasswordChange && <FormInput name="email" rules={emailRules} placeholder={isInfoChange ? "nik@vk.com" : "E-mail"} />}
-                {isPasswordChange && <FormInput name="password_old" rules={passwordRules} placeholder="Ваш прошлый пароль" />}
+                {!isPasswordChange && <FormInput name="email" title="E-mail" rules={emailRules} placeholder={isInfoChange ? "nik@vk.com" : "Введите e-mail"} />}
+                {isPasswordChange && <FormInput name="password_old" title="Прошлый пароль" rules={passwordRules} placeholder="Введите прошлый пароль" />}
                 {(!isInfoChange || isPasswordChange)
-                    && <PasswordInput isAuthForm={isAuthForm} isRegister={isRegister} isPasswordChange={isPasswordChange} />
+                    && <PasswordInput
+                        title={isPasswordChange ? "Новый пароль" : "Пароль"}
+                        isAuthForm={isAuthForm}
+                        isRegister={isRegister}
+                        isPasswordChange={isPasswordChange}
+                    />
                 }
             </div>
         );
@@ -73,6 +82,7 @@ export const FormElem = ({ isAuthForm, isRegister, isInfoChange, isPasswordChang
 
     return (
         <Form
+            className={s.form}
             form={form}
             name="basic"
             initialValues={{remember: true}}
@@ -82,14 +92,15 @@ export const FormElem = ({ isAuthForm, isRegister, isInfoChange, isPasswordChang
         >
             <div className={s.form__inputs}>
                 {renderFormInputs()}
+                {isAuthForm && !isRegister && <RememberMe />}
+            </div>
+            <div className={s.form__button}>
                 <FormButton
-                    value={(isInfoChange || isPasswordChange)
-                        ? "Сохранить"
-                        : (isRegister ? "Зарегистрироваться" : "Войти")
-                    }
+                    value={(isInfoChange || isPasswordChange) ? "Сохранить" : (isRegister ? "Зарегистрироваться" : "Войти")}
                     onClick={handleButtonClick}
                     loader={loader as boolean}
                 />
+                {isAuthForm && !isRegister && <Link className={s.forgotPassword} to={RoutePath.auth_register}>Забыли пароль?</Link>}
             </div>
             {loader && <PreloaderCar />}
             {!loader && (error && <ErrorMessage errorText={error} />)}

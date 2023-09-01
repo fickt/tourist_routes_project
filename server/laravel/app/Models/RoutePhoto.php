@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\BuildPhotoUrl;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,5 +25,9 @@ class RoutePhoto extends Model
     protected $fillable = [
         'route_id',
         'photo_path'
+    ];
+
+    protected $casts = [
+        'photo_path' => BuildPhotoUrl::class
     ];
 }

@@ -15,6 +15,7 @@ import { FiltersPage } from "./filters-page/FiltersPage";
 import { SettingsPage } from "pages/settings-page/SettingsPage";
 import { SettingsInfoPage } from "pages/settings-info-page/SettingsInfoPage";
 import { SettingsPasswordPage } from "pages/settings-password-page/SettingsPasswordPage";
+import { SpotMapPage } from "pages/spot-map-page/SpotMapPage";
 
 export enum AppRoutes {
     HOME = "home",
@@ -33,7 +34,8 @@ export enum AppRoutes {
     AUTH_LOGIN = "auth_login",
     AUTH_REGISTER = "auth_register",
     AUTH_LOGOUT = "auth_logout",
-    NOT_FOUND = "not_found", //в конце
+    NOT_FOUND = "not_found",
+    SPOT_MAP = "spot_map",
 }
 
 export const RoutePath = {
@@ -53,7 +55,8 @@ export const RoutePath = {
     [AppRoutes.AUTH_REGISTER]: "/auth/register",
     [AppRoutes.AUTH_LOGOUT]: "/auth/logout",
     [AppRoutes.FORGOT_PASSWORD]: "/forgotPassword",
-    [AppRoutes.NOT_FOUND]: "*", //в конце
+    [AppRoutes.NOT_FOUND]: "*",
+    [AppRoutes.SPOT_MAP]: "/spotMap/:spotId",
 }
 
 export const mainRoutes: TRoutes[] = [
@@ -63,6 +66,7 @@ export const mainRoutes: TRoutes[] = [
     { path: RoutePath.location, element: <LocationPage /> },
     { path: RoutePath.spotId, element: <SpotPage /> },
     { path: RoutePath.not_found, element: <NotFoundPage /> },
+    { path: RoutePath.spot_map, element: <SpotMapPage/> },
 ]
 
 export const privateRoutes: TRoutes[] = [

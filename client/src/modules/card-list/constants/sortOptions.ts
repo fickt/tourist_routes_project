@@ -11,41 +11,41 @@ export const sortTabs = {
         category: "Места",
         lakes: {
             label: "Озера",
-            value: "lakes"
+            value: "озёра"
         },
         mountains: {
             label: "Горы",
-            value: "mountains"
+            value: "горы"
         },
     },
     vocationType: {
         category: "Тип отдыха",
         family: {
             label: "С семьей",
-            value: "family"
+            value: "с семьей"
         },
         friends: {
             label: "С друзьями",
-            value: "friends"
+            value: "с друзьями"
         },
         alone: {
             label: "В одиночку",
-            value: "alone"
+            value: "в одиночку"
         },
     },
     difficulty: {
         category: "Сложность",
         easy: {
             label: "Новичок",
-            value: "easy"
+            value: "новичок"
         },
         middle: {
             label: "Знающий",
-            value: "middle"
+            value: "знающий"
         },
         hard: {
             label: "Опытный",
-            value: "hard"
+            value: "опытный"
         },
     },
 }

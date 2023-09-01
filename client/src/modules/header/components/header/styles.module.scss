@@ -1,10 +1,6 @@
 .wrapper {
-    background-color: var(--background-color-blue);
-}
-
-.header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;    
+    background-color: var(--color-white);
+    width:100%;
+    text-align: center;
+    box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.20);
 }

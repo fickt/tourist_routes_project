@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         RouteCategorySeeder::run();
         RouteCategoryToRouteSeeder::run();
         RouteSeederFromCsv::run();
+        RouteQuestionnaireSeeder::run();
     }
 }

@@ -6,6 +6,7 @@
     height: calc(100vh - 58px);
     z-index: 100;
     position: fixed;
+    width: 100%;
 }
 
 .filters {
@@ -23,34 +24,6 @@
     gap: 20px;
     border-radius: 10px 10px 0 0;
     background: var(--background-02);
-    /* тень */
     box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.20);
-    /* отступы до краев */
     margin: 0 -26px -24px -26px;
-
-    .buttons__link {
-        display: block;
-
-        .button {
-            padding: 14px 32px;
-            border-radius: 10px;
-            font-family: "Nunito Sans", sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            line-height: 20px;
-            height: auto;
-            width: 100%;
-    
-            &_apply {
-                color: var(--text-02);
-                background-color: var(--background-06);
-            }
-    
-            &_cancel {
-                color: var(--text-01);
-                background-color: var(--background-02);
-                box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.20);
-            }
-        }
-    }
 }

@@ -1,12 +1,17 @@
-import { memo, useState } from "react";
-import { TTagListProps } from "./types";
-import { useAppDispatch, useAppSelector } from "storage/hookTypes";
-import { filterCategories, filterDifficulties } from "modules/filters/store/filtersSelectors";
-import { deleteFilterCategoryAction, deleteFilterDifficultyAction, setFilterCategoryAction, setFilterDifficultyAction } from "modules/filters/store/filtersActions";
-import { filterValues } from "modules/filters/constants/filterValues";
-import { FilterTag } from "modules/filters/components/filter-tag/FilterTag";
+import {memo, useState} from "react";
+import {TTagListProps} from "./types";
+import {useAppDispatch, useAppSelector} from "storage/hookTypes";
+import {filterCategories, filterDifficulties} from "modules/filters/store/filtersSelectors";
+import {
+    deleteFilterCategoryAction,
+    deleteFilterDifficultyAction,
+    setFilterCategoryAction,
+    setFilterDifficultyAction
+} from "modules/filters/store/filtersActions";
+import {filterValues} from "modules/filters/constants/filterValues";
+import {FilterTag} from "modules/filters/components/filter-tag/FilterTag";
 
-export const TagList = memo(({list, title}:TTagListProps) => {
+export const TagList = memo(({list, title}: TTagListProps) => {
 
     const categories = useAppSelector(filterCategories);
     const difficulties = useAppSelector(filterDifficulties);
@@ -34,7 +39,6 @@ export const TagList = memo(({list, title}:TTagListProps) => {
     }
 
     const listItems = list.map((item, i) => {
-                    
         const onClick = () => {
             handleClickTag(item)
         }
@@ -42,7 +46,7 @@ export const TagList = memo(({list, title}:TTagListProps) => {
         const isActive = filters.includes(item)
 
         return (
-            <FilterTag key={i} text={item} onClick={onClick} isActive={isActive}/>
+            <FilterTag key={i} text={item} onClick={onClick} isActive={isActive} />
         )
     })
 

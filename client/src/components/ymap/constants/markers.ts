@@ -67,5 +67,3 @@ export const markers:TMarker[] = [
         rating: 5
     },
 ];
-
-

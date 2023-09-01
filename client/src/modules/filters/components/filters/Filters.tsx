@@ -38,13 +38,13 @@ export const Filters = () => {
                 <FilterItem title={filterValues.difficulty} list={difficultyTags} />
             </div>
             <div className={s.buttons__wrapper}>
-                <Link to={RoutePath.home} className={s.buttons__link}>
-                    <Button extraClass={classNames(s.button, s.button_apply)} action={handleApplyFilters}>
+                <Link to={RoutePath.home} className="buttons__link">
+                    <Button extraClass={classNames("button", "button_green")} action={handleApplyFilters}>
                         Применить
                     </Button>
                 </Link>
-                <Link to={RoutePath.home} className={s.buttons__link}>
-                    <Button extraClass={classNames(s.button, s.button_cancel)} action={handleCancelFilters}>
+                <Link to={RoutePath.home} className="buttons__link">
+                    <Button extraClass={classNames("button", "button_white")} action={handleCancelFilters}>
                         Сбросить фильры
                     </Button>
                 </Link>

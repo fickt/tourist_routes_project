@@ -13,14 +13,14 @@ export const getLocalSpotsAction = (data: TMarker[]): TLocalSpotsDataAction => {
 export const spotsError = (error: string): TSpotsDataError => {
     return {
         type: SPOTS_ERROR,
-        payload: error        
+        payload: error
     }
 }
 
 export const isSpotsLoading = (isLoading: boolean): TSpotsDataLoading => {
     return {
         type: IS_SPOTS_LOADING,
-        payload: isLoading        
+        payload: isLoading
     }
 }
 

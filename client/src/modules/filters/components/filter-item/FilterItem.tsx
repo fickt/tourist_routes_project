@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./styles.module.scss";
 import { TFilterItemProps } from "./types";
-import { TagList } from "../tag-list/TagList";
+import { TagList } from "modules/filters/components/tag-list/TagList";
 
 export const FilterItem = ({ title, list }: TFilterItemProps) => {      
 
