@@ -39,7 +39,7 @@ services:
     volumes:
       - ./ml-service:/usr/src/app
     ports:
-      - "9000:9000"
+      - ${ML_SERVICE_HOST_PORT:-9000}:${ML_SERVICE_CONTAINER_PORT:-9000}
 
   #NGINX
   web:
