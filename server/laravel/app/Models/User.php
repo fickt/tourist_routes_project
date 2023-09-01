@@ -61,6 +61,16 @@ class User extends Authenticatable implements JWTSubject
         'password' => 'hashed',
     ];
 
+    public function recommendations(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Route::class,
+            'route_recommendations',
+            'user_id',
+            'route_id'
+        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user']);
+    }
+
     public function favoriteRoutes(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -88,6 +98,11 @@ class User extends Authenticatable implements JWTSubject
             ? $user->favoriteRoutes()->detach($route)
             : $user->favoriteRoutes()->attach($route);
         return auth()->user()->favoriteRoutes()->get();
+    }
+
+    public function getRecommendations()
+    {
+        return auth()->user()->recommendations()->get();
     }
 
     public function getJWTIdentifier()
