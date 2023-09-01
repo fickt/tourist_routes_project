@@ -7,14 +7,39 @@ import { categoriesTags, difficultyTags, filterValues } from "modules/filters/co
 import { Link } from "react-router-dom";
 import { RoutePath } from "pages/routeConfig";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
+import { getSpotRoutes } from "modules/card-list/store/spotsActions";
+import { localSpots } from "utils/localRoutes";
 import { resetFiltersAction } from "modules/filters/store/filtersActions";
-import { apiSpots } from "modules/card-list/api/SpotsServise";
 
 export const Filters = () => {
-
     const dispatch = useAppDispatch();
-    const { categories, difficulties } = useAppSelector(state => state.filters)
+    const { categories, difficulties } = useAppSelector(state => state.filters);
 
+    const handleApplyFilters = () => {
+        let filteredArray = [...localSpots];
+
+        if (categories.length > 0) {
+            filteredArray = filteredArray.filter(spot =>
+                spot.categories.some((category: string) => categories.includes(category))
+            );
+        }
+
+        if (difficulties.length > 0) {
+            filteredArray = filteredArray.filter(spot =>
+                difficulties.includes(spot.difficulty)
+            );
+        }
+        dispatch(getSpotRoutes(filteredArray));
+    };
+
+    const handleCancelFilters = () => {
+        dispatch(resetFiltersAction());
+        dispatch(getSpotRoutes(localSpots));
+    };
+
+
+    // Фильтрация когда будет бд
+    /*
     const handleApplyFilters = () => {
         const categoryList = categories.join();
         const difficultyList = difficulties.join();
@@ -27,8 +52,9 @@ export const Filters = () => {
     }
 
     const handleCancelFilters = () => {
-        dispatch(resetFiltersAction())
-    }
+        dispatch(resetFiltersAction());
+    };
+    */
 
     return (
         <div className={classNames(s.wrapper)}>
@@ -45,7 +71,7 @@ export const Filters = () => {
                 </Link>
                 <Link to={RoutePath.home} className="buttons__link">
                     <Button extraClass={classNames("button", "button_white")} action={handleCancelFilters}>
-                        Сбросить фильры
+                        Сбросить фильтры
                     </Button>
                 </Link>
             </div>

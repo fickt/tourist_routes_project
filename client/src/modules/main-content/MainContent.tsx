@@ -1,4 +1,4 @@
-import {FormEvent, useMemo, useState} from "react";
+import { FormEvent, useMemo, useState } from "react";
 import s from "./styles.module.scss";
 import { SearchForm } from "components/search/SearchForm";
 import { CardList } from "modules/card-list";
@@ -38,6 +38,26 @@ export const MainContent = () => {
         setIsPopupOpen(false);
     };
 
+    // Поиск когда будет бд
+    /*
+    const handleSearchClick = (e: FormEvent) => {
+        e.preventDefault();
+        handleSearchRequest();
+        setSearchValue("");
+    }
+
+    const handleSearchRequest = () => {
+        debounceSearchValue &&
+        apiSpots.fetchSearchRequest(debounceSearchValue)
+            .then(data => dispatch(getSpotRoutes(data.data)))
+            .catch(err => console.warn(err))
+    }
+
+    useEffect(() => {
+        handleSearchRequest()
+    }, [debounceSearchValue])
+    */
+
     return (
         <>
             {isPopupOpen && (
@@ -48,7 +68,7 @@ export const MainContent = () => {
             }
             <section className={classNames("content-section", s.section)} style={{backgroundImage: `url(${backImage})`}}>
                 <SearchForm
-                    placeholder={"Поиск лучшего маршрута"}
+                    placeholder="Поиск лучшего маршрута"
                     searchValue={searchValue}
                     handleFormSubmit={handleSearchClick}
                     handleInputChange={handleInputChange}

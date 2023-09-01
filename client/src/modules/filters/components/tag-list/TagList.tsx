@@ -1,17 +1,17 @@
-import {memo, useState} from "react";
-import {TTagListProps} from "./types";
-import {useAppDispatch, useAppSelector} from "storage/hookTypes";
-import {filterCategories, filterDifficulties} from "modules/filters/store/filtersSelectors";
+import { useState } from "react";
+import { TTagListProps } from "./types";
+import { useAppDispatch, useAppSelector } from "storage/hookTypes";
+import { filterCategories, filterDifficulties } from "modules/filters/store/filtersSelectors";
 import {
     deleteFilterCategoryAction,
     deleteFilterDifficultyAction,
     setFilterCategoryAction,
     setFilterDifficultyAction
 } from "modules/filters/store/filtersActions";
-import {filterValues} from "modules/filters/constants/filterValues";
-import {FilterTag} from "modules/filters/components/filter-tag/FilterTag";
+import { filterValues } from "modules/filters/constants/filterValues";
+import { FilterTag } from "modules/filters/components/filter-tag/FilterTag";
 
-export const TagList = memo(({list, title}: TTagListProps) => {
+export const TagList = (({list, title}: TTagListProps) => {
 
     const categories = useAppSelector(filterCategories);
     const difficulties = useAppSelector(filterDifficulties);
@@ -23,18 +23,18 @@ export const TagList = memo(({list, title}: TTagListProps) => {
 
         setActiveTag(!activeTag)
         switch (title) {
-            case filterValues.category:
-                categories.includes(item)
-                    ? dispatch(deleteFilterCategoryAction(item))
-                    : dispatch(setFilterCategoryAction(item))
-                break;
-            case filterValues.difficulty:
-                difficulties.includes(item)
-                    ? dispatch(deleteFilterDifficultyAction(item))
-                    : dispatch(setFilterDifficultyAction(item))
-                break;
-            default:
-                break;
+        case filterValues.category:
+            categories.includes(item)
+                ? dispatch(deleteFilterCategoryAction(item))
+                : dispatch(setFilterCategoryAction(item))
+            break;
+        case filterValues.difficulty:
+            difficulties.includes(item)
+                ? dispatch(deleteFilterDifficultyAction(item))
+                : dispatch(setFilterDifficultyAction(item))
+            break;
+        default:
+            break;
         }
     }
 
@@ -46,7 +46,7 @@ export const TagList = memo(({list, title}: TTagListProps) => {
         const isActive = filters.includes(item)
 
         return (
-            <FilterTag key={i} text={item} onClick={onClick} isActive={isActive} />
+            <FilterTag key={i} text={item} onClick={onClick} isActive={isActive}/>
         )
     })
 
