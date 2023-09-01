@@ -216,7 +216,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"content\":\"testContent\",\r\n    \"rating\":3.311111111111\r\n}",
+					"raw": "{\r\n    \"content\":\"testContent\",\r\n    \"rating\":2.311111111111\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -224,13 +224,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/routes/1/comment",
+					"raw": "{{baseUrl}}/routes/5/comment",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"routes",
-						"1",
+						"5",
 						"comment"
 					]
 				}
@@ -290,7 +290,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/routes?search=Тестовый",
+					"raw": "{{baseUrl}}/routes?search=озера",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -300,7 +300,7 @@
 					"query": [
 						{
 							"key": "search",
-							"value": "Тестовый"
+							"value": "озера"
 						}
 					]
 				}
@@ -359,6 +359,101 @@
 						"routes",
 						"favorites",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get questionnaire",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/routes/recommendations/questionnaire",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes",
+						"recommendations",
+						"questionnaire"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send questionnaire answers and get recommendations",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"category\":\"озёра\",\r\n        \"is_liked\":false\r\n    },\r\n    {\r\n        \"category\":\"реки\",\r\n        \"is_liked\":false\r\n    }\r\n]\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/routes/recommendations/questionnaire",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes",
+						"recommendations",
+						"questionnaire"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get recommendations",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/routes/recommendations",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes",
+						"recommendations"
 					]
 				}
 			},
