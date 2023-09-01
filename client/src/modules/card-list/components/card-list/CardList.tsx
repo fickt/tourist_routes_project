@@ -1,13 +1,11 @@
-import React, { memo } from "react";
+import {FC} from "react";
 import s from "./styles.module.scss";
-import { useAppSelector } from "storage/hookTypes";
-import { spotRoutesSelector } from "modules/card-list/store/spotsSelectors";
 import { LocalCard } from "components/local-card/LocalCard";
 import { CardListHeader } from "modules/card-list/components/card-list-header/CardListHeader";
+import {CardListProps} from "modules/card-list/components/card-list/types";
 
-export const CardList = memo(() => {
+export const CardList:FC<CardListProps> = ({spots}) => {
 
-    const spots = useAppSelector(spotRoutesSelector);
 
     return (
         <div className={s.wrapper}>
@@ -17,4 +15,4 @@ export const CardList = memo(() => {
             </div>
         </div>
     );
-});
+};
