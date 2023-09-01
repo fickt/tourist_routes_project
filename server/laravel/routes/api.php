@@ -5,6 +5,8 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\RouteCommentController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RouteFavoriteController;
+use App\Http\Controllers\RouteQuestionnaireController;
+use App\Http\Controllers\RouteRecommendationController;
 use App\Http\Middleware\IsAuthenticated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,13 +36,24 @@ Route::group(['middleware' => 'api'], function () {
 
     /* Routes */
     Route::group(['prefix' => 'routes'], function () {
+        /* Recommendations */
+        Route::group(['prefix' => '/recommendations', 'middleware' => IsAuthenticated::class], function () {
+             Route::get('', [RouteRecommendationController::class, 'index']);
+
+            /* Questionnaire for generating recommendations */
+            Route::group(['prefix' => '/questionnaire'], function () {
+                Route::get('', [RouteQuestionnaireController::class, 'show']);
+                Route::post('', [RouteQuestionnaireController::class, 'store']);
+            });
+        });
+
         /* Favorite routes */
         Route::group(['prefix' => '/favorites', 'middleware' => IsAuthenticated::class], function () {
             Route::get('', [RouteFavoriteController::class, 'index']);
             Route::patch('/{routeId}', [RouteFavoriteController::class, 'update']);
         });
 
-        /*Fetch all routes or by id */
+        /* Fetch all routes or by id */
         Route::get('', [RouteController::class, 'index']);
         Route::get('/{routeId}', [RouteController::class, 'show']);
 

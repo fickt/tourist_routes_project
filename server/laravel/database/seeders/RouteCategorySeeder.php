@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\RouteCategoryEnum;
 use App\Models\RouteCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,37 +15,37 @@ class RouteCategorySeeder extends Seeder
     public static function run(): void
     {
         RouteCategory::query()->create(
-            ['name' => 'озёра']
+            ['name' => RouteCategoryEnum::Lakes->value]
         );
         RouteCategory::query()->create(
-            ['name' => 'горы']
+            ['name' => RouteCategoryEnum::Mountains->value]
         );
         RouteCategory::query()->create(
-            ['name' => 'исторические места']
+            ['name' => RouteCategoryEnum::HistoricSites->value]
         );
         RouteCategory::query()->create(
-            ['name' => 'зоны отдыха']
+            ['name' => RouteCategoryEnum::Resorts->value]
         );
         RouteCategory::query()->create(
-            ['name' => 'реки']
+            ['name' => RouteCategoryEnum::Rivers->value]
         );
         RouteCategory::query()->create(
-            ['name' => 'пещеры']
+            ['name' => RouteCategoryEnum::Caves->value]
         );
         RouteCategory::query()->create(
-            ['name' => 'горнолыжные комплексы']
+            ['name' => RouteCategoryEnum::SkiingComplex->value]
         );
         RouteCategory::query()->create(
-            ['name' => 'леса']
+            ['name' => RouteCategoryEnum::Forests->value]
         );
         RouteCategory::query()->create(
-            ['name' => 'парки']
+            ['name' => RouteCategoryEnum::Parks->value]
         );
         RouteCategory::query()->create(
-            ['name' => 'заповедники']
+            ['name' => RouteCategoryEnum::Preserves->value]
         );
         RouteCategory::query()->create(
-            ['name' => 'курганы']
+            ['name' => RouteCategoryEnum::Kurgans->value]
         );
     }
 }
