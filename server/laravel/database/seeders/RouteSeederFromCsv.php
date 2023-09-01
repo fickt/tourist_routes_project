@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Enums\RouteCategoryEnum;
 use App\Models\Route;
+use App\Models\RouteCategory;
 use App\Models\RoutePhoto;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -38,9 +40,23 @@ class RouteSeederFromCsv extends Seeder
                     'route_id' => $route->id,
                     'photo_path' => 'image_route_zaglushka.jpg'
                 ]);
+            $routeCategory = self::getRandomCategory();
+
+            $route->categories()->attach($routeCategory);
 
             $count++;
         }
         fclose($open);
+    }
+
+    /**
+     * Берёт из RouteCategoryEnum рандомное значение, берет его value и по нему в БД ищет категорию
+     */
+    private static function getRandomCategory()
+    {
+        $categoryNumber = rand(0, count(RouteCategoryEnum::cases()) - 1);
+        return RouteCategory::query()
+            ->where('name', '=', RouteCategoryEnum::cases()[$categoryNumber]->value)
+            ->first();
     }
 }
