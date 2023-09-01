@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuestionnaireAnswersRequest;
 use App\Http\Resources\RouteQuestionnaireResource;
+use App\Http\Resources\RouteResource;
 use App\Models\Route;
 use App\Models\RouteQuestionnaire;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class RouteQuestionnaireController extends Controller
 {
@@ -29,7 +32,7 @@ class RouteQuestionnaireController extends Controller
     /*
      *
      */
-    public function store(Request $request): Collection //QuestionnaireAnswersRequest
+    public function store(QuestionnaireAnswersRequest $request): AnonymousResourceCollection //QuestionnaireAnswersRequest
     {
         $dislikedCategories = [];
         foreach ($request->getPayload() as $answer) {
@@ -47,6 +50,6 @@ class RouteQuestionnaireController extends Controller
         foreach ($recommendedRoutes as $route) {
             $user->recommendations()->attach($route);
         }
-        return $user->recommendations()->get();
+        return RouteResource::collection($user->recommendations()->get());
     }
 }
