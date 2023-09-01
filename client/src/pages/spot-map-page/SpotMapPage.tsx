@@ -1,34 +1,38 @@
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { useEffect, useState } from "react";
-import { markers, TMarker } from "components/ymap/constants/markers";
+import { TMarker } from "components/ymap/constants/markers";
 import { getLocalSpotsAction } from "modules/card-list/store/spotsActions";
 import { YMapComponent } from "components/ymap/YMapComponent";
+import { localSpots, TLocalRoute } from "utils/localRoutes";
+import { useAdaptedSpotType } from "hooks/useAdaptedSpotType";
 
 export const SpotMapPage = () => {
-    const spotId = useAppSelector(state => state.spotId.spotId); // Adjust to match your actual state structure
-    const spots = useAppSelector(state => state?.spots?.data);
 
-    const [spotItem, setSpotItem] = useState<TMarker | null>(null);
     const dispatch = useAppDispatch();
+    const spotId = useAppSelector(state => state.spotId.spotId);
+    const spots = localSpots;
+    const [selectedSpot, setSelectedSpot] = useState<TMarker | null>(null);
 
     const getSpotById = (spotId: string) => {
         if (spots) {
-            const foundSpot = spots.find(spot => spot.id === Number(spotId));
-            setSpotItem(foundSpot || null);
+            const foundSpot: TLocalRoute | undefined = spots.find((spot: TLocalRoute) =>
+                spot.id === Number(spotId));
+            const adaptedSpot = useAdaptedSpotType(foundSpot);
+            setSelectedSpot(adaptedSpot);
         }
     };
 
     useEffect(() => {
         if (spotId) {
-            dispatch(getLocalSpotsAction(markers));
+            dispatch(getLocalSpotsAction(spots));
             getSpotById(spotId);
         }
     }, [spotId, spots]);
 
     return (
         <>
-            {spotItem && (
-                <YMapComponent markers={[spotItem]}/>
+            {selectedSpot && (
+                <YMapComponent markers={[selectedSpot]} />
             )}
         </>
     );

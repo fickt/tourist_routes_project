@@ -1,13 +1,13 @@
-import { TMarker } from "components/ymap/constants/markers";
 import { SPOTS_ERROR, IS_SPOTS_LOADING, GET_LOCAL_SPOTS, GET_SPOT_ROUTES } from "modules/card-list/store/spotsActionTypeNames";
 import { TSpotRoutes } from "modules/card-list/types/spotRoutes";
+import { TLocalRoute } from "utils/localRoutes";
 
 //spots-data actions
 export type TSpotsActions =  TSpotsDataLoading | TSpotsDataError | TLocalSpotsDataAction | TGetRoutesAction;
 
 export type TLocalSpotsDataAction = {
     type: typeof GET_LOCAL_SPOTS,
-    payload: TMarker[]
+    payload: TLocalRoute[]
 }
 
 export type TSpotsDataError = {
