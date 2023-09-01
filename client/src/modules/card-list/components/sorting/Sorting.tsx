@@ -4,13 +4,13 @@ import { Select } from "antd";
 import { TSortingProps } from "./types";
 import { sortTabs } from "modules/card-list/constants/sortOptions";
 import { useAppSelector } from "storage/hookTypes";
-import { spotRoutesSelector } from "modules/card-list/store/spotsSelectors";
 import { useDispatch } from "react-redux";
 import { getSpotRoutes } from "modules/card-list/store/spotsActions";
 
 export const Sorting = ({ options }: TSortingProps) => {
-    const spots = useAppSelector(spotRoutesSelector);
     const dispatch = useDispatch()
+    const spots = useAppSelector(state => state.spots.dataDb)
+
     const sortSpots = (value: string) => {
         const sortedArray = [...spots];
 
