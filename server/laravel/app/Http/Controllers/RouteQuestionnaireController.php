@@ -8,6 +8,7 @@ use App\Models\RouteQuestionnaire;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+
 class RouteQuestionnaireController extends Controller
 {
     public function __construct(protected RouteQuestionnaire $routeQuestionnaire)
@@ -30,22 +31,21 @@ class RouteQuestionnaireController extends Controller
      */
     public function store(Request $request): Collection //QuestionnaireAnswersRequest
     {
+        $dislikedCategories = [];
         foreach ($request->getPayload() as $answer) {
-            print_r($answer);
-            if (!!$answer['is_liked']) {
+            if (!$answer['is_liked']) {
                 $dislikedCategories[] = $answer['category'];
             }
-
-            $recommendedRoutes = Route::query()->whereHas('categories', function ($q) use ($dislikedCategories) {
-                    $q->whereNotIn('name', $dislikedCategories);
-                })->get();
-            /**
-             * @var User $user
-             */
-            $user = auth()->user();
-            foreach ($recommendedRoutes as $route) {
-                $user->recommendations()->attach($route);
-            }
+        }
+        $recommendedRoutes = Route::query()->whereHas('categories', function ($q) use ($dislikedCategories) {
+            $q->whereNotIn('name', $dislikedCategories);
+        })->get();
+        /**
+         * @var User $user
+         */
+        $user = auth()->user();
+        foreach ($recommendedRoutes as $route) {
+            $user->recommendations()->attach($route);
         }
         return $user->recommendations()->get();
     }
