@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use app\Enums\RouteCategoryEnum;
 use App\Models\RouteCategory;
 use App\Models\RouteQuestionnaire;
 use App\Models\RouteQuestionnairePhoto;
@@ -15,9 +16,6 @@ class RouteQuestionnaireSeeder extends Seeder
      */
     public static function run(): void
     {
-        /**
-         * @var RouteQuestionnaire $questionnaire
-         */
         $questionnaire = RouteQuestionnaire::query()->create([
                 'name' => 'Test questionnaire'
             ]
@@ -25,49 +23,49 @@ class RouteQuestionnaireSeeder extends Seeder
 
         RouteQuestionnairePhoto::query()->create([
             'photo' => 'questionnaire_gori_photo.jpg',
-            'category_id' => RouteCategory::query()->where('name', '=', 'горы')->first()->id,
+            'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::Mountains->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
 
         RouteQuestionnairePhoto::query()->create([
             'photo' => 'questionnaire_ozero_photo.jpg',
-            'category_id' => RouteCategory::query()->where('name', '=', 'озёра')->first()->id,
+            'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::Lakes->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
 
         RouteQuestionnairePhoto::query()->create([
             'photo' => 'questionnaire_istoricheskie_mesta_photo.jpg',
-            'category_id' => RouteCategory::query()->where('name', '=', 'исторические места')->first()->id,
+            'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::HistoricSites->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
 
         RouteQuestionnairePhoto::query()->create([
             'photo' => 'questionnaire_zona_otdiha_photo.jpg',
-            'category_id' => RouteCategory::query()->where('name', '=', 'зоны отдыха')->first()->id,
+            'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::Resorts->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
 
         RouteQuestionnairePhoto::query()->create([
             'photo' => 'questionnaire_reki_photo.jpg',
-            'category_id' => RouteCategory::query()->where('name', '=', 'реки')->first()->id,
+            'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::Rivers->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
 
         RouteQuestionnairePhoto::query()->create([
             'photo' => 'questionnaire_pesheri_photo.jpg',
-            'category_id' => RouteCategory::query()->where('name', '=', 'пещеры')->first()->id,
+            'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::Caves->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
 
         RouteQuestionnairePhoto::query()->create([
             'photo' => 'questionnaire_gornolizhni_komplex_photo.jpg',
-            'category_id' => RouteCategory::query()->where('name', '=', 'горнолыжные комплексы')->first()->id,
+            'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::SkiingComplex->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
 
         RouteQuestionnairePhoto::query()->create([
             'photo' => 'questionnaire_kurgan_photo.jpg',
-            'category_id' => RouteCategory::query()->where('name', '=', 'курганы')->first()->id,
+            'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::Kurgans->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
     }
