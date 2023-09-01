@@ -14,8 +14,8 @@ export const SpotRouteList = memo(() => {
     const dispatch = useAppDispatch();
     const spotRoutes = useAppSelector(spotRoutesSelector);
     const [error, setError] = useState<string>();
-    const [loading, setLoading] = useState(false);   
-    
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         //пока не оформлял код ниже, закончил на стадии обработки ошибки
         if (!spotRoutes) {
@@ -44,4 +44,3 @@ export const SpotRouteList = memo(() => {
         </>
     );
 });
-

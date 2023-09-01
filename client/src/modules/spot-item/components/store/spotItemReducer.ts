@@ -1,4 +1,4 @@
-import {SpotType} from "modules/spot-item/components/store/spotItemActions";
+import { SpotType } from "modules/spot-item/components/store/spotItemActions";
 
 interface SpotId {
     spotId: null | string
