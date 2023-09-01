@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
 import { useEffect, useState } from "react";
 import { TMarker } from "components/ymap/constants/markers";
-import { getLocalSpotsAction } from "modules/card-list/store/spotsActions";
+import { handleSpots } from "modules/card-list/store/spotsActions";
 import { YMapComponent } from "components/ymap/YMapComponent";
 import { localSpots, TLocalRoute } from "utils/localRoutes";
 import { useAdaptedSpotType } from "hooks/useAdaptedSpotType";
@@ -24,7 +24,7 @@ export const SpotMapPage = () => {
 
     useEffect(() => {
         if (spotId) {
-            dispatch(getLocalSpotsAction(spots));
+            dispatch(handleSpots(spots));
             getSpotById(spotId);
         }
     }, [spotId, spots]);

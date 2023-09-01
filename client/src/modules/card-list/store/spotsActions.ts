@@ -1,11 +1,18 @@
-import { GET_LOCAL_SPOTS, GET_SPOT_ROUTES, IS_SPOTS_LOADING, SPOTS_ERROR } from "./spotsActionTypeNames";
-import { TLocalSpotsDataAction, TSpotsDataError, TSpotsDataLoading } from "modules/card-list/store/types/spotsActionTypes";
-import { TSpotRoutes } from "modules/card-list/types/spotRoutes";
+import { SET_SPOTS, SET_MAP_SPOTS, IS_SPOTS_LOADING, SPOTS_ERROR } from "./spotsActionTypeNames";
+import { TSpotsDataError, TSpotsDataLoading } from "modules/card-list/store/types/spotsActionTypes";
+import { TMarker } from "components/ymap/constants/markers";
 import { TLocalRoute } from "utils/localRoutes";
 
-export const getLocalSpotsAction = (data: TLocalRoute[]): TLocalSpotsDataAction => {
+export const handleSpots = (data: TLocalRoute[]) => {
     return {
-        type: GET_LOCAL_SPOTS,
+        type: SET_SPOTS,
+        payload: data
+    }
+}
+
+export const handleMapSpots = (data: TMarker[]) => {
+    return {
+        type: SET_MAP_SPOTS,
         payload: data,
     }
 }
@@ -21,12 +28,5 @@ export const isSpotsLoading = (isLoading: boolean): TSpotsDataLoading => {
     return {
         type: IS_SPOTS_LOADING,
         payload: isLoading
-    }
-}
-
-export const getSpotRoutes = (data: TSpotRoutes) => {
-    return {
-        type: GET_SPOT_ROUTES,
-        payload: data
     }
 }

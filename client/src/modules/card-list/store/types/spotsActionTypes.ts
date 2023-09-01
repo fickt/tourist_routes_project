@@ -1,12 +1,11 @@
-import { SPOTS_ERROR, IS_SPOTS_LOADING, GET_LOCAL_SPOTS, GET_SPOT_ROUTES } from "modules/card-list/store/spotsActionTypeNames";
-import { TSpotRoutes } from "modules/card-list/types/spotRoutes";
+import { SPOTS_ERROR, IS_SPOTS_LOADING, SET_SPOTS, SET_MAP_SPOTS } from "modules/card-list/store/spotsActionTypeNames";
 import { TLocalRoute } from "utils/localRoutes";
 
 //spots-data actions
 export type TSpotsActions =  TSpotsDataLoading | TSpotsDataError | TLocalSpotsDataAction | TGetRoutesAction;
 
 export type TLocalSpotsDataAction = {
-    type: typeof GET_LOCAL_SPOTS,
+    type: typeof SET_SPOTS,
     payload: TLocalRoute[]
 }
 
@@ -21,6 +20,6 @@ export type TSpotsDataLoading = {
 }
 
 export type TGetRoutesAction = {
-    type: typeof GET_SPOT_ROUTES,
-    payload: TSpotRoutes
+    type: typeof SET_MAP_SPOTS,
+    payload: TLocalRoute[]
 }

@@ -1,13 +1,21 @@
 .logo {
     position: relative;
     text-decoration: none; 
-    
-    .text {
-        color: var(--background-07);
+
+    &__text,
+    &__title {
         font-family: "Nunito Sans", sans-serif;
         font-size: 20px;
         font-weight: 600;
+    }
+
+    &__text {
+        color: var(--background-07);
         text-transform: uppercase;
+    }
+
+    &__title {
+        color: var(--text-01);
     }
 
     h2 {

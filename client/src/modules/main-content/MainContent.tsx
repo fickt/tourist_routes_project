@@ -7,7 +7,7 @@ import classNames from "classnames";
 import { useDebounce } from "hooks/useDebounce";
 import { apiSpots } from "modules/card-list/api/SpotsServise";
 import { useAppDispatch } from "storage/hookTypes";
-import { getSpotRoutes } from "modules/card-list/store/spotsActions";
+import { handleSpots } from "modules/card-list/store/spotsActions";
 import ImageRecommendIcon from "./assets/imageReccomendIcon.svg";
 import { ImageRecommendPopup } from "modules/image-recommend-popup/ImageRecommendPopup";
 
@@ -36,7 +36,7 @@ export const MainContent = () => {
         debounceSearchValue &&
         apiSpots.fetchSearchRequest(debounceSearchValue)
             .then(data => {
-                dispatch(getSpotRoutes(data.data))
+                dispatch(handleSpots(data.data))
                 console.log(data.data);
             })
             .catch(err => console.warn(err))

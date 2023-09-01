@@ -22,14 +22,21 @@ export const Logo = () => {
             location.pathname !== "/questions";
     };
 
+    const shouldNotRenderLogo = () => {
+        return location.pathname !== "/spots/*";
+    };
+
     return (
         <>
             {shouldRenderBackIcon() && (
                 <a className={s.back} onClick={goBack}><BackIcon className={s.back__icon} /></a>)
             }
-            <Link to={"/"} className={s.logo} onClick={handleClick}>
-                <Title level={2} className={s.text}>logo</Title>
-            </Link>
+            {shouldNotRenderLogo
+                ? (<div className={s.logo}><h2 className={s.logo__title}>О месте</h2></div>)
+                : (<Link to={"/"} className={s.logo} onClick={handleClick}>
+                    <Title level={2} className={s.logo__text}>logo</Title>
+                </Link>)
+            }
         </>
     );
 };

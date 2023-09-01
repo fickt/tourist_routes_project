@@ -1,9 +1,9 @@
 import { TMarker } from "components/ymap/constants/markers";
-import { TSpotRoutes } from "modules/card-list/types/spotRoutes";
+import { TLocalRoute } from "utils/localRoutes";
 
 export type TSpotsState = {
-    data: TMarker[],
-    dataDb: TSpotRoutes,
+    data: TLocalRoute[],
+    map_data: TMarker[],
     loading: boolean,
     error: boolean,
     total: number

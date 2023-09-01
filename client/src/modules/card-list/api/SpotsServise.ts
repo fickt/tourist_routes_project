@@ -1,15 +1,15 @@
 import { AxiosResponse } from "axios";
 import { RoutePath } from "pages/routeConfig";
 import { api } from "utils/api";
-import { TSpotRoutes } from "modules/card-list//types/spotRoutes";
+import { TLocalRoute } from "utils/localRoutes";
 
 export class SpotsService {
 
-    fetchSpots(): Promise<AxiosResponse<TSpotRoutes>> {
+    fetchSpots(): Promise<AxiosResponse<TLocalRoute[]>> {
         return api.get(RoutePath.spots);
     }
 
-    fetchSpotFilter(difficulty: string, category: string): Promise<AxiosResponse<TSpotRoutes>> {
+    fetchSpotFilter(difficulty: string, category: string): Promise<AxiosResponse<TLocalRoute[]>> {
 
         const requestPath = (difficulty: string, category: string) => {
             if (difficulty && category)
@@ -24,7 +24,7 @@ export class SpotsService {
         return api.get(requestPath(difficulty, category));
     }
 
-    fetchSearchRequest(searchValue: string): Promise<AxiosResponse<TSpotRoutes>> {
+    fetchSearchRequest(searchValue: string): Promise<AxiosResponse<TLocalRoute[]>> {
         
         const requestPath = `${RoutePath.spots}?search=${searchValue}`
         return api.get(requestPath);

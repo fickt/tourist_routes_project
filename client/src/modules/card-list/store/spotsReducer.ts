@@ -1,10 +1,10 @@
-import { GET_LOCAL_SPOTS, GET_SPOT_ROUTES, IS_SPOTS_LOADING, SPOTS_ERROR } from "./spotsActionTypeNames";
+import { SET_SPOTS, SET_MAP_SPOTS, IS_SPOTS_LOADING, SPOTS_ERROR } from "./spotsActionTypeNames";
 import { TSpotsActions } from "modules/card-list/store/types/spotsActionTypes";
 import { TSpotsState } from "./types/spotsReducerTypes";
 
 const initialState: TSpotsState = {
     data: null,
-    dataDb: null,
+    map_data: null,
     total: null,
     loading: false,
     error: false
@@ -13,10 +13,10 @@ const initialState: TSpotsState = {
 export function spotsReducer(state = initialState, action:TSpotsActions) {
 
     switch (action.type) {
-        case GET_SPOT_ROUTES:
-            return {...state, dataDb: action.payload}
-        case GET_LOCAL_SPOTS:
-            return {...state, data: action.payload, total: action.payload.length}
+        case SET_SPOTS:
+            return {...state, data: action.payload}
+        case SET_MAP_SPOTS:
+            return {...state, data: action.payload}
         case SPOTS_ERROR:
             return {...state, error: action.payload}
         case IS_SPOTS_LOADING:
