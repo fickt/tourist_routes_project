@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Resources\RouteResource;
+use App\Models\User;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class RouteRecommendationController extends Controller
 {
-    public function index()
+    public function __construct(protected User $user)
     {
-        return auth()->user()->recommendations()->get();
+
+    }
+    public function index(): AnonymousResourceCollection
+    {
+        return RouteResource::collection($this->user->getRecommendations());
     }
 }

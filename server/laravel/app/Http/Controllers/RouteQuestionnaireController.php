@@ -8,8 +8,6 @@ use App\Http\Resources\RouteResource;
 use App\Models\Route;
 use App\Models\RouteQuestionnaire;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class RouteQuestionnaireController extends Controller
@@ -19,37 +17,13 @@ class RouteQuestionnaireController extends Controller
 
     }
 
-    public function index()
-    {
-        return auth()->user()->recommendations()->get();
-    }
-
-    public function show()
+    public function show(): RouteQuestionnaireResource
     {
         return RouteQuestionnaireResource::make($this->routeQuestionnaire->getQuestionnaire());
     }
 
-    /*
-     *
-     */
-    public function store(QuestionnaireAnswersRequest $request): AnonymousResourceCollection //QuestionnaireAnswersRequest
+    public function store(QuestionnaireAnswersRequest $request): AnonymousResourceCollection
     {
-        $dislikedCategories = [];
-        foreach ($request->getPayload() as $answer) {
-            if (!$answer['is_liked']) {
-                $dislikedCategories[] = $answer['category'];
-            }
-        }
-        $recommendedRoutes = Route::query()->whereHas('categories', function ($q) use ($dislikedCategories) {
-            $q->whereNotIn('name', $dislikedCategories);
-        })->get();
-        /**
-         * @var User $user
-         */
-        $user = auth()->user();
-        foreach ($recommendedRoutes as $route) {
-            $user->recommendations()->attach($route);
-        }
-        return RouteResource::collection($user->recommendations()->get());
+        return RouteResource::collection($this->routeQuestionnaire->generateRecommendationsForUser($request->validated()));
     }
 }

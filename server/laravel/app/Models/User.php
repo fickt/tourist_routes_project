@@ -100,6 +100,11 @@ class User extends Authenticatable implements JWTSubject
         return auth()->user()->favoriteRoutes()->get();
     }
 
+    public function getRecommendations()
+    {
+        return auth()->user()->recommendations()->get();
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

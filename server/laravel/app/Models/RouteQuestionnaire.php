@@ -29,4 +29,23 @@ class RouteQuestionnaire extends Model
     {
         return RouteQuestionnaire::query()->with('photos.category')->first();
     }
+
+    public function generateRecommendationsForUser($answers)
+    {
+        $dislikedCategories = [];
+        foreach ($answers as $answer) {
+            if (!$answer['is_liked']) {
+                $dislikedCategories[] = $answer['category'];
+            }
+        }
+        $recommendedRoutes = Route::query()->whereHas('categories', function ($q) use ($dislikedCategories) {
+            $q->whereNotIn('name', $dislikedCategories);
+        })->get();
+
+        $user = auth()->user();
+        foreach ($recommendedRoutes as $route) {
+            $user->recommendations()->attach($route);
+        }
+        return $user->getRecommendations();
+    }
 }
