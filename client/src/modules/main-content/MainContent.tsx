@@ -1,4 +1,4 @@
-import React, { FormEvent, useMemo, useEffect, useState } from "react";
+import React, { FormEvent, useMemo, useState } from "react";
 import s from "./styles.module.scss";
 import {SearchForm} from "components/search/SearchForm";
 import {CardList} from "modules/card-list";
@@ -13,7 +13,6 @@ import {ImageRecommendPopup} from "modules/image-recommend-popup/ImageRecommendP
 import {spotsSelector} from "modules/card-list/store/spotsSelectors";
 
 export const MainContent = () => {
-
     const dispatch = useAppDispatch();
     const [searchValue, setSearchValue] = useState("");
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -49,7 +48,6 @@ export const MainContent = () => {
         apiSpots.fetchSearchRequest(debounceSearchValue)
             .then(data => {
                 dispatch(handleSpots(data.data))
-                console.log(data.data);
             })
             .catch(err => console.warn(err))
     }

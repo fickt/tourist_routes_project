@@ -19,11 +19,9 @@ export const SpotMapPage = () => {
 
     useEffect(() => {
         if (spotId && mapSpots.length > 0) {
-            console.log("spotId", spotId)
             const foundSpot: TMarker | undefined = mapSpots.find((spot: TMarker) =>
                 spot.id === Number(spotId)
             );
-            console.log("место", foundSpot)
             if (foundSpot) {
                 dispatch(handleChosenMapSpot(foundSpot));
             }
