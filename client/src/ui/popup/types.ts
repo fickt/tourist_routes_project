@@ -1,6 +1,8 @@
-export type TImageRecommendPopupProps = {
-    title: string,
+export type TPopupProps = {
+    review?: boolean,
+    image?: boolean,
     isPopupOpen: boolean,
     setIsPopupOpen: (value: boolean) => void,
     closePopup: () => void,
+    spotId?: number,
 }

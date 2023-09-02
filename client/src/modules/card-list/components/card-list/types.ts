@@ -1,5 +1,5 @@
-import {TSpotRoutes} from "modules/card-list/types/spotRoutes";
+import {TLocalRoute} from "utils/localRoutes";
 
 export interface CardListProps {
-    spots: TSpotRoutes
+    spots: TLocalRoute[]
 }

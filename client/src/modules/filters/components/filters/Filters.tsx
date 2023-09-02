@@ -1,22 +1,24 @@
-import { Button } from "ui/button/Button";
+import {Button} from "ui/button/Button";
 import s from "./styles.module.scss";
 import classNames from "classnames";
-import { ContentHeader } from "ui/content-header/ContentHeader";
-import { FilterItem } from "modules/filters/components/filter-item/FilterItem";
-import { categoriesTags, difficultyTags, filterValues } from "modules/filters/constants/filterValues";
-import { Link } from "react-router-dom";
-import { RoutePath } from "pages/routeConfig";
-import { useAppDispatch, useAppSelector } from "storage/hookTypes";
-import { getSpotRoutes } from "modules/card-list/store/spotsActions";
-import { localSpots } from "utils/localRoutes";
-import { resetFiltersAction } from "modules/filters/store/filtersActions";
+import {ContentHeader} from "ui/content-header/ContentHeader";
+import {FilterItem} from "modules/filters/components/filter-item/FilterItem";
+import {categoriesTags, difficultyTags, filterValues} from "modules/filters/constants/filterValues";
+import {Link} from "react-router-dom";
+import {RoutePath} from "pages/routeConfig";
+import {useAppDispatch, useAppSelector} from "storage/hookTypes";
+import {handleSpots} from "modules/card-list/store/spotsActions";
+import {resetFiltersAction} from "modules/filters/store/filtersActions";
+import {spotsSelector} from "modules/card-list/store/spotsSelectors";
 
 export const Filters = () => {
+
     const dispatch = useAppDispatch();
-    const { categories, difficulties } = useAppSelector(state => state.filters);
+    const spotRoutes = useAppSelector(spotsSelector);
+    const {categories, difficulties} = useAppSelector(state => state.filters);
 
     const handleApplyFilters = () => {
-        let filteredArray = [...localSpots];
+        let filteredArray = [...spotRoutes];
 
         if (categories.length > 0) {
             filteredArray = filteredArray.filter(spot =>
@@ -29,12 +31,12 @@ export const Filters = () => {
                 difficulties.includes(spot.difficulty)
             );
         }
-        dispatch(getSpotRoutes(filteredArray));
+        dispatch(handleSpots(filteredArray));
     };
 
     const handleCancelFilters = () => {
         dispatch(resetFiltersAction());
-        dispatch(getSpotRoutes(localSpots));
+        dispatch(handleSpots(spotRoutes));
     };
 
 
@@ -58,10 +60,10 @@ export const Filters = () => {
 
     return (
         <div className={classNames(s.wrapper)}>
-            <ContentHeader title="Фильтр" />
+            <ContentHeader title="Фильтр"/>
             <div className={s.filters}>
-                <FilterItem title={filterValues.category} list={categoriesTags} />
-                <FilterItem title={filterValues.difficulty} list={difficultyTags} />
+                <FilterItem title={filterValues.category} list={categoriesTags}/>
+                <FilterItem title={filterValues.difficulty} list={difficultyTags}/>
             </div>
             <div className={s.buttons__wrapper}>
                 <Link to={RoutePath.home} className="buttons__link">
