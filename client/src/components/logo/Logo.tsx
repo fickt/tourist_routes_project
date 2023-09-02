@@ -1,10 +1,10 @@
-import React, { SyntheticEvent } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, {SyntheticEvent} from "react";
+import {Link, useLocation} from "react-router-dom";
 import s from "./styles.module.scss";
-import { Typography } from "antd";
+import {Typography} from "antd";
 import BackIcon from "./assets/backIcon.svg";
 
-const { Title } = Typography;
+const {Title} = Typography;
 
 export const Logo = () => {
 
@@ -22,21 +22,14 @@ export const Logo = () => {
             location.pathname !== "/questions";
     };
 
-    const shouldNotRenderLogo = () => {
-        return location.pathname !== "/spots/*";
-    };
-
     return (
         <>
             {shouldRenderBackIcon() && (
-                <a className={s.back} onClick={goBack}><BackIcon className={s.back__icon} /></a>)
+                <a className={s.back} onClick={goBack}><BackIcon className={s.back__icon}/></a>)
             }
-            {shouldNotRenderLogo
-                ? (<div className={s.logo}><h2 className={s.logo__title}>О месте</h2></div>)
-                : (<Link to={"/"} className={s.logo} onClick={handleClick}>
-                    <Title level={2} className={s.logo__text}>logo</Title>
-                </Link>)
-            }
+            <Link to={"/"} className={s.logo} onClick={handleClick}>
+                <Title level={2} className={s.logo__text}>logo</Title>
+            </Link>
         </>
     );
 };

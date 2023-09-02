@@ -2,25 +2,16 @@
     position: relative;
     text-decoration: none; 
 
-    &__text,
-    &__title {
+    &__text {
         font-family: "Nunito Sans", sans-serif;
         font-size: 20px;
         font-weight: 600;
-    }
-
-    &__text {
-        color: var(--background-07);
         text-transform: uppercase;
     }
-
-    &__title {
-        color: var(--text-01);
-    }
-
     h2 {
         margin: 0;
         padding: 16px;
+        color: var(--background-07);
     }
 }
 

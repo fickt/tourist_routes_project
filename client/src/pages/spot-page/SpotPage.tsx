@@ -1,31 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useAppDispatch } from "storage/hookTypes";
-import s from "./styles.module.scss";
-import { handleSpots } from "modules/card-list/store/spotsActions";
-import { SpotItem } from "modules/spot-item";
-import { localSpots, TLocalRoute } from "utils/localRoutes";
+import React, {useEffect} from "react";
+import {useParams} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "storage/hookTypes";
+import {handleChosenMapSpot, handleChosenSpot, handleSpots} from "modules/card-list/store/spotsActions";
+import {SpotItem} from "modules/spot-item";
+import {TLocalRoute} from "utils/localRoutes";
+import {chosenSpotSelector, spotsSelector} from "modules/card-list/store/spotsSelectors";
+import {useAdaptedSpotType} from "hooks/useAdaptedSpotType";
 
 export const SpotPage = () => {
 
     const dispatch = useAppDispatch();
-    const spots = localSpots;
-    const { spotId } = useParams();
-    const [spotItem, setSpotItem] = useState<TLocalRoute | null>(null);
+    const spotRoutes = useAppSelector(spotsSelector);
+    const {spotId} = useParams();
+    const spotItem: TLocalRoute = useAppSelector(chosenSpotSelector);
 
     useEffect(() => {
         if (spotId) {
-            dispatch(handleSpots(spots));
+            dispatch(handleSpots(spotRoutes));
             getSpotById(spotId);
         }
-    }, [spotId, spots])
+    }, [spotId, spotRoutes])
 
     const getSpotById = (spotId: string) => {
-        if (spots) {
-            const foundSpot: TLocalRoute | undefined = spots.find((spot: TLocalRoute) => {
+        if (spotRoutes) {
+            const foundSpot: TLocalRoute | undefined = spotRoutes.find((spot: TLocalRoute) => {
                 return spot.id === Number(spotId);
             })
-            setSpotItem(foundSpot);
+            dispatch(handleChosenSpot(foundSpot));
+            const updatedFoundSpot = useAdaptedSpotType(foundSpot);
+            dispatch(handleChosenMapSpot(updatedFoundSpot));
         }
     }
 
@@ -34,7 +37,7 @@ export const SpotPage = () => {
             {spotItem && (
                 <div className="wrapper">
                     <div className="content container">
-                        <SpotItem spotItem={spotItem} />
+                        <SpotItem spotItem={spotItem}/>
                     </div>
                 </div>)
             }

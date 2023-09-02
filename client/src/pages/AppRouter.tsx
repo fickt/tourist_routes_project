@@ -1,10 +1,10 @@
-import React, { memo, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
-import { mainRoutes, privateRoutes } from "./routeConfig";
-import { TRoutes } from "./types";
+import React, {memo, useEffect} from "react";
+import {Route, Routes} from "react-router-dom";
+import {mainRoutes, privateRoutes} from "./routeConfig";
+import {TRoutes} from "./types";
 import Cookies from "js-cookie";
-import { useAppDispatch } from "storage/hookTypes";
-import { handleSetUser, TUser } from "modules/auth-form";
+import {useAppDispatch} from "storage/hookTypes";
+import {handleSetUser, TUser} from "modules/auth-form";
 
 const AppRouter = () => {
 
@@ -20,10 +20,10 @@ const AppRouter = () => {
         }
     }, [])
 
-    const routeMap = ({path, element}: TRoutes) => <Route path={path} element={element} key={path} />
+    const routeMap = ({path, element}: TRoutes) => <Route path={path} element={element} key={path}/>
 
     return (
-        <Routes >
+        <Routes>
             {mainRoutes.map(routeMap)}
             {privateRoutes.map(routeMap)}
         </Routes>
