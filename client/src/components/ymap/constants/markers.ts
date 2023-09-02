@@ -15,7 +15,7 @@ export type TMarker = {
     rating: number
 }
 
-export const markers:TMarker[] = [
+export const markers: TMarker[] = [
     {
         id: 1,
         coordinates: [56.489814, 84.943555],

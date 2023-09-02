@@ -1,0 +1,1 @@
+export const SPOT_ID = "SPOT_ID";

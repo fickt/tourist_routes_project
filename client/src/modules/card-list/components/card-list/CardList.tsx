@@ -1,18 +1,21 @@
-import {FC} from "react";
+import React, { memo } from "react";
 import s from "./styles.module.scss";
+import { useAppSelector } from "storage/hookTypes";
+import { spotsSelector } from "modules/card-list/store/spotsSelectors";
 import { LocalCard } from "components/local-card/LocalCard";
 import { CardListHeader } from "modules/card-list/components/card-list-header/CardListHeader";
-import {CardListProps} from "modules/card-list/components/card-list/types";
+import { TLocalRoute } from "utils/localRoutes";
 
-export const CardList:FC<CardListProps> = ({spots}) => {
+export const CardList = memo(() => {
 
+    const spots = useAppSelector(spotsSelector);
 
     return (
         <div className={s.wrapper}>
             <CardListHeader title="Наши Маршруты" />
             <div className={s.cards}>
-                {spots?.map((spot) => <LocalCard key={spot.id} {...spot} />)}
+                {spots?.map((spot: TLocalRoute) => <LocalCard key={spot.id} {...spot} />)}
             </div>
         </div>
     );
-};
+});

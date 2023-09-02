@@ -1,35 +1,41 @@
-import { useAppDispatch, useAppSelector } from "storage/hookTypes";
-import { useEffect, useState } from "react";
-import { markers, TMarker } from "components/ymap/constants/markers";
-import { getLocalSpotsAction } from "modules/card-list/store/spotsActions";
-import { YMapComponent } from "components/ymap/YMapComponent";
+import React, {useEffect} from "react";
+import {useAppDispatch, useAppSelector} from "storage/hookTypes";
+import {TMarker} from "components/ymap/constants/markers";
+import {handleChosenMapSpot} from "modules/card-list/store/spotsActions";
+import {YMapComponent} from "components/ymap/YMapComponent";
+import {useAdaptedSpotsType} from "hooks/useAdaptedSpotType";
+import {chosenMapSpotSelector, spotsSelector} from "modules/card-list/store/spotsSelectors";
+import {PreloaderCar} from "ui/preloader/PreloaderCar";
+import {useParams} from "react-router-dom";
+import {TLocalRoute} from "utils/localRoutes";
 
 export const SpotMapPage = () => {
-    const spotId = useAppSelector(state => state.spotId.spotId); // Adjust to match your actual state structure
-    const spots = useAppSelector(state => state?.spots?.data);
 
-    const [spotItem, setSpotItem] = useState<TMarker | null>(null);
+    const {spotId} = useParams();
     const dispatch = useAppDispatch();
-
-    const getSpotById = (spotId: string) => {
-        if (spots) {
-            const foundSpot = spots.find(spot => spot.id === Number(spotId));
-            setSpotItem(foundSpot || null);
-        }
-    };
+    const chosenMapSpot = useAppSelector(chosenMapSpotSelector);
+    const spotRoutes: TLocalRoute[] = useAppSelector(spotsSelector);
+    const mapSpots: TMarker[] = useAdaptedSpotsType(spotRoutes);
 
     useEffect(() => {
-        if (spotId) {
-            dispatch(getLocalSpotsAction(markers));
-            getSpotById(spotId);
+        if (spotId && mapSpots.length > 0) {
+            console.log("spotId", spotId)
+            const foundSpot: TMarker | undefined = mapSpots.find((spot: TMarker) =>
+                spot.id === Number(spotId)
+            );
+            console.log("место", foundSpot)
+            if (foundSpot) {
+                dispatch(handleChosenMapSpot(foundSpot));
+            }
         }
-    }, [spotId, spots]);
+    }, [spotId, mapSpots, dispatch]);
 
     return (
         <>
-            {spotItem && (
-                <YMapComponent markers={[spotItem]}/>
-            )}
+            {chosenMapSpot !== null
+                ? (<YMapComponent markers={[chosenMapSpot]}/>)
+                : <PreloaderCar/>
+            }
         </>
     );
 };

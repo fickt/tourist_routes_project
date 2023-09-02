@@ -1,10 +1,10 @@
-import React, { SyntheticEvent } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, {SyntheticEvent} from "react";
+import {Link, useLocation} from "react-router-dom";
 import s from "./styles.module.scss";
-import { Typography } from "antd";
+import {Typography} from "antd";
 import BackIcon from "./assets/backIcon.svg";
 
-const { Title } = Typography;
+const {Title} = Typography;
 
 export const Logo = () => {
 
@@ -25,10 +25,10 @@ export const Logo = () => {
     return (
         <>
             {shouldRenderBackIcon() && (
-                <a className={s.back} onClick={goBack}><BackIcon className={s.back__icon} /></a>)
+                <a className={s.back} onClick={goBack}><BackIcon className={s.back__icon}/></a>)
             }
             <Link to={"/"} className={s.logo} onClick={handleClick}>
-                <Title level={2} className={s.text}>logo</Title>
+                <Title level={2} className={s.logo__text}>logo</Title>
             </Link>
         </>
     );

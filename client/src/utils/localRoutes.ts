@@ -13,7 +13,7 @@ export type TLocalRoute = {
     comments: any[]; //пока комментарии не определены
 }
 
-export const localSpots:TLocalRoute[] = [
+export const localSpots: TLocalRoute[] = [
     {
         id: 1,
         name: "Тестовый маршрут",

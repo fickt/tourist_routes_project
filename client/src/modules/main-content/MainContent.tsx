@@ -1,33 +1,33 @@
-import { FormEvent, useMemo, useState } from "react";
+import React, { FormEvent, useMemo, useEffect, useState } from "react";
 import s from "./styles.module.scss";
-import { SearchForm } from "components/search/SearchForm";
-import { CardList } from "modules/card-list";
+import {SearchForm} from "components/search/SearchForm";
+import {CardList} from "modules/card-list";
 import backImage from "./assets/bg.jpg";
 import classNames from "classnames";
-import { useAppSelector } from "storage/hookTypes";
+import {useDebounce} from "hooks/useDebounce";
+import {apiSpots} from "modules/card-list/api/SpotsServise";
+import {useAppDispatch, useAppSelector} from "storage/hookTypes";
+import {handleSpots} from "modules/card-list/store/spotsActions";
 import ImageRecommendIcon from "./assets/imageReccomendIcon.svg";
-import { ImageRecommendPopup } from "modules/image-recommend-popup/ImageRecommendPopup";
-import { spotRoutesSelector } from "modules/card-list/store/spotsSelectors";
+import {ImageRecommendPopup} from "modules/image-recommend-popup/ImageRecommendPopup";
+import {spotsSelector} from "modules/card-list/store/spotsSelectors";
 
 export const MainContent = () => {
 
+    const dispatch = useAppDispatch();
     const [searchValue, setSearchValue] = useState("");
     const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const spots = useAppSelector(spotRoutesSelector)
+    const debounceSearchValue = useDebounce(searchValue, 500);
+    const spotRoutes = useAppSelector(spotsSelector);
 
     const filteredSpots = useMemo(() => {
-        return spots?.filter(spot =>
+        return spotRoutes?.filter(spot =>
             spot.name.toLowerCase().includes(searchValue.toLowerCase())
         );
-    }, [searchValue, spots]);
+    }, [searchValue, spotRoutes]);
 
     const handleInputChange = (value: string) => {
         setSearchValue(value);
-    };
-
-    const handleSearchClick = (e: FormEvent) => {
-        e.preventDefault();
-        setSearchValue("");
     };
 
     const openPopup = () => {
@@ -38,8 +38,6 @@ export const MainContent = () => {
         setIsPopupOpen(false);
     };
 
-    // Поиск когда будет бд
-    /*
     const handleSearchClick = (e: FormEvent) => {
         e.preventDefault();
         handleSearchRequest();
@@ -49,14 +47,12 @@ export const MainContent = () => {
     const handleSearchRequest = () => {
         debounceSearchValue &&
         apiSpots.fetchSearchRequest(debounceSearchValue)
-            .then(data => dispatch(getSpotRoutes(data.data)))
+            .then(data => {
+                dispatch(handleSpots(data.data))
+                console.log(data.data);
+            })
             .catch(err => console.warn(err))
     }
-
-    useEffect(() => {
-        handleSearchRequest()
-    }, [debounceSearchValue])
-    */
 
     return (
         <>
@@ -66,9 +62,12 @@ export const MainContent = () => {
                     <ImageRecommendPopup isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} closePopup={closePopup} />
                 </>)
             }
-            <section className={classNames("content-section", s.section)} style={{backgroundImage: `url(${backImage})`}}>
+            <section
+                className={classNames("content-section", s.section)}
+                style={{backgroundImage: `url(${backImage})`}}
+            >
                 <SearchForm
-                    placeholder="Поиск лучшего маршрута"
+                    placeholder={"Поиск лучшего маршрута"}
                     searchValue={searchValue}
                     handleFormSubmit={handleSearchClick}
                     handleInputChange={handleInputChange}
@@ -77,7 +76,7 @@ export const MainContent = () => {
             </section>
             <section className={classNames("content-section", s.routes)}>
                 <div className="container content"><CardList
-                    spots={filteredSpots ?? spots}
+                    spots={filteredSpots ?? spotRoutes}
                 /></div>
             </section>
         </>
