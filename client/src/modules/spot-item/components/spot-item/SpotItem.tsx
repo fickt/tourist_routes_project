@@ -4,10 +4,17 @@ import { TSpotItemProps } from "./types";
 import { TagList } from "components/filters-tag/FiltersTag";
 import classNames from "classnames";
 import { Slider } from "modules/spot-item/components/slider/Slider";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setSpotItemId } from "modules/spot-item/store/spotItemActions";
 
 export const SpotItem = ({ spotItem }: TSpotItemProps) => {
 
     const { name, description, photos, id, categories, difficulty, comments } = spotItem;
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(setSpotItemId(id.toString()))
+    }, [id])
 
     return (
         <div className={s.wrapper}>

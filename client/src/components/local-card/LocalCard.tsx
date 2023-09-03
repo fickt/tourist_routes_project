@@ -3,9 +3,10 @@ import s from "./styles.module.scss"
 import { TCardProps } from "./types";
 import { Rate } from "antd";
 import { FavoriteMarker } from "ui/favorite-marker/FavoriteMarker";
+import picture from "modules/main-content/assets/route.jpg";
 
 export const LocalCard = ({ id, name, photos, difficulty }: TCardProps) => {
-
+    photos[0] = picture
     return (
         <div className={s.wrapper}>
             <div className={s.favorite}>
