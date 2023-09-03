@@ -30,5 +30,9 @@ COPY . /var/www
 COPY --chown=www:www . /var/www
 
 USER www
-ENTRYPOINT bin/composer-installer.sh ; php-fpm
+
+ENTRYPOINT bin/composer-installer.sh
 EXPOSE 9000
+
+# Запустите ваше приложение
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=56"]

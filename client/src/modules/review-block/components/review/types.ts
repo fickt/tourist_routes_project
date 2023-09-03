@@ -2,10 +2,8 @@ import {TUser} from "modules/auth-form";
 
 export type TReviewProps = {
     id?: number,
-    rating: number,
     content: string,
-    date: string,
+    rating: number,
     user: TUser,
-    created_at?: string,
-    updated_at?: string
+    date?: Date,
 }

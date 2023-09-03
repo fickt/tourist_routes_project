@@ -1,3 +1,5 @@
+import {TUser} from "modules/auth-form";
+
 export type TLocalRoute = {
     id: number;
     name: string;
@@ -8,7 +10,14 @@ export type TLocalRoute = {
     latitude: number;
     rating: number;
     photos: string[];
-    comments: any[];
+    comments: TComment[];
+}
+
+export type TComment = {
+    id: number,
+    content: string,
+    rating: number,
+    user: TUser
 }
 
 export type TLocalRoutes = TLocalRoute[];

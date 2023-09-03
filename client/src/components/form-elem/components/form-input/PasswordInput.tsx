@@ -2,14 +2,20 @@ import s from "./styles.module.scss";
 import {Form, Input} from "antd";
 import {TPasswordInputProps} from "./types";
 import {passwordRules} from "components/form-elem/constants/formRules";
+import {messages} from "components/form-elem/constants/constants";
 
 export const PasswordInput = ({title, isAuthForm, isRegister, isPasswordChange}: TPasswordInputProps) => {
 
-    const placeholderText = isPasswordChange ? "Придумайте новый пароль" : isRegister ? "Придумайте пароль" : "Введите пароль";
+    const placeholderText = isPasswordChange
+        ? messages.imagineNewPassword
+        : isRegister
+            ? messages.imaginePassword
+            : messages.passPassword;
 
     return (
         <>
-            <Form.Item className="custom__antd__item" name="password" rules={passwordRules} validateStatus={""} hasFeedback>
+            <Form.Item className="custom__antd__item" name="password" rules={passwordRules} validateStatus={""}
+                       hasFeedback>
                 <div className={s.field}>
                     <span className={s.field__title}>{title}</span>
                     <Input.Password
@@ -28,13 +34,13 @@ export const PasswordInput = ({title, isAuthForm, isRegister, isPasswordChange}:
                     dependencies={["password"]}
                     validateStatus={""}
                     rules={[
-                        {required: true, message: "Повторите пароль!"},
+                        {required: true, message: messages.repeatPassword},
                         ({getFieldValue}) => ({
                             validator(_, value) {
                                 if (!value || getFieldValue("password") === value) {
                                     return Promise.resolve();
                                 }
-                                return Promise.reject(new Error("Пароли не совпадают!"));
+                                return Promise.reject(new Error(messages.passwordMissMatch));
                             },
                         }),
                     ]}
@@ -42,7 +48,7 @@ export const PasswordInput = ({title, isAuthForm, isRegister, isPasswordChange}:
                     <div className={s.field}>
                         <span className={s.field__title}>Подтверждение пароля</span>
                         <Input.Password
-                            placeholder={isPasswordChange ? "Повторите новый пароль" : "Повторите пароль"}
+                            placeholder={isPasswordChange ? messages.repeatNewPassword : messages.repeatPassword}
                             className={s.field__input}
                         />
                     </div>

@@ -14,9 +14,10 @@ import {useDispatch} from "react-redux";
 export const SpotItem = ({spotItem}: TSpotItemProps) => {
 
     const {name, rating, description, id, photos, categories, difficulty, comments} = spotItem;
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        dispatch(setSpotItemId(id.toString()))
+        dispatch(setSpotItemId(id.toString()));
     }, [id])
 
     return (

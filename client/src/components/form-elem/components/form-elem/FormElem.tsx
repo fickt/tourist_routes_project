@@ -12,10 +12,11 @@ import {FormInput} from "components/form-elem/components/form-input/FormInput";
 import {emailRules, nicknameRules, passwordRules} from "components/form-elem/constants/formRules";
 import {PasswordInput} from "components/form-elem/components/form-input/PasswordInput";
 import {FormButton} from "components/form-elem/components/form-button/FormButton";
-import {RememberMe} from "components/form-elem/components/remember-me/RememberMe";
 import {TServerResponse} from "modules/auth-form/store/types/authTypes";
 import {RoutePath} from "pages/routeConfig";
 import {Link} from "react-router-dom";
+import {authMessages} from "modules/auth-form";
+import {messages} from "components/form-elem/constants/constants";
 
 export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange}: TFormProps) => {
 
@@ -63,29 +64,30 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
         return (
             <div className={s.form__inputs}>
                 {isInfoChange
-                    ? <FormInput name="nickname" title="Никнейм" rules={nicknameRules} placeholder="Никнейм"/>
-                    : isRegister && <FormInput name="nickname" title="Никнейм" rules={nicknameRules} placeholder="Имя пользователя"/>
+                    ? <FormInput name={messages.nickNameEng} title={messages.nickNameRu} rules={nicknameRules} placeholder={messages.nickNameRu}/>
+                    : isRegister &&
+                    <FormInput name={messages.nickNameEng} title={messages.nickNameRu} rules={nicknameRules} placeholder={messages.userName}/>
                 }
                 {!isPasswordChange
-                    && <FormInput
-                        name="email" title="E-mail"
-                        rules={emailRules}
-                        placeholder={isInfoChange ? "nik@vk.com" : "Введите e-mail"}/>
+                && <FormInput
+                    name={messages.email} title={messages.emailSpecial}
+                    rules={emailRules}
+                    placeholder={isInfoChange ? messages.testEmail : messages.passEmail}/>
                 }
                 {isPasswordChange
-                    && <FormInput
-                        name="password_old"
-                        title="Прошлый пароль"
-                        rules={passwordRules}
-                        placeholder="Введите прошлый пароль"/>
+                && <FormInput
+                    name={messages.passwordOld}
+                    title={messages.lastPassword}
+                    rules={passwordRules}
+                    placeholder={messages.passLastPassword}/>
                 }
                 {(!isInfoChange || isPasswordChange)
-                    && <PasswordInput
-                        title={isPasswordChange ? "Новый пароль" : "Пароль"}
-                        isAuthForm={isAuthForm}
-                        isRegister={isRegister}
-                        isPasswordChange={isPasswordChange}
-                    />
+                && <PasswordInput
+                    title={isPasswordChange ? messages.newPassword : messages.password}
+                    isAuthForm={isAuthForm}
+                    isRegister={isRegister}
+                    isPasswordChange={isPasswordChange}
+                />
                 }
             </div>
         );
@@ -103,16 +105,14 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
         >
             <div className={s.form__inputs}>
                 {renderFormInputs()}
-                {isAuthForm && !isRegister && <RememberMe/>}
             </div>
             <div className={s.form__button}>
                 <FormButton
-                    value={(isInfoChange || isPasswordChange) ? "Сохранить" : (isRegister ? "Зарегистрироваться" : "Войти")}
+                    value={(isInfoChange || isPasswordChange) ? messages.save : (isRegister ? authMessages.register : authMessages.login)}
                     onClick={handleButtonClick}
                     loader={loader as boolean}
                 />
-                {isAuthForm && !isRegister &&
-                <Link className={s.forgotPassword} to={RoutePath.auth_register}>Забыли пароль?</Link>}
+                {isAuthForm && !isRegister && <Link className={s.forgotPassword} to={RoutePath.auth_register}>{messages.forgotPassword}</Link>}
             </div>
             {loader && <PreloaderCar/>}
             {!loader && (error && <ErrorMessage errorText={error}/>)}

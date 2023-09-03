@@ -1,0 +1,22 @@
+export const messages = {
+    imagineNewPassword: "Придумайте новый пароль",
+    imaginePassword: "Придумайте пароль",
+    passPassword: "Введите пароль",
+    repeatPassword: "Повторите пароль",
+    passwordMissMatch: "Пароли не совпадают",
+    repeatNewPassword: "Повторите новый пароль",
+    nickNameRu: "Никнейм",
+    nickNameEng: "nickname",
+    userName: "Имя пользователя",
+    email: "email",
+    emailSpecial: "E-mail",
+    testEmail: "nik@vk.com",
+    passEmail: "Введите e-mail",
+    passwordOld: "password_old",
+    lastPassword: "Прошлый пароль",
+    passLastPassword: "Введите прошлый пароль",
+    newPassword: "Новый пароль",
+    password: "Пароль",
+    save: "Сохранить",
+    forgotPassword: "Забыли пароль?"
+};

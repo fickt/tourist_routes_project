@@ -69,13 +69,13 @@ export const mainRoutes: TRoutes[] = [
     {path: RoutePath.location, element: <LocationPage/>},
     {path: RoutePath.spotId, element: <SpotPage/>},
     {path: RoutePath.spot_map, element: <SpotMapPage/>},
-    {path: RoutePath.review, element: <ReviewPage/>},
     {path: RoutePath.not_found, element: <NotFoundPage/>},
 ]
 
 export const privateRoutes: TRoutes[] = [
     {path: RoutePath.profile, element: <ProtectedRoute><ProfilePage/></ProtectedRoute>},
     {path: RoutePath.mySpots, element: <ProtectedRoute><MySpotsPage/></ProtectedRoute>},
+    {path: RoutePath.review, element: <ProtectedRoute><ReviewPage/></ProtectedRoute>},
     {path: RoutePath.favorites, element: <ProtectedRoute><FavoritesPage/></ProtectedRoute>},
     {path: RoutePath.questions, element: <ProtectedRoute><QuestionsPage/></ProtectedRoute>},
     {path: RoutePath.settings, element: <ProtectedRoute><SettingsPage/></ProtectedRoute>},

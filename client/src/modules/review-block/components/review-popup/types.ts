@@ -7,6 +7,6 @@ export type TReviewPopupProps = {
 }
 
 export type TFormValues = {
-    text: string,
+    content: string,
     rating: number,
 }

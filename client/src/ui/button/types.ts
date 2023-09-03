@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import {ReactNode} from "react";
 
 export type TButtonProps = {
     href?: string,
@@ -7,5 +7,6 @@ export type TButtonProps = {
     type?: "text" | "link" | "default" | "primary" | "dashed",
     action?: () => void,
     extraClass?: string,
-    htmlType?: "button" | "submit" | "reset"
+    htmlType?: "button" | "submit" | "reset",
+    disabled?: boolean,
 }
