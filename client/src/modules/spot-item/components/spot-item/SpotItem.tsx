@@ -7,10 +7,17 @@ import {Slider} from "modules/spot-item/components/slider/Slider";
 import {RatingLabel} from "modules/spot-item/components/rating-label/RatingLabel";
 import {Button} from "ui/button/Button";
 import {Link} from "react-router-dom";
+import {useEffect} from "react";
+import {setSpotItemId} from "modules/spot-item/store/spotItemActions";
+import {useDispatch} from "react-redux";
 
 export const SpotItem = ({spotItem}: TSpotItemProps) => {
 
     const {name, rating, description, id, photos, categories, difficulty, comments} = spotItem;
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(setSpotItemId(id.toString()))
+    }, [id])
 
     return (
         <div className={s.wrapper}>

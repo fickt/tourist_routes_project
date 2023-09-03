@@ -44,17 +44,24 @@ export const YMapComponent = ({markers}: TYMapProps) => {
                 markers.forEach(marker => {
                     //параметры для внутренности баллуна
                     const balloonInner = {}
-                    //Пока картинок на сервере нет, этот код не работает и вместо него обычные маркеры
                     //параметры для картинки на карте
-                    // const iconSets = {
-                    //     iconLayout: "default#image",
-                    //     iconImageHref: marker.picture,
-                    //     iconImageSize: marker.iconImageSize,
-                    //     iconImageOffset: marker.iconImageOffset,
-                    // }
-
-                    const newMarker = new ymaps.Placemark(marker.coordinates, marker.name, balloonInner);
-                    // const newMarker = new ymaps.Placemark(marker.coordinates, balloonInner, iconSets);
+                    const iconSets = {
+                        iconLayout: "default#image",
+                        iconImageHref: marker.picture,
+                        iconImageSize: marker.iconImageSize,
+                        iconImageOffset: marker.iconImageOffset,
+                    }
+                    if (spotId) {
+                        // Если это карта определенного места, то создаем круг вокруг маркера
+                        const circle = new ymaps.Circle([marker.coordinates, 3500], {}, {
+                            fillColor: "rgba(14, 167, 165, 0.30)",
+                            strokeColor: "#0000FF",
+                            strokeOpacity: 0.5,
+                            strokeWidth: 2,
+                        });
+                        myMap.geoObjects.add(circle);
+                    }
+                    const newMarker = new ymaps.Placemark(marker.coordinates, balloonInner, iconSets);
 
                     const buildRouteInSpot = () => { //функция для прокладывания маршрута
                         myMap.geoObjects.remove(multiRoute) //очищаем маршрут перед созданием нового
@@ -81,8 +88,14 @@ export const YMapComponent = ({markers}: TYMapProps) => {
                     })
                     //добавление маркера на карту
                     myMap.geoObjects.add(newMarker);
+
+                    //Если это карта определенного места, то прокладываем маршрут
+                    if(spotId){
+                        buildRouteInSpot()
+                    }
                 })
             };
+
 
             setLocationMarker(); //устанавливаем иконку геопозиции
             setMarkers(markers); //устанавливаем маркеры мест
