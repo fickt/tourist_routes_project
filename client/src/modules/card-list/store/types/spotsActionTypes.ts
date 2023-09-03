@@ -7,7 +7,7 @@ import {
     SET_MAP_SPOTS
 } from "modules/card-list/store/spotsActionTypeNames";
 import {TLocalRoute} from "utils/localRoutes";
-import {TMarker} from "components/ymap/constants/markers";
+import {TMarker} from "utils/serverRoutes";
 
 //spots-data actions
 export type TSpotsActions =

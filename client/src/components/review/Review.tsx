@@ -1,14 +1,15 @@
-import { Rate } from "antd";
 import s from "./styles.module.scss";
-import { TReviewProps } from "./types";
+import {TReviewProps} from "./types";
+import {RatingLabel} from "modules/spot-item/components/rating-label/RatingLabel";
 
-export const Review = ({ user, content, rating }: TReviewProps) => {
+export const Review = ({user, date, content, rating}: TReviewProps) => {
 
     return (
         <div className={s.review}>
-            <div className={s.review__name}>{user.nickname}</div>
-            <div className={s.review__date}>10.08.2023</div>
-            <Rate value={rating} disabled/>
+            <div className={s.review__header}>
+                <div className={s.review__header__info}>{user.nickname}{date}</div>
+                <RatingLabel rating={rating} />
+            </div>
             <p className={s.review__content}>{content}</p>
         </div>
     );

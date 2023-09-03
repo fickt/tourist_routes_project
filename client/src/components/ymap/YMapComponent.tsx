@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import s from "./styles.module.scss";
 import ymaps from "ymaps";
-import { removeControls } from "./helpers/ymap-options";
-import { mapControls, mapState } from "./constants/constants";
-import { TMarker } from "./constants/markers";
-import { TYMapProps } from "./types";
-import { useNavigate, useParams } from "react-router-dom";
-import { getLocation } from "./helpers/location";
+import {removeControls} from "./helpers/ymap-options";
+import {mapControls, mapState} from "./constants/constants";
+import {useNavigate, useParams} from "react-router-dom";
+import {getLocation} from "./helpers/location";
 import locationIcon from "./img/location.png"
-import { ErrorMessage } from "ui/error-message/ErrorMessage";
+import {ErrorMessage} from "ui/error-message/ErrorMessage";
+import {TMarkers} from "utils/serverRoutes";
+import {TYMapProps} from "components/ymap/types";
 
-export const YMapComponent = ({ markers }: TYMapProps) => {
+export const YMapComponent = ({markers}: TYMapProps) => {
 
     const navigate = useNavigate();
-    const { spotId } = useParams(); //проверяем на какой странице мы находимся, если есть spotId, то на странице места, иначе на страницу общей карты
+    const {spotId} = useParams(); //проверяем на какой странице мы находимся, если есть spotId, то на странице места, иначе на страницу общей карты
     const [error, setError] = useState<string>(null);
 
     const init = () => {
         //создание компонентов карты
-        const mapInit = (pos: GeolocationPosition, err?: GeolocationPositionError ) => {
+        const mapInit = (pos: GeolocationPosition, err?: GeolocationPositionError) => {
             const geoPosition = pos && [pos.coords.latitude, pos.coords.longitude];
             err && setError(err.message)
-            const myMap = new ymaps.Map("mapId", { ...mapState, center: geoPosition || mapState.center }); //если есть геолокация меняем центр карты на него
+            const myMap = new ymaps.Map("mapId", {...mapState, center: geoPosition || mapState.center}); //если есть геолокация меняем центр карты на него
             //задаем пустой объект маршрута, нужен для перерисовки
             let multiRoute = new ymaps.multiRouter.MultiRoute({
                 referencePoints: [],
@@ -40,19 +40,21 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
                 myMap.geoObjects.add(locationMarker);
             };
 
-            const setMarkers = (markers: TMarker[]) => {
+            const setMarkers = (markers: TMarkers) => {
                 markers.forEach(marker => {
                     //параметры для внутренности баллуна
                     const balloonInner = {}
+                    //Пока картинок на сервере нет, этот код не работает и вместо него обычные маркеры
                     //параметры для картинки на карте
-                    const iconSets = {
-                        iconLayout: "default#image",
-                        iconImageHref: marker.picture,
-                        iconImageSize: marker.iconImageSize,
-                        iconImageOffset: marker.iconImageOffset,
-                    }
+                    // const iconSets = {
+                    //     iconLayout: "default#image",
+                    //     iconImageHref: marker.picture,
+                    //     iconImageSize: marker.iconImageSize,
+                    //     iconImageOffset: marker.iconImageOffset,
+                    // }
 
-                    const newMarker = new ymaps.Placemark(marker.coordinates, balloonInner, iconSets);
+                    const newMarker = new ymaps.Placemark(marker.coordinates, marker.name, balloonInner);
+                    // const newMarker = new ymaps.Placemark(marker.coordinates, balloonInner, iconSets);
 
                     const buildRouteInSpot = () => { //функция для прокладывания маршрута
                         myMap.geoObjects.remove(multiRoute) //очищаем маршрут перед созданием нового
@@ -84,6 +86,11 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
 
             setLocationMarker(); //устанавливаем иконку геопозиции
             setMarkers(markers); //устанавливаем маркеры мест
+
+            // Установка границ видимой области карты так, чтобы все объекты были видны
+            myMap.setBounds(myMap.geoObjects.getBounds(), {
+                checkZoomRange: true, // проверка допустимости масштаба карты
+            });
         }
         getLocation((pos) => mapInit(pos), (err) => mapInit(null, err)) //определяем геопозицию затем выполняем mapInition
     }
@@ -94,8 +101,8 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
 
     return (
         <>
-            <div id="mapId" className={s.map} />
-            <ErrorMessage errorText={error} />
+            <div id="mapId" className={s.map}/>
+            <ErrorMessage errorText={error}/>
         </>
     );
 }

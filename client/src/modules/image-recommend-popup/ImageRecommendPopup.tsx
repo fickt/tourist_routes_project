@@ -1,33 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {useState} from "react";
 import s from "./styles.module.scss";
 import PopupIcon from "./assets/popupIcon.svg";
-import { Button } from "ui/button/Button";
-import { ImageRecommendPopupProps } from "./types";
-import { useOnClickOutside } from "./hook/useOnclickOutside";
+import {Button} from "ui/button/Button";
+import {TImageRecommendPopupProps} from "./types";
 import classNames from "classnames";
 
-export const ImageRecommendPopup = ({ isPopupOpen, setIsPopupOpen, closePopup }: ImageRecommendPopupProps ) => {
+export const ImageRecommendPopup = ({title, closePopup}: TImageRecommendPopupProps) => {
 
     const [selectedFile, setSelectedFile] = useState(null);
-
-    const handleKeyPress = useCallback((e: KeyboardEvent) => {
-        e.key === "Escape" && setIsPopupOpen(false);
-    }, [setIsPopupOpen])
-
-    useEffect(() => {
-        if (isPopupOpen) {
-            document.addEventListener("keydown", handleKeyPress);
-
-            return () => {
-                document.removeEventListener("keydown", handleKeyPress);
-            }
-        }
-    }, [handleKeyPress, isPopupOpen])
-
-    const handleClickOutside = () => setIsPopupOpen(false);
-    const modalRef = useRef(null);
-    useOnClickOutside(modalRef, handleClickOutside);
-    if (!isPopupOpen) return null;
 
     const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
@@ -39,12 +19,12 @@ export const ImageRecommendPopup = ({ isPopupOpen, setIsPopupOpen, closePopup }:
     const uploadImageInput = () => {
         return (
             <>
-                <label className={s.popup__button} htmlFor="fileInput">Выбрать фото</label>
+                <label className={s.imagePopup__button} htmlFor="fileInput">Выбрать фото</label>
                 <input
                     type="file"
                     id="fileInput"
                     accept="image/*"
-                    style={{ display: "none" }}
+                    style={{display: "none"}}
                     onChange={handleFileInputChange}
                 />
             </>
@@ -52,22 +32,24 @@ export const ImageRecommendPopup = ({ isPopupOpen, setIsPopupOpen, closePopup }:
     }
 
     return (
-        <div className={s.container}>
-            <div className={s.popup} ref={modalRef}>
-                <h2 className={s.popup__title}>Поиск по фото</h2>
-                <div className={s.popup__image}>
-                    {selectedFile
-                        ? <img className={s.userImage} src={URL.createObjectURL(selectedFile)} alt="Ваше изображение" width={256} height={256} />
-                        : <PopupIcon />
-                    }
-                </div>
-                <p className={s.popup__text}>Информация о том, какие форматы фото можно загружать</p>
-                <div className="buttons__wrapper">
-                    {selectedFile
-                        ? <Button extraClass={classNames(`button, ${s.popup__button_green}`)}>Искать</Button>
-                        : uploadImageInput()}
-                    <Button action={closePopup} extraClass={"button"}>Отмена</Button>
-                </div>
+        <div className={s.imagePopup}>
+            <h2 className={s.imagePopup__title}>{title}</h2>
+            <div className={s.imagePopup__image}>
+                {selectedFile
+                    ? <img
+                        className={s.imagePopup__image__userImage}
+                        src={URL.createObjectURL(selectedFile)}
+                        alt="Ваше изображение"
+                    />
+                    : <PopupIcon/>
+                }
+            </div>
+            <p className={s.imagePopup__text}>Информация о том, какие форматы фото можно загружать</p>
+            <div className="buttons__wrapper">
+                {selectedFile
+                    ? <Button extraClass={classNames(`button, ${s.imagePopup__button_green}`)}>Искать</Button>
+                    : uploadImageInput()}
+                <Button action={closePopup} extraClass={"button"}>Отмена</Button>
             </div>
         </div>
     );

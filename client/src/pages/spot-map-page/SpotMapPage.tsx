@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
-import {TMarker} from "components/ymap/constants/markers";
 import {handleChosenMapSpot} from "modules/card-list/store/spotsActions";
 import {YMapComponent} from "components/ymap/YMapComponent";
 import {useAdaptedSpotsType} from "hooks/useAdaptedSpotType";
@@ -8,6 +7,7 @@ import {chosenMapSpotSelector, spotsSelector} from "modules/card-list/store/spot
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {useParams} from "react-router-dom";
 import {TLocalRoute} from "utils/localRoutes";
+import {TMarker, TMarkers} from "utils/serverRoutes";
 
 export const SpotMapPage = () => {
 
@@ -15,7 +15,7 @@ export const SpotMapPage = () => {
     const dispatch = useAppDispatch();
     const chosenMapSpot = useAppSelector(chosenMapSpotSelector);
     const spotRoutes: TLocalRoute[] = useAppSelector(spotsSelector);
-    const mapSpots: TMarker[] = useAdaptedSpotsType(spotRoutes);
+    const mapSpots: TMarkers = useAdaptedSpotsType(spotRoutes);
 
     useEffect(() => {
         if (spotId && mapSpots.length > 0) {
