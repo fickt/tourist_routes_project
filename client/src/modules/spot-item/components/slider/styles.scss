@@ -1,0 +1,40 @@
+.ant-carousel {
+  width: 100%;
+}
+
+.ant-carousel .slick-dots {
+  display: flex;
+  flex-direction: row;
+  column-gap: 11px;
+  align-items: baseline;
+  margin: 0;
+  padding-bottom: 20px;
+}
+
+.ant-carousel .slick-dots-bottom {
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.ant-carousel .slick-dots li {
+  margin: 0;
+}
+
+.ant-carousel .slick-dots li button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-white);
+  opacity: 1;
+  transition: background-color 0.3s, opacity 0.3s;
+  margin: 0;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--color-white);
+  background-color: var(--background-06);
+  margin: 0;
+}
+

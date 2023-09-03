@@ -1,11 +1,25 @@
-import { TMarker } from "components/ymap/constants/markers";
-import { GET_LOCAL_SPOTS, GET_SPOT_ROUTES, IS_SPOTS_LOADING, SPOTS_ERROR } from "./spotsActionTypeNames";
-import { TLocalSpotsDataAction, TSpotsDataError, TSpotsDataLoading } from "modules/card-list/store/types/spotsActionTypes";
-import { TSpotRoutes } from "modules/card-list/types/spotRoutes";
+import {
+    SET_CHOSEN_MAP_SPOT,
+    SET_CHOSEN_SPOT,
+    SET_SPOTS,
+    SET_MAP_SPOTS,
+    IS_SPOTS_LOADING,
+    SPOTS_ERROR
+} from "./spotsActionTypeNames";
+import {TSpotsDataError, TSpotsDataLoading} from "modules/card-list/store/types/spotsActionTypes";
+import {TMarker} from "components/ymap/constants/markers";
+import {TLocalRoute} from "utils/localRoutes";
 
-export const getLocalSpotsAction = (data: TMarker[]): TLocalSpotsDataAction => {
+export const handleSpots = (data: TLocalRoute[]) => {
     return {
-        type: GET_LOCAL_SPOTS,
+        type: SET_SPOTS,
+        payload: data
+    }
+}
+
+export const handleMapSpots = (data: TMarker[] | TMarker) => {
+    return {
+        type: SET_MAP_SPOTS,
         payload: data,
     }
 }
@@ -24,9 +38,16 @@ export const isSpotsLoading = (isLoading: boolean): TSpotsDataLoading => {
     }
 }
 
-export const getSpotRoutes = (data: TSpotRoutes) => {
+export const handleChosenSpot = (spot: TLocalRoute | null) => {
     return {
-        type: GET_SPOT_ROUTES,
-        payload: data
+        type: SET_CHOSEN_SPOT,
+        payload: spot,
+    }
+}
+
+export const handleChosenMapSpot = (mapSpot: TMarker | null) => {
+    return {
+        type: SET_CHOSEN_MAP_SPOT,
+        payload: mapSpot,
     }
 }

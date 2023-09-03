@@ -1,1 +1,1 @@
-export { SpotItem } from "./components/SpotItem"
+export { SpotItem } from "./components/spot-item/SpotItem"

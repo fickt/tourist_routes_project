@@ -1,18 +1,18 @@
 import s from "./styles.module.scss";
 import React, { memo, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "storage/hookTypes";
-import { spotRoutesSelector } from "modules/card-list/store/spotsSelectors";
+import { spotsSelector } from "modules/card-list/store/spotsSelectors";
 import { apiSpots } from "modules/card-list/api/SpotsServise";
-import { getSpotRoutes } from "modules/card-list/store/spotsActions";
-import { TSpotRoute } from "modules/card-list/types/spotRoutes";
+import { handleSpots } from "modules/card-list/store/spotsActions";
 import { ErrorMessage } from "ui/error-message/ErrorMessage";
 import { PreloaderCar } from "ui/preloader/PreloaderCar";
 import { LocalCard } from "components/local-card/LocalCard";
+import { TLocalRoute } from "utils/localRoutes";
 
 export const SpotRouteList = memo(() => {
 
     const dispatch = useAppDispatch();
-    const spotRoutes = useAppSelector(spotRoutesSelector);
+    const spotRoutes = useAppSelector(spotsSelector);
     const [error, setError] = useState<string>();
     const [loading, setLoading] = useState(false);
 
@@ -22,7 +22,7 @@ export const SpotRouteList = memo(() => {
             setLoading(true)
             apiSpots.fetchSpots()
                 .then(data => {
-                    dispatch(getSpotRoutes(data.data))
+                    dispatch(handleSpots(data.data))
                 })
                 .catch(() => {
                     setError("Ошибка на стороне сервера")
@@ -37,7 +37,7 @@ export const SpotRouteList = memo(() => {
         <>
             <h2>Серверный список мест</h2>
             <div className={s.cards}>
-                {spotRoutes?.map((spot: TSpotRoute) => <LocalCard key={spot.id} {...spot} />)}
+                {spotRoutes?.map((spot: TLocalRoute) => <LocalCard key={spot.id} {...spot} />)}
             </div>
             {loading && <PreloaderCar />}
             {!loading && (error && <ErrorMessage errorText={error} />)}

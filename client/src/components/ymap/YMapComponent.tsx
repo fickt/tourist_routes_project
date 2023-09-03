@@ -95,7 +95,7 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
     return (
         <>
             <div id="mapId" className={s.map} />
-            <ErrorMessage errorText={error}/>
+            <ErrorMessage errorText={error} />
         </>
     );
 }
