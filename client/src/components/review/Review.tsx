@@ -8,7 +8,7 @@ export const Review = ({user, date, content, rating}: TReviewProps) => {
         <div className={s.review}>
             <div className={s.review__header}>
                 <div className={s.review__header__info}>{user.nickname}{date}</div>
-                <RatingLabel rating={rating} />
+                <RatingLabel rating={rating}/>
             </div>
             <p className={s.review__content}>{content}</p>
         </div>

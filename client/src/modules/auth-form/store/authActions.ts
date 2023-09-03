@@ -1,5 +1,11 @@
-import { TUser } from "modules/auth-form/store/types/authTypes";
-import { AUTH_ERROR, AUTH_LOADER_ACTIVE, SET_USER, IS_USER_REG, IS_USER_AUTH } from "modules/auth-form/store/authActionsTypeNames";
+import {TUser} from "./types/authTypes";
+import {
+    AUTH_ERROR,
+    AUTH_LOADER_ACTIVE,
+    SET_USER,
+    IS_USER_REG,
+    IS_USER_AUTH
+} from "./authActionsTypeNames";
 
 export const handleAuthError = (payload: string | null) => ({
     type: AUTH_ERROR,

@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { RoutePath } from "pages/routeConfig";
-import { Button } from "ui/button/Button";
+import {Link} from "react-router-dom";
+import {RoutePath} from "pages/routeConfig";
+import {Button} from "ui/button/Button";
 import classNames from "classnames";
 
 export const ChangeFormButton = () => {

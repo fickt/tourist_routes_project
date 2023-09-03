@@ -5,7 +5,7 @@ import {removeControls} from "./helpers/ymap-options";
 import {mapControls, mapState} from "./constants/constants";
 import {useNavigate, useParams} from "react-router-dom";
 import {getLocation} from "./helpers/location";
-import locationIcon from "./img/location.png"
+import locationIcon from "./img/location.png";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
 import {TMarkers} from "utils/serverRoutes";
 import {TYMapProps} from "components/ymap/types";

@@ -1,7 +1,7 @@
-import { Button, Form } from "antd";
-import { TFormButtonProps } from "./types";
+import {Button, Form} from "antd";
+import {TFormButtonProps} from "./types";
 
-export const FormButton = ({ value, onClick, loader }: TFormButtonProps) => {
+export const FormButton = ({value, onClick, loader}: TFormButtonProps) => {
 
     return (
         <Form.Item className="custom__antd__item">

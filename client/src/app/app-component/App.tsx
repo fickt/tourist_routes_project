@@ -30,7 +30,7 @@ const App = () => {
                 if (error.response) {
                     dispatch(handleAuthError(error.response.data.error));
                 } else {
-                    dispatch(handleAuthError("Упс... Возникли проблемы с подгрузкой мест:("));
+                    dispatch(handleAuthError("Упс... Возникли проблемы с загрузкой мест:("));
                 }
             } finally {
                 dispatch(handleAuthLoader(false));

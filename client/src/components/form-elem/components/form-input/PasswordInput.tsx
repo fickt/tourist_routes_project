@@ -1,12 +1,11 @@
 import s from "./styles.module.scss";
-import { Form, Input } from "antd";
-import { TPasswordInputProps } from "./types";
-import { passwordRules } from "components/form-elem/constants/formRules";
+import {Form, Input} from "antd";
+import {TPasswordInputProps} from "./types";
+import {passwordRules} from "components/form-elem/constants/formRules";
 
-export const PasswordInput = ({ title, isAuthForm, isRegister, isPasswordChange }: TPasswordInputProps) => {
+export const PasswordInput = ({title, isAuthForm, isRegister, isPasswordChange}: TPasswordInputProps) => {
 
-    const placeholderText = isPasswordChange ? "Придумайте новый пароль"
-        : isRegister ? "Придумайте пароль" : "Введите пароль";
+    const placeholderText = isPasswordChange ? "Придумайте новый пароль" : isRegister ? "Придумайте пароль" : "Введите пароль";
 
     return (
         <>
@@ -30,7 +29,7 @@ export const PasswordInput = ({ title, isAuthForm, isRegister, isPasswordChange 
                     validateStatus={""}
                     rules={[
                         {required: true, message: "Повторите пароль!"},
-                        ({ getFieldValue }) => ({
+                        ({getFieldValue}) => ({
                             validator(_, value) {
                                 if (!value || getFieldValue("password") === value) {
                                     return Promise.resolve();

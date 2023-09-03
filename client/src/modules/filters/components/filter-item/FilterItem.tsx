@@ -1,14 +1,13 @@
-import React from "react";
 import s from "./styles.module.scss";
-import { TFilterItemProps } from "./types";
-import { TagList } from "modules/filters/components/tag-list/TagList";
+import {TFilterItemProps} from "./types";
+import {TagList} from "modules/filters/components/tag-list/TagList";
 
-export const FilterItem = ({ title, list }: TFilterItemProps) => {      
+export const FilterItem = ({title, list}: TFilterItemProps) => {
 
     return (
         <div className={s.filters__item}>
-            <h2 className={s.item__title}>{title}</h2>
-            <div className={s.item__tags}>
+            <h2 className={s.filters__item__title}>{title}</h2>
+            <div className={s.filters__item__tags}>
                 <TagList title={title} list={list}/>
             </div>
         </div>

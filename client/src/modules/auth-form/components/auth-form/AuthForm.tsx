@@ -1,9 +1,9 @@
-import { TAuthFormProps } from "./types";
-import { FormElem } from "components/form-elem/components/form-elem/FormElem";
+import {TAuthFormProps} from "./types";
+import {FormElem} from "components/form-elem/components/form-elem/FormElem";
 import s from "./styles.module.scss";
-import { ChangeFormButton } from "modules/auth-form/components/change-form-button/ChangeFormButton";
+import {ChangeFormButton} from "modules/auth-form/components/change-form-button/ChangeFormButton";
 
-export const AuthForm = ({ isRegister }: TAuthFormProps) => {
+export const AuthForm = ({isRegister}: TAuthFormProps) => {
 
     const title = isRegister ? "Регистрация" : "Войти";
     const text = isRegister
@@ -13,8 +13,8 @@ export const AuthForm = ({ isRegister }: TAuthFormProps) => {
     return (
         <div className={s.auth}>
             <h2 className={s.auth__title}>{title}</h2>
-            <FormElem isAuthForm isRegister={isRegister} />
-            {!isRegister && <ChangeFormButton />}
+            <FormElem isAuthForm isRegister={isRegister}/>
+            {!isRegister && <ChangeFormButton/>}
             <p className={s.auth__text}>{text}</p>
         </div>
     )
