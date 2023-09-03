@@ -15,7 +15,6 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
     const navigate = useNavigate();
     const { spotId } = useParams(); //проверяем на какой странице мы находимся, если есть spotId, то на странице места, иначе на страницу общей карты
     const [error, setError] = useState<string>(null);
-
     const init = () => {
         //создание компонентов карты
         const mapInit = (pos: GeolocationPosition, err?: GeolocationPositionError ) => {
@@ -51,7 +50,16 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
                         iconImageSize: marker.iconImageSize,
                         iconImageOffset: marker.iconImageOffset,
                     }
-
+                    if (spotId) {
+                        // Если это карта определенного места, то создаем круг вокруг маркера
+                        const circle = new ymaps.Circle([marker.coordinates, 3500], {}, {
+                            fillColor: "rgba(14, 167, 165, 0.30)",
+                            strokeColor: "#0000FF",
+                            strokeOpacity: 0.5,
+                            strokeWidth: 2,
+                        });
+                        myMap.geoObjects.add(circle);
+                    }
                     const newMarker = new ymaps.Placemark(marker.coordinates, balloonInner, iconSets);
 
                     const buildRouteInSpot = () => { //функция для прокладывания маршрута
@@ -79,14 +87,21 @@ export const YMapComponent = ({ markers }: TYMapProps) => {
                     })
                     //добавление маркера на карту
                     myMap.geoObjects.add(newMarker);
+
+                    //Если это карта определенного места, то прокладываем маршрут
+                    if(spotId){
+                        buildRouteInSpot()
+                    }
                 })
             };
+
 
             setLocationMarker(); //устанавливаем иконку геопозиции
             setMarkers(markers); //устанавливаем маркеры мест
         }
         getLocation((pos) => mapInit(pos), (err) => mapInit(null, err)) //определяем геопозицию затем выполняем mapInition
     }
+
 
     useEffect(() => {
         ymaps.ready(init);
