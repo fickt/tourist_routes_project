@@ -32,7 +32,6 @@ services:
       - APP_LOG_FILE=${APP_LOG_FILE}
       - VIRTUAL_PORT=56
       - VIRTUAL_HOST=app.localhost
-
     env_file:
       - .env
 
