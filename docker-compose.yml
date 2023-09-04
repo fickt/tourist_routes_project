@@ -3,6 +3,7 @@ services:
 
   #Frontend
   client:
+    restart: always
     container_name: client
     build:
       context: ./client
@@ -20,6 +21,7 @@ services:
 
   #Backend
   app:
+    restart: always
     container_name: app
     build:
       context: ./server/laravel
@@ -40,6 +42,7 @@ services:
       - .env
 
   ml-service:
+    restart: always
     container_name: ml-service
     build:
       context: ./ml-service
@@ -50,6 +53,7 @@ services:
       - ${ML_SERVICE_HOST_PORT:-9000}:${ML_SERVICE_CONTAINER_PORT:-9000}
 
   nginx-proxy:
+    restart: always
     build:
       context: ./server/nginx-proxy
       dockerfile: Dockerfile
@@ -66,6 +70,7 @@ services:
 
   #NGINX
   web:
+    restart: always
     build:
       context: ./server/nginx
       dockerfile: Dockerfile
