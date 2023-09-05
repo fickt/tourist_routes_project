@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         RouteSeeder::run();
         RoutePhotoSeeder::run();
         RouteCategorySeeder::run();
+        RouteTargetAudienceSeeder::run();
         RouteCategoryToRouteSeeder::run();
         RouteSeederFromCsv::run();
         RouteQuestionnaireSeeder::run();

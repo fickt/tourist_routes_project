@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use App\Enums\RouteCategoryEnum;
+use app\Enums\RouteTargetAudienceEnum;
 use App\Models\Route;
 use App\Models\RouteCategory;
 use App\Models\RoutePhoto;
+use App\Models\RouteTargetAudience;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -41,8 +43,10 @@ class RouteSeederFromCsv extends Seeder
                     'photo_path' => 'image_route_zaglushka.jpg'
                 ]);
             $routeCategory = self::getRandomCategory();
+            $routeTargetAudience = self::getTargetAudience();
 
             $route->categories()->attach($routeCategory);
+            $route->targetAudiences()->attach($routeTargetAudience);
 
             $count++;
         }
@@ -57,6 +61,14 @@ class RouteSeederFromCsv extends Seeder
         $categoryNumber = rand(0, count(RouteCategoryEnum::cases()) - 1);
         return RouteCategory::query()
             ->where('name', '=', RouteCategoryEnum::cases()[$categoryNumber]->value)
+            ->first();
+    }
+
+    private static function getTargetAudience()
+    {
+        $targetAudienceNumber = rand(0, count(RouteTargetAudienceEnum::cases()) - 1);
+        return RouteTargetAudience::query()
+            ->where('name', '=', RouteCategoryEnum::cases()[$targetAudienceNumber]->value)
             ->first();
     }
 }

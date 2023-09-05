@@ -12,7 +12,7 @@ class RouteTargetAudienceSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public static function run(): void
     {
         RouteTargetAudience::query()->create([
            'name' => RouteTargetAudienceEnum::Alone->value
