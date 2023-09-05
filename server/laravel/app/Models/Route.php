@@ -96,7 +96,7 @@ class Route extends Model
     {
         try {
             $route = Route::query()
-                ->with(['difficulty', 'photoPaths', 'categories', 'comments.user'])
+                ->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences'])
                 ->findOrFail($routeId);
 
         } catch (Exception) {
