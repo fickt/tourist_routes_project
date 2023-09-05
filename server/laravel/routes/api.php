@@ -34,6 +34,10 @@ Route::group(['middleware' => 'api'], function () {
         Route::post('/logout', [AuthController::class, 'logout']);
     });
 
+    Route::group(['prefix' => 'myprofile', 'middleware' => IsAuthenticated::class], function () {
+        Route::patch('', [ProfileController::class, 'update']);
+    });
+
     /* Routes */
     Route::group(['prefix' => 'routes'], function () {
         /* Recommendations */
