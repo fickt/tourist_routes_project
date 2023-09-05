@@ -23,7 +23,7 @@ class ProfileEditRequest extends FormRequest
     {
         return [
             'nickname' => 'string|min:1|max:255',
-            'email' => 'string|email|min:1|max:255',
+            'email' => 'string|email|unique:users,email|min:1|max:255',
             'old_password' => 'string|min:1|max:255',
             'new_password' => 'string|min:1|max:255',
         ];
