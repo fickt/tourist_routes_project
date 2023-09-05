@@ -21,7 +21,7 @@ export const Profile = () => {
     const [questArray, setQuestArray] = useState<TLocalRoute[]>([])
 
     useEffect(() => {
-        apiQuestions.fetchQuestions()
+        apiQuestions.fetchRecomendations()
             .then(data => {
                 setQuestArray(data.data)
                 if(data.data.length > 0) {
