@@ -62,6 +62,7 @@ class Route extends Model
      * Доступные queries:
      * ?difficulty= (отфильтровать по уровням сложности)
      * ?category= (отфильтровать по категориям)
+     * ?target_audience= (отфильтровать по целевой аудитории)
      * ?search= (поиск по названию и описанию Route)
      *
      * @return Collection
@@ -81,6 +82,13 @@ class Route extends Model
             $category = explode(',', Request::query('category'));
             $query->whereHas('categories', function ($q) use ($category) {
                 $q->whereIn('name', $category);
+            });
+        }
+
+        if (Request::query('target_audience')) {
+            $target_audiences = explode(',', Request::query('target_audience'));
+            $query->whereHas('targetAudiences', function ($q) use ($target_audiences) {
+                $q->whereIn('name', $target_audiences);
             });
         }
 
