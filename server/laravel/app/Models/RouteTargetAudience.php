@@ -9,7 +9,7 @@ class RouteTargetAudience extends Model
 {
     use HasFactory;
 
-    protected $table = 'route_target_audience';
+    protected $table = 'route_target_audiences';
     protected $fillable = [
         'name'
     ];
