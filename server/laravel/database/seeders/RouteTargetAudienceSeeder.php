@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use app\Enums\RouteTargetAudienceEnum;
+use App\Enums\RouteTargetAudienceEnum;
 use App\Models\RouteTargetAudience;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;

@@ -19,7 +19,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->foreignId('target_audience_id')
-                ->constrained('target_audiences')
+                ->constrained('route_target_audiences')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
 
