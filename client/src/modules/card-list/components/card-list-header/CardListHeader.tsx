@@ -1,5 +1,5 @@
 import s from "./styles.module.scss";
-import {sortOptions} from "modules/card-list/constants/sortOptions";
+// import {sortOptions} from "modules/card-list/constants/sortOptions";
 import {Sorting} from "modules/card-list/components//sorting/Sorting";
 import {FilterButton} from "modules/card-list/components/filter-button/FilterButton";
 import {TCardListHeaderProps} from "./types";
@@ -13,7 +13,8 @@ export const CardListHeader = ({title}: TCardListHeaderProps) => {
                 <h2>{title}</h2>
                 <FilterButton/>
             </div>
-            <Sorting options={sortOptions}/>
+            {/*<Sorting options={sortOptions}/>*/}
+            <Sorting/>
             <FiltersTags/>
         </div>
     )

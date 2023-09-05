@@ -12,6 +12,7 @@ import {apiSpots} from "modules/card-list/api/SpotsServise";
 import {handleSpots} from "modules/card-list/store/spotsActions";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
+import s from "./styles.module.scss";
 
 const App = () => {
 
@@ -40,17 +41,17 @@ const App = () => {
     }, [dispatch]);
 
     return (
-        <>
+        <div className={s.wrapper}>
             <Header/>
             {!spotRoutes
-                ? (<>
+                ? (<div className={s.wrapper__loader}>
                     {loader && <PreloaderCar/>}
                     {!loader && (error && <ErrorMessage errorText={error}/>)}
-                </>)
+                </div>)
                 : (<main><AppRouter/></main>)
             }
             <MobileHeader/>
-        </>
+        </div>
     )
 }
 

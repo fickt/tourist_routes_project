@@ -22,12 +22,11 @@ export const SpotPage = () => {
     }, [spotId, spotRoutes])
 
     const getSpotById = (spotId: string) => {
-        if (spotRoutes) {
-            const foundSpot: TLocalRoute | undefined = spotRoutes.find((spot: TLocalRoute) => {
-                return spot.id === Number(spotId);
-            })
-            dispatch(handleChosenSpot(foundSpot));
+        const foundSpot = spotRoutes.find((spot: TLocalRoute) => spot.id === Number(spotId));
+
+        if (foundSpot) {
             const updatedFoundSpot = useAdaptedSpotType(foundSpot);
+            dispatch(handleChosenSpot(foundSpot));
             dispatch(handleChosenMapSpot(updatedFoundSpot));
         }
     }

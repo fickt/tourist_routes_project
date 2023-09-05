@@ -10,14 +10,15 @@ export type TLocalRoute = {
     latitude: number;
     rating: number;
     photos: string[];
-    comments: TComment[];
+    comments: TReview[];
 }
 
-export type TComment = {
-    id: number,
+export type TReview = {
+    id?: number,
     content: string,
     rating: number,
-    user: TUser
+    user?: TUser | null,
+    date?: Date,
 }
 
 export type TLocalRoutes = TLocalRoute[];

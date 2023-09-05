@@ -1,6 +1,6 @@
 import {AxiosResponse} from "axios";
 import {RoutePath} from "pages/routeConfig";
-import {TAuthResponse} from "modules/auth-form/store/types/authTypes";
+import {TAuthResponse, TLogoutResponse} from "modules/auth-form/store/types/authTypes";
 import {api} from "utils/api";
 
 export class authService {
@@ -12,7 +12,7 @@ export class authService {
         return api.post(RoutePath.auth_register, {nickname, email, password});
     }
 
-    static async logout(): Promise<void> {
-        return api.post<typeof RoutePath.auth_logout, null, void>(RoutePath.auth_logout);
+    static async logout(): Promise<AxiosResponse<TLogoutResponse>> {
+        return api.post(RoutePath.auth_logout);
     }
 }

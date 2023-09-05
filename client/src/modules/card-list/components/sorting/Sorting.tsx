@@ -1,46 +1,45 @@
+import React, {useState, useEffect} from "react";
 import s from "./styles.module.scss";
-import {Select} from "antd";
-import {TSortingProps} from "./types";
-import {sortTabs} from "modules/card-list/constants/sortOptions";
+import ArrowDownIcon from "./assets/arrowDownIcon.svg";
 import {useAppSelector} from "storage/hookTypes";
 import {spotsSelector} from "modules/card-list/store/spotsSelectors";
 import {useDispatch} from "react-redux";
 import {handleSpots} from "modules/card-list/store/spotsActions";
 
-export const Sorting = ({options}: TSortingProps) => {
-    const spots = useAppSelector(spotsSelector);
+export const Sorting = () => {
+
     const dispatch = useDispatch();
-    const sortSpots = (value: string) => {
-        const sortedArray = [...spots];
+    const localRoutes = useAppSelector(spotsSelector);
+    const [isSortFromTheBest, setSortFromTheBest] = useState(true);
 
-        sortedArray.sort((a, b) => {
-            const aIncludesValue = a.categories.includes(value);
-            const bIncludesValue = b.categories.includes(value);
+    useEffect(() => {
+        sortSpots(isSortFromTheBest);
+    }, [isSortFromTheBest]);
 
-            if (a.difficulty === value && b.difficulty !== value) {
-                return -1;
-            } else if (a.difficulty !== value && b.difficulty === value) {
-                return 1;
-            } else if (aIncludesValue && !bIncludesValue) {
-                return -1;
-            } else if (!aIncludesValue && bIncludesValue) {
-                return 1;
+    const toggleClick = () => {
+        setSortFromTheBest(!isSortFromTheBest);
+    }
+
+    const sortSpots = (isSortFromTheBest: boolean) => {
+        const sortRoutes = [...localRoutes].sort((a, b) => {
+            if (isSortFromTheBest) {
+                return b.rating - a.rating;
             } else {
-                return 0;
+                return a.rating - b.rating;
             }
         });
-        dispatch(handleSpots(sortedArray));
+        dispatch(handleSpots(sortRoutes));
     }
 
     return (
         <div className={s.sort}>
             <span className={s.sort__title}>Сортировка:</span>
-            <Select
-                defaultValue={sortTabs.rating.category}
-                options={options}
-                className={s.selector}
-                onChange={sortSpots}
-            />
+            <button className={s.sort__button} onClick={toggleClick}>
+                <span className={s.sort__title}>Рейтинг</span>
+                <div className={isSortFromTheBest ? s.sort__button__icon_up : ""}>
+                    <ArrowDownIcon />
+                </div>
+            </button>
         </div>
     )
 }

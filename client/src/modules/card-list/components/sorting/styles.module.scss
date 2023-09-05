@@ -4,11 +4,25 @@
     gap: 8px;
 
     &__title {
+        font-family: "Nunito Sans", sans-serif;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 400;
+        line-height: 20px;
+        color: var(--text-01);
     }
 
-    .selector{
-        width: 150px;
+    &__button {
+        display: flex;
+<<<<<<< HEAD
+        align-items: center;
+=======
+>>>>>>> b8871a3 (Реализована логика добавления отзыва; пересчёт рейтинга и кол-ва отзывов на странице; Пользователь сразу видит свой отзыв последним; Отображение рейтинга на заполнении звёзд; сортировка по рейтингу; по клику на "рейтинг" меняется направление сортировки)
+        background: transparent;
+        border: none;
+        cursor: pointer;
+
+        &__icon_up {
+            transform: rotate(180deg);
+        }
     }
 }

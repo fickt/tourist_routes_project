@@ -1,0 +1,12 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  &__loader {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    overflow-y: hidden;
+  }
+}

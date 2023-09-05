@@ -18,7 +18,7 @@ export const ReviewBlock = ({comments}: TReviewBlockProps) => {
 
     return (
         <div className={s.reviews_wrapper}>
-            {comments?.length !== 0 && comments?.map((reviewData) =>
+            {reviews?.length !== 0 && reviews?.map((reviewData) =>
                 <Review key={reviewData.id} {...reviewData} />)
             }
         </div>
