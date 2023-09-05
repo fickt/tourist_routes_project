@@ -68,7 +68,7 @@ class RouteSeederFromCsv extends Seeder
     {
         $targetAudienceNumber = rand(0, count(RouteTargetAudienceEnum::cases()) - 1);
         return RouteTargetAudience::query()
-            ->where('name', '=', RouteCategoryEnum::cases()[$targetAudienceNumber]->value)
+            ->where('name', '=', RouteTargetAudienceEnum::cases()[$targetAudienceNumber]->value)
             ->first();
     }
 }
