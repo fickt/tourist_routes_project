@@ -68,7 +68,7 @@ class Route extends Model
      */
     public function getRoutes(): Collection
     {
-        $query = self::query()->with(['difficulty', 'photoPaths', 'categories', 'comments.user']);
+        $query = self::query()->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences']);
 
         if (Request::query('difficulty')) {
             $difficulty = explode(',', Request::query('difficulty'));
