@@ -146,4 +146,14 @@ class Route extends Model
             'route_id'
         );
     }
+
+    public function targetAudiences(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            RouteTargetAudience::class,
+            'routes_route_target_audience',
+            'route_id',
+            'target_audience_id'
+        );
+    }
 }
