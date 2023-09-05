@@ -68,7 +68,7 @@ class User extends Authenticatable implements JWTSubject
             'route_recommendations',
             'user_id',
             'route_id'
-        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user']);
+        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences']);
     }
 
     public function favoriteRoutes(): BelongsToMany
@@ -78,7 +78,7 @@ class User extends Authenticatable implements JWTSubject
             'user_route_favorites',
             'user_id',
             'route_id'
-        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user']);
+        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences']);
     }
 
     /**
