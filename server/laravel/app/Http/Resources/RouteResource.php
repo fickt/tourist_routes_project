@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\RouteTargetAudience;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,7 +25,8 @@ class RouteResource extends JsonResource
             'latitude' => (float) $this->latitude,
             'rating' => $this->rating,
             'photos' => RoutePhotoResource::collection($this->whenLoaded('photoPaths')),
-            'comments' => RouteCommentResource::collection($this->whenLoaded('comments'))
+            'comments' => RouteCommentResource::collection($this->whenLoaded('comments')),
+            'target_audiences' => RouteTargetAudienceResource::collection($this->whenLoaded('targetAudiences'))
         ];
     }
 }
