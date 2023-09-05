@@ -1,5 +1,5 @@
-import { AUTH_ERROR, AUTH_LOADER_ACTIVE, IS_USER_AUTH, IS_USER_REG, SET_USER } from "./authActionsTypeNames";
-import { TAuthState, TAuthAction } from "./types/authTypes";
+import {AUTH_ERROR, AUTH_LOADER_ACTIVE, IS_USER_AUTH, IS_USER_REG, SET_USER} from "./authActionsTypeNames";
+import {TAuthState, TAuthAction} from "./types/authTypes";
 
 const initialState: TAuthState = {
     error_message: null,
@@ -10,7 +10,7 @@ const initialState: TAuthState = {
 }
 
 export const authReducer = (state = initialState, action: TAuthAction) => {
-    switch(action.type) {
+    switch (action.type) {
         case AUTH_ERROR:
             return {
                 ...state,

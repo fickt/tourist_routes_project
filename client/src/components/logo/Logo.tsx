@@ -25,8 +25,8 @@ export const Logo = () => {
     return (
         <>
             {shouldRenderBackIcon() && (
-                <a className={s.back} onClick={goBack}><BackIcon className={s.back__icon}/></a>)
-            }
+                <a className={s.back} onClick={goBack}><BackIcon className={s.back__icon}/></a>
+            )}
             <Link to={"/"} className={s.logo} onClick={handleClick}>
                 <Title level={2} className={s.logo__text}>logo</Title>
             </Link>

@@ -1,5 +1,4 @@
-import { Rule } from "antd/lib/form";
-import { ReactNode } from "react";
+import {Rule} from "antd/lib/form";
 
 export type TFormInputProps = {
     name: string,
@@ -13,9 +12,4 @@ export type TPasswordInputProps = {
     isAuthForm?: boolean,
     isRegister?: boolean,
     isPasswordChange?: boolean,
-
-}
-
-interface CustomPasswordInputProps extends TPasswordInputProps {
-    iconRender: (visible: boolean) => ReactNode;
 }

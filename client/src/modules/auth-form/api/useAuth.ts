@@ -1,9 +1,15 @@
-import { handleAuthError, handleAuthLoader, handleSetUser, handleUserAuth, handleUserReg } from "modules/auth-form/store/authActions";
-import { authLoader, authUser } from "modules/auth-form/store/authSelectors";
+import {
+    handleAuthError,
+    handleAuthLoader,
+    handleSetUser,
+    handleUserAuth,
+    handleUserReg
+} from "modules/auth-form/store/authActions";
+import {authLoader, authUser} from "modules/auth-form/store/authSelectors";
 import Cookies from "js-cookie";
-import { useAppDispatch, useAppSelector } from "storage/hookTypes";
-import { TServerResponse, TUser } from "modules/auth-form/store/types/authTypes";
-import { authService } from "modules/auth-form/api/authService";
+import {useAppDispatch, useAppSelector} from "storage/hookTypes";
+import {TServerResponse, TUser} from "modules/auth-form/store/types/authTypes";
+import {authService} from "modules/auth-form/api/authService";
 
 export const useAuth = () => {
 
@@ -52,5 +58,5 @@ export const useAuth = () => {
         }
     };
 
-    return { user, loader, authenticate };
+    return {user, loader, authenticate};
 };

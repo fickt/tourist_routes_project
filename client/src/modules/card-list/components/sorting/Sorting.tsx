@@ -1,16 +1,15 @@
-import React from "react";
 import s from "./styles.module.scss";
-import { Select } from "antd";
-import { TSortingProps } from "./types";
-import { sortTabs } from "modules/card-list/constants/sortOptions";
-import { useAppSelector } from "storage/hookTypes";
-import { spotsSelector } from "modules/card-list/store/spotsSelectors";
-import { useDispatch } from "react-redux";
-import { handleSpots } from "modules/card-list/store/spotsActions";
+import {Select} from "antd";
+import {TSortingProps} from "./types";
+import {sortTabs} from "modules/card-list/constants/sortOptions";
+import {useAppSelector} from "storage/hookTypes";
+import {spotsSelector} from "modules/card-list/store/spotsSelectors";
+import {useDispatch} from "react-redux";
+import {handleSpots} from "modules/card-list/store/spotsActions";
 
-export const Sorting = ({ options }: TSortingProps) => {
+export const Sorting = ({options}: TSortingProps) => {
     const spots = useAppSelector(spotsSelector);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const sortSpots = (value: string) => {
         const sortedArray = [...spots];
 

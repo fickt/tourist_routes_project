@@ -3,15 +3,12 @@
     flex-direction: column;
     gap: 20px;
 
-
-    .item__title {
+    &__title {
         font-size: 20px;
     }
-
-    .item__tags {
+    &__tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;       
-        
+        gap: 12px;
     }
 }

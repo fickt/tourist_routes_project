@@ -18,6 +18,8 @@ class RouteCommentResource extends JsonResource
             'id' => $this->id,
             'content' => $this->content,
             'rating' => $this->rating,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
             'user' => UserResource::make($this->whenLoaded('user'))
         ];
     }

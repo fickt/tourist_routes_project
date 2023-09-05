@@ -7,8 +7,8 @@ import {
     SPOTS_ERROR
 } from "./spotsActionTypeNames";
 import {TSpotsDataError, TSpotsDataLoading} from "modules/card-list/store/types/spotsActionTypes";
-import {TMarker} from "components/ymap/constants/markers";
 import {TLocalRoute} from "utils/localRoutes";
+import {TMarker, TMarkers} from "utils/serverRoutes";
 
 export const handleSpots = (data: TLocalRoute[]) => {
     return {
@@ -17,7 +17,7 @@ export const handleSpots = (data: TLocalRoute[]) => {
     }
 }
 
-export const handleMapSpots = (data: TMarker[] | TMarker) => {
+export const handleMapSpots = (data: TMarkers | TMarker) => {
     return {
         type: SET_MAP_SPOTS,
         payload: data,

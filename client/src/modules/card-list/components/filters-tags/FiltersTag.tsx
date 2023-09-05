@@ -1,6 +1,6 @@
-import { useAppSelector } from "storage/hookTypes";
+import {useAppSelector} from "storage/hookTypes";
 import s from "./styles.module.scss";
-import { filterCategories } from "modules/filters";
+import {filterCategories} from "modules/filters";
 
 export const FiltersTags = () => {
 

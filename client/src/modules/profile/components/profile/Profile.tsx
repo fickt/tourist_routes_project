@@ -8,10 +8,28 @@ import { ProfileSection } from "modules/profile/components/profile-section/Profi
 import { PassQuestions } from "modules/questions/components/pass-questions/PassQuestions";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
+import {useEffect, useState} from "react";
+import {TLocalRoute} from "utils/localRoutes";
+import {apiQuestions} from "modules/questions/api/QuestionsServise";
+import {useDispatch} from "react-redux";
+import {handleRecommended} from "modules/questions/store/questionsActions";
+import {CardListComponent} from "modules/card-list/components/card-list-component/CardListComponent";
 
 export const Profile = () => {
-
+    const dispatch = useDispatch();
     const recommended = useAppSelector(isRecommended);
+    const [questArray, setQuestArray] = useState<TLocalRoute[]>([])
+
+    useEffect(() => {
+        apiQuestions.fetchRecomendations()
+            .then(data => {
+                setQuestArray(data.data)
+                if(data.data.length > 0) {
+                    dispatch(handleRecommended(true))
+                }
+            })
+            .catch(err => console.warn(err))
+    }, [])
 
     return (
         <div className={s.profile}>
@@ -22,6 +40,9 @@ export const Profile = () => {
             </div>
             <h2>Рекомендации</h2>
             {recommended ? "Сюда будут подгружены рекомендации пользователя с сервера" : <PassQuestions />}
+            {recommended && (
+                <CardListComponent spots={questArray}/>
+            )}
             <div className="buttons__wrapper">
                 <Link to={RoutePath.auth_login} className="buttons__link">
                     <Button extraClass={classNames("button", "button_white")}>Выйти из аккаунта</Button>

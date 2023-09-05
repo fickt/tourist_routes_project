@@ -1,38 +1,35 @@
-.container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: transparent;
-  z-index: 100;
-}
-
-.popup,
-.popup__image {
+.imagePopup,
+.imagePopup__image {
   display: flex;
   flex-direction: column;
+  row-gap: 20px;
   justify-content: center;
   align-items: center;
 }
 
-.popup__image,
-.userImage {
-  border-radius: 30px;
-}
-
-.popup {
-  max-width: 328px;
-  row-gap: 20px;
+.imagePopup {
   padding: 20px;
-  border-radius: 10px;
-  background: var(--background-02, #FBFBFB);
-  box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.20);
 
   &__title,
   &__button,
   &__button_green {
     font-family: "Nunito Sans", sans-serif;
     font-weight: 600;
+  }
+
+  &__text,
+  &__button {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  &__button,
+  &__button_green {
+    color: var(--text-02);
+    background-color: var(--background-06);
+    height: 51px;
+    font-size: 14px;
+    line-height: 20px;
   }
 
   &__title {
@@ -44,12 +41,13 @@
     width: 256px;
     height: 256px;
     background: var(--background-04);
-  }
+    border-radius: 30px;
+    overflow: hidden;
 
-  &__text,
-  &__button {
-    font-size: 14px;
-    line-height: 20px;
+    &__userImage {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   &__text {
@@ -57,15 +55,6 @@
     font-family: "Raleway", sans-serif;
     font-weight: 500;
     margin: 0;
-  }
-
-  &__button,
-  &__button_green {
-    color: var(--text-02);
-    background-color: var(--background-06);
-    height: 51px;
-    font-size: 14px;
-    line-height: 20px;
   }
 
   &__button {

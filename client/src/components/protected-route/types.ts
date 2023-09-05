@@ -1,7 +1,7 @@
-import { ReactNode } from "react";
+import {ReactNode} from "react";
 
 export type TProtectedRouteProps = {
-    onlyOnAuth?: boolean;
-    isRegister?: boolean;
-    children: ReactNode;
+    onlyOnAuth?: boolean,
+    isRegister?: boolean,
+    children: ReactNode,
 }

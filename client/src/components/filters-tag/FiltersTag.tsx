@@ -1,7 +1,7 @@
 import s from "./styles.module.scss";
-import { TFilterTagsProps } from "./types";
+import {TFilterTagsProps} from "./types";
 
-export const TagList = ({ tagList }: TFilterTagsProps) => {
+export const TagList = ({tagList}: TFilterTagsProps) => {
 
     return (
         <div className={s.wrapper}>

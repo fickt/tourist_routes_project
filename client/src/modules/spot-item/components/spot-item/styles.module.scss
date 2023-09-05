@@ -57,3 +57,19 @@
     }
 }
 
+.reviews {
+    &__info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        &__title {
+            font-family: "Nunito Sans", sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-01);
+        }
+    }
+}
+

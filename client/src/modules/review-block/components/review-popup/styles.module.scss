@@ -1,0 +1,37 @@
+.reviewPopup,
+.reviewPopup__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.reviewPopup {
+  align-items: center;
+  padding: 20px;
+
+  &__title {
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--color-black);
+  }
+
+  &__form {
+    text-align: center;
+
+    &__textarea {
+      width: 100%;
+      padding: 20px;
+    }
+  }
+
+
+  &__button_green {
+    color: var(--text-02);
+    background-color: var(--background-06);
+    height: 51px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}

@@ -1,5 +1,5 @@
-import { TMarker } from "./constants/markers";
+import {TMarkers} from "utils/serverRoutes";
 
 export type TYMapProps = {
-    markers: TMarker[]
+    markers: TMarkers
 }

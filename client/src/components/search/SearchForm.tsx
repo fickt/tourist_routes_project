@@ -1,11 +1,11 @@
-import React, { ChangeEvent } from "react";
+import React, {ChangeEvent} from "react";
 import s from "./styles.module.scss";
 import SearchIcon from "./assets/searchIcon.svg";
 import classNames from "classnames";
-import { TSearchProps } from "./types";
-import { Input } from "ui/input/Input";
+import {TSearchProps} from "./types";
+import {Input} from "ui/input/Input";
 
-export const SearchForm = ({ handleFormSubmit, handleInputChange, placeholder, searchValue }: TSearchProps) => {
+export const SearchForm = ({handleFormSubmit, handleInputChange, placeholder, searchValue}: TSearchProps) => {
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         handleInputChange(e.target.value);
@@ -13,13 +13,13 @@ export const SearchForm = ({ handleFormSubmit, handleInputChange, placeholder, s
 
     return (
         <form className={s.search} onSubmit={handleFormSubmit}>
-            <Input                
+            <Input
                 value={searchValue}
                 onChange={onChange}
-                placeholder={placeholder} 
+                placeholder={placeholder}
             />
             <button onClick={handleFormSubmit} className={classNames(s.search__btn, s.search__magnifier_btn)}>
-                <SearchIcon />
+                <SearchIcon/>
             </button>
         </form>
     )

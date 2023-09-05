@@ -4,21 +4,20 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-}
 
-.title {
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 1.2;   
-}
+    &__title {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 1.2;
+    }
 
-.image {
+    &__image {
+        width: 180px;
+        height: 180px;
+        object-fit: contain;
 
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-
-    path {        
-        fill: gray;
+        path {
+            fill: gray;
+        }
     }
 }

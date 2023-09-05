@@ -1,5 +1,5 @@
-import {TMarker} from "components/ymap/constants/markers";
 import {TLocalRoute} from "utils/localRoutes";
+import {TMarker} from "utils/serverRoutes";
 
 export type TSpotsState = {
     data: TLocalRoute[],

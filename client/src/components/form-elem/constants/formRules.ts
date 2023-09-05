@@ -1,4 +1,4 @@
-import { Rule } from "antd/lib/form";
+import {Rule} from "antd/lib/form";
 
 export const nicknameRules: Rule[] = [
     {required: true, message: "Придумайте имя пользователя", whitespace: true},
