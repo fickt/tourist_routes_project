@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteCommentController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RouteFavoriteController;
@@ -62,7 +63,7 @@ Route::group(['middleware' => 'api'], function () {
         Route::get('/{routeId}', [RouteController::class, 'show']);
 
         /* Comments */
-        Route::group(['prefix' => '/{routeId}/comment'], function () {
+        Route::group(['prefix' => '/{routeId}/comment', 'middleware' => IsAuthenticated::class], function () {
             Route::post('', [RouteCommentController::class, 'store']);
         });
     });
