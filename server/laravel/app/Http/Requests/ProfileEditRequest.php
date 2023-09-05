@@ -11,7 +11,7 @@ class ProfileEditRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class ProfileEditRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nickname' => 'string|min:1|max:255',
+            'email' => 'string|email|min:1|max:255',
+            'old_password' => 'string|min:1|max:255',
+            'new_password' => 'string|min:1|max:255',
         ];
     }
 }
