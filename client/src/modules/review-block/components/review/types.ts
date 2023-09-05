@@ -4,6 +4,6 @@ export type TReviewProps = {
     id?: number,
     content: string,
     rating: number,
-    user: TUser,
+    user?: TUser,
     date?: Date,
 }

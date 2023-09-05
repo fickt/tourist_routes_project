@@ -31,7 +31,7 @@ COPY --chown=www:www . /var/www
 
 USER www
 
-ENTRYPOINT bin/composer-installer.sh
+#ENTRYPOINT bin/composer-installer.sh ;
 EXPOSE 9000
 
 # Запустите ваше приложение

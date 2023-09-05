@@ -15,6 +15,6 @@ export const rootReducer = combineReducers({
     auth: authReducer,
     questions: questionsReducer,
     filters: filtersReducer,
-    comments: reviewReducer
+    comments: reviewReducer,
 })
 
