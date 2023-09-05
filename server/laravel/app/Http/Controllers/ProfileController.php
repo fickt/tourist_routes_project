@@ -15,6 +15,6 @@ class ProfileController extends Controller
 
     public function update(ProfileEditRequest $request): UserResource
     {
-        return UserResource::make($this->user->editProfile($request));
+        return UserResource::make($this->user->editProfile($request->validated()));
     }
 }
