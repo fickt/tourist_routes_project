@@ -103,23 +103,19 @@ class User extends Authenticatable implements JWTSubject
         return auth()->user()->favoriteRoutes()->get();
     }
 
-    public function editProfile($data)
+    /**
+     * Редактировать профиль пользователя
+     * Поменять nickname, email, password
+     */
+    public function editProfile($data): mixed
     {
-        $newData = [];
-
         $user = auth()->user();
-        if ($newEmail = $data->email) {
-            $newData = ['email' => $newEmail];
-        }
-        if ($newPassword = $data->new_password && $oldPassword = $data->old_password) {
-            Hash::check($oldPassword, $user->password)
-                ? $newData = ['password' => $newPassword]
-                : throw new HttpException('Пароли не совпадают!', Response::HTTP_BAD_REQUEST);
-        }
-        if ($newNickname = $data->nickname) {
-            $newData = ['nickname' => $newNickname];
-        }
-        return self::update($newData);
+
+        return $user->update($data)
+            ? auth()->user()
+            : throw new HttpException(
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                'Internal server error');
     }
 
     public function getRecommendations()
