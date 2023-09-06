@@ -55,6 +55,10 @@ class Route extends Model
     protected $casts = [
         'rating' => FloatRound::class
     ];
+    
+    protected $hidden = [
+        'embedding',
+    ];
 
     /**
      * Получить все Route
