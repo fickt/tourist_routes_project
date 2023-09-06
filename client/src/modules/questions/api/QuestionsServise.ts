@@ -1,22 +1,16 @@
 import {RoutePath} from "pages/routeConfig";
-import {api, AUTH_TOKEN} from "utils/api";
+import {api} from "utils/api";
 import {IAnswers} from "modules/questions/api/type";
 import {AxiosResponse} from "axios";
 import {TLocalRoute} from "utils/localRoutes";
 
 export class QuestionsServise {
     fetchRecomendations() {
-        const headers = {
-            Authorization: `Bearer ${AUTH_TOKEN}`,
-        };
-        return api.get(RoutePath.spots + "/recommendations", { headers });
+        return api.get(RoutePath.spots + "/recommendations");
     }
 
     fetchQuestions() {
-        const headers = {
-            Authorization: `Bearer ${AUTH_TOKEN}`
-        }
-        return api.get(RoutePath.spots + "/recommendations/questionnaire", {headers})
+        return api.get(RoutePath.spots + "/recommendations/questionnaire")
     }
 
     sendAnswer(answers: IAnswers[]): Promise<AxiosResponse<TLocalRoute>> {

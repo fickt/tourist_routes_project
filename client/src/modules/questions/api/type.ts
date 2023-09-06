@@ -1,4 +1,4 @@
-export interface IAnswers {
+export type IAnswers = {
     category: string,
     is_liked: boolean
 }
