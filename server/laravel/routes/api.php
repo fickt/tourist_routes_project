@@ -33,6 +33,7 @@ Route::group(['middleware' => 'api'], function () {
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/login', [AuthController::class, 'login']);
         Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/refresh', [AuthController::class, 'refresh']);
     });
 
     Route::group(['prefix' => 'myprofile', 'middleware' => IsAuthenticated::class], function () {
