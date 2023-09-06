@@ -117,6 +117,42 @@
 			"response": []
 		},
 		{
+			"name": "Edit user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nickname\":\"Василий\",\r\n    \"email\":\"garrys2machinima@gmail.com\",\r\n \"old_password\":\"password\",\r\n  \"new_password\":\"newpassword\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/myprofile",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"myprofile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Logout user",
 			"request": {
 				"auth": {
@@ -139,6 +175,48 @@
 					"path": [
 						"auth",
 						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if(jsonData.access_token) {\r",
+							"    pm.collectionVariables.set(\"token\", jsonData.access_token)\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/auth/refresh",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"refresh"
 					]
 				}
 			},
@@ -202,21 +280,17 @@
 		{
 			"name": "Comment route with id: 1",
 			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
-				},
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2OTM4NDI1NjIsImV4cCI6MTY5Mzg0NjE2MiwibmJmIjoxNjkzODQyNTYyLCJqdGkiOiIwZmtxRFVzU1NCVXlrRXhQIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.DlJwZetLhfSLXP1GU6tm4k6HAa41V93xVQf-qEhaOKU",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"content\":\"testContent\",\r\n    \"rating\":2.311111111111\r\n}",
+					"raw": "{\r\n    \"content\":\"testContent\",\r\n    \"rating\":3\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -224,13 +298,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/routes/5/comment",
+					"raw": "{{baseUrl}}/routes/1/comment",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"routes",
-						"5",
+						"1",
 						"comment"
 					]
 				}
@@ -365,35 +439,6 @@
 			"response": []
 		},
 		{
-			"name": "Get questionnaire",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "{{token}}",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/routes/recommendations/questionnaire",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"routes",
-						"recommendations",
-						"questionnaire"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Send questionnaire answers and get recommendations",
 			"request": {
 				"auth": {
@@ -454,6 +499,53 @@
 					"path": [
 						"routes",
 						"recommendations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get questionnaire",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/routes/recommendations/questionnaire",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes",
+						"recommendations",
+						"questionnaire"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get test_photo.jpg",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/assets/test_photo.jpg",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"assets",
+						"test_photo.jpg"
 					]
 				}
 			},
