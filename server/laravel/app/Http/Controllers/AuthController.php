@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Resources\AuthUserResource;
 use App\Http\Resources\LogoutResource;
 use App\Models\User;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Password;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AuthController extends Controller
 {
+
     public function register(UserRegisterRequest $request): AuthUserResource
     {
         User::query()->create($request->validated());
@@ -47,6 +50,6 @@ class AuthController extends Controller
 
     public function forgotPassword(ForgotPasswordRequest $request)
     {
-
+        return Password::sendResetLink($request->only('email'));
     }
 }

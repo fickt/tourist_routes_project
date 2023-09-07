@@ -23,7 +23,7 @@ class ForgotPasswordRequest extends FormRequest
     {
         return [
             'email' => 'required|string|email|min:1|max:255',
-            'password' => 'required|string|min:1|max:255'
+           // 'password' => 'required|string|min:1|max:255'
         ];
     }
 }
