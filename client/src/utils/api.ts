@@ -1,21 +1,43 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import {useNavigate} from "react-router-dom";
+import {TAuthResponse} from "modules/auth-form/store/types/authTypes";
+import {RoutePath} from "pages/routeConfig";
+import {useAppDispatch} from "storage/hookTypes";
+import {handleSetUser} from "modules/auth-form";
 
-export const AUTH_TOKEN = Cookies.get("token") || null;
-
+export const API_URL = `http://app.localhost/api`;
 export const api = axios.create({
-    baseURL: "http://app.localhost/api",
-    headers: {
-        Authorization: AUTH_TOKEN ? `Bearer ${AUTH_TOKEN}` : "",
-    },
-});
+    baseURL: API_URL,
+})
 
-// Добавляем интерцептор для обновления заголовка перед каждым запросом
 api.interceptors.request.use((config) => {
-    const updatedConfig = { ...config };
-    const newAuthToken = Cookies.get("token") || null;
-    if (newAuthToken) {
-        updatedConfig.headers.Authorization = `Bearer ${newAuthToken}`;
+    config.headers.Authorization = `Bearer ${Cookies.get("token")}`;
+    return config;
+})
+
+api.interceptors.response.use((config) => {
+    return config;
+}, async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status == 401 && error.config && !error.config._isRetry) {
+        originalRequest._isRetry = true;
+        try {
+            const response = await axios.post<TAuthResponse>(`${API_URL}/auth/refresh`)
+            Cookies.set("token", response.data.access_token);
+            return api.request(originalRequest);
+        } catch (e) {
+            const cookies = Object.keys(Cookies.get());
+            cookies.forEach(cookieName => {
+                Cookies.remove(cookieName);
+            });
+            const dispatch = useAppDispatch();
+            dispatch(handleSetUser(null));
+            const navigate = useNavigate();
+            navigate(RoutePath.auth_login);
+        }
     }
-    return updatedConfig;
-});
+    throw error;
+})
+
+export default api;

@@ -5,14 +5,14 @@ import {MobileHeader} from "modules/mobile-header";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
 import {spotsSelector} from "modules/card-list/store/spotsSelectors";
 import {authError, authLoader} from "modules/auth-form/store/authSelectors";
-import {handleAuthError, handleAuthLoader} from "modules/auth-form/store/authActions";
-import {AxiosResponse} from "axios";
-import {TLocalRoute} from "utils/localRoutes";
-import {apiSpots} from "modules/card-list/api/SpotsServise";
-import {handleSpots} from "modules/card-list/store/spotsActions";
+import {handleSetUser} from "modules/auth-form/store/authActions";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
 import s from "./styles.module.scss";
+import {TUser} from "modules/auth-form";
+import Cookies from "js-cookie";
+import {getFavSpots} from "modules/favorites";
+import {getSpots} from "modules/card-list";
 
 const App = () => {
 
@@ -20,35 +20,32 @@ const App = () => {
     const spotRoutes = useAppSelector(spotsSelector);
     const loader = useAppSelector(authLoader);
     const error = useAppSelector(authError);
+    const token = Cookies.get("token");
 
     useEffect(() => {
-        const fetchData = async () => {
-            dispatch(handleAuthLoader(true));
-            try {
-                const response: AxiosResponse<TLocalRoute[]> = await apiSpots.fetchSpots();
-                dispatch(handleSpots(response.data));
-            } catch (error) {
-                if (error.response) {
-                    dispatch(handleAuthError(error.response.data.error));
-                } else {
-                    dispatch(handleAuthError("Упс... Возникли проблемы с загрузкой мест:("));
-                }
-            } finally {
-                dispatch(handleAuthLoader(false));
+        if (token) {
+            const userData: TUser = {
+                nickname: Cookies.get("nickname"),
+                email: Cookies.get("email"),
             }
+            dispatch(handleSetUser(userData));
         }
-        !spotRoutes && fetchData();
+        const fetchData = async () => {
+            await getFavSpots(dispatch);
+            await getSpots(dispatch);
+        }
+        fetchData();
     }, [dispatch]);
 
     return (
         <div className={s.wrapper}>
             <Header/>
-            {!spotRoutes
-                ? (<div className={s.wrapper__loader}>
+            {spotRoutes
+                ? (<main><AppRouter/></main>)
+                : (<div className={s.wrapper__loader}>
                     {loader && <PreloaderCar/>}
                     {!loader && (error && <ErrorMessage errorText={error}/>)}
                 </div>)
-                : (<main><AppRouter/></main>)
             }
             <MobileHeader/>
         </div>

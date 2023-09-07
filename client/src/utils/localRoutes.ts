@@ -11,6 +11,7 @@ export type TLocalRoute = {
     rating: number;
     photos: string[];
     comments: TReview[];
+    target_audiences: string[],
 }
 
 export type TReview = {

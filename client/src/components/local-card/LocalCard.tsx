@@ -2,14 +2,18 @@ import {Link} from "react-router-dom";
 import s from "./styles.module.scss"
 import {TCardProps} from "./types";
 import {Rate} from "antd";
-import {FavoriteMarker} from "ui/favorite-marker/FavoriteMarker";
+import {FavoriteElem} from "modules/favorites/components/favorite-elem/FavoriteElem";
 
-export const LocalCard = ({id, rating, name, photos, difficulty}: TCardProps) => {
+export const LocalCard = ({activeFavMark, id, rating, name, photos, difficulty}: TCardProps) => {
+
 
     return (
         <div className={s.wrapper}>
             <div className={s.favorite}>
-                <FavoriteMarker/>
+                <FavoriteElem
+                    activeFavMark={activeFavMark}
+                    id={id}
+                />
             </div>
             <Link to={`/spots/${id}`} className={s.card} style={{backgroundImage: `url(${photos[0]})`}}>
                 <span className={s.card__difficulty}>{difficulty}</span>

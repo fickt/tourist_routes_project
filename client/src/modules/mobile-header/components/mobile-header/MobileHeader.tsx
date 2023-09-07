@@ -1,11 +1,11 @@
 import s from "./styles.module.scss";
 import {Link, useLocation} from "react-router-dom";
-import { SyntheticEvent} from "react";
-import { menuLinks } from "./constants/menuLinks";
+import {SyntheticEvent} from "react";
+import {menuLinks} from "./constants/menuLinks";
 import classNames from "classnames";
-import { Button } from "ui/button/Button";
-import { FavoriteMarker } from "ui/favorite-marker/FavoriteMarker";
-import { useAppSelector } from "storage/hookTypes";
+import {Button} from "ui/button/Button";
+import {useAppSelector} from "storage/hookTypes";
+import {FavoriteElem} from "modules/favorites/components/favorite-elem/FavoriteElem";
 
 export const MobileHeader = () => {
 
@@ -36,7 +36,7 @@ export const MobileHeader = () => {
                         </Link>
                     )) : (
                         <>
-                            <FavoriteMarker/>
+                            <FavoriteElem/>
                             <Link to={`/spotMap/:${spotId}`}>
                                 <Button extraClass={s.menu__spot_btn} type="primary">
                                     Построить маршрут

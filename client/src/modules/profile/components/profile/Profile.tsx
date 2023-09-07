@@ -7,17 +7,17 @@ import {isStartQuestions} from "modules/questions/store/questionsSelectors";
 import {ProfileHeader} from "modules/profile/components/profile-header/ProfileHeader";
 import {ProfileSection} from "modules/profile/components/profile-section/ProfileSection";
 import {PassQuestions} from "modules/questions/components/pass-questions/PassQuestions";
-import {Link} from "react-router-dom";
 import classNames from "classnames";
 import {TLocalRoute} from "utils/localRoutes";
 import {apiQuestions} from "modules/questions/api/QuestionsServise";
 import {useDispatch} from "react-redux";
 import {handleStartPassQuestions} from "modules/questions/store/questionsActions";
-import {CardListComponent} from "modules/card-list/components/card-list-component/CardListComponent";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {authError, authLoader} from "modules/auth-form/store/authSelectors";
 import {handleAuthError, handleAuthLoader} from "modules/auth-form/store/authActions";
 import {profileValues} from "modules/profile/constants/profileValues";
+import {ErrorMessage} from "ui/error-message/ErrorMessage";
+import {CardListBody} from "modules/card-list";
 
 export const Profile = () => {
 
@@ -51,12 +51,11 @@ export const Profile = () => {
             <h2>Рекомендации</h2>
             {!isStart && <PassQuestions/>}
             {loader && <PreloaderCar/>}
-            {!error && !loader && <CardListComponent spots={questArray}/>}
+            {!error && !loader && <CardListBody spots={questArray}/>}
             {error && <p>{error}</p>}
             <div className="buttons__wrapper">
                 <div className="buttons__link">
                     <Button
-                        action={logout}
                         extraClass={classNames("button", "button_white")}
                         disabled={loader}
                     >

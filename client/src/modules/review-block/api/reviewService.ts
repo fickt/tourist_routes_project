@@ -1,7 +1,7 @@
 import {AxiosResponse} from "axios";
-import {RoutePath} from "pages/routeConfig";
 import {api} from "utils/api";
 import {TLocalRoute} from "utils/localRoutes";
+import {RoutePath} from "pages/routeConfig";
 
 export class reviewService {
 

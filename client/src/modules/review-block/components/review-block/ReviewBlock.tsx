@@ -1,3 +1,4 @@
+import React, {memo} from "react";
 import {Review} from "modules/review-block/components/review/Review";
 import s from "./styles.module.scss";
 import {TReviewBlockProps} from "./types";
@@ -7,7 +8,7 @@ import {useEffect} from "react";
 import {useAppSelector} from "storage/hookTypes";
 import {getReviews} from "modules/review-block/store/reviewSelectors";
 
-export const ReviewBlock = ({comments}: TReviewBlockProps) => {
+export const ReviewBlock = memo(({comments}: TReviewBlockProps) => {
 
     const reviews = useAppSelector(getReviews);
     const dispatch = useDispatch();
@@ -23,4 +24,4 @@ export const ReviewBlock = ({comments}: TReviewBlockProps) => {
             }
         </div>
     )
-}
+});
