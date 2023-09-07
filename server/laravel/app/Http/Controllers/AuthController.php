@@ -7,9 +7,12 @@ use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Resources\AuthUserResource;
 use App\Http\Resources\LogoutResource;
+use App\Mail\ForgetPasswordMail;
 use App\Models\User;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
+use Mockery\Generator\StringManipulation\Pass\Pass;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AuthController extends Controller
@@ -50,6 +53,6 @@ class AuthController extends Controller
 
     public function forgotPassword(ForgotPasswordRequest $request)
     {
-        return Password::sendResetLink($request->only('email'));
+      Mail::to($request->only('email'))->send(new ForgetPasswordMail());
     }
 }
