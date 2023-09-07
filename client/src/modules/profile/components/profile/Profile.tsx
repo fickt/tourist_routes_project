@@ -29,7 +29,7 @@ export const Profile = () => {
     const recommended = useAppSelector(isRecommended);
     const loader = useAppSelector(authLoader);
     const error = useAppSelector(authError);
-    const [questArray, setQuestArray] = useState<TLocalRoute[]>([])
+    const [questArray, setQuestArray] = useState<TLocalRoute[]>([]);
 
     useEffect(() => {
         !Cookies.get("token") && navigate(RoutePath.auth_login);
@@ -41,8 +41,7 @@ export const Profile = () => {
                 }
             })
             .catch(err => console.warn(err))
-    }, [])
-
+    }, []);
 
     const logout = async (): Promise<void> => {
         dispatch(handleAuthLoader(true)); // включить loader

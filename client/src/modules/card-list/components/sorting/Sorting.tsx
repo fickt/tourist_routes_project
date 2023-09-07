@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, memo} from "react";
 import s from "./styles.module.scss";
 import ArrowDownIcon from "./assets/arrowDownIcon.svg";
 import {useAppSelector} from "storage/hookTypes";
@@ -6,7 +6,7 @@ import {spotsSelector} from "modules/card-list/store/spotsSelectors";
 import {useDispatch} from "react-redux";
 import {handleSpots} from "modules/card-list/store/spotsActions";
 
-export const Sorting = () => {
+export const Sorting = memo(() => {
 
     const dispatch = useDispatch();
     const localRoutes = useAppSelector(spotsSelector);
@@ -42,4 +42,4 @@ export const Sorting = () => {
             </button>
         </div>
     )
-}
+});

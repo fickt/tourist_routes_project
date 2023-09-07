@@ -8,8 +8,8 @@ export const ReviewPage = () => {
     const spotId = parseInt(id);
 
     return (
-        <div className={"wrapper"} style={{ height: "100%", background: `url(${imageBg}) center/cover no-repeat` }}>
-            <div className="overlay" />
+        <div style={{height: "100%", background: `url(${imageBg}) center/cover no-repeat`}}>
+            <div className="overlay"/>
             <Popup review spotId={spotId}/>
         </div>
     )
