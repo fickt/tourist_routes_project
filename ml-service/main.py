@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, HTTPException
 import pandas as pd
 from sqlalchemy import create_engine, inspect
 from recommender import PlaceRecommender
@@ -6,6 +6,7 @@ from PIL import Image
 import io
 import numpy as np
 import time
+import keras
 
 app = FastAPI(title = 'Recommender System')
 
@@ -27,28 +28,40 @@ try:
 except Exception as ex:
     print(ex)
 
-place_recommender = PlaceRecommender(routes['description'] + ' ' + routes['name'])
+place_recommender = PlaceRecommender()
+landscape_clf = keras.models.load_model('clfv2.keras')
+
 
 def read_image(file):
-    image = Image.open(io.BytesIO(file))
+    image = Image.open(io.BytesIO(file)).resize((150, 150))
     return image
 
-@app.post('/recommend-on-history')
-def recommend_on_history(history: str):
-    try:
-        arr = list(map(lambda x: int(x) - 1, history.split(',')))
+@app.post('/recommend-on-image')
+async def recommend_on_image(file: UploadFile = File()):
+    if file.filename.split('.')[-1].lower() not in ('jpg', 'png', 'jpeg', 'ppm', 'tiff', 'bmp'):
+        raise HTTPException(status_code = 400, detail = 'Invalid file format')
 
-        to_recommend = place_recommender.recommend_on_history(arr)
+    image = np.array(read_image(await file.read()))
+
+    if np.array(image).shape[0] > 1080 or np.array(image).shape[0] > 1920 or np.array(image).shape[2] != 3:
+        raise HTTPException(status_code = 400, detail = 'Invalid file shape')
+
+    is_landscape = 1 if landscape_clf.predict(
+        np.expand_dims(image, 0) / 255.0) > 0.5 else 0
+
+    if not is_landscape:
+        raise HTTPException(status_code = 400, detail = 'Loaded image is not landscape')
+
+    try:
+        to_recommend = place_recommender.recommend_on_image(
+            np.expand_dims(image, 0) / 255.0,
+            routes['image_embeddings'])
 
         result = {}
-        print(to_recommend)
         for i in range(len(to_recommend)):
             result[f'place{i}'] = {
                 'index': to_recommend[i] + 1,
-                'name': routes.iloc[to_recommend[i]]['name'],
             }
-
         return result
-
     except Exception as ex:
-        print(ex)
+        return {'error': str(ex)}
