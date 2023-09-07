@@ -38,22 +38,13 @@
     flex-wrap: wrap;
 }
 
-.description,
-.takeWith {
+.description {
     font-family: "Nunito Sans", sans-serif;
     font-weight: 400;
-}
 
-.description {
     &__title {
         font-size: 20px;
         font-weight: 600;
-    }
-}
-
-.takeWith {
-    &__title {
-        font-size: 16px;
     }
 }
 

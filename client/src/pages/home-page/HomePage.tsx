@@ -1,8 +1,8 @@
-import { MainContent } from "modules/main-content/MainContent";
+import {MainContent} from "modules/main-content/MainContent";
 
 export const HomePage = () => {
- 
+
     return (
-        <MainContent />
+        <MainContent/>
     );
 }

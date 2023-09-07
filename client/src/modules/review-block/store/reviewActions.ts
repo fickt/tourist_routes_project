@@ -1,5 +1,5 @@
 import {SET_REVIEWS, ADD_REVIEW} from "modules/review-block/store/reviewActionsTypeNames";
-import {TReview} from "modules/review-block/store/types/reviewTypes";
+import {TReview} from "utils/localRoutes";
 
 export const setReviews = (payload: TReview[]) => ({
     type: SET_REVIEWS,

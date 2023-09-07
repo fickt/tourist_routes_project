@@ -4,11 +4,22 @@
     gap: 8px;
 
     &__title {
+        font-family: "Nunito Sans", sans-serif;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 400;
+        line-height: 20px;
+        color: var(--text-01);
     }
 
-    .selector{
-        width: 150px;
+    &__button {
+        display: flex;
+        align-items: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+
+        &__icon_up {
+            transform: rotate(180deg);
+        }
     }
 }

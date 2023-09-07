@@ -1,5 +1,5 @@
-import {TReviewProps} from "modules/review-block/components/review/types";
+import {TReview} from "utils/localRoutes";
 
 export type TReviewBlockProps = {
-    comments: TReviewProps[] | null,
+    comments: TReview[] | null,
 };
