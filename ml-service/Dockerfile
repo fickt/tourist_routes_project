@@ -5,7 +5,6 @@ RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 
 COPY . /usr/src/app
-RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
 RUN pip install --upgrade pip
 RUN pip install protobuf==3.20.*
 RUN pip install --no-cache-dir -r requirements.txt
