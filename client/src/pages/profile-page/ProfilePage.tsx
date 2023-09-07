@@ -1,10 +1,10 @@
-import { Profile } from "modules/profile/components/profile/Profile";
+import {Profile} from "modules/profile/components/profile/Profile";
 
 export const ProfilePage = () => {
 
     return (
         <div className="wrapper">
-            <Profile />
+            <Profile/>
         </div>
     )
 }

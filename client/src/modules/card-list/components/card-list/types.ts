@@ -1,5 +1,8 @@
 import {TLocalRoute} from "utils/localRoutes";
+import {TUpdatedRoutes} from "modules/favorites/store/types/favoriteTypes";
 
-export interface CardListProps {
-    spots: TLocalRoute[]
+export type TCardListProps = {
+    favPage?: boolean,
+    spots: TLocalRoute[] | TUpdatedRoutes,
+    activeFavMark?: boolean,
 }

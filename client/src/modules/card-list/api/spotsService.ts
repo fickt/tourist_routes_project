@@ -3,7 +3,7 @@ import {RoutePath} from "pages/routeConfig";
 import {api} from "utils/api";
 import {TLocalRoute} from "utils/localRoutes";
 
-export class SpotsService {
+export class spotsService {
 
     fetchSpots(): Promise<AxiosResponse<TLocalRoute[]>> {
         return api.get(RoutePath.spots);
@@ -27,4 +27,4 @@ export class SpotsService {
         return api.get(requestPath);
     }
 }
-export const apiSpots = new SpotsService();
+export const apiSpots = new spotsService();

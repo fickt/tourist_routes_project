@@ -22,23 +22,15 @@ export const Popup = ({spotId, review, image, isPopupOpen, setIsPopupOpen, close
     const imagePopupRef = useRef(null);
     useOnClickOutside(imagePopupRef, () => {
         image && setIsPopupOpen(false);
+        review && setIsPopupOpen(false);
     });
 
-        return (
-            <div className={s.container}>
-                <div className={s.popup} ref={imagePopupRef}>
-                    {image && (
-                        <ImageRecommendPopup
-                            title="Поиск по фото"
-                            isPopupOpen={isPopupOpen}
-                            setIsPopupOpen={setIsPopupOpen}
-                            closePopup={closePopup}
-                        />
-                    )}
-                </div>
-                <div className={s.popup}>
-                    {review && <ReviewPopup title="Оставить отзыв" spotId={spotId} />}
-                </div>
+    return (
+        <div className={s.container}>
+            <div className={s.popup} ref={imagePopupRef}>
+                {image && <ImageRecommendPopup closePopup={closePopup}/>}
+                {review && <ReviewPopup spotId={spotId} closePopup={closePopup}/>}
             </div>
-        );
-    };
+        </div>
+    );
+};

@@ -7,25 +7,30 @@ import {isStartQuestions} from "modules/questions/store/questionsSelectors";
 import {ProfileHeader} from "modules/profile/components/profile-header/ProfileHeader";
 import {ProfileSection} from "modules/profile/components/profile-section/ProfileSection";
 import {PassQuestions} from "modules/questions/components/pass-questions/PassQuestions";
-import {Link} from "react-router-dom";
 import classNames from "classnames";
 import {TLocalRoute} from "utils/localRoutes";
 import {apiQuestions} from "modules/questions/api/QuestionsServise";
 import {useDispatch} from "react-redux";
 import {handleStartPassQuestions} from "modules/questions/store/questionsActions";
-import {CardListComponent} from "modules/card-list/components/card-list-component/CardListComponent";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {authError, authLoader} from "modules/auth-form/store/authSelectors";
 import {handleAuthError, handleAuthLoader} from "modules/auth-form/store/authActions";
 import {profileValues} from "modules/profile/constants/profileValues";
+import {CardListBody} from "modules/card-list";
+import {useNavigate} from "react-router-dom";
+import {authService} from "modules/auth-form/api/authService";
+import {TServerResponse} from "modules/auth-form/store/types/authTypes";
+import Cookies from "js-cookie";
+import {setFavoriteSpots} from "modules/favorites/store/favoriteActions";
 
 export const Profile = () => {
 
     const dispatch = useDispatch();
-    const isStart = useAppSelector(isStartQuestions)
+    const navigate = useNavigate();
+    const isStart = useAppSelector(isStartQuestions);
     const loader = useAppSelector(authLoader);
     const error = useAppSelector(authError);
-    const [questArray, setQuestArray] = useState<TLocalRoute[]>([])
+    const [questArray, setQuestArray] = useState<TLocalRoute[]>([]);
 
     useEffect(() => {
         apiQuestions.fetchRecomendations()
@@ -41,6 +46,22 @@ export const Profile = () => {
             })
     }, [])
 
+    const logout = async (): Promise<void> => {
+        dispatch(handleAuthLoader(true)); // включить loader
+        try {
+            await authService.logout();
+            Object.keys(Cookies.get()).forEach(cookieName => {
+                Cookies.remove(cookieName);
+            });
+            dispatch(setFavoriteSpots(null));
+            navigate(RoutePath.home);
+        } catch (e: Error | TServerResponse) {
+            dispatch(handleAuthError(e.response.data.error));
+        } finally {
+            dispatch(handleAuthLoader(false)); // выключить loader
+        }
+    };
+
     return (
         <div className={s.profile}>
             <ProfileHeader path={RoutePath.settings}/>
@@ -51,7 +72,7 @@ export const Profile = () => {
             <h2>Рекомендации</h2>
             {!isStart && <PassQuestions/>}
             {loader && <PreloaderCar/>}
-            {!error && !loader && <CardListComponent spots={questArray}/>}
+            {!error && !loader && <CardListBody spots={questArray}/>}
             {error && <p>{error}</p>}
             <div className="buttons__wrapper">
                 <div className="buttons__link">
@@ -62,8 +83,6 @@ export const Profile = () => {
                     >
                         Выйти из аккаунта
                     </Button>
-                    {loader && <PreloaderCar/>}
-                    {!loader && (error && <ErrorMessage errorText={error}/>)}
                 </div>
             </div>
         </div>

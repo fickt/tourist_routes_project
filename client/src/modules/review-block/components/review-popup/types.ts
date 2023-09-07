@@ -1,6 +1,6 @@
 export type TReviewPopupProps = {
-    title: string,
     spotId: number,
+    closePopup: () => void,
 }
 
 export type TFormValues = {
