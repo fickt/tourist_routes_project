@@ -6,6 +6,7 @@ use App\Http\Requests\ForgotPasswordRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Resources\AuthUserResource;
+use App\Http\Resources\ForgotPasswordResource;
 use App\Http\Resources\LogoutResource;
 use App\Mail\ForgetPasswordMail;
 use App\Models\User;
@@ -49,8 +50,11 @@ class AuthController extends Controller
         return new AuthUserResource($token);
     }
 
-    public function forgotPassword(ForgotPasswordRequest $request)
+    public function forgotPassword(ForgotPasswordRequest $request): mixed
     {
-      Mail::to($request->only('email'))->send(new ForgetPasswordMail());
+      return Mail::to($request->only('email'))->send(new ForgetPasswordMail())
+          ? new ForgotPasswordResource($request->input('email'))
+          : throw new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR, 'Internal server error')
+      ;
     }
 }
