@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteCommentController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RouteFavoriteController;
@@ -32,6 +33,11 @@ Route::group(['middleware' => 'api'], function () {
         Route::post('/register', [AuthController::class, 'register']);
         Route::post('/login', [AuthController::class, 'login']);
         Route::post('/logout', [AuthController::class, 'logout']);
+        Route::post('/refresh', [AuthController::class, 'refresh']);
+    });
+
+    Route::group(['prefix' => 'myprofile', 'middleware' => IsAuthenticated::class], function () {
+        Route::patch('', [ProfileController::class, 'update']);
     });
 
     /* Routes */
@@ -58,7 +64,7 @@ Route::group(['middleware' => 'api'], function () {
         Route::get('/{routeId}', [RouteController::class, 'show']);
 
         /* Comments */
-        Route::group(['prefix' => '/{routeId}/comment'], function () {
+        Route::group(['prefix' => '/{routeId}/comment', 'middleware' => IsAuthenticated::class], function () {
             Route::post('', [RouteCommentController::class, 'store']);
         });
     });

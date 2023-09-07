@@ -38,4 +38,10 @@ class AuthController extends Controller
 
         return new LogoutResource($user);
     }
+
+    public function refresh(): AuthUserResource
+    {
+        $token = auth()->refresh();
+        return new AuthUserResource($token);
+    }
 }

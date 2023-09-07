@@ -5,3 +5,11 @@
   line-height: 20px;
   margin: 0;
 }
+
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  align-items: center;
+  justify-content: center;
+}

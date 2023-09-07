@@ -9,7 +9,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Response;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Request;
 use Laravel\Sanctum\HasApiTokens;
+use Mockery\Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -68,7 +71,7 @@ class User extends Authenticatable implements JWTSubject
             'route_recommendations',
             'user_id',
             'route_id'
-        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user']);
+        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences']);
     }
 
     public function favoriteRoutes(): BelongsToMany
@@ -78,7 +81,7 @@ class User extends Authenticatable implements JWTSubject
             'user_route_favorites',
             'user_id',
             'route_id'
-        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user']);
+        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences']);
     }
 
     /**
@@ -98,6 +101,21 @@ class User extends Authenticatable implements JWTSubject
             ? $user->favoriteRoutes()->detach($route)
             : $user->favoriteRoutes()->attach($route);
         return auth()->user()->favoriteRoutes()->get();
+    }
+
+    /**
+     * Редактировать профиль пользователя
+     * Поменять nickname, email, password
+     */
+    public function editProfile($data): mixed
+    {
+        $user = auth()->user();
+
+        return $user->update($data)
+            ? auth()->user()
+            : throw new HttpException(
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                'Internal server error');
     }
 
     public function getRecommendations()

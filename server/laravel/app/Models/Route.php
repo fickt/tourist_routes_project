@@ -56,19 +56,24 @@ class Route extends Model
         'rating' => FloatRound::class
     ];
 
+    protected $hidden = [
+        'embedding',
+    ];
+
     /**
      * Получить все Route
      *
      * Доступные queries:
      * ?difficulty= (отфильтровать по уровням сложности)
      * ?category= (отфильтровать по категориям)
+     * ?target_audience= (отфильтровать по целевой аудитории)
      * ?search= (поиск по названию и описанию Route)
      *
      * @return Collection
      */
     public function getRoutes(): Collection
     {
-        $query = self::query()->with(['difficulty', 'photoPaths', 'categories', 'comments.user']);
+        $query = self::query()->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences']);
 
         if (Request::query('difficulty')) {
             $difficulty = explode(',', Request::query('difficulty'));
@@ -84,6 +89,13 @@ class Route extends Model
             });
         }
 
+        if (Request::query('target_audience')) {
+            $target_audiences = explode(',', Request::query('target_audience'));
+            $query->whereHas('targetAudiences', function ($q) use ($target_audiences) {
+                $q->whereIn('name', $target_audiences);
+            });
+        }
+
         if ($search = Request::query('search')) {
             $query
                 ->where('name', 'LIKE', "%$search%")
@@ -96,7 +108,7 @@ class Route extends Model
     {
         try {
             $route = Route::query()
-                ->with(['difficulty', 'photoPaths', 'categories', 'comments.user'])
+                ->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences'])
                 ->findOrFail($routeId);
 
         } catch (Exception) {
@@ -144,6 +156,16 @@ class Route extends Model
         return $this->hasMany(
             RouteComment::class,
             'route_id'
+        );
+    }
+
+    public function targetAudiences(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            RouteTargetAudience::class,
+            'routes_route_target_audience',
+            'route_id',
+            'target_audience_id'
         );
     }
 }
