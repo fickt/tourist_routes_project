@@ -11,8 +11,6 @@ use App\Mail\ForgetPasswordMail;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Password;
-use Mockery\Generator\StringManipulation\Pass\Pass;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AuthController extends Controller
