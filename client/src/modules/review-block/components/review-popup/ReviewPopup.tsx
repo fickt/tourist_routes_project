@@ -12,8 +12,14 @@ import {reviewService} from "modules/review-block/api/reviewService";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
 import {addReview} from "modules/review-block/store/reviewActions";
+import Cookies from "js-cookie";
+import {AxiosResponse} from "axios";
+import {TLocalRoute} from "utils/localRoutes";
+import {apiSpots} from "modules/card-list/api/SpotsServise";
+import {handleSpots} from "modules/card-list/store/spotsActions";
+import {Link} from "react-router-dom";
 
-export const ReviewPopup = ({spotId, title, closePopup}: TReviewPopupProps) => {
+export const ReviewPopup = ({spotId, title}: TReviewPopupProps) => {
 
     const dispatch = useAppDispatch();
     const loader = useAppSelector(authLoader);
@@ -35,24 +41,30 @@ export const ReviewPopup = ({spotId, title, closePopup}: TReviewPopupProps) => {
     const sendReview = async (content: string, rating: number, spotId: number): Promise<void> => {
         dispatch(handleAuthLoader(true)); // включить loader
         try {
-            const response = await reviewService.sendReview(content, rating, spotId);
-            dispatch(addReview(response.data.comments[0]));
+            const spot = await reviewService.sendReview(content, rating, spotId);
+            const comments = spot.data.comments;
+            comments.length > 0 && dispatch(addReview(comments[comments.length - 1]));
+            if (spot) {
+                const spots: AxiosResponse<TLocalRoute[]> = await apiSpots.fetchSpots();
+                dispatch(handleSpots(spots.data));
+            }
             form.resetFields();
             setContent(null);
             setRating(0);
             goBack();
         } catch (e: Error | TServerResponse) {
-            setError(e);
+            if (Cookies.get("token")) {
+                Object.keys(Cookies.get()).forEach(cookieName => {
+                    Cookies.remove(cookieName);
+                });
+                // костыль, чтобы пользователь перелогинился, по хорошему надо делать refresh token
+                window.location.reload();
+            }
+            dispatch(handleAuthError(e.response.data.error));
         } finally {
             dispatch(handleAuthLoader(false)); // выключить loader
         }
     };
-
-    const setError = (e: Error | TServerResponse) => {
-        e.response
-            ? dispatch(handleAuthError(e.response.data.error))
-            : dispatch(handleAuthError("Мы не смогли учесть Ваш отзыв:(")); // ошибка 504 (отвалились докер-контейнеры)
-    }
 
     const rateOnChange = (value: number) => {
         setRating(value);
@@ -90,7 +102,9 @@ export const ReviewPopup = ({spotId, title, closePopup}: TReviewPopupProps) => {
                     >
                         Сохранить
                     </Button>
-                    <Button action={closePopup} extraClass={"button"} disabled={loader}>Позже</Button>
+                    <Link to={`/spots/${spotId}`} className="buttons__link">
+                        <Button extraClass={"button"} disabled={loader}>Позже</Button>
+                    </Link>
                 </div>
             </Form>
             {loader && <PreloaderCar/>}

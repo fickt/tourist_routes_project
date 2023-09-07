@@ -1,6 +1,5 @@
 import s from "./styles.module.scss";
 import {ReviewBlock} from "modules/review-block";
-import {TSpotItemProps} from "./types";
 import {TagList} from "components/filters-tag/FiltersTag";
 import classNames from "classnames";
 import {Slider} from "modules/spot-item/components/slider/Slider";
@@ -10,11 +9,12 @@ import {Link} from "react-router-dom";
 import {useEffect} from "react";
 import {setSpotItemId} from "modules/spot-item/store/spotItemActions";
 import {useDispatch} from "react-redux";
+import {TSpotItemProps} from "./types";
 
 export const SpotItem = ({spotItem}: TSpotItemProps) => {
 
-    const {name, rating, description, id, photos, categories, difficulty, comments} = spotItem;
     const dispatch = useDispatch();
+    const {name, rating, description, id, photos, categories, difficulty, comments} = spotItem;
 
     useEffect(() => {
         dispatch(setSpotItemId(id.toString()));
@@ -32,12 +32,6 @@ export const SpotItem = ({spotItem}: TSpotItemProps) => {
             <section id="main" className={classNames(s.section, s.description)}>
                 <h2 className={s.description__title}>{name}</h2>
                 <div className={s.section__text}>{description}</div>
-            </section>
-            <section id="take-with" className={classNames(s.section, s.takeWith)}>
-                <h2 className={s.takeWith__title}>Возьмите в дорогу</h2>
-                <div className={s.section__text}>Список того, что может потребоваться в дорогу. Все для комфортного
-                    путешествия.
-                </div>
             </section>
             <section id="reviews" className={classNames(s.section, s.reviews)}>
                 <div className={s.reviews__info}>

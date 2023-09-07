@@ -1,3 +1,4 @@
+import React, {useEffect, useState} from "react";
 import s from "./styles.module.scss";
 import {RoutePath} from "pages/routeConfig";
 import {Button} from "ui/button/Button";
@@ -8,7 +9,6 @@ import {ProfileSection} from "modules/profile/components/profile-section/Profile
 import {PassQuestions} from "modules/questions/components/pass-questions/PassQuestions";
 import {Link} from "react-router-dom";
 import classNames from "classnames";
-import {useEffect, useState} from "react";
 import {TLocalRoute} from "utils/localRoutes";
 import {apiQuestions} from "modules/questions/api/QuestionsServise";
 import {useDispatch} from "react-redux";
@@ -54,9 +54,17 @@ export const Profile = () => {
             {!error && !loader && <CardListComponent spots={questArray}/>}
             {error && <p>{error}</p>}
             <div className="buttons__wrapper">
-                <Link to={RoutePath.auth_login} className="buttons__link">
-                    <Button extraClass={classNames("button", "button_white")}>Выйти из аккаунта</Button>
-                </Link>
+                <div className="buttons__link">
+                    <Button
+                        action={logout}
+                        extraClass={classNames("button", "button_white")}
+                        disabled={loader}
+                    >
+                        Выйти из аккаунта
+                    </Button>
+                    {loader && <PreloaderCar/>}
+                    {!loader && (error && <ErrorMessage errorText={error}/>)}
+                </div>
             </div>
         </div>
     )
