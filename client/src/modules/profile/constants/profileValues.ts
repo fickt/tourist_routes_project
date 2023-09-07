@@ -1,4 +1,4 @@
 export const profileValues = {
-    plases: "Мои места",
+    places: "Мои места",
     favorite: "Избранное"
 }

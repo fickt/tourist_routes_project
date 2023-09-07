@@ -37,7 +37,7 @@ export const Profile = () => {
                 }
             })
             .catch(() => {
-                dispatch(handleAuthError('Ошибка получения рекомендованных мест'))
+                dispatch(handleAuthError("Ошибка получения рекомендованных мест"))
             })
     }, [])
 
@@ -45,7 +45,7 @@ export const Profile = () => {
         <div className={s.profile}>
             <ProfileHeader path={RoutePath.settings}/>
             <div className={s.profile__main}>
-                <ProfileSection path={RoutePath.mySpots} title={profileValues.plases}/>
+                <ProfileSection path={RoutePath.mySpots} title={profileValues.places}/>
                 <ProfileSection path={RoutePath.favorites} title={profileValues.favorite}/>
             </div>
             <h2>Рекомендации</h2>

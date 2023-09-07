@@ -20,10 +20,10 @@ export const QuestionsButtons = ({title, answers, isSave}: TQuestionsButtonProps
         if (answers && answers.length > 0) {
             apiQuestions.sendAnswer(answers)
                 .then(response => {
-                    console.log('Успешный ответ:', response);
+                    console.log("Успешный ответ:", response);
                 })
                 .catch(() => {
-                    dispatch(handleAuthError('Ошибка отправки ответов на сервер'))
+                    dispatch(handleAuthError("Ошибка отправки ответов на сервер"))
                 });
         }
     }

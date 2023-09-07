@@ -4,13 +4,13 @@ import LikeIcon from "./assets/like.svg";
 import {QuestionsButtons} from "modules/questions/components/questions-buttons/QuestionsButtons";
 import {useEffect, useState} from "react";
 import {apiQuestions} from "modules/questions/api/QuestionsServise";
-import {IAnswers} from "modules/questions/api/type";
+import {TAnswers} from "modules/questions/api/type";
 import {Typography} from "antd";
 import {useDispatch} from "react-redux";
 import {handleAuthError, handleAuthLoader} from "modules/auth-form/store/authActions";
 import {useAppSelector} from "storage/hookTypes";
 import {authError, authLoader} from "modules/auth-form/store/authSelectors";
-import {questionsValues} from "modules/questions/constants/questionsValues";
+import {questionCardText, questionsValues} from "modules/questions/constants/questionsValues";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 
 export const QuestionCard = () => {
@@ -18,7 +18,7 @@ export const QuestionCard = () => {
     const [questions, setQuestions] = useState([])
     const error = useAppSelector(authError);
     const loader = useAppSelector(authLoader);
-    const [answers, setAnswers] = useState<IAnswers[]>([])
+    const [answers, setAnswers] = useState<TAnswers[]>([])
     const [questionIndex, setQuestionIndex] = useState(0)
     const {Text} = Typography
     const dispatch = useDispatch()
@@ -31,7 +31,7 @@ export const QuestionCard = () => {
                 dispatch(handleAuthLoader(false))
             })
             .catch(() => {
-                dispatch(handleAuthError('Ошибка получения данных для анкеты'))
+                dispatch(handleAuthError("Ошибка получения данных для анкеты"))
             });
     }, [])
 
@@ -50,12 +50,11 @@ export const QuestionCard = () => {
     return (
         <div className={s.questionCard}>
             <p className={s.questionCard__text}>
-                Выберите места, которые вам понравились, и мы сгенерируем на их основе
-                ваши персональные рекомендации
+                {questionCardText}
             </p>
             {!loader ? (
                 <>
-                    <img className={s.questionCard__image} src={questions[questionIndex]} alt='Question Image'/>
+                    <img className={s.questionCard__image} src={questions[questionIndex]} alt="Question Image"/>
                     {!error && questionIndex !== questions.length ? (
                         <div className={s.questionCard__btns}>
                             <DislikeIcon
