@@ -44,4 +44,9 @@ class AuthController extends Controller
         $token = auth()->refresh();
         return new AuthUserResource($token);
     }
+
+    public function forgotPassword(ForgotPasswordRequest $request)
+    {
+
+    }
 }
