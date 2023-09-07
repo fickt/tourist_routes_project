@@ -71,4 +71,8 @@ Route::group(['middleware' => 'api'], function () {
     });
 
     Route::get('/assets/{filename}', [ImageController::class, 'show']);
+    Route::get('/view', function (){
+
+        return view('forgotpassword');
+    });
 });
