@@ -61,4 +61,9 @@ class AuthController extends Controller
             $this->verificationCode->sendVerificationCodeToEmail($request->input('email'))
         );
     }
+
+    public function resetPassword(ResetPasswordRequest $request)
+    {
+
+    }
 }
