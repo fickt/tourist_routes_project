@@ -13,8 +13,11 @@ class ForgetPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public function __construct(protected $verificationCode)
+    {}
+
     public function build(): ForgetPasswordMail
     {
-        return $this->markdown('forgotpassword')->subject('Восстановление пароля')->with();
+        return $this->markdown('forgotpassword')->subject('Восстановление пароля')->with($this->verificationCode);
     }
 }
