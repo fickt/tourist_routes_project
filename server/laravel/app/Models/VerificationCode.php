@@ -14,7 +14,7 @@ class VerificationCode extends Model
 {
     use HasFactory;
 
-    protected $table = 'verification_code';
+    protected $table = 'verification_codes';
 
     protected $fillable = [
         'email',
@@ -28,10 +28,16 @@ class VerificationCode extends Model
     public function sendVerificationCodeToEmail(string $email): mixed
     {
         $verificationCode = $this->generateVerificationCode();
-            self::query()->create([
-                'email' => $email,
-                'code' => $verificationCode
-            ]);
+
+        if (self::query()->where('email', '=', $email)->exists()) {
+            self::query()
+                ->where('email', '=', $email)
+                ->delete();
+        }
+        self::query()->create([
+            'email' => $email,
+            'code' => $verificationCode
+        ]);
 
         return Mail::to([$email])->send(new ForgetPasswordMail($verificationCode))
             ? $email
