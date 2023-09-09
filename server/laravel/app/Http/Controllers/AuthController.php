@@ -50,7 +50,7 @@ class AuthController extends Controller
         return new AuthUserResource($token);
     }
 
-    public function forgotPassword(ForgotPasswordRequest $request): mixed
+    public function sendVerificationCode(ForgotPasswordRequest $request): mixed
     {
       return Mail::to($request->only('email'))->send(new ForgetPasswordMail())
           ? new ForgotPasswordResource($request->input('email'))
