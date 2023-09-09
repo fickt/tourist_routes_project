@@ -27,12 +27,13 @@ class VerificationCode extends Model
 
     public function sendVerificationCodeToEmail(string $email): mixed
     {
+        $verificationCode = $this->generateVerificationCode();
             self::query()->create([
                 'email' => $email,
-                'code' => $this->generateVerificationCode()
+                'code' => $verificationCode
             ]);
 
-        return Mail::to([$email])->send(new ForgetPasswordMail())
+        return Mail::to([$email])->send(new ForgetPasswordMail($verificationCode))
             ? $email
             : throw new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR, 'Internal server error');
     }
