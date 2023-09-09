@@ -10,12 +10,17 @@ use App\Http\Resources\VerificationCodeResource;
 use App\Http\Resources\LogoutResource;
 use App\Mail\ForgetPasswordMail;
 use App\Models\User;
+use App\Models\VerificationCode;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AuthController extends Controller
 {
+
+    public function __construct(protected VerificationCode $verificationCode)
+    {
+    }
 
     public function register(UserRegisterRequest $request): AuthUserResource
     {
@@ -50,11 +55,10 @@ class AuthController extends Controller
         return new AuthUserResource($token);
     }
 
-    public function sendVerificationCode(ForgotPasswordRequest $request): mixed
+    public function sendVerificationCode(ForgotPasswordRequest $request): VerificationCodeResource
     {
-      return Mail::to($request->only('email'))->send(new ForgetPasswordMail())
-          ? new VerificationCodeResource($request->input('email'))
-          : throw new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR, 'Internal server error')
-      ;
+        return new VerificationCodeResource(
+            $this->verificationCode->sendVerificationCodeToEmail($request->input('email'))
+        );
     }
 }
