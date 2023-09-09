@@ -33,7 +33,7 @@ class ResetPasswordRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.exists' => throw new HttpException(Response::HTTP_NOT_FOUND, 'Аккаунт с такой почтой не существует!')
+            'email.exists' => 'Аккаунт с такой почтой не существует!'
         ];
     }
 }

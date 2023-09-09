@@ -67,5 +67,7 @@ class AuthController extends Controller
     public function resetPassword(ResetPasswordRequest $request)
     {
         $this->user->resetPassword($request);
+        VerificationCode::query()->where('code', '=', $request->only('verification_code'))->delete();
+        return "Password successfully reset!";
     }
 }

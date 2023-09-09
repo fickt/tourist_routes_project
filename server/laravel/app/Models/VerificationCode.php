@@ -39,9 +39,10 @@ class VerificationCode extends Model
             'code' => $verificationCode
         ]);
 
-        return Mail::to([$email])->send(new ForgetPasswordMail($verificationCode))
-            ? $email
-            : throw new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR, 'Internal server error');
+        return $verificationCode;
+      //  return Mail::to([$email])->send(new ForgetPasswordMail($verificationCode))
+        //    ? $email
+           // : throw new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR, 'Internal server error');
     }
 
     private function generateVerificationCode(): int
