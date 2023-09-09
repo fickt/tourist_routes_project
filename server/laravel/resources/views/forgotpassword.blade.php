@@ -15,7 +15,7 @@
         </div>
         <div class="card-body">
             <form name="add-blog-post-form" id="add-blog-post-form" action="{{url('store-form')}}">
-              Verification code: {{$verification_code = 24353}}
+              Verification code: {{$verificationCode}}
             </form>
         </div>
     </div>

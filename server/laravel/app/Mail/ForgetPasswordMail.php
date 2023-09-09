@@ -13,7 +13,7 @@ class ForgetPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(protected $verificationCode)
+    public function __construct(protected int $verificationCode)
     {}
 
     public function build(): ForgetPasswordMail
