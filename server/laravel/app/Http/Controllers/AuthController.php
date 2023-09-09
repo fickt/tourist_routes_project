@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ForgotPasswordRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Resources\AuthUserResource;
@@ -18,7 +19,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class AuthController extends Controller
 {
 
-    public function __construct(protected VerificationCode $verificationCode)
+    public function __construct(protected VerificationCode $verificationCode,
+                                protected User             $user)
     {
     }
 
@@ -64,6 +66,6 @@ class AuthController extends Controller
 
     public function resetPassword(ResetPasswordRequest $request)
     {
-
+        $this->user->resetPassword($request);
     }
 }

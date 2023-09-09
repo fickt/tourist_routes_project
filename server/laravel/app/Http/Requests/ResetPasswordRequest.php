@@ -25,6 +25,7 @@ class ResetPasswordRequest extends FormRequest
     {
         return [
             'email' => 'required|string|email|exists:users|min:1|max:255',
+            'password' => 'required|string|min:1|max:255',
             'verification_code' => 'required|integer|between:1000,9999'
         ];
     }

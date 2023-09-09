@@ -118,6 +118,19 @@ class User extends Authenticatable implements JWTSubject
                 'Internal server error');
     }
 
+    public function resetPassword($request)
+    {
+        /**
+         * @var VerificationCode $verificationCode
+         */
+        return $verificationCode = VerificationCode::query()
+            ->where('email', '=', $request['email'], true,
+                'verification_code', '=', $request['verification_code'])
+            ->get()
+            ? User::query()->find($request['email'])->update($request->only('password'))
+            : throw new HttpException(Response::HTTP_BAD_REQUEST, 'Неверный код!');
+    }
+
     public function getRecommendations()
     {
         return auth()->user()->recommendations()->get();
