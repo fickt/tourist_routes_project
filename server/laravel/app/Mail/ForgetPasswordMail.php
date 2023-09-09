@@ -15,6 +15,6 @@ class ForgetPasswordMail extends Mailable
 
     public function build(): ForgetPasswordMail
     {
-        return $this->markdown('forgotpassword')->subject('Восстановление пароля');
+        return $this->markdown('forgotpassword')->subject('Восстановление пароля')->with();
     }
 }
