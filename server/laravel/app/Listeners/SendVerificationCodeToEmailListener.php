@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\VerificationCodeRequestedEvent;
-use App\Mail\ForgetPasswordMail;
+use App\Mail\ResetPasswordMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
@@ -23,6 +23,6 @@ class SendVerificationCodeToEmailListener
      */
     public function handle(VerificationCodeRequestedEvent $event): void
     {
-        Mail::to([$event->email])->send(new ForgetPasswordMail($event->verificationCode));
+        Mail::to([$event->email])->send(new ResetPasswordMail($event->verificationCode));
     }
 }

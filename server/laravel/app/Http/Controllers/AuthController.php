@@ -9,7 +9,7 @@ use App\Http\Requests\UserRegisterRequest;
 use App\Http\Resources\AuthUserResource;
 use App\Http\Resources\VerificationCodeResource;
 use App\Http\Resources\LogoutResource;
-use App\Mail\ForgetPasswordMail;
+use App\Mail\ResetPasswordMail;
 use App\Models\User;
 use App\Models\VerificationCode;
 use Illuminate\Http\Response;

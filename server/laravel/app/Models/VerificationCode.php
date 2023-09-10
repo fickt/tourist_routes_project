@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Events\VerificationCodeRequestedEvent;
-use App\Mail\ForgetPasswordMail;
+use App\Mail\ResetPasswordMail;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
