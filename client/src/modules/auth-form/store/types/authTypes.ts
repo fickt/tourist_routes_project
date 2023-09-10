@@ -33,6 +33,7 @@ export type TUser = {
     nickname: string,
     created_at?: Date,
     updated_at?: Date,
+    token?: string,
 }
 
 export type TAuthAction =

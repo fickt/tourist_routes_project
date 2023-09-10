@@ -1,4 +1,6 @@
-import { ReactNode } from "react";
-import { TLocalRoute } from "utils/localRoutes";
+import {TLocalRoute} from "utils/localRoutes";
 
-export type TCardProps = TLocalRoute & { children?: ReactNode }
+export type TCardProps = {
+    activeFavMark?: boolean,
+    spot: TLocalRoute,
+}

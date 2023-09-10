@@ -1,15 +1,16 @@
-import React, {useState} from "react";
+import React, {useState, ChangeEvent} from "react";
 import s from "./styles.module.scss";
 import PopupIcon from "./assets/popupIcon.svg";
 import {Button} from "ui/button/Button";
 import {TImageRecommendPopupProps} from "./types";
 import classNames from "classnames";
+import {popupTitle} from "./constants/constants";
 
-export const ImageRecommendPopup = ({title, closePopup}: TImageRecommendPopupProps) => {
+export const ImageRecommendPopup = ({closePopup}: TImageRecommendPopupProps) => {
 
     const [selectedFile, setSelectedFile] = useState(null);
 
-    const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (files && files.length > 0) {
             setSelectedFile(files[0]);
@@ -33,7 +34,7 @@ export const ImageRecommendPopup = ({title, closePopup}: TImageRecommendPopupPro
 
     return (
         <div className={s.imagePopup}>
-            <h2 className={s.imagePopup__title}>{title}</h2>
+            <h2 className={s.imagePopup__title}>{popupTitle}</h2>
             <div className={s.imagePopup__image}>
                 {selectedFile
                     ? <img
