@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\VerificationCodeRequestedEvent;
 use App\Mail\ForgetPasswordMail;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,7 +26,7 @@ class VerificationCode extends Model
         'is_valid'
     ];
 
-    public function sendVerificationCodeToEmail(string $email): mixed
+    public function sendVerificationCodeToEmail(string $email): string
     {
         $verificationCode = $this->generateVerificationCode();
 
@@ -38,11 +39,8 @@ class VerificationCode extends Model
             'email' => $email,
             'code' => $verificationCode
         ]);
-
-        return $verificationCode;
-      //  return Mail::to([$email])->send(new ForgetPasswordMail($verificationCode))
-        //    ? $email
-           // : throw new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR, 'Internal server error');
+        VerificationCodeRequestedEvent::dispatch($email, $verificationCode);
+        return $email;
     }
 
     private function generateVerificationCode(): int

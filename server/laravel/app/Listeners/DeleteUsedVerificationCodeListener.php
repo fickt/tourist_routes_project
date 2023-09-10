@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\ResetPassword;
+use App\Events\ResetPasswordEvent;
 use App\Models\VerificationCode;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -20,7 +20,7 @@ class DeleteUsedVerificationCodeListener
     /**
      * Handle the event.
      */
-    public function handle(ResetPassword $event): void
+    public function handle(ResetPasswordEvent $event): void
     {
         VerificationCode::query()
             ->where('code', '=', $event->verificationCode)

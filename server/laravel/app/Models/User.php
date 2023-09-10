@@ -3,7 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Events\ResetPassword;
+use App\Events\ResetPasswordEvent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,9 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Response;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Request;
 use Laravel\Sanctum\HasApiTokens;
-use Mockery\Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -119,7 +117,7 @@ class User extends Authenticatable implements JWTSubject
                 'Internal server error');
     }
 
-    public function resetPassword($request)
+    public function resetPassword($request): void
     {
          VerificationCode::query()
             ->where('email', '=', $request->input('email'))
@@ -127,7 +125,7 @@ class User extends Authenticatable implements JWTSubject
             ->exists()
             ? User::query()->where('email','=',$request['email'])->update(['password' => Hash::make($request['password'])])
             : throw new HttpException(Response::HTTP_BAD_REQUEST, 'Неверный код!');
-            ResetPassword::dispatch($request->input('email'), $request->input('verification_code'));
+            ResetPasswordEvent::dispatch($request->input('email'), $request->input('verification_code'));
     }
 
     public function getRecommendations()
