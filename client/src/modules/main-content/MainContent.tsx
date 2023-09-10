@@ -36,8 +36,7 @@ export const MainContent = () => {
         setSearchValue("");
     }
 
-    const searchRequest = () => {
-        debounceSearchValue &&
+    const handleSearchRequest = () => {
         apiSpots.fetchSearchRequest(debounceSearchValue)
             .then(data => {
                 dispatch(handleSpots(data.data))
