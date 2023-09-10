@@ -120,12 +120,13 @@ class User extends Authenticatable implements JWTSubject
 
     public function resetPassword($request)
     {
-        return VerificationCode::query()
+         VerificationCode::query()
             ->where('email', '=', $request->input('email'))
             ->where('code', '=', $request->input('verification_code'))
             ->exists()
             ? User::query()->where('email','=',$request['email'])->update(['password' => Hash::make($request['password'])])
             : throw new HttpException(Response::HTTP_BAD_REQUEST, 'Неверный код!');
+            eve
     }
 
     public function getRecommendations()
