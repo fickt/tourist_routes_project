@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Events\ResetPassword;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -126,7 +127,7 @@ class User extends Authenticatable implements JWTSubject
             ->exists()
             ? User::query()->where('email','=',$request['email'])->update(['password' => Hash::make($request['password'])])
             : throw new HttpException(Response::HTTP_BAD_REQUEST, 'Неверный код!');
-            eve
+            ResetPassword::dispatch($request->input('email'), $request->input('verification_code'));
     }
 
     public function getRecommendations()
