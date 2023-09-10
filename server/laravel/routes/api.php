@@ -34,8 +34,13 @@ Route::group(['middleware' => 'api'], function () {
         Route::post('/login', [AuthController::class, 'login']);
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::post('/refresh', [AuthController::class, 'refresh']);
+
+        /* Resetting password */
+        Route::post('/send-verification-code', [AuthController::class, 'sendVerificationCode']);
+        Route::post('/reset-password', [AuthController::class, 'resetPassword']);
     });
 
+    /* Profile */
     Route::group(['prefix' => 'myprofile', 'middleware' => IsAuthenticated::class], function () {
         Route::patch('', [ProfileController::class, 'update']);
     });
@@ -44,7 +49,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::group(['prefix' => 'routes'], function () {
         /* Recommendations */
         Route::group(['prefix' => '/recommendations', 'middleware' => IsAuthenticated::class], function () {
-             Route::get('', [RouteRecommendationController::class, 'index']);
+            Route::get('', [RouteRecommendationController::class, 'index']);
 
             /* Questionnaire for generating recommendations */
             Route::group(['prefix' => '/questionnaire'], function () {
@@ -70,4 +75,8 @@ Route::group(['middleware' => 'api'], function () {
     });
 
     Route::get('/assets/{filename}', [ImageController::class, 'show']);
+    Route::get('/view', function () {
+
+        return view('forgotpassword');
+    });
 });
