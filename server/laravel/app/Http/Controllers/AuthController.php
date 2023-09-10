@@ -7,6 +7,7 @@ use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Resources\AuthUserResource;
+use App\Http\Resources\ResetPasswordResource;
 use App\Http\Resources\VerificationCodeResource;
 use App\Http\Resources\LogoutResource;
 use App\Mail\ResetPasswordMail;
@@ -64,9 +65,9 @@ class AuthController extends Controller
         );
     }
 
-    public function resetPassword(ResetPasswordRequest $request)
+    public function resetPassword(ResetPasswordRequest $request): ResetPasswordResource
     {
         $this->user->resetPassword($request);
-        return "Password successfully reset!";
+        return new ResetPasswordResource($request->input('email'));
     }
 }
