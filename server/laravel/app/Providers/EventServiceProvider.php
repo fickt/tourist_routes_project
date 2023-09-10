@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\ResetPasswordEvent;
+use App\Events\SuccessfulResetPasswordEvent;
 use App\Events\VerificationCodeRequestedEvent;
 use App\Jobs\TestJob;
 use App\Listeners\DeleteUsedVerificationCodeListener;
@@ -22,7 +22,7 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        ResetPasswordEvent::class => [
+        SuccessfulResetPasswordEvent::class => [
             DeleteUsedVerificationCodeListener::class
         ],
         VerificationCodeRequestedEvent::class => [

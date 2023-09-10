@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ResetPasswordEvent
+class SuccessfulResetPasswordEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
