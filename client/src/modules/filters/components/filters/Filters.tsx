@@ -7,10 +7,10 @@ import {categoriesTags, difficultyTags, filterValues} from "modules/filters/cons
 import {Link} from "react-router-dom";
 import {RoutePath} from "pages/routeConfig";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
-import {apiSpots} from "modules/card-list/api/SpotsServise";
 import {handleSpots} from "modules/card-list/store/spotsActions";
 import {resetFiltersAction} from "modules/filters/store/filtersActions";
 import {handleAuthError} from "modules/auth-form/store/authActions";
+import {apiSpots} from "modules/card-list/api/spotsService";
 
 export const Filters = () => {
 

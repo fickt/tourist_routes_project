@@ -32,7 +32,7 @@ export const MainContent = () => {
 
     const searchClick = (e: FormEvent) => {
         e.preventDefault();
-        searchRequest();
+        handleSearchRequest();
         setSearchValue("");
     }
 
