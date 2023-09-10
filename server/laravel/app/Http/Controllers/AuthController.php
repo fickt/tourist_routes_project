@@ -2,16 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ForgotPasswordRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Resources\AuthUserResource;
+use App\Http\Resources\ResetPasswordResource;
+use App\Http\Resources\VerificationCodeResource;
 use App\Http\Resources\LogoutResource;
+use App\Mail\ResetPasswordMail;
 use App\Models\User;
+use App\Models\VerificationCode;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AuthController extends Controller
 {
+
+    public function __construct(protected VerificationCode $verificationCode,
+                                protected User             $user)
+    {
+    }
+
     public function register(UserRegisterRequest $request): AuthUserResource
     {
         User::query()->create($request->validated());
@@ -37,5 +50,24 @@ class AuthController extends Controller
         auth()->logout();
 
         return new LogoutResource($user);
+    }
+
+    public function refresh(): AuthUserResource
+    {
+        $token = auth()->refresh();
+        return new AuthUserResource($token);
+    }
+
+    public function sendVerificationCode(ForgotPasswordRequest $request): VerificationCodeResource
+    {
+        return new VerificationCodeResource(
+            $this->verificationCode->sendVerificationCodeToEmail($request->input('email'))
+        );
+    }
+
+    public function resetPassword(ResetPasswordRequest $request): ResetPasswordResource
+    {
+        $this->user->resetPassword($request);
+        return new ResetPasswordResource($request->input('email'));
     }
 }

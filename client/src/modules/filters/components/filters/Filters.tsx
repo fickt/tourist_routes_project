@@ -9,58 +9,41 @@ import {RoutePath} from "pages/routeConfig";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
 import {handleSpots} from "modules/card-list/store/spotsActions";
 import {resetFiltersAction} from "modules/filters/store/filtersActions";
-import {spotsSelector} from "modules/card-list/store/spotsSelectors";
+import {handleAuthError} from "modules/auth-form/store/authActions";
+import {apiSpots} from "modules/card-list/api/spotsService";
 
 export const Filters = () => {
 
     const dispatch = useAppDispatch();
-    const spotRoutes = useAppSelector(spotsSelector);
-    const {categories, difficulties} = useAppSelector(state => state.filters);
+    const {categories, difficulties} = useAppSelector(state => state.filters)
 
-    const handleApplyFilters = () => {
-        let filteredArray = [...spotRoutes];
-
-        if (categories.length > 0) {
-            filteredArray = filteredArray.filter(spot =>
-                spot.categories.some((category: string) => categories.includes(category))
-            );
-        }
-
-        if (difficulties.length > 0) {
-            filteredArray = filteredArray.filter(spot =>
-                difficulties.includes(spot.difficulty)
-            );
-        }
-        dispatch(handleSpots(filteredArray));
-    };
-
-    const handleCancelFilters = () => {
-        dispatch(resetFiltersAction());
-        dispatch(handleSpots(spotRoutes));
-    };
-
-
-    // Фильтрация когда будет бд
-    /*
     const handleApplyFilters = () => {
         const categoryList = categories.join();
         const difficultyList = difficulties.join();
 
         apiSpots.fetchSpotFilter(difficultyList, categoryList)
-            .then(data => console.log(data)
-            )
-            .catch(err => console.log(err)
-            )
+            .then(response => {
+                dispatch(handleSpots(response.data))
+            })
+            .catch(() => {
+                dispatch(handleAuthError("Ошибка фильтрации"))
+            })
     }
 
     const handleCancelFilters = () => {
-        dispatch(resetFiltersAction());
-    };
-    */
+        dispatch(resetFiltersAction())
+        apiSpots.fetchSpots()
+            .then(response => {
+                dispatch(handleSpots(response.data))
+            })
+            .catch(() => {
+                dispatch(handleAuthError("Ошибка сброса фильтров"))
+            })
+    }
 
     return (
         <div className={classNames(s.wrapper)}>
-            <ContentHeader title="Фильтр"/>
+            <ContentHeader title={filterValues.filter}/>
             <div className={s.filters}>
                 <FilterItem title={filterValues.category} list={categoriesTags}/>
                 <FilterItem title={filterValues.difficulty} list={difficultyTags}/>
@@ -79,4 +62,4 @@ export const Filters = () => {
             </div>
         </div>
     )
-}
+};

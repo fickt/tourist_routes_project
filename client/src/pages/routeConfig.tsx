@@ -16,7 +16,6 @@ import {SettingsPage} from "pages/settings-page/SettingsPage";
 import {SettingsInfoPage} from "pages/settings-info-page/SettingsInfoPage";
 import {SettingsPasswordPage} from "pages/settings-password-page/SettingsPasswordPage";
 import {SpotMapPage} from "pages/spot-map-page/SpotMapPage";
-import {ReviewPage} from "pages/review-page/ReviewPage";
 
 export enum AppRoutes {
     HOME = "home",
@@ -27,7 +26,6 @@ export enum AppRoutes {
     SETTINGS = "settings",
     SETTINGS_INFO = "settings_info",
     SETTINGS_PASSWORD = "settings_password",
-    REVIEW = "review",
     SPOTS = "spots",
     SPOT_ID = "spotId",
     SPOT_MAP = "spot_map",
@@ -50,7 +48,6 @@ export const RoutePath = {
     [AppRoutes.SETTINGS]: "/settings",
     [AppRoutes.SETTINGS_INFO]: "/settings_info",
     [AppRoutes.SETTINGS_PASSWORD]: "/settings_password",
-    [AppRoutes.REVIEW]: "/review/:id",
     [AppRoutes.SPOTS]: "/routes",
     [AppRoutes.LOCATION]: "/location",
     [AppRoutes.SPOT_ID]: "/spots/:spotId",
@@ -75,7 +72,6 @@ export const mainRoutes: TRoutes[] = [
 export const privateRoutes: TRoutes[] = [
     {path: RoutePath.profile, element: <ProtectedRoute><ProfilePage/></ProtectedRoute>},
     {path: RoutePath.mySpots, element: <ProtectedRoute><MySpotsPage/></ProtectedRoute>},
-    {path: RoutePath.review, element: <ProtectedRoute><ReviewPage/></ProtectedRoute>},
     {path: RoutePath.favorites, element: <ProtectedRoute><FavoritesPage/></ProtectedRoute>},
     {path: RoutePath.questions, element: <ProtectedRoute><QuestionsPage/></ProtectedRoute>},
     {path: RoutePath.settings, element: <ProtectedRoute><SettingsPage/></ProtectedRoute>},

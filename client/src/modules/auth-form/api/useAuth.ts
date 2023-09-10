@@ -48,8 +48,8 @@ export const useAuth = () => {
             dispatch(handleSetUser(userData));
             // Сохранение значений в куках
             Cookies.set("token", response.data.access_token);
-            Cookies.set("email", userData.email);
-            Cookies.set("nickname", userData.nickname);
+            Cookies.set("nickname", response.data.user.nickname);
+            Cookies.set("email", response.data.user.email);
             setAction(isRegistration);
         } catch (e: Error | TServerResponse) {
             setError(e);

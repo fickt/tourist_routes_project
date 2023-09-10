@@ -3,12 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Events\SuccessfulResetPasswordEvent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Response;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -98,6 +100,32 @@ class User extends Authenticatable implements JWTSubject
             ? $user->favoriteRoutes()->detach($route)
             : $user->favoriteRoutes()->attach($route);
         return auth()->user()->favoriteRoutes()->get();
+    }
+
+    /**
+     * Редактировать профиль пользователя
+     * Поменять nickname, email, password
+     */
+    public function editProfile($data): mixed
+    {
+        $user = auth()->user();
+
+        return $user->update($data)
+            ? auth()->user()
+            : throw new HttpException(
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                'Internal server error');
+    }
+
+    public function resetPassword($request): void
+    {
+         VerificationCode::query()
+            ->where('email', '=', $request->input('email'))
+            ->where('code', '=', $request->input('verification_code'))
+            ->exists()
+            ? User::query()->where('email','=',$request['email'])->update(['password' => Hash::make($request['password'])])
+            : throw new HttpException(Response::HTTP_BAD_REQUEST, 'Неверный код!');
+            SuccessfulResetPasswordEvent::dispatch($request->input('email'), $request->input('verification_code'));
     }
 
     public function getRecommendations()

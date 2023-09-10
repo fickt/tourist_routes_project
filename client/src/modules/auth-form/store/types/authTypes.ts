@@ -12,6 +12,11 @@ export type TAuthResponse = {
     user: TUser,
 }
 
+export type TLogoutResponse = {
+    message: string,
+    user: TUser
+}
+
 export type TServerResponse = any; //пока не утвердился тип с бэком
 
 export type TAuthState = {
@@ -26,6 +31,9 @@ export type TUser = {
     email: string,
     id?: number,
     nickname: string,
+    created_at?: Date,
+    updated_at?: Date,
+    token?: string,
 }
 
 export type TAuthAction =

@@ -5,20 +5,20 @@ import {CardList} from "modules/card-list";
 import backImage from "./assets/bg.jpg";
 import classNames from "classnames";
 import {useDebounce} from "hooks/useDebounce";
-import {apiSpots} from "modules/card-list/api/SpotsServise";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
 import {handleSpots} from "modules/card-list/store/spotsActions";
 import {spotsSelector} from "modules/card-list/store/spotsSelectors";
 import {Popup} from "ui/popup/Popup";
 import ImageRecommendIcon from "./assets/imageReccomendIcon.svg";
+import {apiSpots} from "modules/card-list/api/spotsService";
 
 export const MainContent = () => {
 
     const dispatch = useAppDispatch();
+    const spotRoutes = useAppSelector(spotsSelector);
     const [searchValue, setSearchValue] = useState("");
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const debounceSearchValue = useDebounce(searchValue, 500);
-    const spotRoutes = useAppSelector(spotsSelector);
 
     const filteredSpots = useMemo(() => {
         return spotRoutes?.filter(spot =>
@@ -26,18 +26,17 @@ export const MainContent = () => {
         );
     }, [searchValue, spotRoutes]);
 
-    const handleInputChange = (value: string) => setSearchValue(value);
+    const inputChange = (value: string) => setSearchValue(value);
     const openPopup = () => setIsPopupOpen(true);
     const closePopup = () => setIsPopupOpen(false);
 
-    const handleSearchClick = (e: FormEvent) => {
+    const searchClick = (e: FormEvent) => {
         e.preventDefault();
         handleSearchRequest();
         setSearchValue("");
     }
 
     const handleSearchRequest = () => {
-        debounceSearchValue &&
         apiSpots.fetchSearchRequest(debounceSearchValue)
             .then(data => {
                 dispatch(handleSpots(data.data))
@@ -65,8 +64,8 @@ export const MainContent = () => {
                 <SearchForm
                     placeholder={"Поиск лучшего маршрута"}
                     searchValue={searchValue}
-                    handleFormSubmit={handleSearchClick}
-                    handleInputChange={handleInputChange}
+                    handleFormSubmit={searchClick}
+                    handleInputChange={inputChange}
                 />
                 <button className={s.imageRecommend} onClick={openPopup}>
                     <ImageRecommendIcon/>

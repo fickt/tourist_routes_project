@@ -31,7 +31,8 @@ COPY --chown=www:www . /var/www
 
 USER www
 
-ENTRYPOINT bin/composer-installer.sh
+#ENTRYPOINT bin/composer-installer.sh ; ["php", "artisan", "serve", "--host=0.0.0.0", "--port=56"]
+
 EXPOSE 9000
 
 # Запустите ваше приложение

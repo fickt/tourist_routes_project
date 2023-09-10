@@ -5,6 +5,7 @@ import {questionsReducer} from "modules/questions/store/questionsReducer";
 import {filtersReducer} from "modules/filters/store/filtersReducer";
 import {spotItemReducer} from "modules/spot-item/store/spotItemReducer";
 import {reviewReducer} from "modules/review-block/store/reviewReducer";
+import {favoriteReducer} from "modules/favorites/store/favoriteReducer";
 
 export const rootReducer = combineReducers({
     spots: spotsReducer,
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
     auth: authReducer,
     questions: questionsReducer,
     filters: filtersReducer,
-    comments: reviewReducer
+    comments: reviewReducer,
+    favorites: favoriteReducer,
 })
 
