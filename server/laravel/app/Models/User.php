@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\RouteRelationEnum;
 use App\Events\SuccessfulResetPasswordEvent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -70,7 +71,7 @@ class User extends Authenticatable implements JWTSubject
             'route_recommendations',
             'user_id',
             'route_id'
-        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences']);
+        )->with(RouteRelationEnum::allRelations());
     }
 
     public function completedRoutes(): BelongsToMany
@@ -80,7 +81,7 @@ class User extends Authenticatable implements JWTSubject
             'completed_routes',
             'user_id',
             'route_id'
-        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences']);
+        )->with(RouteRelationEnum::allRelations());
     }
 
     public function favoriteRoutes(): BelongsToMany
@@ -90,7 +91,7 @@ class User extends Authenticatable implements JWTSubject
             'user_route_favorites',
             'user_id',
             'route_id'
-        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences']);
+        )->with(RouteRelationEnum::allRelations());
     }
 
     /**
@@ -109,7 +110,7 @@ class User extends Authenticatable implements JWTSubject
         $user->favoriteRoutes()->find($routeId)
             ? $user->favoriteRoutes()->detach($route)
             : $user->favoriteRoutes()->attach($route);
-        return $this->getRecommendations();
+        return $this->getFavoriteRoutes();
     }
 
     public function addRouteToCompletedRoutesById(int $routeId)
@@ -162,6 +163,10 @@ class User extends Authenticatable implements JWTSubject
         return auth()->user()->completedRoutes()->get();
     }
 
+    public function getFavoriteRoutes()
+    {
+        return auth()->user()->favoriteRoutes()->get();
+    }
     public function getJWTIdentifier()
     {
         return $this->getKey();
