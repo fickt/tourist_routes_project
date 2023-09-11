@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\RouteResource;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class RouteCompletedController extends Controller
 {
@@ -11,13 +12,13 @@ class RouteCompletedController extends Controller
     {
     }
 
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
-
+        return RouteResource::collection($this->user->getCompletedRoutes());
     }
 
-    public function update()
+    public function update(int $routeId): AnonymousResourceCollection
     {
-
+        return RouteResource::collection($this->user->addRouteToCompletedRoutesById($routeId));
     }
 }
