@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteCommentController;
+use App\Http\Controllers\RouteCompletedController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RouteFavoriteController;
 use App\Http\Controllers\RouteQuestionnaireController;
