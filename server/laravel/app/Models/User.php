@@ -73,6 +73,16 @@ class User extends Authenticatable implements JWTSubject
         )->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences']);
     }
 
+    public function completedRoutes(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Route::class,
+            'completed_routes',
+            'user_id',
+            'route_id'
+        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences']);
+    }
+
     public function favoriteRoutes(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -119,18 +129,23 @@ class User extends Authenticatable implements JWTSubject
 
     public function resetPassword($request): void
     {
-         VerificationCode::query()
+        VerificationCode::query()
             ->where('email', '=', $request->input('email'))
             ->where('code', '=', $request->input('verification_code'))
             ->exists()
-            ? User::query()->where('email','=',$request['email'])->update(['password' => Hash::make($request['password'])])
+            ? User::query()->where('email', '=', $request['email'])->update(['password' => Hash::make($request['password'])])
             : throw new HttpException(Response::HTTP_BAD_REQUEST, 'Неверный код!');
-            SuccessfulResetPasswordEvent::dispatch($request->input('email'), $request->input('verification_code'));
+        SuccessfulResetPasswordEvent::dispatch($request->input('email'), $request->input('verification_code'));
     }
 
     public function getRecommendations()
     {
         return auth()->user()->recommendations()->get();
+    }
+
+    public function getCompletedRoutes()
+    {
+        return auth()->user()->completedRoutes()->get();
     }
 
     public function getJWTIdentifier()
