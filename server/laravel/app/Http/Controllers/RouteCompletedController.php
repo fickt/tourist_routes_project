@@ -19,6 +19,6 @@ class RouteCompletedController extends Controller
 
     public function update(int $routeId): AnonymousResourceCollection
     {
-        return RouteResource::collection(auth()->user()->addRouteToCompletedRoutesById($routeId));
+        return RouteResource::collection($this->user->addRouteToCompletedRoutesById($routeId));
     }
 }
