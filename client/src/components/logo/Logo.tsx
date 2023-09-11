@@ -9,7 +9,10 @@ const {Title} = Typography;
 export const Logo = () => {
 
     const location = useLocation();
-    const goBack = () => window.history.back();
+    const goBack = (e: SyntheticEvent<HTMLAnchorElement>) => {
+        e.stopPropagation();
+        window.history.back();
+    };
 
     const handleClick = (e: SyntheticEvent<HTMLAnchorElement>) => {
         location.pathname === "/" && e.preventDefault();
@@ -24,12 +27,13 @@ export const Logo = () => {
 
     return (
         <>
-            {shouldRenderBackIcon() && (
-                <a className={s.back} onClick={goBack}><BackIcon className={s.back__icon}/></a>
-            )}
             <Link to={"/"} className={s.logo} onClick={handleClick}>
                 <Title level={2} className={s.logo__text}>logo</Title>
             </Link>
+
+            {shouldRenderBackIcon() && (
+                <a className={s.back} onClick={goBack}><BackIcon className={s.back__icon}/></a>
+            )}
         </>
     );
 };
