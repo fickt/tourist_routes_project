@@ -64,6 +64,12 @@ Route::group(['middleware' => 'api'], function () {
             Route::patch('/{routeId}', [RouteFavoriteController::class, 'update']);
         });
 
+        /* Completed routes */
+        Route::group(['prefix' => '/completed', 'middleware' => IsAuthenticated::class], function () {
+            Route::get('', [RouteCompletedController::class, 'index']);
+            Route::patch('/{routeId}', [RouteCompletedController::class, 'update']);
+        });
+
         /* Fetch all routes or by id */
         Route::get('', [RouteController::class, 'index']);
         Route::get('/{routeId}', [RouteController::class, 'show']);
