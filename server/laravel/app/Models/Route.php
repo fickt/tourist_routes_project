@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\FloatRound;
+use App\Enums\RouteRelationEnum;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -73,7 +74,7 @@ class Route extends Model
      */
     public function getRoutes(): Collection
     {
-        $query = self::query()->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences']);
+        $query = self::query()->with(RouteRelationEnum::allRelations());
 
         if (Request::query('difficulty')) {
             $difficulty = explode(',', Request::query('difficulty'));
@@ -108,7 +109,7 @@ class Route extends Model
     {
         try {
             $route = Route::query()
-                ->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences'])
+                ->with(RouteRelationEnum::allRelations())
                 ->findOrFail($routeId);
 
         } catch (Exception) {
