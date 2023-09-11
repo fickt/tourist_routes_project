@@ -109,7 +109,21 @@ class User extends Authenticatable implements JWTSubject
         $user->favoriteRoutes()->find($routeId)
             ? $user->favoriteRoutes()->detach($route)
             : $user->favoriteRoutes()->attach($route);
-        return auth()->user()->favoriteRoutes()->get();
+        return $this->getRecommendations();
+    }
+
+    public function addRouteToCompletedRoutesById(int $routeId)
+    {
+        $route = Route::query()->find($routeId) ??
+            throw new HttpException(
+                Response::HTTP_NOT_FOUND,
+                "Route with id: $routeId has not been found!");
+
+        $user = auth()->user();
+        $user->completedRoutes()->find($routeId)
+            ? $user->completedRoutes()->detach($route)
+            : $user->completedRoutes()->attach($route);
+        return $this->getCompletedRoutes();
     }
 
     /**
