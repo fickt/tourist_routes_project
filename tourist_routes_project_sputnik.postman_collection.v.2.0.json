@@ -41,7 +41,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nickname\":\"вася228\",\r\n    \"email\":\"andrei2ivanovich@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+					"raw": "{\r\n    \"nickname\":\"вася228\",\r\n    \"email\":\"garrys2machinima@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,7 +96,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"andrei2ivanovich@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+					"raw": "{\r\n    \"email\":\"garrys2machinima@gmail.com\", //andrei2ivanovich@gmail.com\r\n    \"password\":\"password\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -364,7 +364,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/routes?search=озера",
+					"raw": "{{baseUrl}}/routes?search=волга",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -374,7 +374,7 @@
 					"query": [
 						{
 							"key": "search",
-							"value": "озера"
+							"value": "волга"
 						}
 					]
 				}
@@ -410,7 +410,7 @@
 			"response": []
 		},
 		{
-			"name": "Add favorite route id: 1 to user id: 1",
+			"name": "Add/Delete favorite route id: 1 to user id: 1",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -433,6 +433,63 @@
 						"routes",
 						"favorites",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add/Delete completed route",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/routes/completed/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes",
+						"completed",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all completed routes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/routes/completed",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes",
+						"completed"
 					]
 				}
 			},
@@ -546,6 +603,70 @@
 					"path": [
 						"assets",
 						"test_photo.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Verification Code",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"garrys2machinima@gmail.com\" //Сюды свою почту введите, пришлёт четырехзначный код, его ввести в тест Reset password with verification code from email\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/send-verification-code",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"send-verification-code"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset password with verification code from email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"garrys2machinima@gmail.com\",\r\n    \"verification_code\": 6237,\r\n    \"password\": \"newpassword\"\r\n}    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/reset-password",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"reset-password"
 					]
 				}
 			},
