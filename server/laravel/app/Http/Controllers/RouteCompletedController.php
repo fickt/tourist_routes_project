@@ -18,6 +18,6 @@ class RouteCompletedController extends Controller
 
     public function update()
     {
-        
+
     }
 }
