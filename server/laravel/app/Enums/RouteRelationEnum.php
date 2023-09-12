@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Enums;
+namespace App\Enums;
 
 enum RouteRelationEnum: string
 {
@@ -15,7 +15,7 @@ enum RouteRelationEnum: string
     {
         $array = [];
         foreach (self::cases() as $case) {
-            $array[] = $case->name;
+            $array[] = $case->value;
         }
         return $array;
     }
