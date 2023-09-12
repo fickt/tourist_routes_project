@@ -3,7 +3,7 @@ import pandas as pd
 from sqlalchemy import create_engine, inspect
 from recommender import PlaceRecommender
 from PIL import Image
-import io
+import io, base64
 import numpy as np
 import time
 import keras
@@ -37,11 +37,8 @@ def read_image(file):
     return image
 
 @app.post('/recommend-on-image')
-async def recommend_on_image(file: UploadFile = File()):
-    if file.filename.split('.')[-1].lower() not in ('jpg', 'png', 'jpeg', 'ppm', 'tiff', 'bmp'):
-        raise HTTPException(status_code = 400, detail = 'Invalid file format')
-
-    image = np.array(read_image(await file.read()))
+async def recommend_on_image(file: str):
+    image = Image.open(io.BytesIO(base64.decodebytes(bytes(file, "utf-8"))))
 
     if np.array(image).shape[0] > 1080 or np.array(image).shape[0] > 1920 or np.array(image).shape[2] != 3:
         raise HTTPException(status_code = 400, detail = 'Invalid file shape')
