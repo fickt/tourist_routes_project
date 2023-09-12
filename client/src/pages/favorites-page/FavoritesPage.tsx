@@ -7,7 +7,7 @@ import {ErrorMessage} from "ui/error-message/ErrorMessage";
 import {authError, authLoader} from "modules/auth-form/store/authSelectors";
 import s from "./styles.module.scss";
 import {getFavSpots} from "modules/favorites";
-import {message} from "modules/favorites/constants/constants";
+import {favMessage} from "modules/favorites/constants/constants";
 
 export const FavoritesPage = () => {
 
@@ -24,13 +24,13 @@ export const FavoritesPage = () => {
     }, [favSpots, dispatch]);
 
     const cardList = favSpots !== null && favSpots.length > 0 && (
-        <CardList favPage activeFavMark spots={favSpots} />
+        <CardList favPage activeFavMark spots={favSpots}/>
     );
 
     const errorMessage = (
         <div className="wrapper">
             <div className={s.favoriteWrapper}>
-                <ErrorMessage errorText={message} />
+                <ErrorMessage errorText={favMessage}/>
             </div>
         </div>
     );
@@ -38,16 +38,16 @@ export const FavoritesPage = () => {
     const loadingElem = (
         <div className="wrapper">
             <div className={s.favoriteWrapper}>
-                {loader && <PreloaderCar />}
-                {!loader && error && <ErrorMessage errorText={error} />}
+                {loader && <PreloaderCar/>}
+                {!loader && error && <ErrorMessage errorText={error}/>}
             </div>
         </div>
     );
 
     return (
         <>
-            {cardList || errorMessage}
-            {loader || error && loadingElem}
+            {loader && loadingElem}
+            {!loader && cardList || errorMessage}
         </>
     );
 }
