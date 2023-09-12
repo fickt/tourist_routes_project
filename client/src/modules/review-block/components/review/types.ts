@@ -5,5 +5,5 @@ export type TReviewProps = {
     content: string,
     rating: number,
     user?: TUser,
-    date?: Date,
+    created_at: Date,
 }
