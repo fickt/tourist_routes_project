@@ -11,7 +11,7 @@ class MlServiceClient
     {
         $encoded = base64_encode(file_get_contents($image));
         $response = Http::post(self::URL_ML_SERVICE, [
-           'file' => base64_encode($image)
+           'file' => base64_encode(file_get_contents($image))
         ]);
       //  print_r($response->json());
         return $response->json();
