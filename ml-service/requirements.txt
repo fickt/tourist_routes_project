@@ -11,3 +11,4 @@ numpy
 psycopg2
 typing_extensions
 python-multipart
+pydantic
