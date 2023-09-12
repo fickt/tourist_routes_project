@@ -44,6 +44,8 @@ async def recommend_on_image(img: File):
     if np.array(image).shape[0] > 1080 or np.array(image).shape[0] > 1920 or np.array(image).shape[2] != 3:
         raise HTTPException(status_code = 400, detail = 'Invalid file shape')
 
+    image = image.resize((150, 150))
+
     is_landscape = 1 if landscape_clf.predict(
         np.expand_dims(image, 0) / 255.0) > 0.5 else 0
 
