@@ -1,0 +1,13 @@
+fastapi
+keras
+numpy
+pandas
+Pillow
+scikit_learn
+SQLAlchemy
+tensorflow
+uvicorn
+numpy
+psycopg2
+typing_extensions
+python-multipart

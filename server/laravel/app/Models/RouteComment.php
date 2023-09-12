@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\FloatRound;
+use App\Enums\RouteRelationEnum;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -57,7 +58,7 @@ class RouteComment extends Model
             )
         );
         return Route::query()
-            ->with(['difficulty', 'photoPaths', 'categories', 'comments.user'])
+            ->with(RouteRelationEnum::allRelations())
             ->find($routeId);
     }
 
