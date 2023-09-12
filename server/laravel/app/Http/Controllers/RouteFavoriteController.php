@@ -19,15 +19,11 @@ class RouteFavoriteController extends Controller
 
     public function update(int $routeId): AnonymousResourceCollection
     {
-        return RouteResource::collection(
-            $this->user->addRouteToFavoritesById($routeId)
-        );
+        return RouteResource::collection($this->user->addRouteToFavoritesById($routeId));
     }
 
     public function index(): AnonymousResourceCollection
     {
-        return RouteResource::collection(
-            auth()->user()->favoriteRoutes()->get()
-        );
+        return RouteResource::collection($this->user->getFavoriteRoutes());
     }
 }

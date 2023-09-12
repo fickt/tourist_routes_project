@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use App\Events\VerificationCodeRequestedEvent;
-use App\Mail\ResetPasswordMail;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 

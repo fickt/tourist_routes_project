@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteCommentController;
+use App\Http\Controllers\RouteCompletedController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RouteFavoriteController;
 use App\Http\Controllers\RouteQuestionnaireController;
@@ -62,6 +63,12 @@ Route::group(['middleware' => 'api'], function () {
         Route::group(['prefix' => '/favorites', 'middleware' => IsAuthenticated::class], function () {
             Route::get('', [RouteFavoriteController::class, 'index']);
             Route::patch('/{routeId}', [RouteFavoriteController::class, 'update']);
+        });
+
+        /* Completed routes */
+        Route::group(['prefix' => '/completed', 'middleware' => IsAuthenticated::class], function () {
+            Route::get('', [RouteCompletedController::class, 'index']);
+            Route::patch('/{routeId}', [RouteCompletedController::class, 'update']);
         });
 
         /* Fetch all routes or by id */

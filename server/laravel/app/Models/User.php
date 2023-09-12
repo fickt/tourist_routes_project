@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\RouteRelationEnum;
 use App\Events\SuccessfulResetPasswordEvent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -70,7 +71,17 @@ class User extends Authenticatable implements JWTSubject
             'route_recommendations',
             'user_id',
             'route_id'
-        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences']);
+        )->with(RouteRelationEnum::allRelations());
+    }
+
+    public function completedRoutes(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Route::class,
+            'completed_routes',
+            'user_id',
+            'route_id'
+        )->with(RouteRelationEnum::allRelations());
     }
 
     public function favoriteRoutes(): BelongsToMany
@@ -80,7 +91,7 @@ class User extends Authenticatable implements JWTSubject
             'user_route_favorites',
             'user_id',
             'route_id'
-        )->with(['difficulty', 'photoPaths', 'categories', 'comments.user', 'targetAudiences']);
+        )->with(RouteRelationEnum::allRelations());
     }
 
     /**
@@ -99,7 +110,21 @@ class User extends Authenticatable implements JWTSubject
         $user->favoriteRoutes()->find($routeId)
             ? $user->favoriteRoutes()->detach($route)
             : $user->favoriteRoutes()->attach($route);
-        return auth()->user()->favoriteRoutes()->get();
+        return $this->getFavoriteRoutes();
+    }
+
+    public function addRouteToCompletedRoutesById(int $routeId)
+    {
+        $route = Route::query()->find($routeId) ??
+            throw new HttpException(
+                Response::HTTP_NOT_FOUND,
+                "Route with id: $routeId has not been found!");
+
+        $user = auth()->user();
+        $user->completedRoutes()->find($routeId)
+            ? $user->completedRoutes()->detach($route)
+            : $user->completedRoutes()->attach($route);
+        return $this->getCompletedRoutes();
     }
 
     /**
@@ -119,13 +144,13 @@ class User extends Authenticatable implements JWTSubject
 
     public function resetPassword($request): void
     {
-         VerificationCode::query()
+        VerificationCode::query()
             ->where('email', '=', $request->input('email'))
             ->where('code', '=', $request->input('verification_code'))
             ->exists()
-            ? User::query()->where('email','=',$request['email'])->update(['password' => Hash::make($request['password'])])
+            ? User::query()->where('email', '=', $request['email'])->update(['password' => Hash::make($request['password'])])
             : throw new HttpException(Response::HTTP_BAD_REQUEST, 'Неверный код!');
-            SuccessfulResetPasswordEvent::dispatch($request->input('email'), $request->input('verification_code'));
+        SuccessfulResetPasswordEvent::dispatch($request->input('email'), $request->input('verification_code'));
     }
 
     public function getRecommendations()
@@ -133,6 +158,15 @@ class User extends Authenticatable implements JWTSubject
         return auth()->user()->recommendations()->get();
     }
 
+    public function getCompletedRoutes()
+    {
+        return auth()->user()->completedRoutes()->get();
+    }
+
+    public function getFavoriteRoutes()
+    {
+        return auth()->user()->favoriteRoutes()->get();
+    }
     public function getJWTIdentifier()
     {
         return $this->getKey();
