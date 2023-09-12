@@ -35,16 +35,16 @@ services:
     env_file:
       - .env
 
-  #ml-service:
-  #  restart: always
-  #  container_name: ml-service
-  #  build:
-  #    context: ./ml-service
-  #    dockerfile: Dockerfile
-  #  volumes:
-  #    - ./ml-service:/usr/src/app
-  #  ports:
-  #    - ${ML_SERVICE_HOST_PORT:-9000}:${ML_SERVICE_CONTAINER_PORT:-9000}
+  ml-service:
+    restart: always
+    container_name: ml-service
+    build:
+      context: ./ml-service
+      dockerfile: Dockerfile
+    volumes:
+      - ./ml-service:/usr/src/app
+    ports:
+      - ${ML_SERVICE_HOST_PORT:-9000}:${ML_SERVICE_CONTAINER_PORT:-9000}
 
   nginx-proxy:
     restart: always
