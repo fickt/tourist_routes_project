@@ -15,7 +15,7 @@ import {handleStartPassQuestions} from "modules/questions/store/questionsActions
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {authError, authLoader} from "modules/auth-form/store/authSelectors";
 import {handleAuthError, handleAuthLoader} from "modules/auth-form/store/authActions";
-import {profileValues} from "modules/profile/constants/profileValues";
+import {errorProfile, profileValues} from "modules/profile/constants/profileValues";
 import {CardListBody} from "modules/card-list";
 import {useNavigate} from "react-router-dom";
 import {authService} from "modules/auth-form/api/authService";
@@ -31,18 +31,21 @@ export const Profile = () => {
     const loader = useAppSelector(authLoader);
     const error = useAppSelector(authError);
     const [questArray, setQuestArray] = useState<TLocalRoute[]>([]);
-
     useEffect(() => {
+        if(Cookies.get("isPass") === "true") {
+            dispatch(handleStartPassQuestions(false))
+        }else {
+            dispatch(handleStartPassQuestions(true))
+        }
         apiQuestions.fetchRecomendations()
             .then(data => {
                 dispatch(handleAuthLoader(false))
-                if (data.data.length > 0) {
-                    dispatch(handleStartPassQuestions(true))
+                if (data.data.length) {
                     setQuestArray(data.data)
                 }
             })
             .catch(() => {
-                dispatch(handleAuthError("Ошибка получения рекомендованных мест"))
+                dispatch(handleAuthError(errorProfile.recommended))
             })
     }, [])
 
