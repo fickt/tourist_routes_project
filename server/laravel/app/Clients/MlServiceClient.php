@@ -13,6 +13,10 @@ class MlServiceClient
 {
     private const URL_ML_SERVICE = 'http://ml-service:9000/recommend-on-image';
 
+    public function __construct(protected Route $route)
+    {
+    }
+
     public function findRouteByImage($image): Collection|array
     {
         try {
@@ -22,9 +26,9 @@ class MlServiceClient
         } catch (\Exception) {
             throw new HttpException(Response::HTTP_SERVICE_UNAVAILABLE, 'ML сервис недоступен, отправьте запрос позже');
         }
-
+        
         return $response
-         ? Route::query()->with(RouteRelationEnum::allRelations())->whereIn('id', $response)->get()
+         ? $this->route->getRoutesByIds($response)
          : throw new HttpException(Response::HTTP_NOT_FOUND, 'Маршрут по изображению не найден');
     }
 }
