@@ -23,19 +23,20 @@ const App = () => {
     const token = Cookies.get("token");
 
     useEffect(() => {
-        const fetchData = async () => {
-            if (token) {
-                const userData: TUser = {
-                    nickname: Cookies.get("nickname"),
-                    email: Cookies.get("email"),
-                };
-                dispatch(handleSetUser(userData));
-                await getFavSpots(dispatch);
-            }
-            await getSpots(dispatch);
-        };
         fetchData();
-    }, [dispatch, token]);
+    }, [token]);
+
+    const fetchData = async () => {
+        if (token) {
+            const userData: TUser = {
+                nickname: Cookies.get("nickname"),
+                email: Cookies.get("email"),
+            };
+            dispatch(handleSetUser(userData));
+            await getFavSpots(dispatch);
+        }
+        await getSpots(dispatch);
+    };
 
     return (
         <div className={s.wrapper}>

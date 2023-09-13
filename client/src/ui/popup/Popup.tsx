@@ -5,24 +5,26 @@ import {useOnClickOutside} from "hooks/useOnclickOutside";
 import {ImageRecommendPopup} from "modules/image-recommend-popup/ImageRecommendPopup";
 import {ReviewPopup} from "modules/review-block/components/review-popup/ReviewPopup";
 
-export const Popup = ({spotId, review, image, isPopupOpen, setIsPopupOpen, closePopup}: TPopupProps) => {
+export const Popup = ({spotId, review, image, popup, closePopup}: TPopupProps) => {
 
     const handleKeyPress = useCallback((e: KeyboardEvent) => {
-        e.key === "Escape" && setIsPopupOpen(false);
-    }, [setIsPopupOpen]);
+        if (e.key === "Escape") {
+            popup && closePopup();
+        }
+    }, [popup]);
 
     useEffect(() => {
-        isPopupOpen && document.addEventListener("keydown", handleKeyPress);
+        popup && document.addEventListener("keydown", handleKeyPress);
 
         return () => {
-            isPopupOpen && document.removeEventListener("keydown", handleKeyPress);
+            popup && document.removeEventListener("keydown", handleKeyPress);
         };
-    }, [handleKeyPress, isPopupOpen]);
+    }, [handleKeyPress, popup]);
 
     const imagePopupRef = useRef(null);
     useOnClickOutside(imagePopupRef, () => {
-        image && setIsPopupOpen(false);
-        review && setIsPopupOpen(false);
+        image && closePopup();
+        review && closePopup();
     });
 
     return (

@@ -118,6 +118,15 @@ main {
     width: 100%;
 
     .button {
+        &_green,
+        &_white {
+            font-family: "Nunito Sans", sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 10px 32px;
+            height: auto;
+        }
+
         &_green {
             color: var(--text-02);
             background-color: var(--background-06);

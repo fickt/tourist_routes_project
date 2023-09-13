@@ -4,18 +4,21 @@ import {Button} from "ui/button/Button";
 import {TReviewPopupProps} from "./types";
 import classNames from "classnames";
 import s from "./styles.module.scss";
+import Cookies from "js-cookie";
 import {handleAuthError} from "modules/auth-form/store/authActions";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
 import {authError, authLoader} from "modules/auth-form/store/authSelectors";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {sendReview} from "modules/review-block/api/reviewApi";
-import {buttontext, elemName, popupTitle, reviewForm} from "modules/review-block/components/constants/constants";
+import {buttonText, elemName, popupTitle, reviewForm} from "modules/review-block/components/constants/constants";
+import {RoutePath} from "pages/routeConfig";
 
 export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
 
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const loader = useAppSelector(authLoader);
     const error = useAppSelector(authError);
     const [form] = Form.useForm();
@@ -28,10 +31,15 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
     }, [])
 
     const sendForm = () => {
-        const fetchData = async () => {
-            await sendReview(dispatch, content, rating, spotId, form, setContent, setRating, closePopup);
+        if (Cookies.get("token")) {
+            const fetchData = async () => {
+                await sendReview(dispatch, content, rating, spotId, form, setContent, setRating, closePopup);
+                navigate(`/spots/${spotId}`);
+            }
+            fetchData();
+        } else {
+            navigate(RoutePath.auth_login);
         }
-        fetchData();
     }
 
     const rateOnChange = (value: number) => setRating(value);
@@ -67,7 +75,7 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
                         Сохранить
                     </Button>
                     <Link to={`/spots/${spotId}`} className="buttons__link">
-                        <Button action={closePopup} extraClass="button" disabled={loader}>{buttontext}</Button>
+                        <Button action={closePopup} extraClass="button" disabled={loader}>{buttonText}</Button>
                     </Link>
                 </div>
             </Form>

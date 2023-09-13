@@ -1,6 +1,7 @@
 import {TLocalRoute} from "utils/localRoutes";
 
 export type TFavoriteElemProps = {
-    activeFavMark?: boolean
+    activeFavMark?: boolean,
     spot?: TLocalRoute,
+    setMarkerActive?: () => void,
 }

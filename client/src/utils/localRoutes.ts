@@ -20,7 +20,7 @@ export type TReview = {
     content: string,
     rating: number,
     user?: TUser | null,
-    date?: Date,
+    created_at: Date,
 }
 
 export type TLocalRoutes = TLocalRoute[];

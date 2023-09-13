@@ -11,13 +11,15 @@ import {spotsSelector} from "modules/card-list/store/spotsSelectors";
 import {Popup} from "ui/popup/Popup";
 import ImageRecommendIcon from "./assets/imageReccomendIcon.svg";
 import {apiSpots} from "modules/card-list/api/spotsService";
+import {imgPopupState} from "ui/popup/store/popupSelector";
+import {toggleImgPopup} from "ui/popup/store/popupActions";
 
 export const MainContent = () => {
 
     const dispatch = useAppDispatch();
     const spotRoutes = useAppSelector(spotsSelector);
+    const imgPopup = useAppSelector(imgPopupState);
     const [searchValue, setSearchValue] = useState("");
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const debounceSearchValue = useDebounce(searchValue, 500);
 
     const filteredSpots = useMemo(() => {
@@ -27,8 +29,8 @@ export const MainContent = () => {
     }, [searchValue, spotRoutes]);
 
     const inputChange = (value: string) => setSearchValue(value);
-    const openPopup = () => setIsPopupOpen(true);
-    const closePopup = () => setIsPopupOpen(false);
+    const openImgPopup = () => dispatch(toggleImgPopup(true));
+    const closeImgPopup = () => dispatch(toggleImgPopup(false));
 
     const searchClick = (e: FormEvent) => {
         e.preventDefault();
@@ -46,15 +48,10 @@ export const MainContent = () => {
 
     return (
         <>
-            {isPopupOpen && (
+            {imgPopup && (
                 <>
                     <div className="overlay"/>
-                    <Popup
-                        image
-                        closePopup={closePopup}
-                        isPopupOpen={isPopupOpen}
-                        setIsPopupOpen={setIsPopupOpen}
-                    />
+                    <Popup image popup={imgPopup} closePopup={closeImgPopup}/>
                 </>)
             }
             <section
@@ -67,7 +64,7 @@ export const MainContent = () => {
                     handleFormSubmit={searchClick}
                     handleInputChange={inputChange}
                 />
-                <button className={s.imageRecommend} onClick={openPopup}>
+                <button className={s.imageRecommend} onClick={openImgPopup}>
                     <ImageRecommendIcon/>
                 </button>
             </section>

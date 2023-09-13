@@ -1,53 +1,40 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import s from "./styles.module.scss";
 import {TagList} from "components/filters-tag/FiltersTag";
 import classNames from "classnames";
 import {Slider} from "modules/spot-item/components/slider/Slider";
 import {RatingLabel} from "modules/spot-item/components/rating-label/RatingLabel";
-import {Button} from "ui/button/Button";
 import {setSpotItemId} from "modules/spot-item/store/spotItemActions";
 import {useDispatch} from "react-redux";
 import {TSpotItemProps} from "./types";
-import {Popup} from "ui/popup/Popup";
-import Cookies from "js-cookie";
-import {useNavigate} from "react-router-dom";
-import {RoutePath} from "pages/routeConfig";
 import {ReviewBlock} from "modules/review-block";
+import {Button} from "ui/button/Button"
+import {toggleReviewPopup} from "ui/popup/store/popupActions";
+import {useAppSelector} from "storage/hookTypes";
+import {reviewPopupState} from "ui/popup/store/popupSelector";
+import {Popup} from "ui/popup/Popup";
 
 export const SpotItem = ({spotItem}: TSpotItemProps) => {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const reviewPopup = useAppSelector(reviewPopupState);
     const {name, rating, description, id, photos, categories, difficulty, comments} = spotItem;
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const openPopup = () => setIsPopupOpen(true);
-    const closePopup = () => setIsPopupOpen(false);
 
     useEffect(() => {
         dispatch(setSpotItemId(id.toString()));
     }, [id]);
 
-    const showReviewPopup = () => {
-        if (Cookies.get("token")) {
-            return (
-                <>
-                    <div className="overlay"/>
-                    <Popup
-                        review
-                        spotId={id}
-                        closePopup={closePopup}
-                        isPopupOpen={isPopupOpen}
-                        setIsPopupOpen={setIsPopupOpen}
-                    />
-                </>)
-        } else {
-            navigate(RoutePath.auth_login);
-        }
-    }
+    const closeReviewPopup = () => dispatch(toggleReviewPopup(false));
+    const openReviewPopup = () => dispatch(toggleReviewPopup(true));
 
     return (
         <div className={s.wrapper}>
-            {isPopupOpen && showReviewPopup()}
+            {reviewPopup && (
+                <>
+                    <div className="overlay"/>
+                    <Popup review spotId={id} popup={reviewPopup} closePopup={closeReviewPopup} />
+                </>
+            )}
             <section id="image" className={classNames(s.section, s.slider)}>
                 <Slider photos={photos} name={name}/>
                 <div className={s.tags}>
@@ -66,7 +53,7 @@ export const SpotItem = ({spotItem}: TSpotItemProps) => {
                 </div>
                 <div className="buttons__wrapper">
                     <div className="buttons__link">
-                        <Button extraClass={classNames("button", "button_green")} action={openPopup}>
+                        <Button extraClass={classNames("button", "button_green")} action={openReviewPopup}>
                             Оставить отзыв
                         </Button>
                     </div>
