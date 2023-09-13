@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import classNames from "classnames";
 import {apiQuestions} from "modules/questions/api/QuestionsServise";
 import {handleAuthError, handleAuthLoader} from "modules/auth-form/store/authActions";
-import {questionsValues} from "modules/questions/constants/questionsValues";
+import {errorMessage, questionsValues} from "modules/questions/constants/questionsValues";
 import Cookies from "js-cookie";
 
 export const QuestionsButtons = ({title, answers, isSave}: TQuestionsButtonProps) => {
@@ -25,7 +25,7 @@ export const QuestionsButtons = ({title, answers, isSave}: TQuestionsButtonProps
                     dispatch(handleStartPassQuestions(true))
                 })
                 .catch(() => {
-                    dispatch(handleAuthError("Ошибка отправки ответов на сервер"))
+                    dispatch(handleAuthError(errorMessage.buttons))
                 });
         }
     }

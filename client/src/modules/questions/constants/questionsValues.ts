@@ -4,8 +4,9 @@ export const questionsValues = {
     ready: "Готово"
 }
 
-export const errorMes = {
+export const errorMessage = {
     card: "Ошибка получения данных для анкеты",
+    buttons: "Ошибка отправки ответов на сервер"
 }
 
 export const questionCardText = "Выберите места, которые вам понравились, и мы сгенерируем на их основе ваши персональные рекомендации"

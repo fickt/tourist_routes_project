@@ -31,10 +31,11 @@ export const Profile = () => {
     const loader = useAppSelector(authLoader);
     const error = useAppSelector(authError);
     const [questArray, setQuestArray] = useState<TLocalRoute[]>([]);
+
     useEffect(() => {
-        if(Cookies.get("isPass") === "true") {
+        if (Cookies.get("isPass") === "true") {
             dispatch(handleStartPassQuestions(false))
-        }else {
+        } else {
             dispatch(handleStartPassQuestions(true))
         }
         apiQuestions.fetchRecomendations()
