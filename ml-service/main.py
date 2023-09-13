@@ -1,9 +1,10 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
+from pydantic import BaseModel
 import pandas as pd
 from sqlalchemy import create_engine, inspect
 from recommender import PlaceRecommender
 from PIL import Image
-import io
+import io, base64
 import numpy as np
 import time
 import keras
@@ -32,19 +33,18 @@ place_recommender = PlaceRecommender()
 landscape_clf = keras.models.load_model('clfv2.keras')
 
 
-def read_image(file):
-    image = Image.open(io.BytesIO(file)).resize((150, 150))
-    return image
+class File(BaseModel):
+    file: str
+
 
 @app.post('/recommend-on-image')
-async def recommend_on_image(file: UploadFile = File()):
-    if file.filename.split('.')[-1].lower() not in ('jpg', 'png', 'jpeg', 'ppm', 'tiff', 'bmp'):
-        raise HTTPException(status_code = 400, detail = 'Invalid file format')
-
-    image = np.array(read_image(await file.read()))
+async def recommend_on_image(img: File):
+    image = Image.open(io.BytesIO(base64.decodebytes(bytes(img.file, "utf-8"))))
 
     if np.array(image).shape[0] > 1080 or np.array(image).shape[0] > 1920 or np.array(image).shape[2] != 3:
         raise HTTPException(status_code = 400, detail = 'Invalid file shape')
+
+    image = image.resize((150, 150))
 
     is_landscape = 1 if landscape_clf.predict(
         np.expand_dims(image, 0) / 255.0) > 0.5 else 0
