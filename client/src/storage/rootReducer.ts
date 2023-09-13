@@ -6,6 +6,8 @@ import {filtersReducer} from "modules/filters/store/filtersReducer";
 import {spotItemReducer} from "modules/spot-item/store/spotItemReducer";
 import {reviewReducer} from "modules/review-block/store/reviewReducer";
 import {favoriteReducer} from "modules/favorites/store/favoriteReducer";
+import {popupReducer} from "ui/popup/store/popupReducer";
+import {routesPassReducer} from "modules/my-spots/store/routesPassReducer";
 
 export const rootReducer = combineReducers({
     spots: spotsReducer,
@@ -18,5 +20,7 @@ export const rootReducer = combineReducers({
     filters: filtersReducer,
     comments: reviewReducer,
     favorites: favoriteReducer,
+    popup: popupReducer,
+    routesPass: routesPassReducer,
 })
 

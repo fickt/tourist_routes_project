@@ -108,7 +108,7 @@ class Route extends Model
     public function getRouteById(int $routeId)
     {
         try {
-            $route = Route::query()
+            $route = self::query()
                 ->with(RouteRelationEnum::allRelations())
                 ->findOrFail($routeId);
 
@@ -119,6 +119,14 @@ class Route extends Model
             );
         }
         return $route;
+    }
+
+    public function getRoutesByIds(array $routeIds): Collection|array
+    {
+        return self::query()
+            ->with(RouteRelationEnum::allRelations())
+            ->whereIn('id', $routeIds)
+            ->get();
     }
 
     /**
