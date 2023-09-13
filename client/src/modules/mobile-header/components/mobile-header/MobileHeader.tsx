@@ -10,7 +10,10 @@ import {spotsSelector} from "modules/card-list/store/spotsSelectors";
 import {userFavoritesSpots} from "modules/favorites/store/favoriteSelector";
 import {TLocalRoute} from "utils/localRoutes";
 import {useDispatch} from "react-redux";
-import {toggleReviewPopup} from "ui/popup/store/popupActions";
+import {setRoutePass} from "modules/my-spots/api/routePassApi";
+import {authLoader} from "modules/auth-form/store/authSelectors";
+import Cookies from "js-cookie";
+import {userRoutesPass} from "modules/my-spots/store/routesPassSelector";
 
 const preventNavigation = (currentPath: string, targetPath: string) => {
     return currentPath === targetPath;
@@ -23,8 +26,10 @@ export const MobileHeader = () => {
     const {pathname} = location;
     const {spotId} = useAppSelector(state => state.spotId);
     const spotIdAsNumber = parseInt(spotId, 10);
+    const loader = useAppSelector(authLoader);
     const spotRoutes = useAppSelector(spotsSelector);
     const favSpots = useAppSelector(userFavoritesSpots);
+    const routesPass = useAppSelector(userRoutesPass);
     const isSpot = location.pathname.includes("/spots/");
     const isSpotMap = location.pathname.includes("/spotMap/");
     const chosenSpot = spotRoutes?.find((spot: TLocalRoute) => spot.id === spotIdAsNumber);
@@ -34,9 +39,15 @@ export const MobileHeader = () => {
         preventNavigation(pathname, path) && e.preventDefault();
     };
 
-    const openReviewPopup = () => {
-        dispatch(toggleReviewPopup(true));
-    };
+    const setSpotPass = () => {
+        const isAlreadyPass = routesPass && routesPass.some((passSpot) => passSpot.id === spotIdAsNumber);
+        if (routesPass && !isAlreadyPass) {
+            const fetchData = async () => {
+                await setRoutePass(dispatch, spotIdAsNumber);
+            }
+            fetchData();
+        }
+    }
 
     return (
         <div className={s.container}>
@@ -50,7 +61,8 @@ export const MobileHeader = () => {
                             <Button
                                 extraClass={classNames(s.menu__button, "button_green")}
                                 type="primary"
-                                action={openReviewPopup}
+                                action={setSpotPass}
+                                disabled={loader || !Cookies.get("token")}
                             >
                                 Маршрут пройден
                             </Button>

@@ -12,7 +12,6 @@ export type TLocalRoute = {
     photos: string[];
     comments: TReview[];
     target_audiences: string[],
-    activeFavMark?: boolean,
 }
 
 export type TReview = {

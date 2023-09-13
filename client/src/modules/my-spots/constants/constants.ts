@@ -1,0 +1,1 @@
+export const routesPassMessage = "Пока нет пройденных мест :(";
