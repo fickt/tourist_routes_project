@@ -1,6 +1,6 @@
-import React, {SyntheticEvent} from "react";
+import React, {SyntheticEvent, useEffect, useState} from "react";
 import s from "./styles.module.scss";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {menuLinks} from "./constants/menuLinks";
 import classNames from "classnames";
 import {Button} from "ui/button/Button";
@@ -11,9 +11,10 @@ import {userFavoritesSpots} from "modules/favorites/store/favoriteSelector";
 import {TLocalRoute} from "utils/localRoutes";
 import {useDispatch} from "react-redux";
 import {setRoutePass} from "modules/my-spots/api/routePassApi";
-import {authLoader} from "modules/auth-form/store/authSelectors";
-import Cookies from "js-cookie";
 import {userRoutesPass} from "modules/my-spots/store/routesPassSelector";
+import Cookies from "js-cookie";
+import {RoutePath} from "pages/routeConfig";
+import {isLoader} from "components/loader-error";
 
 const preventNavigation = (currentPath: string, targetPath: string) => {
     return currentPath === targetPath;
@@ -26,7 +27,7 @@ export const MobileHeader = () => {
     const {pathname} = location;
     const {spotId} = useAppSelector(state => state.spotId);
     const spotIdAsNumber = parseInt(spotId, 10);
-    const loader = useAppSelector(authLoader);
+    const loader = useAppSelector(isLoader);
     const spotRoutes = useAppSelector(spotsSelector);
     const favSpots = useAppSelector(userFavoritesSpots);
     const routesPass = useAppSelector(userRoutesPass);
@@ -34,18 +35,31 @@ export const MobileHeader = () => {
     const isSpotMap = location.pathname.includes("/spotMap/");
     const chosenSpot = spotRoutes?.find((spot: TLocalRoute) => spot.id === spotIdAsNumber);
     const favoriteSpot = favSpots?.find((favSpot: TLocalRoute) => favSpot === chosenSpot);
+    const [isAlreadyPass, setAlreadyPass] = useState(false);
+    const token = Cookies.get("token");
 
     const handleClick = (e: SyntheticEvent<HTMLAnchorElement>, path: string) => {
         preventNavigation(pathname, path) && e.preventDefault();
     };
 
+    useEffect(() => {
+        routesPass
+            ? setAlreadyPass(routesPass.some((passSpot: TLocalRoute) => passSpot.id === spotIdAsNumber))
+            : setAlreadyPass(false);
+    }, [routesPass, spotIdAsNumber, dispatch])
+
     const setSpotPass = () => {
-        const isAlreadyPass = routesPass && routesPass.some((passSpot) => passSpot.id === spotIdAsNumber);
-        if (routesPass && !isAlreadyPass) {
-            const fetchData = async () => {
-                await setRoutePass(dispatch, spotIdAsNumber);
+        if (!token) {
+            const navigate = useNavigate();
+            navigate(RoutePath.auth_login);
+        } else {
+            if (!isAlreadyPass) {
+                const fetchData = async () => {
+                    await setRoutePass(dispatch, spotIdAsNumber);
+                    setAlreadyPass(true);
+                }
+                fetchData();
             }
-            fetchData();
         }
     }
 
@@ -62,7 +76,7 @@ export const MobileHeader = () => {
                                 extraClass={classNames(s.menu__button, "button_green")}
                                 type="primary"
                                 action={setSpotPass}
-                                disabled={loader || !Cookies.get("token")}
+                                disabled={loader || isAlreadyPass || !token}
                             >
                                 Маршрут пройден
                             </Button>

@@ -1,32 +1,27 @@
-import {
-    handleAuthError,
-    handleAuthLoader,
-    handleSetUser,
-    handleUserAuth,
-    handleUserReg
-} from "modules/auth-form/store/authActions";
-import {authLoader, authUser} from "modules/auth-form/store/authSelectors";
+import {handleSetUser, handleUserAuth, handleUserReg} from "modules/auth-form/store/authActions";
+import {authUser} from "modules/auth-form/store/authSelectors";
 import Cookies from "js-cookie";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
 import {TServerResponse, TUser} from "modules/auth-form/store/types/authTypes";
 import {authService} from "modules/auth-form/api/authService";
+import {isLoader, setError, setLoader} from "components/loader-error";
 
 export const useAuth = () => {
 
     const dispatch = useAppDispatch();
-    const loader = useAppSelector(authLoader);
+    const loader = useAppSelector(isLoader);
     const user = useAppSelector(authUser);
 
-    // Что произошло: регистрация или логин
+    // Установка флага: регистрация или логин
     const setAction = (isRegistration: boolean) => {
         isRegistration ? handleUserReg(true) : handleUserAuth(true);
     }
 
     // Установка ошибки
-    const setError = (e: Error | TServerResponse) => {
+    const setAuthError = (e: Error | TServerResponse) => {
         e.response
-            ? dispatch(handleAuthError(e.response.data.error))
-            : dispatch(handleAuthError("Попробуйте снова")); // ошибка 504 (отвалились докер-контейнеры)
+            ? dispatch(setError(e.response.data.error))
+            : dispatch(setError("Попробуйте снова")); // ошибка 504 (отвалились докер-контейнеры)
     }
 
     const authenticate = async (
@@ -35,7 +30,7 @@ export const useAuth = () => {
         password: string,
         isRegistration: boolean
     ) => {
-        dispatch(handleAuthLoader(true)); // включить loader
+        dispatch(setLoader(true));
         try {
             const response: TServerResponse = isRegistration
                 ? await authService.register(nickname, email, password) // отправка запроса на регистрацию
@@ -52,9 +47,9 @@ export const useAuth = () => {
             Cookies.set("email", response.data.user.email);
             setAction(isRegistration);
         } catch (e: Error | TServerResponse) {
-            setError(e);
+            setAuthError(e);
         } finally {
-            dispatch(handleAuthLoader(false)); // выключить loader
+            dispatch(setLoader(false));
         }
     };
 

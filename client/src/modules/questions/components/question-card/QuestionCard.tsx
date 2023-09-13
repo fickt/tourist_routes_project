@@ -7,31 +7,30 @@ import {apiQuestions} from "modules/questions/api/QuestionsServise";
 import {TAnswers} from "modules/questions/api/type";
 import {Typography} from "antd";
 import {useDispatch} from "react-redux";
-import {handleAuthError, handleAuthLoader} from "modules/auth-form/store/authActions";
 import {useAppSelector} from "storage/hookTypes";
-import {authError, authLoader} from "modules/auth-form/store/authSelectors";
-import {questionCardText, questionsValues} from "modules/questions/constants/questionsValues";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
+import {isError, isLoader, setError, setLoader} from "components/loader-error";
+import {constants, questionCardText, questionErrorMessage} from "modules/questions/constants/constants";
 
 export const QuestionCard = () => {
 
+    const error = useAppSelector(isLoader);
+    const loader = useAppSelector(isError);
     const [questions, setQuestions] = useState([])
-    const error = useAppSelector(authError);
-    const loader = useAppSelector(authLoader);
     const [answers, setAnswers] = useState<TAnswers[]>([])
     const [questionIndex, setQuestionIndex] = useState(0)
     const {Text} = Typography
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(handleAuthLoader(true))
+        dispatch(setLoader(true))
         apiQuestions.fetchQuestions()
             .then(response => {
                 setQuestions(response.data.photos)
-                dispatch(handleAuthLoader(false))
+                dispatch(setLoader(false))
             })
             .catch(() => {
-                dispatch(handleAuthError("Ошибка получения данных для анкеты"))
+                dispatch(setError(questionErrorMessage))
             });
     }, [])
 
@@ -73,7 +72,7 @@ export const QuestionCard = () => {
                     <QuestionsButtons
                         isSave={questionIndex === questions.length}
                         answers={answers}
-                        title={questionsValues.ready}
+                        title={constants.ready}
                     />
                 </>
             ) : (

@@ -23,6 +23,7 @@ export const SpotMapPage = () => {
     const reviewPopup = useAppSelector(reviewPopupState);
 
     const closeReviewPopup = () => dispatch(toggleReviewPopup(false));
+    const loadReviewPopupData = async () => await dispatch(toggleReviewPopup(true));
 
     const transformSpotId = () => {
         let cleanedSpotId = spotId.replace(":", "");
@@ -36,10 +37,6 @@ export const SpotMapPage = () => {
                 spot.id === spotIdAsNumber
             );
             foundSpot && dispatch(handleChosenMapSpot(foundSpot));
-
-            const loadReviewPopupData = async () => {
-                await dispatch(toggleReviewPopup(true));
-            };
             loadReviewPopupData();
         }
     }, [transformSpotId, mapSpots, chosenMapSpot, dispatch, navigate]);
