@@ -7,6 +7,7 @@ use App\Http\Controllers\RouteCommentController;
 use App\Http\Controllers\RouteCompletedController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RouteFavoriteController;
+use App\Http\Controllers\RouteFindByImageController;
 use App\Http\Controllers\RouteQuestionnaireController;
 use App\Http\Controllers\RouteRecommendationController;
 use App\Http\Middleware\IsAuthenticated;
@@ -48,6 +49,10 @@ Route::group(['middleware' => 'api'], function () {
 
     /* Routes */
     Route::group(['prefix' => 'routes'], function () {
+
+        /* Find route by image */
+        Route::post('/find-by-image', [RouteFindByImageController::class, 'show']);
+
         /* Recommendations */
         Route::group(['prefix' => '/recommendations', 'middleware' => IsAuthenticated::class], function () {
             Route::get('', [RouteRecommendationController::class, 'index']);

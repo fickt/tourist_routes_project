@@ -13,7 +13,7 @@ use Illuminate\Database\Seeder;
 
 class RouteSeederFromCsv extends Seeder
 {
-    private const PATH_ROUTES_CSV_FILE = "/routes/data_for_db.csv";
+    private const PATH_ROUTES_CSV_FILE = "/routes/data_with_array_emb_custom.csv";
     private const NUMBER_OF_ROUTES = 30;
 
     /**
@@ -34,13 +34,14 @@ class RouteSeederFromCsv extends Seeder
                     'longitude' => $data[3],
                     'difficulty_id' => $data[4],
                     'distance_from_nearest_city' => $data[5],
+                    'embedding' => $data[10],
                     'rating' => 0
                 ]
             );
             RoutePhoto::query()->create(
                 [
                     'route_id' => $route->id,
-                    'photo_path' => 'image_route_zaglushka.jpg'
+                    'photo_path' => $data[9]
                 ]);
             $routeCategory = self::getRandomCategory();
             $routeTargetAudience = self::getTargetAudience();
