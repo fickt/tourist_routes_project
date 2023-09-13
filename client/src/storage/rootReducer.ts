@@ -1,13 +1,14 @@
 import {combineReducers} from "redux";
 import {spotsReducer} from "modules/card-list"
 import {authReducer} from "modules/auth-form";
-import {questionsReducer} from "modules/questions/store/questionsReducer";
-import {filtersReducer} from "modules/filters/store/filtersReducer";
-import {spotItemReducer} from "modules/spot-item/store/spotItemReducer";
-import {reviewReducer} from "modules/review-block/store/reviewReducer";
-import {favoriteReducer} from "modules/favorites/store/favoriteReducer";
 import {popupReducer} from "ui/popup/store/popupReducer";
-import {routesPassReducer} from "modules/my-spots/store/routesPassReducer";
+import {questionsReducer} from "modules/questions";
+import {filtersReducer} from "modules/filters";
+import {spotItemReducer} from "modules/spot-item";
+import {reviewReducer} from "modules/review-block";
+import {favoriteReducer} from "modules/favorites";
+import {routesPassReducer} from "modules/my-spots";
+import {imageSearchReducer} from "modules/image-search-popup";
 
 export const rootReducer = combineReducers({
     spots: spotsReducer,
@@ -22,5 +23,6 @@ export const rootReducer = combineReducers({
     favorites: favoriteReducer,
     popup: popupReducer,
     routesPass: routesPassReducer,
+    imgSearchRoutes: imageSearchReducer,
 })
 

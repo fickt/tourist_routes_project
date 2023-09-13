@@ -1,1 +1,0 @@
-export const popupTitle = "Поиск по фото";

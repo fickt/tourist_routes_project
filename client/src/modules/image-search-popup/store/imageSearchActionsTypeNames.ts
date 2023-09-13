@@ -1,0 +1,1 @@
+export const SET_NEW_ROUTES = "SET_NEW_ROUTES";
