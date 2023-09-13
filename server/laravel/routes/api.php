@@ -50,6 +50,7 @@ Route::group(['middleware' => 'api'], function () {
     /* Routes */
     Route::group(['prefix' => 'routes'], function () {
 
+        /* Find route by image */
         Route::post('/find-by-image', [RouteFindByImageController::class, 'show']);
 
         /* Recommendations */
