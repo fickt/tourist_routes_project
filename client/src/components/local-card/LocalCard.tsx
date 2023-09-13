@@ -4,9 +4,12 @@ import {TCardProps} from "./types";
 import {Rate} from "antd";
 import {FavoriteElem} from "modules/favorites/components/favorite-elem/FavoriteElem";
 import {Button} from "ui/button/Button";
+import {useAppSelector} from "storage/hookTypes";
+import {userFavoritesSpots} from "modules/favorites/store/favoriteSelector";
 
-export const LocalCard = ({activeFavMark, spot}: TCardProps) => {
-
+export const LocalCard = ({spot}: TCardProps) => {
+    const favSpots = useAppSelector(userFavoritesSpots);
+    const mark = favSpots?.some(fav => fav.id === spot.id);
     function getDeclension(number: number, one: string, two: string, five: string) {
         let n = Math.abs(number);
         n %= 100;
@@ -32,7 +35,7 @@ export const LocalCard = ({activeFavMark, spot}: TCardProps) => {
     return (
         <div className={s.wrapper}>
             <div className={s.favorite}>
-                <FavoriteElem activeFavMark={activeFavMark} spot={spot}/>
+                <FavoriteElem activeFavMark={mark} spot={spot}/>
             </div>
             <Link to={`/spots/${spot.id}`} className={s.card}>
                 <img className={s.card__img} 

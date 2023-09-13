@@ -10,7 +10,7 @@ export class favoriteService {
         return api.get(`${RoutePath.spots}/${fav}`);
     }
 
-    static async addToFavorites(routeId: number): Promise<AxiosResponse<TLocalRoutes>> {
+    static async addOrRemoveToFavorites(routeId: number): Promise<AxiosResponse<TLocalRoutes>> {
         return api.patch(`${RoutePath.spots}/${fav}/${routeId}`);
     }
 }
