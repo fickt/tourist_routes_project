@@ -18,7 +18,6 @@ export const Logo = () => {
     const handleClick = (e: SyntheticEvent<HTMLAnchorElement>) => {
         location.pathname === "/" && e.preventDefault();
     };
-    console.log(location.pathname)
     const shouldRenderBackIcon = () => {
         return location.pathname !== "/" &&
             location.pathname !== "/profile" &&

@@ -10,7 +10,7 @@ import {useDispatch} from "react-redux";
 import {handleAuthError, handleAuthLoader} from "modules/auth-form/store/authActions";
 import {useAppSelector} from "storage/hookTypes";
 import {authError, authLoader} from "modules/auth-form/store/authSelectors";
-import {questionCardText, questionsValues} from "modules/questions/constants/questionsValues";
+import {errorMessage, questionCardText, questionsValues} from "modules/questions/constants/questionsValues";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 
 export const QuestionCard = () => {
@@ -31,7 +31,7 @@ export const QuestionCard = () => {
                 dispatch(handleAuthLoader(false))
             })
             .catch(() => {
-                dispatch(handleAuthError("Ошибка получения данных для анкеты"))
+                dispatch(handleAuthError(errorMessage.card))
             });
     }, [])
 
