@@ -5,29 +5,28 @@ import {TReviewPopupProps} from "./types";
 import classNames from "classnames";
 import s from "./styles.module.scss";
 import Cookies from "js-cookie";
-import {handleAuthError} from "modules/auth-form/store/authActions";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
-import {authError, authLoader} from "modules/auth-form/store/authSelectors";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
 import {Link, useNavigate} from "react-router-dom";
 import {sendReview} from "modules/review-block/api/reviewApi";
 import {buttonText, elemName, popupTitle, reviewForm} from "modules/review-block/components/constants/constants";
 import {RoutePath} from "pages/routeConfig";
+import {isError, isLoader, setError} from "components/loader-error";
 
 export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const loader = useAppSelector(authLoader);
-    const error = useAppSelector(authError);
+    const loader = useAppSelector(isLoader);
+    const error = useAppSelector(isError);
     const [form] = Form.useForm();
     const {TextArea} = Input;
     const [content, setContent] = useState("");
     const [rating, setRating] = useState(0);
 
     useEffect(() => {
-        dispatch(handleAuthError(null));
+        dispatch(setError(null));
     }, [])
 
     const sendForm = () => {

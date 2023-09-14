@@ -40,7 +40,7 @@ a {
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
     padding-left: var(--container-padding);
     padding-right: var(--container-padding);
@@ -72,6 +72,9 @@ a {
 }
 
 main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     flex: 1;
 };
 

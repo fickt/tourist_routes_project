@@ -13,8 +13,6 @@ import {apiQuestions} from "modules/questions/api/QuestionsServise";
 import {useDispatch} from "react-redux";
 import {handleStartPassQuestions} from "modules/questions/store/questionsActions";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
-import {authError, authLoader} from "modules/auth-form/store/authSelectors";
-import {handleAuthError, handleAuthLoader} from "modules/auth-form/store/authActions";
 import {errorProfile, profileValues} from "modules/profile/constants/profileValues";
 import {CardListBody} from "modules/card-list";
 import {useNavigate} from "react-router-dom";
@@ -22,14 +20,15 @@ import {authService} from "modules/auth-form/api/authService";
 import {TServerResponse} from "modules/auth-form/store/types/authTypes";
 import Cookies from "js-cookie";
 import {setFavoriteSpots} from "modules/favorites/store/favoriteActions";
+import {isError, isLoader, setError, setLoader} from "components/loader-error";
 
 export const Profile = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isStart = useAppSelector(isStartQuestions);
-    const loader = useAppSelector(authLoader);
-    const error = useAppSelector(authError);
+    const loader = useAppSelector(isLoader);
+    const error = useAppSelector(isError);
     const [questArray, setQuestArray] = useState<TLocalRoute[]>([]);
 
     useEffect(() => {
@@ -40,18 +39,16 @@ export const Profile = () => {
         }
         apiQuestions.fetchRecomendations()
             .then(data => {
-                dispatch(handleAuthLoader(false))
-                if (data.data.length) {
-                    setQuestArray(data.data)
-                }
+                dispatch(setLoader(false));
+                data.data.length && setQuestArray(data.data);
             })
             .catch(() => {
-                dispatch(handleAuthError(errorProfile.recommended))
+                dispatch(setError(errorProfile.recommended));
             })
     }, [])
 
     const logout = async (): Promise<void> => {
-        dispatch(handleAuthLoader(true)); // включить loader
+        dispatch(setLoader(true));
         try {
             await authService.logout();
             Object.keys(Cookies.get()).forEach(cookieName => {
@@ -60,9 +57,9 @@ export const Profile = () => {
             dispatch(setFavoriteSpots(null));
             navigate(RoutePath.home);
         } catch (e: Error | TServerResponse) {
-            dispatch(handleAuthError(e.response.data.error));
+            dispatch(setError(e.response.data.error));
         } finally {
-            dispatch(handleAuthLoader(false)); // выключить loader
+            dispatch(setLoader(false));
         }
     };
 

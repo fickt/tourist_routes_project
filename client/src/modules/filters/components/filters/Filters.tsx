@@ -9,8 +9,9 @@ import {RoutePath} from "pages/routeConfig";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
 import {handleSpots} from "modules/card-list/store/spotsActions";
 import {resetFiltersAction} from "modules/filters/store/filtersActions";
-import {handleAuthError} from "modules/auth-form/store/authActions";
 import {apiSpots} from "modules/card-list/api/spotsService";
+import {setError} from "components/loader-error";
+import {dropErrorMessage, filterErrorMessage} from "modules/filters/constants/constants";
 
 export const Filters = () => {
 
@@ -26,7 +27,7 @@ export const Filters = () => {
                 dispatch(handleSpots(response.data))
             })
             .catch(() => {
-                dispatch(handleAuthError("Ошибка фильтрации"))
+                dispatch(setError(filterErrorMessage))
             })
     }
 
@@ -37,7 +38,7 @@ export const Filters = () => {
                 dispatch(handleSpots(response.data))
             })
             .catch(() => {
-                dispatch(handleAuthError("Ошибка сброса фильтров"))
+                dispatch(setError(dropErrorMessage))
             })
     }
 
