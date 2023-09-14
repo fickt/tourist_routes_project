@@ -34,7 +34,7 @@ class RouteQuestionnaireSeeder extends Seeder
         ]);
 
         RouteQuestionnairePhoto::query()->create([
-            'photo' => 'questionnaire_istoricheskie_mesta_photo.jpg',
+            'photo' => 'https://www.vesveter.ru/images/rossia/dolina_tsarey.JPG',
             'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::HistoricSites->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
