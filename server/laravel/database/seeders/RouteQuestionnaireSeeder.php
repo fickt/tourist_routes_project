@@ -28,7 +28,7 @@ class RouteQuestionnaireSeeder extends Seeder
         ]);
 
         RouteQuestionnairePhoto::query()->create([
-            'photo' => 'questionnaire_ozero_photo.jpg',
+            'photo' => 'https://gazeta19.ru/media/k2/galleries/48178/V20L1eUdaFI.jpg',
             'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::Lakes->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
