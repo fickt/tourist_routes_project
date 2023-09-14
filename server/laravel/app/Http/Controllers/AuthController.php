@@ -38,7 +38,7 @@ class AuthController extends Controller
     public function login(UserLoginRequest $request): AuthUserResource
     {
         if (!$token = auth()->attempt($request->validated())) {
-            throw new HttpException(Response::HTTP_UNAUTHORIZED, 'Неправильный логин или пароль!');
+            throw new HttpException(Response::HTTP_BAD_REQUEST, 'Неправильный логин или пароль!');
         }
 
         return new AuthUserResource($token);
