@@ -52,7 +52,7 @@ class RouteQuestionnaireSeeder extends Seeder
         ]);
 
         RouteQuestionnairePhoto::query()->create([
-            'photo' => 'questionnaire_pesheri_photo.jpg',
+            'photo' => 'https://554a875a-71dc-4f5f-b6bf-ae8967f137d5.selcdn.net/thumbs2/d82aecf8-58f3-11ec-9c26-2657e3d8179c.800x600.jpeg',
             'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::Caves->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
