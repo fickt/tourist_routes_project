@@ -3,4 +3,6 @@ export const profileValues = {
     favorite: "Избранное"
 }
 
-export const favSpotsErrorMessage = "Ошибка получения рекомендованных мест";
+export const errorProfile = {
+    recommended: "Ошибка получения рекомендованных мест"
+}

@@ -1,7 +1,12 @@
-export const constants = {
+export const questionsValues = {
     pass: "Пройти",
     later: "Позже",
     ready: "Готово"
+}
+
+export const errorMessage = {
+    card: "Ошибка получения данных для анкеты",
+    buttons: "Ошибка отправки ответов на сервер"
 }
 
 export const questionCardText = "Выберите места, которые вам понравились, и мы сгенерируем на их основе ваши персональные рекомендации"

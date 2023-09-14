@@ -10,27 +10,27 @@ import {useDispatch} from "react-redux";
 import {useAppSelector} from "storage/hookTypes";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {isError, isLoader, setError, setLoader} from "components/loader-error";
-import {constants, questionCardText, questionErrorMessage} from "modules/questions/constants/constants";
+import {questionsValues, questionCardText, errorMessage} from "modules/questions/constants/constants";
 
 export const QuestionCard = () => {
 
     const error = useAppSelector(isLoader);
     const loader = useAppSelector(isError);
-    const [questions, setQuestions] = useState([])
-    const [answers, setAnswers] = useState<TAnswers[]>([])
-    const [questionIndex, setQuestionIndex] = useState(0)
-    const {Text} = Typography
-    const dispatch = useDispatch()
+    const [questions, setQuestions] = useState([]);
+    const [answers, setAnswers] = useState<TAnswers[]>([]);
+    const [questionIndex, setQuestionIndex] = useState(0);
+    const {Text} = Typography;
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(setLoader(true))
+        dispatch(setLoader(true));
         apiQuestions.fetchQuestions()
             .then(response => {
-                setQuestions(response.data.photos)
-                dispatch(setLoader(false))
+                setQuestions(response.data.photos);
+                dispatch(setLoader(false));
             })
             .catch(() => {
-                dispatch(setError(questionErrorMessage))
+                dispatch(setError(errorMessage.card));
             });
     }, [])
 
@@ -72,7 +72,7 @@ export const QuestionCard = () => {
                     <QuestionsButtons
                         isSave={questionIndex === questions.length}
                         answers={answers}
-                        title={constants.ready}
+                        title={questionsValues.ready}
                     />
                 </>
             ) : (

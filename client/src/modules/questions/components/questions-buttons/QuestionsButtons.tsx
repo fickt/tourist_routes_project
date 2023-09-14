@@ -7,7 +7,8 @@ import {Link} from "react-router-dom";
 import classNames from "classnames";
 import {apiQuestions} from "modules/questions/api/QuestionsServise";
 import {setError, setLoader} from "components/loader-error";
-import {constants, questionErrorServerConnect} from "modules/questions/constants/constants";
+import {questionsValues, errorMessage} from "modules/questions/constants/constants";
+import Cookies from "js-cookie";
 
 export const QuestionsButtons = ({title, answers, isSave}: TQuestionsButtonProps) => {
 
@@ -16,21 +17,22 @@ export const QuestionsButtons = ({title, answers, isSave}: TQuestionsButtonProps
     const startPassQuestions = () => dispatch(handleStartPassQuestions(true));
 
     const sendAnswers = () => {
-        dispatch(setLoader(true))
+        dispatch(setLoader(true));
         if (answers && answers.length > 0) {
             apiQuestions.sendAnswer(answers)
-                .then(response => {
-                    console.log("Успешный ответ:", response);
+                .then(() => {
+                    Cookies.set("isPass", "false");
+                    dispatch(handleStartPassQuestions(true));
                 })
                 .catch(() => {
-                    dispatch(setError(questionErrorServerConnect))
+                    dispatch(setError(errorMessage.buttons));
                 });
         }
     }
 
     return (
         <div className="buttons__wrapper">
-            {title == constants.ready
+            {title == questionsValues.ready
                 ? <>
                     {isSave && (
                         <Link onClick={sendAnswers} className="buttons__link" to={RoutePath.profile}>
@@ -48,7 +50,7 @@ export const QuestionsButtons = ({title, answers, isSave}: TQuestionsButtonProps
             }
             {!isSave && (
                 <Link className="buttons__link" to={RoutePath.profile}>
-                    <Button extraClass={classNames("button", "button_white")}>{constants.later}</Button>
+                    <Button extraClass={classNames("button", "button_white")}>{questionsValues.later}</Button>
                 </Link>
             )}
         </div>

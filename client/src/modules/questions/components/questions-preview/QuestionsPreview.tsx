@@ -1,7 +1,7 @@
 import s from "./styles.module.scss";
 import {QuestionsButtons} from "modules/questions/components/questions-buttons/QuestionsButtons";
 import QuestionnaireIcon from "./assets/questionnaire.svg";
-import {constants, questionPreviewText} from "modules/questions/constants/constants";
+import {questionsValues, questionPreviewText} from "modules/questions/constants/constants";
 
 export const QuestionsPreview = () => {
 
@@ -9,7 +9,7 @@ export const QuestionsPreview = () => {
         <div className={s.wrapper}>
             <QuestionnaireIcon/>
             <p className={s.preview__text}>{questionPreviewText}</p>
-            <QuestionsButtons title={constants.pass}/>
+            <QuestionsButtons title={questionsValues.pass}/>
         </div>
     )
 }

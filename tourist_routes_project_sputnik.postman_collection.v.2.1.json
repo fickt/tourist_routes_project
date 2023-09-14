@@ -280,11 +280,21 @@
 		{
 			"name": "Comment route with id: 1",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2OTM4NDI1NjIsImV4cCI6MTY5Mzg0NjE2MiwibmJmIjoxNjkzODQyNTYyLCJqdGkiOiIwZmtxRFVzU1NCVXlrRXhQIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.DlJwZetLhfSLXP1GU6tm4k6HAa41V93xVQf-qEhaOKU",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2OTM4NDI1NjIsImV4cCI6MTY5Mzg0NjE2MiwibmJmIjoxNjkzODQyNTYyLCJqdGkiOiIwZmtxRFVzU1NCVXlrRXhQIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.DlJwZetLhfSLXP1GU6tm4k6HAa41V93xVQf-qEhaOKU",
 						"type": "text"
 					}
 				],
@@ -404,6 +414,44 @@
 					"path": [
 						"routes",
 						"favorites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Route find by image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/admin/Desktop/600-3.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/routes/find-by-image",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"routes",
+						"find-by-image"
 					]
 				}
 			},

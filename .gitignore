@@ -19,3 +19,4 @@ yarn-error.log
 .idea
 /.env
 server/laravel/.env
+ml-service/__pycache__/main.cpython-311.pyc
