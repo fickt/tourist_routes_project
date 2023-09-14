@@ -46,7 +46,7 @@ class RouteQuestionnaireSeeder extends Seeder
         ]);
 
         RouteQuestionnairePhoto::query()->create([
-            'photo' => 'questionnaire_reki_photo.jpg',
+            'photo' => 'https://www.gasu.ru/culture-and-sport/russkiy-ekstrim/u-kan/9.jpg',
             'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::Rivers->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
