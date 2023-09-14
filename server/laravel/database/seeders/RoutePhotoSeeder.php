@@ -47,7 +47,7 @@ class RoutePhotoSeeder extends Seeder
         RoutePhoto::query()->create(
             [
                 'route_id' => $route->id,
-                'photo_path' => 'https://pixnio.com/free-images/2018/12/05/2018-12-05-12-26-47-1536x1024.jpg'
+                'photo_path' => 'http://www.ap22.ru/netcat_files/multifile/2546/166114/1648923611_18_vsegda_pomnim_com_p_yelovii_les_letom_foto_22.jpg'
             ]
         );
 
