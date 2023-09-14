@@ -40,21 +40,21 @@ class RoutePhotoSeeder extends Seeder
         RoutePhoto::query()->create(
             [
                 'route_id' => $route->id,
-                'photo_path' => 'https://i.artfile.me/wallpaper/29-04-2018/1280x960/priroda-gory-prostor-1334586.jpg'
+                'photo_path' => 'https://beautifoto.ru/wp-content/uploads/2019/07/5-7.jpg'
             ]
         );
 
         RoutePhoto::query()->create(
             [
                 'route_id' => $route->id,
-                'photo_path' => 'https://i.artfile.me/wallpaper/29-04-2018/1280x960/priroda-gory-prostor-1334586.jpg'
+                'photo_path' => 'https://pixnio.com/free-images/2018/12/05/2018-12-05-12-26-47-1536x1024.jpg'
             ]
         );
 
         RoutePhoto::query()->create(
             [
                 'route_id' => $route->id,
-                'photo_path' => 'https://i.artfile.me/wallpaper/29-04-2018/1280x960/priroda-gory-prostor-1334586.jpg'
+                'photo_path' => 'https://img.goodfon.ru/original/1280x1024/9/75/les-derevya-trava-solnce.jpg'
             ]
         );
     }
