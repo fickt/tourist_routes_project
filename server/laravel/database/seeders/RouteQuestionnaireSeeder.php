@@ -22,7 +22,7 @@ class RouteQuestionnaireSeeder extends Seeder
         );
 
         RouteQuestionnairePhoto::query()->create([
-            'photo' => 'questionnaire_gori_photo.jpg',
+            'photo' => 'http://s4.fotokto.ru/photo/full/471/4713629.jpg',
             'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::Mountains->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
