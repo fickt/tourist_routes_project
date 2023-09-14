@@ -5,7 +5,10 @@ import {TLocalRoute} from "utils/localRoutes";
 
 export class imageSearchService {
 
-    static async sendImageSearch(content: string): Promise<AxiosResponse<TLocalRoute[]>> {
-        return api.post(`${RoutePath.spots}/find-by-image`, {content});
+    static async sendImageSearch(file: File): Promise<AxiosResponse<TLocalRoute[]>> {
+        const formData = new FormData();
+        formData.append("image", file);
+
+        return api.post(`${RoutePath.spots}/find-by-image`, formData);
     }
 }

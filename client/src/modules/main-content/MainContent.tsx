@@ -1,4 +1,4 @@
-import React, {FormEvent, useMemo, useState} from "react";
+import React, {FormEvent, useEffect, useState} from "react";
 import s from "./styles.module.scss";
 import {SearchForm} from "components/search/SearchForm";
 import {CardList} from "modules/card-list";
@@ -13,20 +13,29 @@ import ImageRecommendIcon from "./assets/imageReccomendIcon.svg";
 import {apiSpots} from "modules/card-list/api/spotsService";
 import {imgPopupState} from "ui/popup/store/popupSelector";
 import {toggleImgPopup} from "ui/popup/store/popupActions";
+import {imageSearchRoutes} from "modules/image-search-popup";
+import {theBestRoute} from "./constants/constants";
+import {setError} from "components/loader-error";
 
 export const MainContent = () => {
 
     const dispatch = useAppDispatch();
     const spotRoutes = useAppSelector(spotsSelector);
+    const searchRoutesByImage = useAppSelector(imageSearchRoutes);
     const imgPopup = useAppSelector(imgPopupState);
     const [searchValue, setSearchValue] = useState("");
+    const [filteredSpots, setFilteredSpots] = useState(null);
     const debounceSearchValue = useDebounce(searchValue, 500);
 
-    const filteredSpots = useMemo(() => {
-        return spotRoutes?.filter(spot =>
-            spot.name.toLowerCase().includes(searchValue.toLowerCase())
-        );
-    }, [searchValue, spotRoutes]);
+    useEffect(() => {
+        if (searchValue.trim() === "") {
+            setFilteredSpots(searchRoutesByImage || spotRoutes);
+        } else {
+            const routesToFilter = searchRoutesByImage || spotRoutes;
+            setFilteredSpots(routesToFilter.filter(spot =>
+                spot.name.toLowerCase().includes(searchValue.toLowerCase())));
+        }
+    }, [searchValue, spotRoutes, searchRoutesByImage])
 
     const inputChange = (value: string) => setSearchValue(value);
     const openImgPopup = () => dispatch(toggleImgPopup(true));
@@ -40,10 +49,8 @@ export const MainContent = () => {
 
     const handleSearchRequest = () => {
         apiSpots.fetchSearchRequest(debounceSearchValue)
-            .then(data => {
-                dispatch(handleSpots(data.data))
-            })
-            .catch(err => console.warn(err))
+            .then(data => dispatch(handleSpots(data.data)))
+            .catch(err => dispatch((setError(err))));
     }
 
     return (
@@ -59,7 +66,7 @@ export const MainContent = () => {
                 style={{backgroundImage: `url(${backImage})`}}
             >
                 <SearchForm
-                    placeholder={"Поиск лучшего маршрута"}
+                    placeholder={theBestRoute}
                     searchValue={searchValue}
                     handleFormSubmit={searchClick}
                     handleInputChange={inputChange}
@@ -70,7 +77,7 @@ export const MainContent = () => {
             </section>
             <section className={classNames("content-section", s.routes)}>
                 <div className="container content">
-                    <CardList spots={filteredSpots ?? spotRoutes}/>
+                    <CardList spots={filteredSpots || searchRoutesByImage || spotRoutes}/>
                 </div>
             </section>
         </>

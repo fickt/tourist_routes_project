@@ -11,7 +11,7 @@ export const loaderErrorReducer = (state = initialState, action: TLoaderErrorAct
         case IS_ERROR_ACTIVE:
             return {
                 ...state,
-                error_message: action.payload,
+                is_error_message: action.payload,
             }
         case IS_LOADER_ACTIVE:
             return {
