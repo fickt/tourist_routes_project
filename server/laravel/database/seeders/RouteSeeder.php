@@ -23,20 +23,19 @@ class RouteSeeder extends Seeder
         Route::query()->create(
             [
                 'name' => 'Тестовый маршрут',
-                'description' => 'Дон ли, Волга ли течёт — котомку на плечо
-Боль в груди — там тайничок, открытый фомкой, не ключом
-Сколько миль ещё? Перелет короткий был не в счёт
-Долгий пыльный чёс, фургон набит коробками с мерчём
-Верим — подфартит, наши постели портативны
-Менестрелю два пути: корпоратив или квартирник
-Схемы однотипны, все теперь MC
-Ведь, смену породив, мы здесь достигли смены парадигмы
-Теперь рэп — многопартийный; бэттлов наплодив
-Я смотрю в зеркало по типу: «Сколько бед наворотил ты!»
-Я б весь рэп поработил, но всё время в пути
-У индустрии нервный тик, валокордин — стенокардийным
-Соберите суд, но победителей не судят
-Мы первые кроманьонцы — мы выбились в люди',
+                'description' => 'Victoria Falls (Lozi: Mosi-oa-Tunya, "Thundering Smoke"; Tonga: Shungu Namutitima, "Boiling Water") is a waterfall on the Zambezi River in southern Africa,
+which provides habitat for several unique species of plants and animals. It is located on the border between Zambia and Zimbabwe
+ and is one of the world\'s largest waterfalls, with a width of 1,708 m (5,604 ft).
+
+Archeological sites and oral history describe a long record of African knowledge of the site. Though known to some European geographers before the 19th century,
+Scottish missionary David Livingstone identified the falls in 1855, providing the British colonial name of Victoria Falls after Queen Victoria.
+    Since the mid 20th century, the site has been an increasingly important source of tourism. Zambia and Zimbabwe both have national parks and tourism infrastructure at the site.
+    Research in the late 2010s found that precipitation variability due to climate change is likely to change the character of the fall.
+    $@§©¬µ☺☻☻♂
+    &#128512;
+&#128514;
+&#128522;
+🙂😗🤐',
                 'difficulty_id' => $route_difficulty->id,
                 'longitude' => 91.4,
                 'latitude' => 53.7,
