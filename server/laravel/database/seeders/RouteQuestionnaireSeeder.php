@@ -58,7 +58,7 @@ class RouteQuestionnaireSeeder extends Seeder
         ]);
 
         RouteQuestionnairePhoto::query()->create([
-            'photo' => 'questionnaire_gornolizhni_komplex_photo.jpg',
+            'photo' => 'https://ic.pics.livejournal.com/lazarevs_007/50099764/4869909/4869909_original.jpg',
             'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::SkiingComplex->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
