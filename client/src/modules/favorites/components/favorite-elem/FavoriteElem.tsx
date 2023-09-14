@@ -15,10 +15,9 @@ export const FavoriteElem = memo(({activeFavMark, spot}: TFavoriteElemProps) => 
     const iconStyle = activeFavMark ? s.icon_active : "";
 
     const addToFav = async () => {
-        const isAlreadyFavorite = favSpots && favSpots.some((favSpot) => favSpot.id === spot.id);
-        if (favSpots && !isAlreadyFavorite) {
+        if (favSpots) {
             try {
-                const response = await favoriteService.addToFavorites(spot.id);
+                const response = await favoriteService.addOrRemoveToFavorites(spot.id);
                 dispatch(setFavoriteSpots(response.data));
             } catch (error) {
                 dispatch(handleAuthError("Место уже в избранном!"));
