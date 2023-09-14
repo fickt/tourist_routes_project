@@ -40,7 +40,7 @@ class RouteQuestionnaireSeeder extends Seeder
         ]);
 
         RouteQuestionnairePhoto::query()->create([
-            'photo' => 'questionnaire_zona_otdiha_photo.jpg',
+            'photo' => 'https://a.d-cd.net/_0AAAgGs8OA-960.jpg',
             'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::Resorts->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
