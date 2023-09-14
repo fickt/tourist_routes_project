@@ -37,6 +37,8 @@ export const Logo = () => {
             return "Личный кабинет";
         case "/favorites":
             return "Избранное";
+        case "/filters":
+            return "Фильтр";
         case "/location":
             return "Ближайшие места";
         case "/settings":

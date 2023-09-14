@@ -4,9 +4,7 @@ import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
 import {Form, FormInstance} from "antd";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
-import {authError, authLoader} from "modules/auth-form/store/authSelectors";
 import {useAuth} from "modules/auth-form/api/useAuth";
-import {handleAuthError} from "modules/auth-form/store/authActions";
 import {TFormData, TFormProps} from "components/form-elem/types";
 import {FormInput} from "components/form-elem/components/form-input/FormInput";
 import {emailRules, nicknameRules, passwordRules} from "components/form-elem/constants/formRules";
@@ -17,17 +15,18 @@ import {RoutePath} from "pages/routeConfig";
 import {Link} from "react-router-dom";
 import {authMessages} from "modules/auth-form";
 import {messages} from "components/form-elem/constants/constants";
+import {isError, isLoader, setError} from "components/loader-error";
 
 export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange}: TFormProps) => {
 
     const dispatch = useAppDispatch();
     const [form] = Form.useForm<FormInstance>();
-    const loader = useAppSelector(authLoader);
-    const error = useAppSelector(authError);
+    const loader = useAppSelector(isLoader);
+    const error = useAppSelector(isError);
     const {authenticate} = useAuth();
 
     useEffect(() => {
-        dispatch(handleAuthError(null));
+        dispatch(setError(null));
         form.resetFields();
     }, [isRegister]);
 
@@ -56,7 +55,7 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
             await form.validateFields();
             sendForm(form);
         } catch (error: Error | TServerResponse) {
-            dispatch(handleAuthError(error.response.data.error))
+            dispatch(setError(error.response.data.error))
         }
     };
 

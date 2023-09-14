@@ -9,6 +9,7 @@ import {reviewReducer} from "modules/review-block";
 import {favoriteReducer} from "modules/favorites";
 import {routesPassReducer} from "modules/my-spots";
 import {imageSearchReducer} from "modules/image-search-popup";
+import {loaderErrorReducer} from "components/loader-error";
 
 export const rootReducer = combineReducers({
     spots: spotsReducer,
@@ -17,6 +18,7 @@ export const rootReducer = combineReducers({
     chosen_spot: spotsReducer,
     chosen_map_spot: spotsReducer,
     auth: authReducer,
+    loaderError: loaderErrorReducer,
     questions: questionsReducer,
     filters: filtersReducer,
     comments: reviewReducer,

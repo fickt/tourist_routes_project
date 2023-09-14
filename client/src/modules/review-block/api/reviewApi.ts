@@ -1,4 +1,3 @@
-import {handleAuthError, handleAuthLoader} from "modules/auth-form/store/authActions";
 import {AxiosResponse} from "axios";
 import {TLocalRoute} from "utils/localRoutes";
 import {Dispatch} from "redux";
@@ -7,6 +6,7 @@ import {apiSpots} from "modules/card-list/api/spotsService";
 import {handleSpots} from "modules/card-list/store/spotsActions";
 import {TServerResponse} from "modules/auth-form/store/types/authTypes";
 import {FormInstance} from "antd";
+import {setError, setLoader} from "components/loader-error";
 
 export async function sendReview(
     dispatch: Dispatch,
@@ -18,7 +18,7 @@ export async function sendReview(
     setRating: (value: number) => void,
     closePopup: () => void,
 ): Promise<void> {
-    dispatch(handleAuthLoader(true));
+    dispatch(setLoader(true));
     try {
         const favSpot = await reviewService.sendReview(content, rating, spotId);
         if (favSpot) {
@@ -30,8 +30,8 @@ export async function sendReview(
         setRating(0);
         closePopup();
     } catch (e: Error | TServerResponse) {
-        dispatch(handleAuthError(e.response.data.error));
+        dispatch(setError(e.response.data.error));
     } finally {
-        dispatch(handleAuthLoader(false));
+        dispatch(setLoader(false));
     }
 }

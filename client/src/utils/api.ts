@@ -3,8 +3,6 @@ import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
 import {TAuthResponse} from "modules/auth-form/store/types/authTypes";
 import {RoutePath} from "pages/routeConfig";
-import {useAppDispatch} from "storage/hookTypes";
-import {handleSetUser} from "modules/auth-form";
 
 export const API_URL = `http://app.localhost/api`;
 export const api = axios.create({
@@ -31,8 +29,7 @@ api.interceptors.response.use((config) => {
             cookies.forEach(cookieName => {
                 Cookies.remove(cookieName);
             });
-            const dispatch = useAppDispatch();
-            dispatch(handleSetUser(null));
+            window.location.reload();
             const navigate = useNavigate();
             navigate(RoutePath.auth_login);
         }

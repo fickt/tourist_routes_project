@@ -96,7 +96,6 @@ export const YMapComponent = ({markers}: TYMapProps) => {
                 })
             };
 
-
             setLocationMarker(); //устанавливаем иконку геопозиции
             setMarkers(markers); //устанавливаем маркеры мест
 
