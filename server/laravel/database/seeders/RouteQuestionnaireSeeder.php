@@ -64,7 +64,7 @@ class RouteQuestionnaireSeeder extends Seeder
         ]);
 
         RouteQuestionnairePhoto::query()->create([
-            'photo' => 'questionnaire_kurgan_photo.jpg',
+            'photo' => 'https://img5.arrivo.ru/1679/54/68242/0/flickr.com-Vasiliy_Petrov.jpg',
             'category_id' => RouteCategory::query()->where('name', '=', RouteCategoryEnum::Kurgans->value)->first()->id,
             'questionnaire_id' => $questionnaire->id
         ]);
