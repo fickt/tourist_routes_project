@@ -2,10 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Events\UserCompletedQuestionnaireEvent;
 use App\Models\User;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+
 
 class ChangeUserIsQuestionnaireCompletedFieldListener
 {
@@ -20,9 +18,12 @@ class ChangeUserIsQuestionnaireCompletedFieldListener
     /**
      * Handle the event.
      */
-    public function handle(UserCompletedQuestionnaireEvent $event): void
+    public function handle(): void
     {
-        auth()->user()->is_questionnaire_completed = true;
-       // echo $is_updated;
+        User::query()
+            ->where('id', '=', auth()->user()->id)
+            ->update([
+            'is_questionnaire_completed' => true
+        ]);
     }
 }
