@@ -3,10 +3,13 @@
 namespace App\Providers;
 
 use App\Events\SuccessfulResetPasswordEvent;
+use App\Events\UserCompletedQuestionnaireEvent;
 use App\Events\VerificationCodeRequestedEvent;
 use App\Jobs\TestJob;
+use App\Listeners\DeletePreviousQuestionnaireResultsListener;
 use App\Listeners\DeleteUsedVerificationCodeListener;
 use App\Listeners\SendVerificationCodeToEmailListener;
+use App\Listeners\ChangeUserIsQuestionnaireCompletedFieldListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -27,6 +30,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         VerificationCodeRequestedEvent::class => [
             SendVerificationCodeToEmailListener::class
+        ],
+        UserCompletedQuestionnaireEvent::class => [
+            ChangeUserIsQuestionnaireCompletedFieldListener::class,
+            DeletePreviousQuestionnaireResultsListener::class
         ]
     ];
 

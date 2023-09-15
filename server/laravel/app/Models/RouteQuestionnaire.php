@@ -57,10 +57,10 @@ class RouteQuestionnaire extends Model
         })->get();
 
         $user = auth()->user();
+        UserCompletedQuestionnaireEvent::dispatch($user->id);
         foreach ($recommendedRoutes as $route) {
             $user->recommendations()->attach($route);
         }
-        UserCompletedQuestionnaireEvent::dispatch($user->id);
         return $user->getRecommendations();
     }
 }

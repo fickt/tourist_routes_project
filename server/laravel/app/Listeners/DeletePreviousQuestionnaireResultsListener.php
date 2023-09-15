@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class UserCompletedQuestionnaireListener
+class DeletePreviousQuestionnaireResultsListener
 {
     /**
      * Create the event listener.
@@ -22,11 +22,7 @@ class UserCompletedQuestionnaireListener
      */
     public function handle(UserCompletedQuestionnaireEvent $event): void
     {
-        User::query()
-            ->where('id', $event->userId)
-            ->first()
-            ->update([
-                'is_questionnaire_completed' => true
-            ]);
+        $user = auth()->user();
+        $user->recommendations()->delete();
     }
 }
