@@ -8,8 +8,10 @@ import {useAppSelector} from "storage/hookTypes";
 import {userFavoritesSpots} from "modules/favorites/store/favoriteSelector";
 
 export const LocalCard = ({spot}: TCardProps) => {
+
     const favSpots = useAppSelector(userFavoritesSpots);
     const mark = favSpots?.some(fav => fav.id === spot.id);
+
     function getDeclension(number: number, one: string, two: string, five: string) {
         let n = Math.abs(number);
         n %= 100;
@@ -27,7 +29,7 @@ export const LocalCard = ({spot}: TCardProps) => {
     }
 
     const difficultyClass: Record<string, string> = {
-        "новичок": s.card__difficulty__eazy,
+        "новичок": s.card__difficulty__easy,
         "знающий": s.card__difficulty__middle,
         "опытный": s.card__difficulty__hard,
     };
@@ -38,9 +40,7 @@ export const LocalCard = ({spot}: TCardProps) => {
                 <FavoriteElem activeFavMark={mark} spot={spot}/>
             </div>
             <Link to={`/spots/${spot.id}`} className={s.card}>
-                <img className={s.card__img} 
-                    src={spot.photos[0]}
-                    alt="Spot"/>
+                <img className={s.card__img} src={spot.photos[0]} alt={spot.name}/>
                 <div className={s.card__main}>
                     <div className={s.card__main__header}>
                         <span className={s.card__main__rating}>
@@ -50,7 +50,7 @@ export const LocalCard = ({spot}: TCardProps) => {
                             <span className={s.card__main__count}>{spot.comments.length}</span>
                             {getDeclension(
                                 spot.comments.length,
-                                'отзыв', 'отзыва', 'отзывов'
+                                "отзыв", "отзыва", "отзывов"
                             )}
                         </div>
                     </div>

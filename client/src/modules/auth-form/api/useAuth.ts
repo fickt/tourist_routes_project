@@ -46,11 +46,12 @@ export const useAuth = () => {
             Cookies.set("nickname", response.data.user.nickname);
             Cookies.set("email", response.data.user.email);
             if (isRegistration) {
-                Cookies.set("isPass", "true")
+                Cookies.set("isPass", "true");
             }
             setAction(isRegistration);
         } catch (e: Error | TServerResponse) {
             setAuthError(e);
+            console.log(e)
         } finally {
             dispatch(setLoader(false));
         }
