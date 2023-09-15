@@ -8,6 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * App\Models\RouteQuestionnaire
+ * == Properties ==
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ *
+ * == Relations ==
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RouteQuestionnairePhoto> $photos
+
+ * @mixin \Eloquent
+ */
 class RouteQuestionnaire extends Model
 {
     use HasFactory;

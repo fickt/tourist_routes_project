@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Models\RoutePhoto
- *
+ * == Properties ==
  * @property int $id
  * @property int $route_id
  * @property string $photo_path

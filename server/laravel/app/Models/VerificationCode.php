@@ -9,6 +9,17 @@ use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
+/**
+ * App\Models\VerificationCode
+ * == Properties ==
+ * @property int $id
+ * @property string $email
+ * @property int $code
+ * @property bool $is_valid
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @mixin \Eloquent
+ */
 class VerificationCode extends Model
 {
     use HasFactory;
