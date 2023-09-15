@@ -16,6 +16,7 @@ import {toggleImgPopup} from "ui/popup/store/popupActions";
 import {imageSearchRoutes} from "modules/image-search-popup";
 import {theBestRoute} from "./constants/constants";
 import {setError} from "components/loader-error";
+import {setFile} from "modules/image-search-popup/store/imageSearchActions";
 
 export const MainContent = () => {
 
@@ -38,8 +39,12 @@ export const MainContent = () => {
     }, [searchValue, spotRoutes, searchRoutesByImage])
 
     const inputChange = (value: string) => setSearchValue(value);
-    const openImgPopup = () => dispatch(toggleImgPopup(true));
     const closeImgPopup = () => dispatch(toggleImgPopup(false));
+
+    const openImgPopup = () => {
+        dispatch(setFile(null));
+        dispatch(toggleImgPopup(true));
+    }
 
     const searchClick = (e: FormEvent) => {
         e.preventDefault();

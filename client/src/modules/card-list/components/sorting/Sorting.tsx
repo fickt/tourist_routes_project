@@ -7,6 +7,9 @@ import {useDispatch} from "react-redux";
 import {handleSpots} from "modules/card-list/store/spotsActions";
 import {getLocation, TLocationFail, TLocationSuccess} from "components/ymap/helpers/location";
 import {TPoints} from "modules/card-list/components/sorting/type";
+import {sortErrorMessage} from "modules/card-list/constants/constants";
+import {imageSearchRoutes} from "modules/image-search-popup";
+import {setNewRoutes} from "modules/image-search-popup/store/imageSearchActions";
 
 // Функция для вычисления расстояния между двумя координатами
 function calculateDistance(point1: TPoints, point2:  TPoints) {
@@ -35,35 +38,53 @@ function deg2rad(degrees: number) {
 }
 
 export const Sorting = memo(() => {
+
     const dispatch = useDispatch();
     const localRoutes = useAppSelector(spotsSelector);
+    const searchRoutesByImage = useAppSelector(imageSearchRoutes);
     const [isSortFromTheBest, setSortFromTheBest] = useState(true);
     const [isSortFromDistance, setSortFromDistance] = useState(true);
     const [userLocation, setUserLocation] = useState(null);
+    const [routesToSort, setRoutesToSort] = useState(localRoutes);
 
     useEffect(() => {
         sortSpots(isSortFromTheBest);
     }, [isSortFromTheBest]);
 
-    const toggleClick = () => {
-        setSortFromTheBest(!isSortFromTheBest);
-    }
+    useEffect(() => {
+        searchRoutesByImage && setRoutesToSort(searchRoutesByImage);
+    }, [searchRoutesByImage, localRoutes]);
+
+    useEffect(() => {
+        getLocation(handleLocationSuccess, handleLocationFail);
+    }, []);
+
+    const toggleClick = () => setSortFromTheBest(!isSortFromTheBest);
+
+    const handleLocationSuccess: TLocationSuccess = (pos) => {
+        setUserLocation({lat: pos.coords.latitude, lon: pos.coords.longitude});
+    };
+
+    const handleLocationFail: TLocationFail = (err) => {
+        console.error(sortErrorMessage, err);
+    };
 
     const sortSpots = (isSortFromTheBest: boolean) => {
-        const sortRoutes = [...localRoutes].sort((a, b) => {
+        const newRoutes = [...routesToSort].sort((a, b) => {
             if (isSortFromTheBest) {
                 return b.rating - a.rating;
             } else {
                 return a.rating - b.rating;
             }
         });
-        dispatch(handleSpots(sortRoutes));
+        routesToSort === localRoutes
+            ? dispatch(handleSpots(newRoutes))
+            : dispatch(setNewRoutes(newRoutes));
     }
 
-
-    const sortSpotsByDistance = (isSortFromDistance:boolean, userLocation:  TPoints) => {
+    const sortSpotsByDistance = (isSortFromDistance:boolean, userLocation: TPoints) => {
         setSortFromDistance(!isSortFromDistance)
-        const sortRoutes = [...localRoutes].sort((a, b) => {
+        const newRoutes = [...routesToSort].sort((a, b) => {
             if (isSortFromDistance) {
                 const distanceA = calculateDistance(userLocation, {lat: a.latitude, lon: a.longitude});
                 const distanceB = calculateDistance(userLocation, {lat: b.latitude, lon: b.longitude});
@@ -74,20 +95,10 @@ export const Sorting = memo(() => {
                 return distanceB - distanceA;
             }
         });
-        dispatch(handleSpots(sortRoutes));
+        routesToSort === localRoutes
+            ? dispatch(handleSpots(newRoutes))
+            : dispatch(setNewRoutes(newRoutes));
     }
-
-    const handleLocationSuccess: TLocationSuccess = (pos) => {
-        setUserLocation({lat: pos.coords.latitude, lon: pos.coords.longitude});
-    };
-
-    const handleLocationFail: TLocationFail = (err) => {
-        console.error("Ошибка получения местоположения:", err);
-    };
-
-    useEffect(() => {
-        getLocation(handleLocationSuccess, handleLocationFail);
-    }, []);
 
     return (
         <div className={s.sort}>

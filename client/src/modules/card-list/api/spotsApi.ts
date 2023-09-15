@@ -15,7 +15,6 @@ export async function getSpots(dispatch: Dispatch) {
             isFavorite: false,
         }));
         dispatch(handleSpots(spotsWithFavoriteInfo));
-        console.log(spotsList)
     } catch (e) {
         e.response
             ? dispatch(setError(e.response.data.error))

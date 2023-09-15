@@ -21,10 +21,6 @@ export const ImageSearchPopup = ({closePopup}: TImageSearchPopupProps) => {
     const error = useAppSelector(isError);
     const file = useAppSelector(userFile);
 
-    useEffect(() => {
-        console.log(file)
-    }, [file, dispatch])
-
     const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         files && files.length > 0 && dispatch(setFile(files[0]));
@@ -45,11 +41,7 @@ export const ImageSearchPopup = ({closePopup}: TImageSearchPopupProps) => {
         )
     }
 
-    const startImgSearch = (
-        dispatch: Dispatch,
-        file: File | null,
-        closePopup: () => void,
-    ) => {
+    const startImgSearch = (dispatch: Dispatch, file: File | null, closePopup: () => void) => {
         file && sendImage(dispatch, file, closePopup);
     }
 
@@ -78,9 +70,9 @@ export const ImageSearchPopup = ({closePopup}: TImageSearchPopupProps) => {
                         action={handleClick}
                         disabled={loader}
                         extraClass={classNames(`button, ${s.imagePopup__button_green}`)}
-                    >
-                        {imgSearch.btnSearch}
-                    </Button>
+                        >
+                            {imgSearch.btnSearch}
+                        </Button>
                     : uploadImageInput()}
                 <Button action={closePopup} extraClass={"button"} disabled={loader}>
                     {imgSearch.btnCancel}
