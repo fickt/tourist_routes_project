@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Events\UserCompletedQuestionnaireEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -57,7 +56,7 @@ class RouteQuestionnaire extends Model
         })->get();
 
         $user = auth()->user();
-        UserCompletedQuestionnaireEvent::dispatch($user->id);
+        UserCompletedQuestionnaireEvent::dispatch();
         foreach ($recommendedRoutes as $route) {
             $user->recommendations()->attach($route);
         }
