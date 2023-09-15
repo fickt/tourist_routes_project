@@ -6,8 +6,9 @@ import {RoutePath} from "pages/routeConfig";
 import {Link} from "react-router-dom";
 import classNames from "classnames";
 import {apiQuestions} from "modules/questions/api/QuestionsServise";
-import {handleAuthError, handleAuthLoader} from "modules/auth-form/store/authActions";
-import {questionsValues} from "modules/questions/constants/questionsValues";
+import {setError, setLoader} from "components/loader-error";
+import {questionsValues, errorMessage} from "modules/questions/constants/constants";
+import Cookies from "js-cookie";
 
 export const QuestionsButtons = ({title, answers, isSave}: TQuestionsButtonProps) => {
 
@@ -16,14 +17,15 @@ export const QuestionsButtons = ({title, answers, isSave}: TQuestionsButtonProps
     const startPassQuestions = () => dispatch(handleStartPassQuestions(true));
 
     const sendAnswers = () => {
-        dispatch(handleAuthLoader(true))
+        dispatch(setLoader(true));
         if (answers && answers.length > 0) {
             apiQuestions.sendAnswer(answers)
-                .then(response => {
-                    console.log("Успешный ответ:", response);
+                .then(() => {
+                    Cookies.set("isPass", "false");
+                    dispatch(handleStartPassQuestions(true));
                 })
                 .catch(() => {
-                    dispatch(handleAuthError("Ошибка отправки ответов на сервер"))
+                    dispatch(setError(errorMessage.buttons));
                 });
         }
     }

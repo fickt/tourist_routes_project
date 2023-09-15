@@ -18,7 +18,6 @@ export const Logo = () => {
     const handleClick = (e: SyntheticEvent<HTMLAnchorElement>) => {
         location.pathname === "/" && e.preventDefault();
     };
-    console.log(location.pathname)
     const shouldRenderBackIcon = () => {
         return location.pathname !== "/" &&
             location.pathname !== "/profile" &&
@@ -38,6 +37,8 @@ export const Logo = () => {
             return "Личный кабинет";
         case "/favorites":
             return "Избранное";
+        case "/filters":
+            return "Фильтр";
         case "/location":
             return "Ближайшие места";
         case "/settings":

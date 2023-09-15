@@ -1,9 +1,9 @@
-import keras.models
 from sklearn.metrics.pairwise import cosine_similarity
 from keras.models import Model
+from keras.applications import vgg19
 
+vgg19 = vgg19.VGG19(weights = 'imagenet')
 
-model = keras.models.load_model('feature_extractor.keras')
 
 class PlaceRecommender:
     """
@@ -13,13 +13,13 @@ class PlaceRecommender:
         """
             description_df: Series of places descriptions
         """
-        self.feat_extractor = Model(inputs = model.input, outputs = model.get_layer("dense_1").output)
+        self.feature_vgg = Model(inputs = vgg19.input, outputs = vgg19.get_layer("fc2").output)
 
     def recommend_on_image(self, image, embeddings):
-        features = self.feat_extractor(image)
+        features = self.feature_vgg(image)
         to_recommend = []
         for embedding in embeddings:
-            to_recommend.append(cosine_similarity(features, eval(embedding)))
+            to_recommend.append(cosine_similarity(features, [eval(embedding)]))
 
         to_recommend = sorted(list(enumerate(to_recommend)), reverse = True, key = lambda x: x[1])[0:5]
         to_recommend = [place[0] for place in to_recommend]

@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\SuccessfulResetPasswordEvent;
 use App\Models\VerificationCode;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class DeleteUsedVerificationCodeListener
 {

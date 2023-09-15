@@ -1,21 +1,5 @@
 import {TUser} from "./types/authTypes";
-import {
-    AUTH_ERROR,
-    AUTH_LOADER_ACTIVE,
-    SET_USER,
-    IS_USER_REG,
-    IS_USER_AUTH
-} from "./authActionsTypeNames";
-
-export const handleAuthError = (payload: string | null) => ({
-    type: AUTH_ERROR,
-    payload: payload,
-});
-
-export const handleAuthLoader = (payload: boolean) => ({
-    type: AUTH_LOADER_ACTIVE,
-    payload: payload,
-});
+import {SET_USER, IS_USER_REG, IS_USER_AUTH} from "./authActionsTypeNames";
 
 export const handleSetUser = (payload: TUser | null) => ({
     type: SET_USER,

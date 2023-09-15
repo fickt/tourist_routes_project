@@ -4,24 +4,25 @@ import {useAppDispatch, useAppSelector} from "storage/hookTypes";
 import {userFavoritesSpots} from "modules/favorites/store/favoriteSelector";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
-import {authError, authLoader} from "modules/auth-form/store/authSelectors";
 import s from "./styles.module.scss";
 import {getFavSpots} from "modules/favorites";
 import {favMessage} from "modules/favorites/constants/constants";
+import {isError, isLoader} from "components/loader-error";
 
 export const FavoritesPage = () => {
 
     const dispatch = useAppDispatch();
     const favSpots = useAppSelector(userFavoritesSpots);
-    const loader = useAppSelector(authLoader);
-    const error = useAppSelector(authError);
+    const loader = useAppSelector(isLoader);
+    const error = useAppSelector(isError);
 
     useEffect(() => {
-        const fetchData = async () => {
-            !favSpots && await getFavSpots(dispatch);
-        }
         fetchData();
     }, [favSpots, dispatch]);
+
+    const fetchData = async () => {
+        !favSpots && await getFavSpots(dispatch);
+    }
 
     const cardList = favSpots !== null && favSpots.length > 0 && (
         <CardList favPage activeFavMark spots={favSpots}/>

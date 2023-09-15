@@ -9,6 +9,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * App\Models\RouteQuestionnairePhoto
+ *
+ * == Properties ==
+ * @property int $id
+ * @property string $photo
+ * @property int $questionnaire_id
+ * @property int $category_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ *
+ * == Relations ==
+ * @property-read \App\Models\RouteCategory|null $category
+ * @mixin \Eloquent
+ */
 class RouteQuestionnairePhoto extends Model
 {
     use HasFactory;

@@ -13,10 +13,15 @@ import {toggleReviewPopup} from "ui/popup/store/popupActions";
 import {useAppSelector} from "storage/hookTypes";
 import {reviewPopupState} from "ui/popup/store/popupSelector";
 import {Popup} from "ui/popup/Popup";
+import {authUser} from "modules/auth-form";
+import {RoutePath} from "pages/routeConfig";
+import {useNavigate} from "react-router-dom";
 
 export const SpotItem = ({spotItem}: TSpotItemProps) => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const user = useAppSelector(authUser);
     const reviewPopup = useAppSelector(reviewPopupState);
     const {name, rating, description, id, photos, categories, difficulty, comments} = spotItem;
 
@@ -25,7 +30,9 @@ export const SpotItem = ({spotItem}: TSpotItemProps) => {
     }, [id]);
 
     const closeReviewPopup = () => dispatch(toggleReviewPopup(false));
-    const openReviewPopup = () => dispatch(toggleReviewPopup(true));
+    const openReviewPopup = () => user
+        ? dispatch(toggleReviewPopup(true))
+        : navigate(RoutePath.auth_login);
 
     return (
         <div className={s.wrapper}>

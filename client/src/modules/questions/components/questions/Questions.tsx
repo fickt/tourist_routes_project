@@ -1,8 +1,8 @@
 import s from "./styles.module.scss";
-import { QuestionsPreview } from "modules/questions/components/questions-preview/QuestionsPreview";
-import { QuestionCard } from "modules/questions/components/question-card/QuestionCard";
-import { useAppSelector } from "storage/hookTypes";
-import { isStartQuestions } from "modules/questions/store/questionsSelectors";
+import {QuestionsPreview} from "modules/questions/components/questions-preview/QuestionsPreview";
+import {QuestionCard} from "modules/questions/components/question-card/QuestionCard";
+import {useAppSelector} from "storage/hookTypes";
+import {isStartQuestions} from "modules/questions/store/questionsSelectors";
 
 export const Questions = () => {
 
@@ -11,10 +11,7 @@ export const Questions = () => {
     return (
         <div className={s.questionsForm}>
             <h2 className={s.questionsForm__title}>Анкета</h2>
-            {isStartPassQuestions
-                ? <QuestionCard />
-                : <QuestionsPreview />
-            }
+            {isStartPassQuestions ? <QuestionCard/> : <QuestionsPreview/>}
         </div>
     )
 }

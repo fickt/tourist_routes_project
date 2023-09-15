@@ -1,12 +1,13 @@
-import {handleAuthError, handleAuthLoader} from "modules/auth-form/store/authActions";
 import {AxiosResponse} from "axios";
 import {TLocalRoute} from "utils/localRoutes";
 import {handleSpots} from "modules/card-list/store/spotsActions";
 import {apiSpots} from "modules/card-list/api/spotsService";
 import {Dispatch} from "redux";
+import {setError, setLoader} from "components/loader-error";
+import {errorMessage} from "modules/card-list/constants/constants";
 
 export async function getSpots(dispatch: Dispatch) {
-    dispatch(handleAuthLoader(true));
+    dispatch(setLoader(true));
     try {
         const spotsList: AxiosResponse<TLocalRoute[]> = await apiSpots.fetchSpots();
         const spotsWithFavoriteInfo = spotsList.data.map((spot: TLocalRoute) => ({
@@ -14,11 +15,12 @@ export async function getSpots(dispatch: Dispatch) {
             isFavorite: false,
         }));
         dispatch(handleSpots(spotsWithFavoriteInfo));
+        console.log(spotsList)
     } catch (e) {
         e.response
-            ? dispatch(handleAuthError(e.response.data.error))
-            : dispatch(handleAuthError("Упс... Возникли проблемы с загрузкой мест:("));
+            ? dispatch(setError(e.response.data.error))
+            : dispatch(setError(errorMessage));
     } finally {
-        dispatch(handleAuthLoader(false));
+        dispatch(setLoader(false));
     }
 }

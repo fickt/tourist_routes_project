@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * App\Models\Route
  *
+ * == Properties ==
  * @property int $id
  * @property string $name
  * @property string $description
@@ -26,12 +27,16 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  * @property float $latitude
  * @property float $distance_from_nearest_city
  * @property float $rating
+ * @property string|null $embedding
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
+ * == Relations ==
  * @property-read Collection<int, \App\Models\RouteCategory> $categories
  * @property-read Collection<int, \App\Models\RouteComment> $comments
  * @property-read \App\Models\RouteDifficulty $difficulty
  * @property-read Collection<int, \App\Models\RoutePhoto> $photoPaths
+ * @property-read Collection<int, \App\Models\RouteTargetAudience> $targetAudiences
  * @mixin \Eloquent
  */
 class Route extends Model

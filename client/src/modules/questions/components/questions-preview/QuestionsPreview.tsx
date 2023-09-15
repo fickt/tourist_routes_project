@@ -1,7 +1,7 @@
 import s from "./styles.module.scss";
 import {QuestionsButtons} from "modules/questions/components/questions-buttons/QuestionsButtons";
-import QuestionnaireIcon from "./assets/questionnaire.svg"
-import {questionPreviewText, questionsValues} from "modules/questions/constants/questionsValues";
+import QuestionnaireIcon from "./assets/questionnaire.svg";
+import {questionsValues, questionPreviewText} from "modules/questions/constants/constants";
 
 export const QuestionsPreview = () => {
 

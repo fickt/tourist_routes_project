@@ -4,9 +4,10 @@ import {favoriteService} from "modules/favorites/api/favoriteService";
 import {TFavoriteElemProps} from "./types";
 import {FavoriteMarker} from "modules/favorites/components/favorite-marker/FavoriteMarker";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
-import {handleAuthError} from "modules/auth-form/store/authActions";
 import {userFavoritesSpots} from "modules/favorites/store/favoriteSelector";
 import {setFavoriteSpots} from "modules/favorites/store/favoriteActions";
+import {setError} from "components/loader-error";
+import {errorFavMessage} from "modules/favorites/constants/constants";
 
 export const FavoriteElem = memo(({activeFavMark, spot}: TFavoriteElemProps) => {
 
@@ -15,13 +16,12 @@ export const FavoriteElem = memo(({activeFavMark, spot}: TFavoriteElemProps) => 
     const iconStyle = activeFavMark ? s.icon_active : "";
 
     const addToFav = async () => {
-        const isAlreadyFavorite = favSpots && favSpots.some((favSpot) => favSpot.id === spot.id);
-        if (favSpots && !isAlreadyFavorite) {
+        if (favSpots) {
             try {
-                const response = await favoriteService.addToFavorites(spot.id);
+                const response = await favoriteService.addOrRemoveToFavorites(spot.id);
                 dispatch(setFavoriteSpots(response.data));
             } catch (error) {
-                dispatch(handleAuthError("Место уже в избранном!"));
+                dispatch(setError(errorFavMessage));
             }
         }
     }
