@@ -20,13 +20,21 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * App\Models\User
  *
  * @mixin Builder
+ *
+ * == Properties ==
  * @property int $id
  * @property string $email
  * @property string|null $nickname
  * @property string $password
+ * @property bool $is_questionnaire_completed
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
+ *
+ * == Relations ==
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Route> $favoriteRoutes
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Route> $completedRoutes
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Route> $recommendations
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements JWTSubject
@@ -42,6 +50,7 @@ class User extends Authenticatable implements JWTSubject
         'nickname',
         'email',
         'password',
+        'is_questionnaire_completed'
     ];
 
     /**

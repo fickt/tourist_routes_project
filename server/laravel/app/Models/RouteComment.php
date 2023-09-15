@@ -16,6 +16,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  * App\Models\RouteComment
  *
  * @mixin Builder
+ *
+ * == Properties ==
  * @property int $id
  * @property string $content
  * @property int $route_id
@@ -23,6 +25,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  * @property float $rating
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
+ * == Relations ==
  * @property-read \App\Models\User $user
  * @mixin \Eloquent
  */
