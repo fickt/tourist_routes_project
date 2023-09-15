@@ -8,6 +8,7 @@ export const CardListBody = memo(({activeFavMark, spots}: CardListBodyProps) => 
 
     return (
         <div className={s.cards}>
+            {!spots.length && <span className={s.not__found}>Ничего не найдено!!!</span>}
             {spots?.map((spot: TLocalRoute) =>
                 <LocalCard key={spot.id} spot={spot} activeFavMark={activeFavMark}/>)}
         </div>

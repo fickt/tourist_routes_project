@@ -13,4 +13,8 @@
     font-weight: 400;
     line-height: 20px;
   }
+
+  .tag:first-letter {
+    text-transform: uppercase;
+  }
 }

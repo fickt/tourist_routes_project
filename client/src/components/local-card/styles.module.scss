@@ -49,11 +49,12 @@
 		column-gap: 12px;
 	}
 
+	&__tag:first-letter {
+		text-transform: uppercase;
+	}
+
 	&__tag {
-		display: flex;
 		padding: 4px 16px;
-		justify-content: center;
-		align-items: center;
 		color: var(--color-black);
 		border-radius: 20px;
 		background: var(--background-04);
@@ -61,7 +62,6 @@
 		font-size: 12px;
 		font-weight: 400;
 		line-height: 20px;
-		text-transform: capitalize;
 	}
 
 	&__difficulty__eazy {
@@ -138,6 +138,7 @@
 			color: var(--text-01);
 			font-size: 20px;
 			font-weight: 600;
+			height: 70px;
 		}
 
 		&__comments {
