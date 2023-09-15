@@ -53,7 +53,7 @@ export const QuestionCard = () => {
             </p>
             {!loader ? (
                 <>
-                    <img className={s.questionCard__image} src={questions[questionIndex]} alt="Question Image"/>
+                    <img className={s.questionCard__image} src={questions[questionIndex]?.photo_url} alt="Question Image"/>
                     {!error && questionIndex !== questions.length ? (
                         <div className={s.questionCard__btns}>
                             <DislikeIcon
