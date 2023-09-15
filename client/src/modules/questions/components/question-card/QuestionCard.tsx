@@ -8,14 +8,12 @@ import {TAnswers} from "modules/questions/api/type";
 import {Typography} from "antd";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "storage/hookTypes";
-import {PreloaderCar} from "ui/preloader/PreloaderCar";
-import {isError, isLoader, setError, setLoader} from "components/loader-error";
+import {isLoader, setError, setLoader} from "components/loader-error";
 import {questionsValues, questionCardText, errorMessage} from "modules/questions/constants/constants";
 
 export const QuestionCard = () => {
 
     const error = useAppSelector(isLoader);
-    const loader = useAppSelector(isError);
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState<TAnswers[]>([]);
     const [questionIndex, setQuestionIndex] = useState(0);
@@ -51,33 +49,29 @@ export const QuestionCard = () => {
             <p className={s.questionCard__text}>
                 {questionCardText}
             </p>
-            {!loader ? (
-                <>
-                    <img className={s.questionCard__image} src={questions[questionIndex]?.photo_url} alt="Question Image"/>
-                    {!error && questionIndex !== questions.length ? (
-                        <div className={s.questionCard__btns}>
-                            <DislikeIcon
-                                onClick={() => handleAnswer(false)}
-                                className={s.questionCard__dislike}
-                            />
-                            <Text>или</Text>
-                            <LikeIcon
-                                onClick={() => handleAnswer(true)}
-                                className={s.questionCard__like}
-                            />
-                        </div>
-                    ) : (
-                        <p>{error}</p>
-                    )}
-                    <QuestionsButtons
-                        isSave={questionIndex === questions.length}
-                        answers={answers}
-                        title={questionsValues.ready}
-                    />
-                </>
-            ) : (
-                <PreloaderCar/>
-            )}
+            <>
+                <img className={s.questionCard__image} src={questions[questionIndex]?.photo_url} alt="Question Image"/>
+                {!error && questionIndex !== questions.length ? (
+                    <div className={s.questionCard__btns}>
+                        <DislikeIcon
+                            onClick={() => handleAnswer(false)}
+                            className={s.questionCard__dislike}
+                        />
+                        <Text>или</Text>
+                        <LikeIcon
+                            onClick={() => handleAnswer(true)}
+                            className={s.questionCard__like}
+                        />
+                    </div>
+                ) : (
+                    <p>{error}</p>
+                )}
+                <QuestionsButtons
+                    isSave={questionIndex === questions.length}
+                    answers={answers}
+                    title={questionsValues.ready}
+                />
+            </>
         </div>
     );
 };
