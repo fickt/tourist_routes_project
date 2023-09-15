@@ -20,6 +20,7 @@ class ChangeUserIsQuestionnaireCompletedFieldListener
      */
     public function handle(): void
     {
+        auth()->user()->is_questionnaire_completed ?:
         User::query()
             ->where('id', '=', auth()->user()->id)
             ->update([
