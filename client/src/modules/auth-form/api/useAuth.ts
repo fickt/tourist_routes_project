@@ -39,12 +39,14 @@ export const useAuth = () => {
                 id: response.data.user.id,
                 nickname: response.data.user.nickname,
                 email: response.data.user.email,
+                is_questionnaire_completed: response.data.user.is_questionnaire_completed
             }
             dispatch(handleSetUser(userData));
             // Сохранение значений в куках
             Cookies.set("token", response.data.access_token);
             Cookies.set("nickname", response.data.user.nickname);
             Cookies.set("email", response.data.user.email);
+            Cookies.set("is_questionnaire_completed", response.data.user.is_questionnaire_completed);
             if (isRegistration) {
                 Cookies.set("isPass", "true");
             }
