@@ -7,6 +7,7 @@ import {handleSpots} from "modules/card-list/store/spotsActions";
 import {TServerResponse} from "modules/auth-form/store/types/authTypes";
 import {FormInstance} from "antd";
 import {setError, setLoader} from "components/loader-error";
+import {setNewRoutes} from "modules/image-search-popup/store/imageSearchActions";
 
 export async function sendReview(
     dispatch: Dispatch,
@@ -17,13 +18,21 @@ export async function sendReview(
     setContent: (value: null) => void,
     setRating: (value: number) => void,
     closePopup: () => void,
+    searchRoutesByImage?: TLocalRoute[],
 ): Promise<void> {
     dispatch(setLoader(true));
     try {
-        const favSpot = await reviewService.sendReview(content, rating, spotId);
-        if (favSpot) {
+        const sendReview = await reviewService.sendReview(content, rating, spotId);
+        if (sendReview) {
             const spots: AxiosResponse<TLocalRoute[]> = await apiSpots.fetchSpots();
             spots.data && dispatch(handleSpots(spots.data));
+            if (searchRoutesByImage) {
+                const newRoutes = spots.data.filter((spot) =>
+                    searchRoutesByImage.some((searchByImageRoute) =>
+                        searchByImageRoute.id === spot.id)
+                );
+                dispatch(setNewRoutes(newRoutes));
+            }
         }
         form.resetFields();
         setContent(null);

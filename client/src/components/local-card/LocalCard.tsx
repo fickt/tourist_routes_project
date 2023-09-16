@@ -2,15 +2,18 @@ import {Link} from "react-router-dom";
 import s from "./styles.module.scss"
 import {TCardProps} from "./types";
 import {Rate} from "antd";
-import {FavoriteElem} from "modules/favorites/components/favorite-elem/FavoriteElem";
 import {Button} from "ui/button/Button";
 import {useAppSelector} from "storage/hookTypes";
-import {userFavoritesSpots} from "modules/favorites/store/favoriteSelector";
+import {userRoutesPass} from "modules/my-spots";
+import {FavoriteElem, userFavoritesSpots} from "modules/favorites";
+import {FilterTag, routePassText} from "modules/filters";
 
 export const LocalCard = ({spot}: TCardProps) => {
 
     const favSpots = useAppSelector(userFavoritesSpots);
-    const mark = favSpots?.some(fav => fav.id === spot.id);
+    const routesPass = useAppSelector(userRoutesPass);
+    const favMark = favSpots?.some(fav => fav.id === spot.id);
+    const passMark = routesPass?.some(pass => pass.id === spot.id);
 
     function getDeclension(number: number, one: string, two: string, five: string) {
         let n = Math.abs(number);
@@ -36,9 +39,8 @@ export const LocalCard = ({spot}: TCardProps) => {
 
     return (
         <div className={s.wrapper}>
-            <div className={s.favorite}>
-                <FavoriteElem activeFavMark={mark} spot={spot}/>
-            </div>
+            <div className={s.favorite}><FavoriteElem activeFavMark={favMark} spot={spot}/></div>
+            {passMark && <div className={s.routePass}><FilterTag passRoute text={routePassText}/></div>}
             <Link to={`/spots/${spot.id}`} className={s.card}>
                 <img className={s.card__img} src={spot.photos[0]} alt={spot.name}/>
                 <div className={s.card__main}>

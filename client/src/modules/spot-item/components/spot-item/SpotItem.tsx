@@ -16,6 +16,8 @@ import {Popup} from "ui/popup/Popup";
 import {authUser} from "modules/auth-form";
 import {RoutePath} from "pages/routeConfig";
 import {useNavigate} from "react-router-dom";
+import {userRoutesPass} from "modules/my-spots";
+import {FilterTag, routePassText} from "modules/filters";
 
 export const SpotItem = ({spotItem}: TSpotItemProps) => {
 
@@ -23,6 +25,8 @@ export const SpotItem = ({spotItem}: TSpotItemProps) => {
     const navigate = useNavigate();
     const user = useAppSelector(authUser);
     const reviewPopup = useAppSelector(reviewPopupState);
+    const routesPass = useAppSelector(userRoutesPass);
+    const passMark = routesPass?.some(pass => pass.id === spotItem.id);
     const {name, rating, description, id, photos, categories, difficulty, comments} = spotItem;
 
     useEffect(() => {
@@ -43,6 +47,7 @@ export const SpotItem = ({spotItem}: TSpotItemProps) => {
                 </>
             )}
             <section id="image" className={classNames(s.section, s.slider)}>
+                {passMark && <div className={s.routePass}><FilterTag passRoute text={routePassText}/></div>}
                 <Slider photos={photos} name={name}/>
                 <div className={s.tags}>
                     <TagList tagList={[difficulty]}/>

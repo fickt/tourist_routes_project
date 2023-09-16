@@ -13,6 +13,7 @@ import {sendReview} from "modules/review-block/api/reviewApi";
 import {buttonText, elemName, popupTitle, reviewForm} from "modules/review-block/components/constants/constants";
 import {RoutePath} from "pages/routeConfig";
 import {isError, isLoader, setError} from "components/loader-error";
+import {imageSearchRoutes} from "modules/image-search-popup";
 
 export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
 
@@ -20,6 +21,7 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
     const navigate = useNavigate();
     const loader = useAppSelector(isLoader);
     const error = useAppSelector(isError);
+    const searchRoutesByImage = useAppSelector(imageSearchRoutes)
     const [form] = Form.useForm();
     const {TextArea} = Input;
     const [content, setContent] = useState("");
@@ -32,7 +34,7 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
     const sendForm = () => {
         if (Cookies.get("token")) {
             const fetchData = async () => {
-                await sendReview(dispatch, content, rating, spotId, form, setContent, setRating, closePopup);
+                await sendReview(dispatch, content, rating, spotId, form, setContent, setRating, closePopup, searchRoutesByImage);
                 navigate(`/spots/${spotId}`);
             }
             fetchData();
