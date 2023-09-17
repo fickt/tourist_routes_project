@@ -21,3 +21,7 @@
         background: rgba(251, 251, 251, 0.80);
     }
 }
+
+.tags__item:first-letter {
+    text-transform: uppercase;
+}

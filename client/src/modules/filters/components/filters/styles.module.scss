@@ -28,3 +28,12 @@
     box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.20);
     margin: 0 -26px -24px -26px;
 }
+
+.button__drop{
+    width: 100%;
+    height: 41.6px;
+    border-radius: 10px;
+    border: 1px solid var(--background-01, #3E3E3E);
+    background: var(--background-02, #FBFBFB);
+
+}

@@ -73,7 +73,7 @@ export const Filters = () => {
                     </Button>
                 </Link>
                 <Link to={RoutePath.home} className="buttons__link">
-                    <Button extraClass={classNames("button", "button_white")} action={handleCancelFilters}>
+                    <Button extraClass={s.button__drop} action={handleCancelFilters}>
                         {buttonsActions.drop}
                     </Button>
                 </Link>
