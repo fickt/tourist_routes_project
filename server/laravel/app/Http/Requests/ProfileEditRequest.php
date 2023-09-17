@@ -3,9 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\ComparePasswords;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use phpseclib3\Crypt\Hash;
 
 class ProfileEditRequest extends FormRequest
 {

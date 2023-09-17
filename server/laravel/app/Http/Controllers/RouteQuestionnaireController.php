@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\QuestionnaireAnswersRequest;
 use App\Http\Resources\RouteQuestionnaireResource;
 use App\Http\Resources\RouteResource;
-use App\Models\Route;
 use App\Models\RouteQuestionnaire;
-use App\Models\User;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class RouteQuestionnaireController extends Controller

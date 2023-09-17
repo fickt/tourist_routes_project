@@ -3,7 +3,7 @@ services:
 
   #Frontend
   client:
-    restart: always
+    restart: unless-stopped
     container_name: client
     build:
       context: ./client
@@ -13,12 +13,15 @@ services:
     environment:
       - NODE_ENV=development
       - CI=true
-      - VIRTUAL_PORT=3001
-      - VIRTUAL_HOST=client.localhost
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.client.loadbalancer.server.port=3001
+      - traefik.http.routers.client.rule=Host(`client.localhost`)
+      - traefik.http.routers.client.entrypoints=web
 
   #Backend
   app:
-    restart: always
+    restart: unless-stopped
     container_name: app
     build:
       context: ./server/laravel
@@ -27,38 +30,52 @@ services:
       - ./server/laravel:/var/www
     depends_on:
       - db
-      - nginx-proxy
+      - traefik-proxy
     environment:
       - APP_LOG_FILE=${APP_LOG_FILE}
-      - VIRTUAL_PORT=56
-      - VIRTUAL_HOST=app.localhost
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.app.loadbalancer.server.port=56
+      - traefik.http.routers.app.rule=Host(`app.localhost`)
+      - traefik.http.routers.app.entrypoints=web
     env_file:
       - .env
 
   ml-service:
-    restart: always
+    restart: unless-stopped
     container_name: ml-service
     build:
       context: ./ml-service
       dockerfile: Dockerfile
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.ml-service.loadbalancer.server.port=9000
+      - traefik.http.routers.ml-service.rule=Host(`ml-service.localhost`)
+      - traefik.http.routers.ml-service.entrypoints=web
     volumes:
       - ./ml-service:/usr/src/app
     ports:
       - ${ML_SERVICE_HOST_PORT:-9000}:${ML_SERVICE_CONTAINER_PORT:-9000}
 
-  nginx-proxy:
-    restart: always
-    build:
-      context: ./server/nginx-proxy
-      dockerfile: Dockerfile
-    container_name: nginx-proxy
+  traefik-proxy:
+    image: "traefik:v2.10"
+    restart: unless-stopped
+    container_name: traefik-proxy
+    command:
+      - --log.level=DEBUG
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
     ports:
-      - ${NGINX_PROXY_HOST_PORT:-80}:${NGINX_PROXY_CONTAINER_PORT:-80}
+      - "80:80"
+      - "8080:8080"
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   db:
     image: postgres:15
+    restart: unless-stopped
     container_name: db
     ports:
       - ${DB_PORT:-5432}:${DB_PORT:-5432}
@@ -67,16 +84,3 @@ services:
       - POSTGRES_DB=${DB_DATABASE:-postgres}
       - POSTGRES_USER=${DB_USER:-root}
       - POSTGRES_PASSWORD=${DB_PASSWORD?}
-
- # rabbitmq:
-  #  image: rabbitmq:3-management-alpine
-  #  container_name: rabbitmq
-  #  ports:
-  #    - '5672:5672'
-  #    - '15672:15672'
-  #  networks:
-      #- rabbitmq_go_net
-
-#networks:
- # rabbitmq_go_net:
-  #  driver: bridge
