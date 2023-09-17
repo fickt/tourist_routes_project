@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Jobs\TestJob;
 use Illuminate\Console\Command;
-use PHPUnit\Util\Test;
 
 class FireEvent extends Command
 {
