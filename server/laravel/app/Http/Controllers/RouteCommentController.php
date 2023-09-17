@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RouteCommentRequest;
 use App\Http\Resources\RouteResource;
-use App\Models\Route;
 use App\Models\RouteComment;
-use Exception;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RouteCommentController extends Controller
 {
