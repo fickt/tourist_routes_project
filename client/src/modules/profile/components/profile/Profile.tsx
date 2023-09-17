@@ -11,7 +11,6 @@ import classNames from "classnames";
 import {TLocalRoute} from "utils/localRoutes";
 import {apiQuestions} from "modules/questions/api/QuestionsServise";
 import {useDispatch} from "react-redux";
-import {handleStartPassQuestions} from "modules/questions/store/questionsActions";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {errorProfile, profileValues} from "modules/profile/constants/profileValues";
 import {CardListBody} from "modules/card-list";
@@ -23,7 +22,6 @@ import {setFavoriteSpots} from "modules/favorites/store/favoriteActions";
 import {isError, isLoader, setError, setLoader} from "components/loader-error";
 
 export const Profile = () => {
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isStart = useAppSelector(isStartQuestions);
@@ -32,11 +30,6 @@ export const Profile = () => {
     const [questArray, setQuestArray] = useState<TLocalRoute[]>([]);
 
     useEffect(() => {
-        if (Cookies.get("isPass") === "true") {
-            dispatch(handleStartPassQuestions(false))
-        } else {
-            dispatch(handleStartPassQuestions(true))
-        }
         apiQuestions.fetchRecomendations()
             .then(data => {
                 dispatch(setLoader(false));

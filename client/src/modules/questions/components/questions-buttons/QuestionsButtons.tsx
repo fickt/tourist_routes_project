@@ -21,8 +21,7 @@ export const QuestionsButtons = ({title, answers, isSave}: TQuestionsButtonProps
         if (answers && answers.length > 0) {
             apiQuestions.sendAnswer(answers)
                 .then(() => {
-                    Cookies.set("isPass", "false");
-                    dispatch(handleStartPassQuestions(true));
+                    Cookies.set("is_questionnaire_completed", "true");
                 })
                 .catch(() => {
                     dispatch(setError(errorMessage.buttons));

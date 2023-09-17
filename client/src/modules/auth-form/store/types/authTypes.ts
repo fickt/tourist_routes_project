@@ -26,6 +26,7 @@ export type TUser = {
     created_at?: Date,
     updated_at?: Date,
     token?: string,
+    is_questionnaire_completed?: boolean
 }
 
 export type TAuthAction =

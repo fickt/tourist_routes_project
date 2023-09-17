@@ -14,11 +14,14 @@ export async function sendImage(
     dispatch(setLoader(true));
     try {
         const response: AxiosResponse<TLocalRoute[]> = await imageSearchService.sendImageSearch(formData);
-        response && dispatch(setNewRoutes(response.data));
+        if (response) {
+            response.data.sort((a, b) => b.rating - a.rating);
+            dispatch(setNewRoutes(response.data));
+        }
         closePopup();
     } catch (e) {
         e.response && dispatch(setError(e.response.data.error));
-        setFile(null);
+        dispatch(setFile(null));
     } finally {
         dispatch(setLoader(false));
     }

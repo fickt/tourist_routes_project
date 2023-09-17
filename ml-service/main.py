@@ -31,7 +31,7 @@ except Exception as ex:
     print(ex)
 
 place_recommender = PlaceRecommender()
-landscape_clf = keras.models.load_model('clfv2.keras')
+landscape_clf = keras.models.load_model('clfv5.keras')
 
 class File(BaseModel):
     file: str
