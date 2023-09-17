@@ -7,67 +7,45 @@ use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Resources\AuthUserResource;
+use App\Http\Resources\LogoutResource;
 use App\Http\Resources\ResetPasswordResource;
 use App\Http\Resources\VerificationCodeResource;
-use App\Http\Resources\LogoutResource;
-use App\Mail\ResetPasswordMail;
-use App\Models\User;
-use App\Models\VerificationCode;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Mail;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use App\Services\AuthService;
 
 class AuthController extends Controller
 {
 
-    public function __construct(protected VerificationCode $verificationCode,
-                                protected User             $user)
+    public function __construct(protected AuthService $service)
     {
     }
 
     public function register(UserRegisterRequest $request): AuthUserResource
     {
-        User::query()->create($request->validated());
-        if (!$token = auth()->attempt($request->only(['email', 'password']))) {
-            throw new HttpException(Response::HTTP_UNAUTHORIZED, 'Аутентификация не выполнена!');
-        }
-
-        return new AuthUserResource($token);
+        return AuthUserResource::make($this->service->register($request));
     }
 
     public function login(UserLoginRequest $request): AuthUserResource
     {
-        if (!$token = auth()->attempt($request->validated())) {
-            throw new HttpException(Response::HTTP_BAD_REQUEST, 'Неправильный логин или пароль!');
-        }
-
-        return new AuthUserResource($token);
+        return AuthUserResource::make($this->service->login($request));
     }
 
     public function logout(): LogoutResource
     {
-        $user = auth()->user();
-        auth()->logout();
-
-        return new LogoutResource($user);
+        return LogoutResource::make($this->service->logout());
     }
 
     public function refresh(): AuthUserResource
     {
-        $token = auth()->refresh();
-        return new AuthUserResource($token);
+        return AuthUserResource::make($this->service->refresh());
     }
 
     public function sendVerificationCode(ForgotPasswordRequest $request): VerificationCodeResource
     {
-        return new VerificationCodeResource(
-            $this->verificationCode->sendVerificationCodeToEmail($request->input('email'))
-        );
+        return VerificationCodeResource::make($this->service->sendVerificationCode($request));
     }
 
     public function resetPassword(ResetPasswordRequest $request): ResetPasswordResource
     {
-        $this->user->resetPassword($request);
-        return new ResetPasswordResource($request->input('email'));
+        return ResetPasswordResource::make($this->service->resetPassword($request));
     }
 }
