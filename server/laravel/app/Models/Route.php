@@ -104,8 +104,8 @@ class Route extends Model
 
         if ($search = Request::query('search')) {
             $query
-                ->where('name', 'LIKE', "%$search%")
-                ->orWhere('description', 'LIKE', "%$search%");
+                ->where('name', 'ILIKE', "%$search%")
+                ->orWhere('description', 'ILIKE', "%$search%");
         }
         return $query->get();
     }
