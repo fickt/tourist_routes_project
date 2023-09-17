@@ -2,8 +2,8 @@
 
 namespace App\Clients;
 
-use App\Enums\RouteRelationEnum;
 use App\Models\Route;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,11 +23,11 @@ class MlServiceClient
             $response = Http::post(self::URL_ML_SERVICE, [
                 'file' => base64_encode(file_get_contents($image))
             ])->json();
-        } catch (\Exception) {
+        } catch (Exception) {
             throw new HttpException(Response::HTTP_SERVICE_UNAVAILABLE, 'ML сервис недоступен, отправьте запрос позже');
         }
 
-        return $response
+        return $response && $response->status() < 400
          ? $this->route->getRoutesByIds($response)
          : throw new HttpException(Response::HTTP_NOT_FOUND, 'Маршрут по изображению не найден');
     }
