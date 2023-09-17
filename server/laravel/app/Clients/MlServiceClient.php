@@ -27,7 +27,7 @@ class MlServiceClient
             throw new HttpException(Response::HTTP_SERVICE_UNAVAILABLE, 'ML сервис недоступен, отправьте запрос позже');
         }
 
-        return $response && $response->status() < 400
+        return $response && $response->status() < Response::HTTP_BAD_REQUEST
          ? $this->route->getRoutesByIds($response)
          : throw new HttpException(Response::HTTP_NOT_FOUND, 'Маршрут по изображению не найден');
     }
