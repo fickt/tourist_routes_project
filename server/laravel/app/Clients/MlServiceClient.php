@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class MlServiceClient
 {
-    private const URL_ML_SERVICE = 'http://ml-service:9000/recommend-on-image';
+    private const URL_ML_SERVICE = 'http://ml-service.localhost/recommend-on-image';
 
     public function __construct(protected Route $route)
     {
