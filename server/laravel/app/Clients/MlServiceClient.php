@@ -23,8 +23,8 @@ class MlServiceClient
         try {
             $response = Http::post(self::URL_ML_SERVICE, [ //ВОТ ТУТ ТА САМАЯ ОШИБКА ВЫЛЕТАЕТ (если закомментить try/catch)
                 'file' => base64_encode(file_get_contents($image))
-            ]);
-            var_dump($response->json());
+            ])->json();
+//            var_dump($response->json());
         } catch (Exception) {
             throw new HttpException(Response::HTTP_SERVICE_UNAVAILABLE, 'ML сервис недоступен, отправьте запрос позже');
         }
