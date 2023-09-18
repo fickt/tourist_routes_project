@@ -19,15 +19,17 @@ class MlServiceClient
 
     public function findRouteByImage($image): Collection|array
     {
+       // echo print_r(['file' => base64_encode(file_get_contents($image))]);
         try {
-            $response = Http::post(self::URL_ML_SERVICE, [
+            $response = Http::post(self::URL_ML_SERVICE, [ //ВОТ ТУТ ТА САМАЯ ОШИБКА ВЫЛЕТАЕТ (если закомментить try/catch)
                 'file' => base64_encode(file_get_contents($image))
-            ])->json();
+            ]);
+            var_dump($response->json());
         } catch (Exception) {
             throw new HttpException(Response::HTTP_SERVICE_UNAVAILABLE, 'ML сервис недоступен, отправьте запрос позже');
         }
-        print_r($response);
-        return $response //&& $response->status() < Response::HTTP_BAD_REQUEST
+
+        return $response
          ? $this->route->getRoutesByIds($response)
          : throw new HttpException(Response::HTTP_NOT_FOUND, 'Маршрут по изображению не найден');
     }
