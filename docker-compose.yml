@@ -31,6 +31,7 @@ services:
     depends_on:
       - db
       - traefik-proxy
+      - ml-service
     environment:
       - APP_LOG_FILE=${APP_LOG_FILE}
     labels:
@@ -47,11 +48,11 @@ services:
     build:
       context: ./ml-service
       dockerfile: Dockerfile
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.ml-service.loadbalancer.server.port=9000
-      - traefik.http.routers.ml-service.rule=Host(`ml-service.localhost`)
-      - traefik.http.routers.ml-service.entrypoints=web
+  #  labels:
+    #  - traefik.enable=true
+     # - traefik.http.services.ml-service.loadbalancer.server.port=9000
+     # - traefik.http.routers.ml-service.rule=Host(`ml-service.localhost`)
+   #   - traefik.http.routers.ml-service.entrypoints=web
     volumes:
       - ./ml-service:/usr/src/app
     ports:
