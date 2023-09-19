@@ -84,22 +84,28 @@ export const MobileHeader = () => {
                     ) : !isSpot ? (
                         menuLinks.map((link, index) => (
                             <Link
+                                className={s.menu__link_wrapper}
                                 key={index}
                                 to={link.path}
                                 onClick={(e) => handleClick(e, link.path)}
                             >
-                                <span className={classNames(s.menu__icon, {[s.menu__icon_filled]: pathname === link.path,})}>
+                                <span
+                                    className={classNames(s.menu__icon, {[s.menu__icon_filled]: pathname === link.path,})}>
                                     {link.icon}
                                 </span>
+                                <span className={classNames(s.menu__name, {[s.menu__name_filled]: pathname === link.path,})}>
+                                    {link.text}
+                                </span>
                             </Link>))
-                        ) : (<>
-                                {favoriteSpot && <FavoriteElem spot={favoriteSpot} activeFavMark />}
-                                {chosenSpot && <FavoriteElem spot={chosenSpot} />}
-                                <Link className={classNames("buttons__link", s.buttons__link_elem)} to={`/spotMap/:${spotId}`}>
-                                    <Button extraClass="button_green" type="primary">Построить маршрут</Button>
-                                </Link>
-                            </>
-                        )}
+                    ) : (<>
+                        {favoriteSpot && <FavoriteElem spot={favoriteSpot} activeFavMark/>}
+                        {chosenSpot && <FavoriteElem spot={chosenSpot}/>}
+                        <Link className={classNames("buttons__link", s.buttons__link_elem)}
+                            to={`/spotMap/:${spotId}`}>
+                            <Button extraClass="button_green" type="primary">Построить маршрут</Button>
+                        </Link>
+                    </>
+                    )}
                 </div>
             </nav>
         </div>
