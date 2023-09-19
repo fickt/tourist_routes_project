@@ -1,7 +1,6 @@
 import React, {SyntheticEvent, useEffect, useState} from "react";
 import s from "./styles.module.scss";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import {menuLinks} from "./constants/menuLinks";
 import classNames from "classnames";
 import {Button} from "ui/button/Button";
 import {useAppSelector} from "storage/hookTypes";
@@ -15,13 +14,13 @@ import {userRoutesPass} from "modules/my-spots/store/routesPassSelector";
 import Cookies from "js-cookie";
 import {RoutePath} from "pages/routeConfig";
 import {isLoader} from "components/loader-error";
+import {buttonText, menuLinks, spotMap} from "modules/mobile-header/constants/menuLinks";
 
 const preventNavigation = (currentPath: string, targetPath: string) => {
     return currentPath === targetPath;
 };
 
 export const MobileHeader = () => {
-
     const dispatch = useDispatch();
     const location = useLocation();
     const {pathname} = location;
@@ -31,10 +30,10 @@ export const MobileHeader = () => {
     const spotRoutes = useAppSelector(spotsSelector);
     const favSpots = useAppSelector(userFavoritesSpots);
     const routesPass = useAppSelector(userRoutesPass);
-    const isSpot = location.pathname.includes("/spots/");
-    const isSpotMap = location.pathname.includes("/spotMap/");
+    const isSpot = location.pathname.includes(`${RoutePath.spots}`);
+    const isSpotMap = location.pathname.includes(spotMap);
     const chosenSpot = spotRoutes?.find((spot: TLocalRoute) => spot.id === spotIdAsNumber);
-    const favoriteSpot = favSpots?.find((favSpot: TLocalRoute) => favSpot === chosenSpot);
+    const favoriteSpot = favSpots?.find((favSpot: TLocalRoute) => favSpot.id === spotIdAsNumber);
     const [isAlreadyPass, setAlreadyPass] = useState(false);
     const token = Cookies.get("token");
 
@@ -78,7 +77,7 @@ export const MobileHeader = () => {
                                 action={setSpotPass}
                                 disabled={loader || isAlreadyPass || !token}
                             >
-                                Маршрут пройден
+                                {buttonText.passRoute}
                             </Button>
                         </div>
                     ) : !isSpot ? (
@@ -93,10 +92,9 @@ export const MobileHeader = () => {
                                 </span>
                             </Link>))
                         ) : (<>
-                                {favoriteSpot && <FavoriteElem spot={favoriteSpot} activeFavMark />}
-                                {chosenSpot && <FavoriteElem spot={chosenSpot} />}
-                                <Link className={classNames("buttons__link", s.buttons__link_elem)} to={`/spotMap/:${spotId}`}>
-                                    <Button extraClass="button_green" type="primary">Построить маршрут</Button>
+                                <FavoriteElem spot={favoriteSpot ? favoriteSpot : chosenSpot} activeFavMark={!!favoriteSpot}/>
+                                <Link className={classNames("buttons__link", s.buttons__link_elem)} to={`${spotMap}:${spotId}`}>
+                                    <Button extraClass="button_green" type="primary">{buttonText.buildRoute}</Button>
                                 </Link>
                             </>
                         )}

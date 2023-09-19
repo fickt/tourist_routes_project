@@ -4,7 +4,7 @@ import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
 import {Form, FormInstance} from "antd";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
-import {useAuth} from "modules/auth-form/api/useAuth";
+import {useAuth} from "hooks/useAuth";
 import {TFormData, TFormProps} from "components/form-elem/types";
 import {FormInput} from "components/form-elem/components/form-input/FormInput";
 import {emailRules, nicknameRules, passwordRules} from "components/form-elem/constants/formRules";

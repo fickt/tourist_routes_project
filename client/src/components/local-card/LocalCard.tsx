@@ -9,7 +9,6 @@ import {FavoriteElem, userFavoritesSpots} from "modules/favorites";
 import {FilterTag, routePassText} from "modules/filters";
 
 export const LocalCard = ({spot}: TCardProps) => {
-
     const favSpots = useAppSelector(userFavoritesSpots);
     const routesPass = useAppSelector(userRoutesPass);
     const favMark = favSpots?.some(fav => fav.id === spot.id);
