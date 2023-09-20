@@ -9,6 +9,6 @@ export class imageSearchService {
         const formData = new FormData();
         formData.append("image", file);
 
-        return api.post(`${RoutePath.spots}/find-by-image`, formData);
+        return api.post(`${RoutePath.routes}/find-by-image`, formData);
     }
 }

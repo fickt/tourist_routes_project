@@ -7,6 +7,7 @@ import {useAppSelector} from "storage/hookTypes";
 import {RoutePath} from "pages/routeConfig";
 import {headers} from "components/logo/constants/constants";
 
+
 const {Title} = Typography;
 
 export const Logo = () => {
