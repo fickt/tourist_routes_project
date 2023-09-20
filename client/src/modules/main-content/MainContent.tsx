@@ -19,6 +19,7 @@ import {setError} from "components/loader-error";
 import {setFile} from "modules/image-search-popup/store/imageSearchActions";
 
 export const MainContent = () => {
+
     const dispatch = useAppDispatch();
     const spotRoutes = useAppSelector(spotsSelector);
     const searchRoutesByImage = useAppSelector(imageSearchRoutes);

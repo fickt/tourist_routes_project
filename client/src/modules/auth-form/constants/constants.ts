@@ -5,3 +5,5 @@ export const authMessages = {
     login: "Войти",
     registration: "Зарегистрироваться",
 };
+
+export const refreshUrl = "http://app.localhost/api/auth/refresh";

@@ -10,7 +10,7 @@ export const CardListBody = memo(({spots}: CardListBodyProps) => {
         <div className={s.cards}>
             {!spots.length && <span className={s.not__found}>Ничего не найдено!!!</span>}
             {spots?.map((spot: TLocalRoute) =>
-                <LocalCard key={spot.id} spot={spot}/>)}
+                <LocalCard key={spot.id} spot={spot} />)}
         </div>
     );
 });
