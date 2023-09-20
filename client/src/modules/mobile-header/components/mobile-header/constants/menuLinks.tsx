@@ -1,4 +1,4 @@
-import { RoutePath } from "pages/routeConfig";
+import {RoutePath} from "pages/routeConfig";
 import HomeIcon from "modules/mobile-header/components/mobile-header/assets/home.svg";
 import LocationIcon from "modules/mobile-header/components/mobile-header/assets/location.svg";
 import FavoritesIcon from "modules/mobile-header/components/mobile-header/assets/favorites.svg";

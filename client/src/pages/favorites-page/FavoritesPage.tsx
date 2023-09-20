@@ -10,7 +10,6 @@ import {favMessage} from "modules/favorites/constants/constants";
 import {isError, isLoader} from "components/loader-error";
 
 export const FavoritesPage = () => {
-
     const dispatch = useAppDispatch();
     const favSpots = useAppSelector(userFavoritesSpots);
     const loader = useAppSelector(isLoader);
@@ -24,9 +23,7 @@ export const FavoritesPage = () => {
         !favSpots && await getFavSpots(dispatch);
     }
 
-    const cardList = favSpots !== null && favSpots.length > 0 && (
-        <CardList favPage activeFavMark spots={favSpots}/>
-    );
+    const cardList = favSpots !== null && favSpots.length > 0 && <CardList favPage spots={favSpots}/>;
 
     const errorMessage = (
         <div className="wrapper">

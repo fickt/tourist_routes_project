@@ -7,10 +7,10 @@ import {fav} from "modules/favorites/constants/constants";
 export class favoriteService {
 
     static async getUserFavorites(): Promise<AxiosResponse<TLocalRoutes>> {
-        return api.get(`${RoutePath.spots}/${fav}`);
+        return api.get(`${RoutePath.routes}/${fav}`);
     }
 
     static async addOrRemoveToFavorites(routeId: number): Promise<AxiosResponse<TLocalRoutes>> {
-        return api.patch(`${RoutePath.spots}/${fav}/${routeId}`);
+        return api.patch(`${RoutePath.routes}/${fav}/${routeId}`);
     }
 }

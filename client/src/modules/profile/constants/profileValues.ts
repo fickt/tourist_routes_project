@@ -6,3 +6,5 @@ export const profileValues = {
 export const errorProfile = {
     recommended: "Ошибка получения рекомендованных мест"
 }
+
+export const logoutText = "Выйти из аккаунта";
