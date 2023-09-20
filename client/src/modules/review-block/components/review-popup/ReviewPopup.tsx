@@ -73,11 +73,8 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
                     >
                         Сохранить
                     </Button>
-                    <Link to={`/${RoutePath.spots}${spotId}`} className="buttons__link">
-                        <Button
-                            action={closePopup}
-                            extraClass={classNames("button", s.reviewPopup__button_white)}
-                            disabled={loader}>
+                    <Link to={`/${RoutePath.spots}/:${spotId}`} className="buttons__link">
+                        <Button action={closePopup} extraClass="button" disabled={loader}>
                             {buttonText}
                         </Button>
                     </Link>

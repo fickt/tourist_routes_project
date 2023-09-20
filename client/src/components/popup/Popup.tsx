@@ -6,10 +6,10 @@ import {ReviewPopup} from "modules/review-block";
 import {TPopupProps} from "components/popup/types";
 
 export const Popup = ({spotId, review, image, popup, closePopup}: TPopupProps) => {
+    const imagePopupRef = useRef(null);
+
     const handleKeyPress = useCallback((e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-            popup && closePopup();
-        }
+        e.keyCode === 27 && popup && closePopup();
     }, [popup]);
 
     useEffect(() => {
@@ -19,7 +19,6 @@ export const Popup = ({spotId, review, image, popup, closePopup}: TPopupProps) =
         };
     }, [handleKeyPress, popup]);
 
-    const imagePopupRef = useRef(null);
     useOnClickOutside(imagePopupRef, () => {
         image && closePopup();
         review && closePopup();

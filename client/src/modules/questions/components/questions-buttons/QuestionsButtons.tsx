@@ -5,10 +5,10 @@ import {handleRecommended, handleStartPassQuestions} from "modules/questions/sto
 import {RoutePath} from "pages/routeConfig";
 import {Link} from "react-router-dom";
 import classNames from "classnames";
-import {apiQuestions} from "modules/questions/api/QuestionsServise";
 import {setError, setLoader} from "components/loader-error";
 import {questionsValues, errorMessage} from "modules/questions/constants/constants";
 import Cookies from "js-cookie";
+import {apiQuestions} from "modules/questions/api/QuestionsService";
 
 export const QuestionsButtons = ({title, answers, isSave}: TQuestionsButtonProps) => {
 
