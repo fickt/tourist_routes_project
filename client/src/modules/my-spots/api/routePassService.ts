@@ -6,10 +6,10 @@ import {RoutePath} from "pages/routeConfig";
 export class routePassService {
 
     static async setRoutePass(routeId: number): Promise<AxiosResponse<TLocalRoute>> {
-        return api.patch(`${RoutePath.spots}/completed/${routeId}`);
+        return api.patch(`${RoutePath.routes}/completed/${routeId}`);
     }
 
     static async getRoutesPass(): Promise<AxiosResponse<TLocalRoutes>> {
-        return api.get(`${RoutePath.spots}/completed`);
+        return api.get(`${RoutePath.routes}/completed`);
     }
 }

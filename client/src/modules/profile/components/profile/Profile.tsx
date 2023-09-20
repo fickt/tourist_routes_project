@@ -9,10 +9,9 @@ import {ProfileSection} from "modules/profile/components/profile-section/Profile
 import {PassQuestions} from "modules/questions/components/pass-questions/PassQuestions";
 import classNames from "classnames";
 import {TLocalRoute} from "utils/localRoutes";
-import {apiQuestions} from "modules/questions/api/QuestionsServise";
 import {useDispatch} from "react-redux";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
-import {errorProfile, profileValues} from "modules/profile/constants/profileValues";
+import {errorProfile, logoutText, profileValues} from "modules/profile/constants/profileValues";
 import {CardListBody} from "modules/card-list";
 import {useNavigate} from "react-router-dom";
 import {authService} from "modules/auth-form/api/authService";
@@ -20,8 +19,10 @@ import {TServerResponse} from "modules/auth-form/store/types/authTypes";
 import Cookies from "js-cookie";
 import {setFavoriteSpots} from "modules/favorites/store/favoriteActions";
 import {isError, isLoader, setError, setLoader} from "components/loader-error";
+import {apiQuestions} from "modules/questions/api/QuestionsService";
 
 export const Profile = () => {
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isStart = useAppSelector(isStartQuestions);
@@ -30,7 +31,7 @@ export const Profile = () => {
     const [questArray, setQuestArray] = useState<TLocalRoute[]>([]);
 
     useEffect(() => {
-        apiQuestions.fetchRecomendations()
+        apiQuestions.fetchRecommendations()
             .then(data => {
                 dispatch(setLoader(false));
                 data.data.length && setQuestArray(data.data);
@@ -75,7 +76,7 @@ export const Profile = () => {
                         extraClass={classNames("button", "button_white")}
                         disabled={loader}
                     >
-                        Выйти из аккаунта
+                        {logoutText}
                     </Button>
                 </div>
             </div>

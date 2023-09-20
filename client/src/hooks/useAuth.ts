@@ -7,7 +7,6 @@ import {authService} from "modules/auth-form/api/authService";
 import {isLoader, setError, setLoader} from "components/loader-error";
 
 export const useAuth = () => {
-
     const dispatch = useAppDispatch();
     const loader = useAppSelector(isLoader);
     const user = useAppSelector(authUser);
@@ -22,6 +21,15 @@ export const useAuth = () => {
         e.response
             ? dispatch(setError(e.response.data.error))
             : dispatch(setError("Попробуйте снова")); // ошибка 504 (отвалились докер-контейнеры)
+    }
+
+    // Сохранение значений в куках
+    const setCookies = (isRegistration: boolean, response: TServerResponse) => {
+        Cookies.set("token", response.data.access_token);
+        Cookies.set("nickname", response.data.user.nickname);
+        Cookies.set("email", response.data.user.email);
+        Cookies.set("is_questionnaire_completed", response.data.user.is_questionnaire_completed);
+        isRegistration && Cookies.set("isPass", "true");
     }
 
     const authenticate = async (
@@ -42,18 +50,10 @@ export const useAuth = () => {
                 is_questionnaire_completed: response.data.user.is_questionnaire_completed
             }
             dispatch(handleSetUser(userData));
-            // Сохранение значений в куках
-            Cookies.set("token", response.data.access_token);
-            Cookies.set("nickname", response.data.user.nickname);
-            Cookies.set("email", response.data.user.email);
-            Cookies.set("is_questionnaire_completed", response.data.user.is_questionnaire_completed);
-            if (isRegistration) {
-                Cookies.set("isPass", "true");
-            }
+            setCookies(isRegistration, response);
             setAction(isRegistration);
         } catch (e: Error | TServerResponse) {
             setAuthError(e);
-            console.log(e)
         } finally {
             dispatch(setLoader(false));
         }

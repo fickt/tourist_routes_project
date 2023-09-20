@@ -4,26 +4,25 @@ import {api} from "utils/api";
 import {TLocalRoute} from "utils/localRoutes";
 
 export class spotsService {
-
     fetchSpots(): Promise<AxiosResponse<TLocalRoute[]>> {
-        return api.get(RoutePath.spots);
+        return api.get(RoutePath.routes);
     }
 
     fetchSpotFilter(difficulty: string, category: string): Promise<AxiosResponse<TLocalRoute[]>> {
         const requestPath = (difficulty: string, category: string) => {
             if (difficulty && category)
-                return `${RoutePath.spots}?difficulty=${difficulty}&category=${category}`
+                return `${RoutePath.routes}?difficulty=${difficulty}&category=${category}`
             if (!difficulty && category)
-                return `${RoutePath.spots}?category=${category}`
+                return `${RoutePath.routes}?category=${category}`
             if (difficulty && !category)
-                return `${RoutePath.spots}?difficulty=${difficulty}`
+                return `${RoutePath.routes}?difficulty=${difficulty}`
             return RoutePath.spots
         }
         return api.get(requestPath(difficulty, category));
     }
 
     fetchSearchRequest(searchValue: string): Promise<AxiosResponse<TLocalRoute[]>> {
-        const requestPath = `${RoutePath.spots}?search=${searchValue}`
+        const requestPath = `${RoutePath.routes}?search=${searchValue}`
         return api.get(requestPath);
     }
 }

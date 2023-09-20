@@ -3,13 +3,13 @@ import DislikeIcon from "./assets/dislike.svg";
 import LikeIcon from "./assets/like.svg";
 import {QuestionsButtons} from "modules/questions/components/questions-buttons/QuestionsButtons";
 import {useEffect, useState} from "react";
-import {apiQuestions} from "modules/questions/api/QuestionsServise";
 import {TAnswers} from "modules/questions/api/type";
 import {Typography} from "antd";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "storage/hookTypes";
 import {isLoader, setError, setLoader} from "components/loader-error";
 import {questionsValues, questionCardText, errorMessage} from "modules/questions/constants/constants";
+import {apiQuestions} from "modules/questions/api/QuestionsService";
 
 export const QuestionCard = () => {
 

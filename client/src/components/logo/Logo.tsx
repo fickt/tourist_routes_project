@@ -4,53 +4,58 @@ import s from "./styles.module.scss";
 import {Typography} from "antd";
 import BackIcon from "./assets/backIcon.svg";
 import {useAppSelector} from "storage/hookTypes";
+import {RoutePath} from "pages/routeConfig";
+import {headers} from "components/logo/constants/constants";
 
 const {Title} = Typography;
 
 export const Logo = () => {
-    const {spotId} = useAppSelector(state => state.spotId)
+    const {spotId} = useAppSelector(state => state.spotId);
     const location = useLocation();
+
     const goBack = (e: SyntheticEvent<HTMLAnchorElement>) => {
         e.stopPropagation();
         window.history.back();
     };
 
     const handleClick = (e: SyntheticEvent<HTMLAnchorElement>) => {
-        location.pathname === "/" && e.preventDefault();
+        location.pathname === `${RoutePath.home}` && e.preventDefault();
     };
     const shouldRenderBackIcon = () => {
-        return location.pathname !== "/" &&
-            location.pathname !== "/profile" &&
-            location.pathname !== "/auth/login" &&
-            location.pathname !== "/questions";
+        return location.pathname !== `${RoutePath.home}` &&
+            location.pathname !== `${RoutePath.profile}` &&
+            location.pathname !== `${RoutePath.auth_login}` &&
+            location.pathname !== `${RoutePath.questions}`;
     };
 
     const nameOfPage = () => {
         switch (location.pathname) {
-        case "/":
-            return "Наши маршруты";
-        case "/auth/login":
-            return "Войти";
-        case "/auth/register":
-            return "Регистрация";
-        case "/profile":
-            return "Личный кабинет";
-        case "/favorites":
-            return "Избранное";
-        case `/mySpots`:
-            return "Мои места";
-        case "/filters":
-            return "Фильтр";
-        case "/location":
-            return "Ближайшие места";
-        case "/settings":
-            return "Управление аккаунтом";
-        case "/settings_info":
-            return "Управление аккаунтом";
-        case `/spotMap/:${spotId}`:
-            return "Маршрут";
-        default:
-            return "О месте";
+            case `${RoutePath.home}`:
+                return headers.ourRoutes;
+            case `${RoutePath.auth_login}`:
+                return headers.logo;
+            case `${RoutePath.auth_register}`:
+                return headers.logo;
+            case `${RoutePath.profile}`:
+                return headers.profile;
+            case `${RoutePath.favorites}`:
+                return headers.favorites;
+            case `${RoutePath.mySpots}`:
+                return headers.mySpots;
+            case `${RoutePath.filters}`:
+                return headers.filters;
+            case `${RoutePath.location}`:
+                return headers.nearest;
+            case `${RoutePath.settings}`:
+                return headers.settingsInfo;
+            case `${RoutePath.settings_info}`:
+                return headers.settingsInfo;
+            case `${RoutePath.spotMap}:${spotId}`:
+                return headers.route;
+            case `${RoutePath.questions}`:
+                return headers.logo;
+            default:
+                return headers.aboutSpot;
         }
     }
 
@@ -59,7 +64,6 @@ export const Logo = () => {
             <Link to={"/"} className={s.logo} onClick={handleClick}>
                 <Title level={2} className={s.logo__text}>{nameOfPage()}</Title>
             </Link>
-
             {shouldRenderBackIcon() && (
                 <a className={s.back} onClick={goBack}><BackIcon className={s.back__icon}/></a>
             )}
