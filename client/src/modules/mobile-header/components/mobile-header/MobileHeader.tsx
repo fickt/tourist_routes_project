@@ -83,12 +83,16 @@ export const MobileHeader = () => {
                     ) : !isSpot ? (
                         menuLinks.map((link, index) => (
                             <Link
+                                className={s.menu__link_wrapper}
                                 key={index}
                                 to={link.path}
                                 onClick={(e) => handleClick(e, link.path)}
                             >
                                 <span className={classNames(s.menu__icon, {[s.menu__icon_filled]: pathname === link.path,})}>
                                     {link.icon}
+                                </span>
+                                <span className={classNames(s.menu__name, {[s.menu__name_filled]: pathname === link.path,})}>
+                                    {link.text}
                                 </span>
                             </Link>))
                         ) : (<>

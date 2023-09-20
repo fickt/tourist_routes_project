@@ -13,6 +13,25 @@
         border-radius: 10px 10px 0 0;
         box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.30);
 
+        &__link_wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        &__name {
+            color: var(--background-03);
+            font-size: 10px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;;
+
+            &_filled {
+                color: var(--background-06);
+            }
+        }
+
         &__wrapper {
             display: grid;
             grid-template-columns: repeat(4,1fr);
