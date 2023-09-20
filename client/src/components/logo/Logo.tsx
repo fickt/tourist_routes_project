@@ -3,12 +3,11 @@ import {Link, useLocation} from "react-router-dom";
 import s from "./styles.module.scss";
 import {Typography} from "antd";
 import BackIcon from "./assets/backIcon.svg";
-import {useAppSelector} from "storage/hookTypes";
+import {AppRoutes, RoutePath} from "pages/routeConfig";
 
 const {Title} = Typography;
 
 export const Logo = () => {
-    const {spotId} = useAppSelector(state => state.spotId)
     const location = useLocation();
     const goBack = (e: SyntheticEvent<HTMLAnchorElement>) => {
         e.stopPropagation();
@@ -27,28 +26,30 @@ export const Logo = () => {
 
     const nameOfPage = () => {
         switch (location.pathname) {
-        case "/":
+        case RoutePath[AppRoutes.HOME]:
             return "Наши маршруты";
-        case "/auth/login":
+        case RoutePath[AppRoutes.AUTH_LOGIN]:
             return "Войти";
-        case "/auth/register":
+        case RoutePath[AppRoutes.AUTH_REGISTER]:
             return "Регистрация";
-        case "/profile":
+        case RoutePath[AppRoutes.PROFILE]:
             return "Личный кабинет";
-        case "/favorites":
+        case RoutePath[AppRoutes.FAVORITES]:
             return "Избранное";
-        case `/mySpots`:
+        case RoutePath[AppRoutes.MY_SPOTS]:
             return "Мои места";
-        case "/filters":
+        case RoutePath[AppRoutes.FILTERS]:
             return "Фильтр";
-        case "/location":
+        case RoutePath[AppRoutes.LOCATION]:
             return "Ближайшие места";
-        case "/settings":
+        case RoutePath[AppRoutes.SETTINGS]:
             return "Управление аккаунтом";
-        case "/settings_info":
+        case RoutePath[AppRoutes.SETTINGS_INFO]:
             return "Управление аккаунтом";
-        case `/spotMap/:${spotId}`:
+        case RoutePath[AppRoutes.SPOT_MAP]:
             return "Маршрут";
+        case RoutePath[AppRoutes.QUESTIONS]:
+            return "Анкета";
         default:
             return "О месте";
         }
