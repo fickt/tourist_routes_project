@@ -9,18 +9,15 @@ import {useDispatch} from "react-redux";
 import {TSpotItemProps} from "./types";
 import {ReviewBlock} from "modules/review-block";
 import {Button} from "ui/button/Button"
-import {toggleReviewPopup} from "ui/popup/store/popupActions";
 import {useAppSelector} from "storage/hookTypes";
-import {reviewPopupState} from "ui/popup/store/popupSelector";
-import {Popup} from "ui/popup/Popup";
 import {authUser} from "modules/auth-form";
 import {RoutePath} from "pages/routeConfig";
 import {useNavigate} from "react-router-dom";
 import {userRoutesPass} from "modules/my-spots";
 import {FilterTag, routePassText} from "modules/filters";
+import {Popup, reviewPopupState, toggleReviewPopup} from "components/popup";
 
 export const SpotItem = ({spotItem}: TSpotItemProps) => {
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useAppSelector(authUser);
@@ -34,6 +31,7 @@ export const SpotItem = ({spotItem}: TSpotItemProps) => {
     }, [id]);
 
     const closeReviewPopup = () => dispatch(toggleReviewPopup(false));
+
     const openReviewPopup = () => user
         ? dispatch(toggleReviewPopup(true))
         : navigate(RoutePath.auth_login);

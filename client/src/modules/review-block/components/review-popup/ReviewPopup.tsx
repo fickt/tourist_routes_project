@@ -16,7 +16,6 @@ import {isError, isLoader, setError} from "components/loader-error";
 import {imageSearchRoutes} from "modules/image-search-popup";
 
 export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
-
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const loader = useAppSelector(isLoader);
@@ -35,7 +34,6 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
         if (Cookies.get("token")) {
             const fetchData = async () => {
                 await sendReview(dispatch, content, rating, spotId, form, setContent, setRating, closePopup, searchRoutesByImage);
-                navigate(`/spots/${spotId}`);
             }
             fetchData();
         } else {
@@ -75,8 +73,13 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
                     >
                         Сохранить
                     </Button>
-                    <Link to={`/spots/${spotId}`} className="buttons__link">
-                        <Button action={closePopup} extraClass={s.button} disabled={loader}>{buttonText}</Button>
+                    <Link to={`/${RoutePath.spots}${spotId}`} className="buttons__link">
+                        <Button
+                            action={closePopup}
+                            extraClass={classNames("button", s.reviewPopup__button_white)}
+                            disabled={loader}>
+                            {buttonText}
+                        </Button>
                     </Link>
                 </div>
             </Form>

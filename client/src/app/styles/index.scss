@@ -59,7 +59,7 @@ a {
     flex-direction: column;
     padding: 24px 16px;
     margin: 0 auto;
-    background-color: var(--background-04);
+    background-color: var(--background-02);
 };
 
 .overlay {
@@ -119,6 +119,7 @@ main {
 .buttons__link {
     display: block;
     width: 100%;
+    height: 50px;
 
     .button {
         &_green,
@@ -126,11 +127,13 @@ main {
             font-family: "Nunito Sans", sans-serif;
             font-size: 16px;
             font-weight: 400;
-            padding: 10px 32px;
-            height: auto;
+            padding: 14px 32px;
+            max-height: 50px;
+            border-radius: 10px;
         }
 
         &_green {
+            height: inherit;
             color: var(--text-02);
             background-color: var(--background-06);
         }
@@ -139,6 +142,7 @@ main {
             color: var(--text-01);
             background-color: var(--background-02);
             box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.20);
+            border: 1px solid var(--background-01);
         }
     }
 }
