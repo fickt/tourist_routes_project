@@ -1,3 +1,11 @@
+ svg path {
+  stroke: var(--background-01);
+}
+
 .icon_active {
   fill: var(--background-06);
+}
+
+.icon_active > path {
+  stroke: none;
 }

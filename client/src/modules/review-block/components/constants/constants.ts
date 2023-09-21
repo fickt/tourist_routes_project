@@ -10,7 +10,10 @@ export const elemName = {
     rating: "rating",
     text: "text",
 }
-export const buttonText = "Позже";
+export const buttonText = {
+    later: "Позже",
+    save: "Сохранить",
+};
 
 export const formatDate = (dateString: Date) => {
     const originalDate = new Date(dateString);

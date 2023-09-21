@@ -30,6 +30,14 @@
       background: var(--background-04);
     }
   }
+
+  &__button_green {
+    color: var(--text-02);
+    background-color: var(--background-06);
+    height: 51px;
+    font-size: 14px;
+    line-height: 20px;
+  }
 }
 
 :where(.css-dev-only-do-not-override-1sn0ohr).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover{

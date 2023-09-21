@@ -36,6 +36,7 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
                 await sendReview(dispatch, content, rating, spotId, form, setContent, setRating, closePopup, searchRoutesByImage);
             }
             fetchData();
+            window.history.back();
         } else {
             navigate(RoutePath.auth_login);
         }
@@ -66,16 +67,18 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
                     />
                 </Form.Item>
                 <div className="buttons__wrapper">
-                    <Button
-                        action={() => form.submit()}
-                        extraClass={classNames("button", s.reviewPopup__button_green)}
-                        disabled={loader}
-                    >
-                        Сохранить
-                    </Button>
-                    <Link to={`/${RoutePath.spots}/:${spotId}`} className="buttons__link">
+                    <div className="buttons__link">
+                        <Button
+                            action={() => form.submit()}
+                            extraClass={classNames("button", s.reviewPopup__button_green)}
+                            disabled={loader}
+                        >
+                            {buttonText.save}
+                        </Button>
+                    </div>
+                    <Link to={`${RoutePath.spots}/:${spotId}`} className="buttons__link">
                         <Button action={closePopup} extraClass="button" disabled={loader}>
-                            {buttonText}
+                            {buttonText.later}
                         </Button>
                     </Link>
                 </div>
