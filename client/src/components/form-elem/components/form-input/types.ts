@@ -5,6 +5,7 @@ export type TFormInputProps = {
     title: string,
     rules: Rule[],
     placeholder: string,
+    onChange?: () => void,
 }
 
 export type TPasswordInputProps = {

@@ -7,7 +7,6 @@ import {useAppSelector} from "storage/hookTypes";
 import {RoutePath} from "pages/routeConfig";
 import {headers} from "components/logo/constants/constants";
 
-
 const {Title} = Typography;
 
 export const Logo = () => {
@@ -22,6 +21,7 @@ export const Logo = () => {
     const handleClick = (e: SyntheticEvent<HTMLAnchorElement>) => {
         location.pathname === `${RoutePath.home}` && e.preventDefault();
     };
+
     const shouldRenderBackIcon = () => {
         return location.pathname !== `${RoutePath.home}` &&
             location.pathname !== `${RoutePath.profile}` &&
@@ -62,12 +62,12 @@ export const Logo = () => {
 
     return (
         <>
-            <Link to={"/"} className={s.logo} onClick={handleClick}>
-                <Title level={2} className={s.logo__text}>{nameOfPage()}</Title>
+            <Link to={RoutePath.home} className={s.logo} onClick={handleClick}>
+                <Title level={2}>{nameOfPage()}</Title>
             </Link>
-            {shouldRenderBackIcon() && (
+            {shouldRenderBackIcon() &&
                 <a className={s.back} onClick={goBack}><BackIcon className={s.back__icon}/></a>
-            )}
+            }
         </>
     );
 };

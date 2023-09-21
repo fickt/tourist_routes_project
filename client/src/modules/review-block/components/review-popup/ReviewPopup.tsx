@@ -36,7 +36,6 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
                 await sendReview(dispatch, content, rating, spotId, form, setContent, setRating, closePopup, searchRoutesByImage);
             }
             fetchData();
-            window.history.back();
         } else {
             navigate(RoutePath.auth_login);
         }

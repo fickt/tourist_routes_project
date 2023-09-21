@@ -1,25 +1,22 @@
 .logo {
     position: relative;
-    text-decoration: none; 
+    text-decoration: none;
+    width: fit-content;
 
-    &__text {
+    h2 {
         font-family: "Nunito Sans", sans-serif;
         font-size: 20px;
         font-weight: 600;
-
-    }
-
-    h2 {
         margin: 0;
-        padding: 16px;
+        padding: 16px 10px;
         color: var(--background-07);
     }
 }
 
 .back {
     position: absolute;
-    top: 16px;
-    left: 10px;
+    top: 15px;
+    left: 30px;
     cursor: pointer;
 
     &__icon {

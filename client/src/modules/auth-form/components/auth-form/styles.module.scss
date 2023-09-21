@@ -13,10 +13,20 @@
   }
 
   &__text {
-    font-family: "Raleway", sans-serif;
-    font-size: 14px;
     font-weight: 400;
-    line-height: 20px;
-    color: var(--text-03);
   }
 };
+
+.auth__text,
+.forgotPassword {
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--text-03);
+}
+
+.forgotPassword {
+  font-weight: 500;
+  text-decoration-line: underline;
+  align-self: end;
+}

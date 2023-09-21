@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  width: 154px;
+  min-width: 154px;
   height: 154px;
   padding: 12px;
   color: var(--color-white);
@@ -19,4 +19,9 @@
     font-weight: 500;
     align-items: end;
   }
+}
+
+.fav svg path {
+  backdrop-filter: blur(4px);
+  stroke: rgba(255, 255, 255, 0.7);
 }

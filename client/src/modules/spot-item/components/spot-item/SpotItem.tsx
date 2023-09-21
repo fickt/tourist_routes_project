@@ -16,6 +16,7 @@ import {useNavigate} from "react-router-dom";
 import {userRoutesPass} from "modules/my-spots";
 import {FilterTag, routePassText} from "modules/filters";
 import {Popup, reviewPopupState, toggleReviewPopup} from "components/popup";
+import {reviews, setReview} from "modules/spot-item/constants/constants";
 
 export const SpotItem = ({spotItem}: TSpotItemProps) => {
     const dispatch = useDispatch();
@@ -58,13 +59,13 @@ export const SpotItem = ({spotItem}: TSpotItemProps) => {
             </section>
             <section id="reviews" className={classNames(s.section, s.reviews)}>
                 <div className={s.reviews__info}>
-                    <h2 className={s.reviews__info__title}>Отзывы {comments.length !== 0 && comments.length}</h2>
+                    <h2 className={s.reviews__info__title}>{reviews} {comments.length !== 0 && comments.length}</h2>
                     <RatingLabel rating={rating}/>
                 </div>
                 <div className="buttons__wrapper">
                     <div className="buttons__link">
                         <Button extraClass={classNames("button", "button_green")} action={openReviewPopup}>
-                            Оставить отзыв
+                            {setReview}
                         </Button>
                     </div>
                 </div>

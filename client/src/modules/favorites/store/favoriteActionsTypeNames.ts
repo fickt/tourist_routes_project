@@ -1,4 +1,1 @@
 export const SET_FAV_SPOTS = "SET_FAV_SPOTS";
-export const ADD_FAV_SPOT = "ADD_FAV_SPOT";
-export const IS_FAV_MARK_ACTIVE = "IS_FAV_MARK_ACTIVE";
-export const IS_SPOTS_UPDATED = "IS_SPOTS_UPDATED";

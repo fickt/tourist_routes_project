@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import {ReactNode, MouseEvent} from "react";
 
 export type TButtonProps = {
     href?: string,
@@ -9,4 +9,5 @@ export type TButtonProps = {
     extraClass?: string,
     htmlType?: "button" | "submit" | "reset",
     disabled?: boolean,
+    onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }

@@ -108,6 +108,11 @@ main {
     }
 };
 
+.myList {
+    background-color: var(--background-04);
+    height: 100%;
+}
+
 .buttons__wrapper {
     width: 100%;
     display: flex;
@@ -123,15 +128,6 @@ main {
 
     .button {
         border: none;
-        &_green,
-        &_white {
-            font-family: "Nunito Sans", sans-serif;
-            font-size: 16px;
-            font-weight: 400;
-            padding: 14px 32px;
-            max-height: 50px;
-            border-radius: 10px;
-        }
 
         &_green {
             height: inherit;
@@ -141,20 +137,20 @@ main {
 
         &_white {
             color: var(--text-01);
-            background-color: var(--background-02);
-            box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.20);
+            border: 1px solid var(--background-01);
+            background: var(--background-02);
         }
     }
 }
 
-.button,
+.button_green,
+.button_white,
 .form__button {
     padding: 14px 32px;
     border-radius: 10px;
     font-family: "Nunito Sans", sans-serif;
     font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
+    font-weight: 400;
     height: auto;
     width: 100%;
 }

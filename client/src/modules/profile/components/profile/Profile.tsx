@@ -46,6 +46,7 @@ export const Profile = () => {
             });
             dispatch(setFavoriteSpots(null));
             navigate(RoutePath.home);
+            window.location.reload();
         } catch (e: Error | TServerResponse) {
             dispatch(setError(e.response.data.error));
         } finally {

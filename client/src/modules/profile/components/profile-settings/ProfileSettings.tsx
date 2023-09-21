@@ -2,33 +2,45 @@ import {RoutePath} from "pages/routeConfig";
 import s from "./styles.module.scss";
 import {Button} from "ui/button/Button";
 import {Link} from "react-router-dom";
-import {useAppSelector} from "storage/hookTypes";
-import {authUser} from "modules/auth-form";
-import {ProfileHeader} from "modules/profile/components/profile-header/ProfileHeader";
+import {settings} from "modules/profile/constants/profileValues";
+import {FormElem} from "components/form-elem/components/form-elem/FormElem";
 import classNames from "classnames";
+import {useAppSelector} from "storage/hookTypes";
+import {inputTouched} from "modules/profile/store/profileSelector";
+import {isError, isLoader} from "components/loader-error";
+import {PreloaderCar} from "ui/preloader/PreloaderCar";
+import {ErrorMessage} from "ui/error-message/ErrorMessage";
 
 export const ProfileSettings = () => {
-
-    const user = useAppSelector(authUser);
+    const loader = useAppSelector(isLoader);
+    const error = useAppSelector(isError);
+    const isInputTouched = useAppSelector(inputTouched);
 
     return (
         <div className={s.settings}>
-            <ProfileHeader path={RoutePath.settings_info}/>
-            <span className={s.settings__title}>Учетные данные</span>
+            <span className={s.settings__title}>{settings.profileData}</span>
             <div className={s.settings__fields}>
-                <div className={s.field}>
-                    <label className={s.field__email}>E-mail
-                        <input className={s.field__email__input} placeholder={user.email} readOnly/>
-                    </label>
-                </div>
-                <div className={s.field}>
-                    <span className={s.settings__title}>Пароль</span>
+                <FormElem isInfoChange/>
+                <div className={s.settings__fields}>
+                    {isInputTouched && (
+                        <div className={classNames("buttons__wrapper", s.settings__fields__buttons)}>
+                            <Link className={"buttons__link"} to={RoutePath.settings}>
+                                <Button extraClass={classNames("button", "button_green")}>{settings.save}</Button>
+                            </Link>
+                            <Link className={"buttons__link"} to={RoutePath.settings}>
+                                <Button extraClass={classNames("button", "button_white")}>{settings.cancel}</Button>
+                            </Link>
+                        </div>
+                    )}
+                    <span className={s.settings__title}>{settings.password}</span>
                     <div className="buttons__wrapper">
                         <Link className="buttons__link" to={RoutePath.settings_password}>
-                            <Button extraClass={classNames("button", "button_white")}>Изменить пароль</Button>
+                            <Button extraClass={classNames("button", "button_white")}>{settings.changePassword}</Button>
                         </Link>
                     </div>
                 </div>
+                {loader && <PreloaderCar/>}
+                {!loader && (error && <ErrorMessage errorText={error}/>)}
             </div>
         </div>
     )
