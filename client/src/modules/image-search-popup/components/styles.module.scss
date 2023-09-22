@@ -10,6 +10,10 @@
 .imagePopup {
   padding: 20px;
 
+  svg path {
+    stroke: var(--text-03);
+  }
+
   &__title,
   &__button,
   &__button_green {

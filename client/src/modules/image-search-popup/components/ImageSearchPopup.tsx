@@ -13,6 +13,8 @@ import {isError, isLoader, setError} from "components/loader-error";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
 import {setFile} from "modules/image-search-popup/store/imageSearchActions";
 import {userFile} from "modules/image-search-popup/store/imageSearchSelectors";
+import {RoutePath} from "pages/routeConfig";
+import {Link} from "react-router-dom";
 
 export const ImageSearchPopup = ({closePopup}: TImageSearchPopupProps) => {
     const dispatch = useAppDispatch();
@@ -75,14 +77,17 @@ export const ImageSearchPopup = ({closePopup}: TImageSearchPopupProps) => {
                     ? <Button
                         action={handleClick}
                         disabled={loader}
-                        extraClass={classNames(`button, ${s.imagePopup__button_green}`)}
+                        extraClass={classNames("button", s.imagePopup__button_green)}
                         >
                             {imgSearch.btnSearch}
                         </Button>
-                    : uploadImageInput()}
-                <Button action={closePopup} extraClass={"button"} disabled={loader}>
-                    {imgSearch.btnCancel}
-                </Button>
+                    : uploadImageInput()
+                }
+                <Link to={`${RoutePath.home}`} className="buttons__link">
+                    <Button action={closePopup} extraClass="button" disabled={loader}>
+                        {imgSearch.btnCancel}
+                    </Button>
+                </Link>
             </div>
         </div>
     );

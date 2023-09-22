@@ -126,8 +126,10 @@ main {
     height: 50px;
 
     .button {
+        width: 100%;
         border: none;
         max-height: 50px;
+        background-color: transparent;
 
         &_green {
             height: inherit;
@@ -165,6 +167,10 @@ main {
 .custom__antd__item {
     width: 100%;
     margin-bottom: 0;
+}
+
+.ant-btn-default {
+    box-shadow: none;
 }
 
 @media (min-width: 760px) {

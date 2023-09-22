@@ -69,7 +69,7 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
                     <div className="buttons__link">
                         <Button
                             action={() => form.submit()}
-                            extraClass={classNames("button", s.reviewPopup__button_green)}
+                            extraClass={classNames("button", "button_green")}
                             disabled={loader}
                         >
                             {buttonText.save}
