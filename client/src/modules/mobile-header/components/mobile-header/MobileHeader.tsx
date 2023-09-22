@@ -95,13 +95,13 @@ export const MobileHeader = () => {
                                     {link.text}
                                 </span>
                             </Link>))
-                        ) : (<>
-                                <FavoriteElem spot={favoriteSpot ? favoriteSpot : chosenSpot} activeFavMark={!!favoriteSpot}/>
-                                <Link className={classNames("buttons__link", s.buttons__link_elem)} to={`${spotMap}:${spotId}`}>
-                                    <Button extraClass="button_green" type="primary">{buttonText.buildRoute}</Button>
-                                </Link>
-                            </>
-                        )}
+                    ) : (<>
+                        <FavoriteElem spot={favoriteSpot ? favoriteSpot : chosenSpot} activeFavMark={!!favoriteSpot}/>
+                        <Link className={classNames("buttons__link", s.buttons__link_elem)} to={`${spotMap}:${spotId}`}>
+                            <Button extraClass="button_green" type="primary">{buttonText.buildRoute}</Button>
+                        </Link>
+                    </>
+                    )}
                 </div>
             </nav>
         </div>

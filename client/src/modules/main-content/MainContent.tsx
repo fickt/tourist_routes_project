@@ -13,6 +13,7 @@ import {setError} from "components/loader-error";
 import {imgPopupState, Popup, toggleImgPopup} from "components/popup";
 
 export const MainContent = () => {
+
     const dispatch = useAppDispatch();
     const spotRoutes = useAppSelector(spotsSelector);
     const searchRoutesByImage = useAppSelector(imageSearchRoutes);
