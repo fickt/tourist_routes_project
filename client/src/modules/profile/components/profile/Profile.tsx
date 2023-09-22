@@ -27,6 +27,7 @@ export const Profile = () => {
     const [questArray, setQuestArray] = useState<TLocalRoute[]>([]);
 
     useEffect(() => {
+        dispatch(setLoader(true));
         apiQuestions.fetchRecommendations()
             .then(data => {
                 dispatch(setLoader(false));
@@ -61,8 +62,6 @@ export const Profile = () => {
                 <ProfileSection path={RoutePath.mySpots} title={profileValues.places}/>
                 <ProfileSection path={RoutePath.favorites} title={profileValues.favorite}/>
             </div>
-            <h2>Рекомендации</h2>
-            {!isStart && <PassQuestions/>}
             <div className="buttons__wrapper">
                 <div className="buttons__link">
                     <Button
@@ -74,9 +73,9 @@ export const Profile = () => {
                     </Button>
                 </div>
             </div>
+            {!isStart && <PassQuestions/>}
             {loader && <PreloaderCar/>}
             {!error && !loader && <CardListBody spots={questArray}/>}
-            {error && <p>{error}</p>}
         </div>
     )
 }
