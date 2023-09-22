@@ -1,3 +1,4 @@
+import React, {useEffect} from "react";
 import {RoutePath} from "pages/routeConfig";
 import s from "./styles.module.scss";
 import {Button} from "ui/button/Button";
@@ -7,14 +8,16 @@ import {FormElem} from "components/form-elem/components/form-elem/FormElem";
 import classNames from "classnames";
 import {useAppSelector} from "storage/hookTypes";
 import {inputTouched} from "modules/profile/store/profileSelector";
-import {isError, isLoader} from "components/loader-error";
-import {PreloaderCar} from "ui/preloader/PreloaderCar";
-import {ErrorMessage} from "ui/error-message/ErrorMessage";
+import {useDispatch} from "react-redux";
+import {setInputTouched} from "modules/profile";
 
 export const ProfileSettings = () => {
-    const loader = useAppSelector(isLoader);
-    const error = useAppSelector(isError);
+    const dispatch = useDispatch();
     const isInputTouched = useAppSelector(inputTouched);
+
+    useEffect(() => {
+        dispatch(setInputTouched(false));
+    }, [])
 
     return (
         <div className={s.settings}>
@@ -39,8 +42,6 @@ export const ProfileSettings = () => {
                         </Link>
                     </div>
                 </div>
-                {loader && <PreloaderCar/>}
-                {!loader && (error && <ErrorMessage errorText={error}/>)}
             </div>
         </div>
     )

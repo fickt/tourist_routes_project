@@ -7,7 +7,7 @@ import {useAppDispatch, useAppSelector} from "storage/hookTypes";
 import {useAuth} from "hooks/useAuth";
 import {TFormData, TFormProps} from "components/form-elem/types";
 import {FormInput} from "components/form-elem/components/form-input/FormInput";
-import {emailRules, nicknameRules, passwordRules} from "components/form-elem/constants/formRules";
+import {emailRules, nicknameRules} from "components/form-elem/constants/formRules";
 import {PasswordInput} from "components/form-elem/components/form-input/PasswordInput";
 import {FormButton} from "components/form-elem/components/form-button/FormButton";
 import {TServerResponse} from "modules/auth-form/store/types/authTypes";
@@ -82,14 +82,6 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
                         onChange={inputTouched}
                     />
                 }
-                {isPasswordChange
-                    && <FormInput
-                        name={messages.passwordOld}
-                        title={messages.lastPassword}
-                        rules={passwordRules}
-                        placeholder={messages.passLastPassword}
-                    />
-                }
                 {(!isInfoChange || isPasswordChange)
                     && <PasswordInput
                         title={isPasswordChange ? messages.newPassword : messages.password}
@@ -115,10 +107,10 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
             <div className={s.form__inputs}>
                 {renderFormInputs()}
             </div>
-            {!isInfoChange && (
+            {!isInfoChange && !isPasswordChange && (
                 <div className={s.form__button}>
                     <FormButton
-                        value={(isInfoChange || isPasswordChange) ? messages.save : (isRegister ? authMessages.register : authMessages.login)}
+                        value={isRegister ? authMessages.register : authMessages.login}
                         onClick={handleButtonClick}
                         loader={loader as boolean}
                     />

@@ -5,17 +5,21 @@ import {passwordRules} from "components/form-elem/constants/formRules";
 import {messages} from "components/form-elem/constants/constants";
 
 export const PasswordInput = ({title, isAuthForm, isRegister, isPasswordChange}: TPasswordInputProps) => {
-
-    const placeholderText = isPasswordChange
-        ? messages.imagineNewPassword
-        : isRegister
-            ? messages.imaginePassword
-            : messages.passPassword;
+    const placeholderText = isPasswordChange ? messages.imagineNewPassword : isRegister
+        ? messages.imaginePassword
+        : messages.passPassword;
 
     return (
         <>
-            <Form.Item className="custom__antd__item" name="password" rules={passwordRules} validateStatus={""}
-                       hasFeedback>
+            {isPasswordChange && (<>
+                <Form.Item className="custom__antd__item" name={messages.passwordOld} rules={passwordRules} validateStatus={""} hasFeedback>
+                    <div className={s.field}>
+                        <span className={s.field__title}>{messages.lastPassword}</span>
+                        <Input.Password type="password" placeholder={messages.passLastPassword} className={s.field__input}/>
+                    </div>
+                </Form.Item>
+            </>)}
+            <Form.Item className="custom__antd__item" name="password" rules={passwordRules} validateStatus={""} hasFeedback>
                 <div className={s.field}>
                     <span className={s.field__title}>{title}</span>
                     <Input.Password

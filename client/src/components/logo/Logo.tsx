@@ -49,10 +49,10 @@ export const Logo = () => {
                 return headers.nearest;
             case `${RoutePath.settings}`:
                 return headers.settingsInfo;
-            case `${RoutePath.settings_info}`:
-                return headers.settingsInfo;
             case `${RoutePath.spotMap}:${spotId}`:
                 return headers.route;
+            case `${RoutePath.settings_password}`:
+                return headers.changePassword;
             case `${RoutePath.questions}`:
                 return headers.logo;
             default:
