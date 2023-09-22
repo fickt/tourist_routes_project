@@ -1,4 +1,4 @@
-import {TOGGLE_REVIEW_POPUP, TOGGLE_IMG_POPUP} from "ui/popup/store/popupActionsTypeNames";
+import {TOGGLE_REVIEW_POPUP, TOGGLE_IMG_POPUP} from "components/popup/store/popupActionsTypeNames";
 
 export const toggleReviewPopup = (payload: boolean) => ({
     type: TOGGLE_REVIEW_POPUP,

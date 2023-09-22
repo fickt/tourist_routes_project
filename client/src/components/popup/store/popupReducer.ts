@@ -1,5 +1,5 @@
-import {TPopupAction, TPopupState} from "ui/popup/store/types/popupTypes";
-import {TOGGLE_IMG_POPUP, TOGGLE_REVIEW_POPUP} from "ui/popup/store/popupActionsTypeNames";
+import {TPopupAction, TPopupState} from "components/popup/store/types/popupTypes";
+import {TOGGLE_IMG_POPUP, TOGGLE_REVIEW_POPUP} from "components/popup/store/popupActionsTypeNames";
 
 const initialState: TPopupState = {
     is_review_popup_open: false,

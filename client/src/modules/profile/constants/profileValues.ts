@@ -8,3 +8,12 @@ export const errorProfile = {
 }
 
 export const logoutText = "Выйти из аккаунта";
+
+export const settings = {
+    profileData: "Учетные данные",
+    password: "Пароль",
+    changePassword: "Изменить пароль",
+    profileControl: "Управление аккаунтом",
+    save: "Сохранить",
+    cancel: "Отмена",
+}

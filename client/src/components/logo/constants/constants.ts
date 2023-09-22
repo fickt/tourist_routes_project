@@ -9,4 +9,5 @@ export const headers = {
     route: "Маршрут",
     aboutSpot: "О месте",
     logo: "LOGO",
+    changePassword: "Изменение пароля",
 }

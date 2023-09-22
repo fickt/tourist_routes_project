@@ -1,12 +1,11 @@
 import React, {useCallback, useEffect, useRef} from "react";
 import s from "./styles.module.scss";
-import {TPopupProps} from "./types";
 import {useOnClickOutside} from "hooks/useOnclickOutside";
 import {ImageSearchPopup} from "modules/image-search-popup";
 import {ReviewPopup} from "modules/review-block";
+import {TPopupProps} from "components/popup/types";
 
 export const Popup = ({spotId, review, image, popup, closePopup}: TPopupProps) => {
-
     const imagePopupRef = useRef(null);
 
     const handleKeyPress = useCallback((e: KeyboardEvent) => {
@@ -15,7 +14,6 @@ export const Popup = ({spotId, review, image, popup, closePopup}: TPopupProps) =
 
     useEffect(() => {
         popup && document.addEventListener("keydown", handleKeyPress);
-
         return () => {
             popup && document.removeEventListener("keydown", handleKeyPress);
         };

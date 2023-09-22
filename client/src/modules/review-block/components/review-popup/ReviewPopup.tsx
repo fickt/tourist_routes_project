@@ -16,7 +16,6 @@ import {isError, isLoader, setError} from "components/loader-error";
 import {imageSearchRoutes} from "modules/image-search-popup";
 
 export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
-
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const loader = useAppSelector(isLoader);
@@ -35,7 +34,6 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
         if (Cookies.get("token")) {
             const fetchData = async () => {
                 await sendReview(dispatch, content, rating, spotId, form, setContent, setRating, closePopup, searchRoutesByImage);
-                navigate(`/spots/${spotId}`);
             }
             fetchData();
         } else {
@@ -68,15 +66,19 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
                     />
                 </Form.Item>
                 <div className="buttons__wrapper">
-                    <Button
-                        action={() => form.submit()}
-                        extraClass={classNames("button", s.reviewPopup__button_green)}
-                        disabled={loader}
-                    >
-                        Сохранить
-                    </Button>
+                    <div className="buttons__link">
+                        <Button
+                            action={() => form.submit()}
+                            extraClass={classNames("button", s.reviewPopup__button_green)}
+                            disabled={loader}
+                        >
+                            {buttonText.save}
+                        </Button>
+                    </div>
                     <Link to={`${RoutePath.spots}/:${spotId}`} className="buttons__link">
-                        <Button action={closePopup} extraClass="button" disabled={loader}>{buttonText}</Button>
+                        <Button action={closePopup} extraClass="button" disabled={loader}>
+                            {buttonText.later}
+                        </Button>
                     </Link>
                 </div>
             </Form>

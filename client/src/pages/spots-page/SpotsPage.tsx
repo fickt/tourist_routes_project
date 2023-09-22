@@ -5,7 +5,6 @@ import {useAppSelector} from "storage/hookTypes";
 import {spotsSelector} from "modules/card-list/store/spotsSelectors";
 
 export const SpotsPage = () => {
-
     const spots = useAppSelector(spotsSelector);
 
     return (

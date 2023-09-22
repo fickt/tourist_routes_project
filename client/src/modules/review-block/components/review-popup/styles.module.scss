@@ -7,7 +7,6 @@
   border-radius: 10px;
 }
 
-
 .reviewPopup {
   align-items: center;
   padding: 20px;
@@ -28,32 +27,18 @@
       width: 100%;
       padding: 20px;
       border-radius: 10px;
-      background: var(--background-04, #EFEFEF);
+      background: var(--background-04);
     }
   }
 
-
   &__button_green {
+    width: 100%;
     color: var(--text-02);
     background-color: var(--background-06);
     height: 51px;
     font-size: 14px;
     line-height: 20px;
   }
-}
-
-.button{
-  padding: 14px 32px;
-  border: 0;
-  height: auto;
-  width: 100%;
-  background-color: white;
-  color: var(--text-01);
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 }
 
 :where(.css-dev-only-do-not-override-1sn0ohr).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover{

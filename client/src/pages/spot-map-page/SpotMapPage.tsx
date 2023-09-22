@@ -8,9 +8,9 @@ import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {useNavigate, useParams} from "react-router-dom";
 import {TLocalRoute} from "utils/localRoutes";
 import {TMarker, TMarkers} from "utils/serverRoutes";
-import {Popup} from "ui/popup/Popup";
-import {toggleReviewPopup} from "ui/popup/store/popupActions";
-import {reviewPopupState} from "ui/popup/store/popupSelector";
+import {Popup} from "components/popup/Popup";
+import {toggleReviewPopup} from "components/popup/store/popupActions";
+import {reviewPopupState} from "components/popup/store/popupSelector";
 
 export const SpotMapPage = () => {
 

@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import {TServerResponse} from "modules/auth-form/store/types/authTypes";
-import {toggleReviewPopup} from "ui/popup/store/popupActions";
+import {toggleReviewPopup} from "components/popup/store/popupActions";
 import {routePassService} from "modules/my-spots/api/routePassService";
 import {TLocalRoutes} from "utils/localRoutes";
 import {setRoutesPass} from "modules/my-spots/store/routesPassActions";

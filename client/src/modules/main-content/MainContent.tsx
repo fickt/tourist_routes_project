@@ -1,22 +1,16 @@
 import React, {FormEvent, useEffect, useState} from "react";
 import s from "./styles.module.scss";
 import {SearchForm} from "components/search/SearchForm";
-import {CardList} from "modules/card-list";
+import {apiSpots, CardList, handleSpots, spotsSelector} from "modules/card-list";
 import backImage from "./assets/bg.jpg";
 import classNames from "classnames";
 import {useDebounce} from "hooks/useDebounce";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
-import {handleSpots} from "modules/card-list/store/spotsActions";
-import {spotsSelector} from "modules/card-list/store/spotsSelectors";
-import {Popup} from "ui/popup/Popup";
 import ImageRecommendIcon from "./assets/imageReccomendIcon.svg";
-import {apiSpots} from "modules/card-list/api/spotsService";
-import {imgPopupState} from "ui/popup/store/popupSelector";
-import {toggleImgPopup} from "ui/popup/store/popupActions";
-import {imageSearchRoutes} from "modules/image-search-popup";
+import {imageSearchRoutes, setFile} from "modules/image-search-popup";
 import {theBestRoute} from "./constants/constants";
 import {setError} from "components/loader-error";
-import {setFile} from "modules/image-search-popup/store/imageSearchActions";
+import {imgPopupState, Popup, toggleImgPopup} from "components/popup";
 
 export const MainContent = () => {
 
@@ -27,6 +21,7 @@ export const MainContent = () => {
     const [searchValue, setSearchValue] = useState("");
     const [filteredSpots, setFilteredSpots] = useState(null);
     const debounceSearchValue = useDebounce(searchValue, 500);
+    const body = document.querySelector("body") as HTMLElement | null;
 
     useEffect(() => {
         if (searchValue.trim() === "") {
@@ -39,9 +34,15 @@ export const MainContent = () => {
     }, [searchValue, spotRoutes, searchRoutesByImage])
 
     const inputChange = (value: string) => setSearchValue(value);
-    const closeImgPopup = () => dispatch(toggleImgPopup(false));
+
+    const closeImgPopup = () => {
+        body.classList.remove("disable-scroll");
+        dispatch(toggleImgPopup(false));
+    }
 
     const openImgPopup = () => {
+        body.classList.add("disable-scroll");
+        dispatch(setError(""));
         dispatch(setFile(null));
         dispatch(toggleImgPopup(true));
     }

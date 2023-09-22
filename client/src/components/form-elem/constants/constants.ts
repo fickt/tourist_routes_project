@@ -13,7 +13,7 @@ export const messages = {
     testEmail: "nik@vk.com",
     passEmail: "Введите e-mail",
     passwordOld: "password_old",
-    lastPassword: "Прошлый пароль",
+    lastPassword: "Текущий пароль",
     passLastPassword: "Введите прошлый пароль",
     newPassword: "Новый пароль",
     password: "Пароль",

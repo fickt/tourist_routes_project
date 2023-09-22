@@ -1,4 +1,4 @@
-import {TOGGLE_IMG_POPUP, TOGGLE_REVIEW_POPUP} from "ui/popup/store/popupActionsTypeNames";
+import {TOGGLE_IMG_POPUP, TOGGLE_REVIEW_POPUP} from "components/popup/store/popupActionsTypeNames";
 
 export type TPopupState = {
     is_review_popup_open: boolean,

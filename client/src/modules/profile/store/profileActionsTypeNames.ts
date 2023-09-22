@@ -1,0 +1,1 @@
+export const IS_INPUT_TOUCHED = "IS_INPUT_TOUCHED";

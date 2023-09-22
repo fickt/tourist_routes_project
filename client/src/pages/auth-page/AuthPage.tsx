@@ -1,11 +1,11 @@
-import { AuthForm } from "modules/auth-form/components/auth-form/AuthForm";
-import { TAuthPageProps } from "pages/types";
+import {TAuthPageProps} from "pages/types";
+import {AuthForm} from "modules/auth-form";
 
-export const AuthPage = ({ isRegister }: TAuthPageProps) => {
+export const AuthPage = ({isRegister}: TAuthPageProps) => {
 
     return (
         <div className="wrapper">
-            <AuthForm isRegister={isRegister} />
+            <AuthForm isRegister={isRegister}/>
         </div>
     );
 };
