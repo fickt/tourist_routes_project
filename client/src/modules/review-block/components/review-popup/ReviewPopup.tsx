@@ -34,6 +34,7 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
         if (Cookies.get("token")) {
             const fetchData = async () => {
                 await sendReview(dispatch, content, rating, spotId, form, setContent, setRating, closePopup, searchRoutesByImage);
+                await navigate(RoutePath.spots + "/" + spotId);
             }
             fetchData();
         } else {
