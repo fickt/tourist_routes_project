@@ -1,15 +1,15 @@
 .filters__item {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__title {
+    font-size: 20px;
+  }
+
+  &__tags {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    &__title {
-        font-size: 20px;
-    }
-
-    &__tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-    }
+    flex-wrap: wrap;
+    gap: 12px;
+  }
 }

@@ -7,7 +7,7 @@ import {AppRoutes, RoutePath} from "pages/routeConfig";
 import FilterSvg from './assets/filter.svg';
 
 export const CardListBody = memo(({spots}: CardListBodyProps) => {
-    const isProfile = window.location.href.includes(RoutePath[AppRoutes.PROFILE]);
+    const isProfile = window.location.href.includes(RoutePath.profile);
     return (
         <div className={s.cards}>
             {isProfile &&
