@@ -75,7 +75,7 @@ export const Profile = () => {
             </div>
             {!isStart && <PassQuestions/>}
             {loader && <PreloaderCar/>}
-            {!error && !loader && <CardListBody spots={questArray}/>}
+            {questArray.length>0 && !error && !loader && <CardListBody spots={questArray}/>}
         </div>
     )
 }

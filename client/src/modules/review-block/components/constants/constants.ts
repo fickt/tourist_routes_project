@@ -4,6 +4,7 @@ export const reviewForm = {
     ratingRule: "Укажите рейтинг!",
     textareaRule: "Напишите отзыв!",
     textareaText: "Напишите свой отзыв",
+    textareaTrimText: "Напишите свой отзыв без пробелов",
 }
 
 export const elemName = {
