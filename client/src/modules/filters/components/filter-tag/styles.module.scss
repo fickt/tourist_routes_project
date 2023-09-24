@@ -1,27 +1,27 @@
 .tags__item {
-    font-family: "Nunito Sans", sans-serif;
-    padding: 4px 16px;
-    min-height: 28px;
-    border-radius: 20px;
-    background-color: var(--background-04);
-    color: var(--text-01);
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 20px;
-    transition: background-color 0.15s;
-    cursor: pointer;
+  font-family: "Nunito Sans", sans-serif;
+  padding: 4px 16px;
+  min-height: 28px;
+  border-radius: 20px;
+  background-color: var(--background-04);
+  color: var(--text-01);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  transition: background-color 0.15s;
+  cursor: pointer;
 
-    &_active {
-        background-color: var(--background-tag);
-    }
+  &_active {
+    background-color: var(--background-tag);
+  }
 
-    &_passRoute {
-        backdrop-filter: blur(4px);
-        border-radius: 30px;
-        background: rgba(251, 251, 251, 0.80);
-    }
+  &_passRoute {
+    backdrop-filter: blur(4px);
+    border-radius: 30px;
+    background: rgba(251, 251, 251, 0.80);
+  }
 }
 
 .tags__item:first-letter {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
