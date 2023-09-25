@@ -1,1 +1,1 @@
-export { LocalSpotsMap } from "./components/LocalSpotsMap";
+export {LocalSpotsMap} from "./components/LocalSpotsMap";

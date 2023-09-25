@@ -10,7 +10,7 @@ import {favoriteReducer} from "modules/favorites";
 import {routesPassReducer} from "modules/my-spots";
 import {imageSearchReducer} from "modules/image-search-popup";
 import {loaderErrorReducer} from "components/loader-error";
-import {profileReducer} from "modules/profile/store/profileReducer";
+import {profileReducer} from "modules/profile";
 
 export const rootReducer = combineReducers({
     spots: spotsReducer,

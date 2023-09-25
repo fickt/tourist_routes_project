@@ -65,7 +65,7 @@ export const ImageSearchPopup = ({closePopup}: TImageSearchPopupProps) => {
                         src={URL.createObjectURL(file as Blob)}
                         alt={imgSearch.yourImg}
                     />
-                    : loader ? <PreloaderCar/> : <ImgPopupIcon/>
+                    : <ImgPopupIcon/>
                 }
             </div>
             {loader && <PreloaderCar/>

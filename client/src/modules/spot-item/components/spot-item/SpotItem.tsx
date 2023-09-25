@@ -26,15 +26,23 @@ export const SpotItem = ({spotItem}: TSpotItemProps) => {
     const routesPass = useAppSelector(userRoutesPass);
     const passMark = routesPass?.some(pass => pass.id === spotItem.id);
     const {name, rating, description, id, photos, categories, difficulty, comments} = spotItem;
+    const body = document.querySelector("body") as HTMLElement | null;
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    },[]);
 
     useEffect(() => {
         dispatch(setSpotItemId(id.toString()));
     }, [id]);
 
-    const closeReviewPopup = () => dispatch(toggleReviewPopup(false));
+    const closeReviewPopup = () => {
+        body && body.classList.remove("disable-scroll");
+        dispatch(toggleReviewPopup(false));
+    }
 
     const openReviewPopup = () => user
-        ? dispatch(toggleReviewPopup(true))
+        ? dispatch(toggleReviewPopup(true)) && body && body.classList.add("disable-scroll")
         : navigate(RoutePath.auth_login);
 
     return (
@@ -42,10 +50,10 @@ export const SpotItem = ({spotItem}: TSpotItemProps) => {
             {reviewPopup && (
                 <>
                     <div className="overlay"/>
-                    <Popup review spotId={id} popup={reviewPopup} closePopup={closeReviewPopup} />
+                    <Popup review spotId={id} popup={reviewPopup} closePopup={closeReviewPopup}/>
                 </>
             )}
-            <section id="image" className={classNames(s.section, s.slider)}>
+            <section className={classNames(s.section, s.slider)}>
                 {passMark && <div className={s.routePass}><FilterTag passRoute text={routePassText}/></div>}
                 <Slider photos={photos} name={name}/>
                 <div className={s.tags}>
@@ -53,11 +61,11 @@ export const SpotItem = ({spotItem}: TSpotItemProps) => {
                     <TagList tagList={categories}/>
                 </div>
             </section>
-            <section id="main" className={classNames(s.section, s.description)}>
+            <section className={classNames(s.section, s.description)}>
                 <h2 className={s.description__title}>{name}</h2>
                 <div className={s.section__text}>{description}</div>
             </section>
-            <section id="reviews" className={classNames(s.section, s.reviews)}>
+            <section className={classNames(s.section, s.reviews)}>
                 <div className={s.reviews__info}>
                     <h2 className={s.reviews__info__title}>{reviews} {comments.length !== 0 && comments.length}</h2>
                     <RatingLabel rating={rating}/>

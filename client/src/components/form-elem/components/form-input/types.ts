@@ -6,6 +6,7 @@ export type TFormInputProps = {
     rules: Rule[],
     placeholder: string,
     onChange?: () => void,
+    loader: boolean,
 }
 
 export type TPasswordInputProps = {
@@ -13,4 +14,5 @@ export type TPasswordInputProps = {
     isAuthForm?: boolean,
     isRegister?: boolean,
     isPasswordChange?: boolean,
+    loader: boolean,
 }

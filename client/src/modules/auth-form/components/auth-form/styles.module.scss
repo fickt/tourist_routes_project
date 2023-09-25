@@ -30,3 +30,9 @@
   text-decoration-line: underline;
   align-self: end;
 }
+
+@media (min-width: 760px) {
+  .auth {
+    max-width: 500px;
+  }
+};

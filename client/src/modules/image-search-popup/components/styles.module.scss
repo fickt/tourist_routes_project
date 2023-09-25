@@ -9,10 +9,7 @@
 
 .imagePopup {
   padding: 20px;
-
-  svg path {
-    stroke: var(--text-03);
-  }
+  width: 100%;
 
   &__title,
   &__button,
@@ -22,7 +19,8 @@
   }
 
   &__text,
-  &__button {
+  &__button,
+  &__button_green {
     font-size: 14px;
     line-height: 20px;
   }
@@ -31,9 +29,12 @@
   &__button_green {
     color: var(--text-02);
     background-color: var(--background-06);
-    height: 51px;
-    font-size: 14px;
-    line-height: 20px;
+    font-weight: 400;
+    height: 50px;
+  }
+
+  &__button_green:disabled {
+    color: rgba(0, 0, 0, 0.25);
   }
 
   &__title {
@@ -47,6 +48,10 @@
     background: var(--background-04);
     border-radius: 30px;
     overflow: hidden;
+
+    svg path {
+      stroke: var(--text-03);
+    }
 
     &__userImage {
       width: 100%;

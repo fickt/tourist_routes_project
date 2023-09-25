@@ -62,7 +62,7 @@ a {
 };
 
 .overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -98,7 +98,7 @@ main {
 
     .mapIcon {
         border-radius: 10px;
-        border: 5px solid #ffffff;
+        border: 5px solid var(--color-white);
     }
 
     .balloon-image {
@@ -145,6 +145,14 @@ main {
     }
 }
 
+.button:disabled {
+    background-color: rgba(0, 0, 0, 0.04);
+    color: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--button-disabled-color);
+    border-radius: 10px;
+    height: 50px;
+}
+
 .button_green,
 .button_white,
 .form__button {
@@ -179,13 +187,30 @@ main {
     align-items: center;
 }
 
+.disable-scroll {
+    overflow-y: hidden;
+}
+
 @media (min-width: 760px) {
     .container {
         padding-left: calc(var(--container-padding) * 2);
         padding-right: calc(var(--container-padding) * 2);
         width: calc(100% - 4*(var(--container-padding)));
     }
+
     .content {
         padding: calc(var(--content-padding) * 2) 0;
     }
-};
+
+    .wrapper {
+        width: 500px;
+    }
+
+    .buttons__link {
+        text-align: center;
+    }
+
+    .button {
+        max-width: 500px;
+    }
+}

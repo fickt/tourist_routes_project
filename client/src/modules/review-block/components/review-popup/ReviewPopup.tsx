@@ -35,7 +35,6 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
         if (Cookies.get("token") ) {
             const fetchData = async () => {
                 const trimmedContent = content.trim();
-
                 if (trimmedContent.length) {
                     await sendReview(dispatch, trimmedContent, rating, spotId, form, setContent, setRating, closePopup, searchRoutesByImage);
                 }
@@ -53,16 +52,14 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
     return (
         <div className={s.reviewPopup}>
             <h2 className={s.reviewPopup__title}>{popupTitle}</h2>
-            <Form
-                name={elemName.form}
-                className={s.reviewPopup__form}
-                onFinish={sendForm}
-                form={form}
-            >
+            <Form name={elemName.form} className={s.reviewPopup__form} onFinish={sendForm} form={form}>
                 <Form.Item name={elemName.rating} rules={[{required: true, message: reviewForm.ratingRule}]}>
                     <Rate allowClear={false} onChange={rateOnChange} value={rating} disabled={loader}/>
                 </Form.Item>
-                <Form.Item name={elemName.text} rules={[{required: true, message: isNotTrim ? reviewForm.textareaTrimText : reviewForm.textareaRule}]}>
+                <Form.Item name={elemName.text} rules={[{
+                    required: true,
+                    message: isNotTrim ? reviewForm.textareaTrimText : reviewForm.textareaRule
+                }]}>
                     <TextArea
                         maxLength={5000}
                         className={s.reviewPopup__form__textarea}

@@ -9,7 +9,6 @@ import {FavoriteElem, userFavoritesSpots} from "modules/favorites";
 import {FilterTag, routePassText} from "modules/filters";
 
 export const LocalCard = ({spot}: TCardProps) => {
-
     const favSpots = useAppSelector(userFavoritesSpots);
     const routesPass = useAppSelector(userRoutesPass);
     const favMark = favSpots?.some(fav => fav.id === spot.id);
@@ -48,13 +47,10 @@ export const LocalCard = ({spot}: TCardProps) => {
                         <span className={s.card__main__rating}>
                             <Rate defaultValue={spot.rating} disabled/>
                         </span>
-                        <div className={s.card__main__comments}>
-                            <span className={s.card__main__count}>{spot.comments.length}</span>
-                            {getDeclension(
-                                spot.comments.length,
-                                "отзыв", "отзыва", "отзывов"
-                            )}
-                        </div>
+                        <span className={s.card__main__count}>
+                            {spot.comments.length} {getDeclension(spot.comments.length,
+                            "отзыв", "отзыва", "отзывов")}
+                        </span>
                     </div>
                     <h2 className={s.card__main__name}>{spot.name}</h2>
                     <div className={s.card__tags}>

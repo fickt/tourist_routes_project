@@ -5,11 +5,11 @@ import {Typography} from "antd";
 import BackIcon from "./assets/backIcon.svg";
 import {useAppSelector} from "storage/hookTypes";
 import {RoutePath} from "pages/routeConfig";
-import {headers} from "components/logo/constants/constants";
+import {headers} from "modules/header/constants/constants";
 
 const {Title} = Typography;
 
-export const Logo = () => {
+export const Header = () => {
     const {spotId} = useAppSelector(state => state.spotId);
     const location = useLocation();
 
@@ -19,7 +19,7 @@ export const Logo = () => {
     };
 
     const handleClick = (e: SyntheticEvent<HTMLAnchorElement>) => {
-        location.pathname === `${RoutePath.home}` && e.preventDefault();
+        location.pathname === RoutePath.home && e.preventDefault();
     };
 
     const shouldRenderBackIcon = () => {
@@ -61,13 +61,11 @@ export const Logo = () => {
     }
 
     return (
-        <>
+        <div className={s.wrapper}>
+            {shouldRenderBackIcon() && <a className={s.back} onClick={goBack}><BackIcon className={s.back__icon}/></a>}
             <Link to={RoutePath.home} className={s.logo} onClick={handleClick}>
                 <Title level={2}>{nameOfPage()}</Title>
             </Link>
-            {shouldRenderBackIcon() &&
-                <a className={s.back} onClick={goBack}><BackIcon className={s.back__icon}/></a>
-            }
-        </>
+        </div>
     );
 };

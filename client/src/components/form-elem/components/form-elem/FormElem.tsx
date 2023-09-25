@@ -10,8 +10,7 @@ import {FormInput} from "components/form-elem/components/form-input/FormInput";
 import {emailRules, nicknameRules} from "components/form-elem/constants/formRules";
 import {PasswordInput} from "components/form-elem/components/form-input/PasswordInput";
 import {FormButton} from "components/form-elem/components/form-button/FormButton";
-import {TServerResponse} from "modules/auth-form/store/types/authTypes";
-import {authMessages, authUser} from "modules/auth-form";
+import {authMessages, authUser, TServerResponse} from "modules/auth-form";
 import {messages} from "components/form-elem/constants/constants";
 import {isError, isLoader, setError} from "components/loader-error";
 import {setInputTouched} from "modules/profile";
@@ -60,7 +59,7 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
         }
     };
 
-    const renderFormInputs = () => {
+    const renderFormInputs = (loader: boolean) => {
         return (
             <div className={s.form__inputs}>
                 {isInfoChange
@@ -70,9 +69,15 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
                         rules={nicknameRules}
                         placeholder={user.nickname}
                         onChange={inputTouched}
+                        loader={loader as boolean}
                     />
-                    : isRegister
-                        && <FormInput name={messages.nickNameEng} title={messages.nickNameRu} rules={nicknameRules} placeholder={messages.userName}/>
+                    : isRegister && <FormInput
+                        name={messages.nickNameEng}
+                        title={messages.nickNameRu}
+                        rules={nicknameRules}
+                        placeholder={messages.userName}
+                        loader={loader as boolean}
+                    />
                 }
                 {!isPasswordChange
                     && <FormInput
@@ -80,6 +85,7 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
                         rules={emailRules}
                         placeholder={isInfoChange ? user.email : messages.passEmail}
                         onChange={inputTouched}
+                        loader={loader as boolean}
                     />
                 }
                 {(!isInfoChange || isPasswordChange)
@@ -88,6 +94,7 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
                         isAuthForm={isAuthForm}
                         isRegister={isRegister}
                         isPasswordChange={isPasswordChange}
+                        loader={loader as boolean}
                     />
                 }
             </div>
@@ -105,7 +112,7 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
             onValuesChange={handleFormChange}
         >
             <div className={s.form__inputs}>
-                {renderFormInputs()}
+                {renderFormInputs(loader)}
             </div>
             {!isInfoChange && !isPasswordChange && (
                 <div className={s.form__button}>
