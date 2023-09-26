@@ -19,19 +19,12 @@ export const MainContent = () => {
     const searchRoutesByImage = useAppSelector(imageSearchRoutes);
     const imgPopup = useAppSelector(imgPopupState);
     const [searchValue, setSearchValue] = useState("");
-    const [filteredSpots, setFilteredSpots] = useState(null);
     const debounceSearchValue = useDebounce(searchValue, 500);
     const body = document.querySelector("body") as HTMLElement | null;
 
     useEffect(() => {
-        if (searchValue.trim() === "") {
-            setFilteredSpots(searchRoutesByImage || spotRoutes);
-        } else {
-            const routesToFilter = searchRoutesByImage || spotRoutes;
-            setFilteredSpots(routesToFilter.filter(spot =>
-                spot.name.toLowerCase().includes(searchValue.toLowerCase())));
-        }
-    }, [searchValue, spotRoutes, searchRoutesByImage])
+        handleSearchRequest()
+    }, [debounceSearchValue])
 
     const inputChange = (value: string) => setSearchValue(value);
 
@@ -83,7 +76,7 @@ export const MainContent = () => {
             </section>
             <section className={classNames("content-section", s.routes)}>
                 <div className="container content">
-                    <CardList spots={filteredSpots || searchRoutesByImage || spotRoutes}/>
+                    <CardList spots={searchRoutesByImage || spotRoutes}/>
                 </div>
             </section>
         </>

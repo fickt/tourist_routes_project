@@ -4,6 +4,7 @@ import {RoutePath} from "pages/routeConfig";
 import {useAppSelector} from "storage/hookTypes";
 import {isRecommended} from "modules/questions";
 import {authUser} from "modules/auth-form";
+import Cookies from "js-cookie";
 
 export const ProtectedRoute = ({onlyOnAuth, isRegister, children}: TProtectedRouteProps) => {
 
@@ -14,7 +15,9 @@ export const ProtectedRoute = ({onlyOnAuth, isRegister, children}: TProtectedRou
         // если логин и у пользователя есть рекомендации, то редирект на страницу home
         if (!isRegister && user && recommended) {
             return <Navigate replace to={{pathname: RoutePath.home}}/>;
-            // во всех остальных случаях редирект на анкету
+        } else if (!isRegister && user && Cookies.get("is_questionnaire_completed") === "true") {
+            return <Navigate replace to={{pathname: RoutePath.profile}}/>
+
         } else {
             return <Navigate replace to={{pathname: RoutePath.questions}}/>
         }
