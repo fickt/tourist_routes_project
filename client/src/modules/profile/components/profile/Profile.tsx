@@ -14,28 +14,32 @@ import {CardListBody} from "modules/card-list";
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
 import {isError, isLoader, setError, setLoader} from "components/loader-error";
-import {apiQuestions, isStartQuestions, PassQuestions} from "modules/questions";
+import {apiQuestions, PassQuestions} from "modules/questions";
 import {authService, TServerResponse} from "modules/auth-form";
 import {setFavoriteSpots} from "modules/favorites";
 
 export const Profile = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const isStart = useAppSelector(isStartQuestions);
+    const isStart = Cookies.get("is_questionnaire_completed")
     const loader = useAppSelector(isLoader);
     const error = useAppSelector(isError);
     const [questArray, setQuestArray] = useState<TLocalRoute[]>([]);
 
     useEffect(() => {
-        dispatch(setLoader(true));
-        apiQuestions.fetchRecommendations()
-            .then(data => {
-                dispatch(setLoader(false));
-                data.data.length && setQuestArray(data.data);
-            })
-            .catch(() => {
-                dispatch(setError(errorProfile.recommended));
-            })
+        dispatch(setError(''))
+        dispatch(setLoader(false));
+        if (isStart === 'true') {
+            dispatch(setLoader(true));
+            apiQuestions.fetchRecommendations()
+                .then(data => {
+                    dispatch(setLoader(false));
+                    data.data.length && setQuestArray(data.data);
+                })
+                .catch(() => {
+                    dispatch(setError(errorProfile.recommended));
+                })
+        }
     }, [])
 
     const logout = async (): Promise<void> => {
@@ -73,9 +77,10 @@ export const Profile = () => {
                     </Button>
                 </div>
             </div>
-            {!isStart && <PassQuestions/>}
+            {isStart === 'false' && <PassQuestions/>}
+            {error}
             {loader && <PreloaderCar/>}
-            {questArray.length>0 && !error && !loader && <CardListBody spots={questArray}/>}
+            {questArray.length > 0 && !error && !loader && <CardListBody spots={questArray}/>}
         </div>
     )
 }
