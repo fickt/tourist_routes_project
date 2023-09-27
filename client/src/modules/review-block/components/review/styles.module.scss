@@ -12,7 +12,6 @@
 	flex-direction: column;
 	gap: 16px;
 	width: 100%;
-	max-height: 196px;
 	border: none;
 	border-radius: 10px;
 	padding: 20px;
@@ -31,8 +30,14 @@
 
 	&__content {
 		font-size: 12px;
-		overflow: hidden;
+		word-wrap: break-word;
 	}
 }
+
+@media (min-width: 760px) {
+	.review {
+		max-width: 500px;
+	}
+};
 
 

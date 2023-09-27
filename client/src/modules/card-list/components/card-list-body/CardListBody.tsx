@@ -3,7 +3,7 @@ import s from "./styles.module.scss";
 import {TLocalRoute} from "utils/localRoutes";
 import {LocalCard} from "components/local-card/LocalCard";
 import {CardListBodyProps} from "./types";
-import {AppRoutes, RoutePath} from "pages/routeConfig";
+import {RoutePath} from "pages/routeConfig";
 import FilterSvg from './assets/filter.svg';
 
 export const CardListBody = memo(({spots}: CardListBodyProps) => {

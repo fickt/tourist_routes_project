@@ -4,7 +4,6 @@ import {MouseEvent} from "react";
 import classNames from "classnames";
 
 export const Button = ({children, type, target, href, extraClass, htmlType, action, disabled}: TButtonProps) => {
-
     const onclick = (e: MouseEvent<HTMLAnchorElement>) => {
         href && e.preventDefault();
         action && action();

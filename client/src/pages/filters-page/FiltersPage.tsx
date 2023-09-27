@@ -1,10 +1,8 @@
-import { Filters } from "modules/filters";
+import {Filters} from "modules/filters";
 
 export const FiltersPage = () => {
 
     return (
-        <>
-            <Filters />
-        </>
+        <Filters/>
     )
 }

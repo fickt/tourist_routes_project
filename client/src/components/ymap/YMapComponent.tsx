@@ -12,7 +12,6 @@ import {TYMapProps} from "components/ymap/types";
 import {RoutePath} from "pages/routeConfig";
 
 export const YMapComponent = ({markers}: TYMapProps) => {
-
     const navigate = useNavigate();
     const {spotId} = useParams(); //проверяем на какой странице мы находимся, если есть spotId, то на странице места, иначе на страницу общей карты
     const [error, setError] = useState<string>(null);
@@ -28,7 +27,6 @@ export const YMapComponent = ({markers}: TYMapProps) => {
                 referencePoints: [],
                 params: {}
             });
-
             removeControls(myMap, mapControls); //удаляем лишние виджеты управления на карте
 
             const setLocationMarker = () => {
@@ -36,7 +34,6 @@ export const YMapComponent = ({markers}: TYMapProps) => {
                     iconLayout: "default#image",
                     iconImageHref: locationIcon,
                 }
-
                 const locationMarker = new ymaps.Placemark(geoPosition, {}, iconSets);
                 myMap.geoObjects.add(locationMarker);
             };
@@ -91,21 +88,16 @@ export const YMapComponent = ({markers}: TYMapProps) => {
                     myMap.geoObjects.add(newMarker);
 
                     //Если это карта определенного места, то прокладываем маршрут
-                    if(spotId){
-                        buildRouteInSpot()
-                    }
+                    spotId && buildRouteInSpot();
                 })
             };
-
             setLocationMarker(); //устанавливаем иконку геопозиции
             setMarkers(markers); //устанавливаем маркеры мест
 
             // Установка границ видимой области карты так, чтобы все объекты были видны
-            myMap.setBounds(myMap.geoObjects.getBounds(), {
-                checkZoomRange: true, // проверка допустимости масштаба карты
-            });
+            myMap.setBounds(myMap.geoObjects.getBounds(), {checkZoomRange: true}); // проверка допустимости масштаба карты
         }
-        getLocation((pos) => mapInit(pos), (err) => mapInit(null, err)) //определяем геопозицию затем выполняем mapInition
+        getLocation((pos) => mapInit(pos), (err) => mapInit(null, err));
     }
 
     useEffect(() => {

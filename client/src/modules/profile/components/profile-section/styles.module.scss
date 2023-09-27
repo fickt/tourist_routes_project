@@ -25,3 +25,12 @@
   backdrop-filter: blur(4px);
   stroke: rgba(255, 255, 255, 0.7);
 }
+
+@media (min-width: 760px) {
+  .fav {
+    min-width: 220px;
+    height: 220px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}

@@ -17,6 +17,12 @@
   width: 100%;
   row-gap: 20px;
   border-radius: 10px;
-  background: var(--background-02, #FBFBFB);
+  background: var(--background-02);
   box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.20);
 }
+
+@media (min-width: 760px) {
+  .container {
+    width: 500px;
+  }
+};

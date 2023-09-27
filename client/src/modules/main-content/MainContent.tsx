@@ -2,7 +2,7 @@ import React, {FormEvent, useEffect, useState} from "react";
 import s from "./styles.module.scss";
 import {SearchForm} from "components/search/SearchForm";
 import {apiSpots, CardList, handleSpots, spotsSelector} from "modules/card-list";
-import backImage from "./assets/bg.jpg";
+import backImage from "./assets/bg.png";
 import classNames from "classnames";
 import {useDebounce} from "hooks/useDebounce";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
@@ -13,7 +13,6 @@ import {setError} from "components/loader-error";
 import {imgPopupState, Popup, toggleImgPopup} from "components/popup";
 
 export const MainContent = () => {
-
     const dispatch = useAppDispatch();
     const spotRoutes = useAppSelector(spotsSelector);
     const searchRoutesByImage = useAppSelector(imageSearchRoutes);
@@ -29,12 +28,12 @@ export const MainContent = () => {
     const inputChange = (value: string) => setSearchValue(value);
 
     const closeImgPopup = () => {
-        body.classList.remove("disable-scroll");
+        body && body.classList.remove("disable-scroll");
         dispatch(toggleImgPopup(false));
     }
 
     const openImgPopup = () => {
-        body.classList.add("disable-scroll");
+        body && body.classList.add("disable-scroll");
         dispatch(setError(""));
         dispatch(setFile(null));
         dispatch(toggleImgPopup(true));
@@ -64,15 +63,17 @@ export const MainContent = () => {
                 className={classNames("content-section", s.section)}
                 style={{backgroundImage: `url(${backImage})`}}
             >
-                <SearchForm
-                    placeholder={theBestRoute}
-                    searchValue={searchValue}
-                    handleFormSubmit={searchClick}
-                    handleInputChange={inputChange}
-                />
-                <button className={s.imageRecommend} onClick={openImgPopup}>
-                    <ImageRecommendIcon/>
-                </button>
+                <div className={s.section__search}>
+                    <SearchForm
+                        placeholder={theBestRoute}
+                        searchValue={searchValue}
+                        handleFormSubmit={searchClick}
+                        handleInputChange={inputChange}
+                    />
+                    <button className={s.imageRecommend} onClick={openImgPopup}>
+                        <ImageRecommendIcon/>
+                    </button>
+                </div>
             </section>
             <section className={classNames("content-section", s.routes)}>
                 <div className="container content">

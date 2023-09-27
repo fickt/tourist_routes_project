@@ -8,7 +8,6 @@ import {chosenSpotSelector, spotsSelector} from "modules/card-list/store/spotsSe
 import {useAdaptedSpotType} from "hooks/useAdaptedSpotType";
 
 export const SpotPage = () => {
-
     const dispatch = useAppDispatch();
     const spotRoutes = useAppSelector(spotsSelector);
     const {spotId} = useParams();
@@ -33,13 +32,7 @@ export const SpotPage = () => {
 
     return (
         <>
-            {spotItem && (
-                <div className="wrapper">
-                    <div className="content container">
-                        <SpotItem spotItem={spotItem}/>
-                    </div>
-                </div>)
-            }
+            {spotItem && <div className="content container"><SpotItem spotItem={spotItem}/></div>}
         </>
     );
 }
