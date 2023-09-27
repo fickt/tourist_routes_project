@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {RoutePath} from "pages/routeConfig";
 import {Button} from "ui/button/Button";
 import {settings} from "modules/profile";
-import s from './styles.module.scss';
+import s from "./styles.module.scss";
 
 export const ProfilePassword = () => {
 

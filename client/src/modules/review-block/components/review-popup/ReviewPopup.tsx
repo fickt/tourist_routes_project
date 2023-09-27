@@ -61,7 +61,7 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
                     message: isNotTrim ? reviewForm.textareaTrimText : reviewForm.textareaRule
                 }]}>
                     <TextArea
-                        maxLength={5000}
+                        maxLength={1000}
                         className={s.reviewPopup__form__textarea}
                         placeholder={reviewForm.textareaText}
                         style={{resize: "none"}}
