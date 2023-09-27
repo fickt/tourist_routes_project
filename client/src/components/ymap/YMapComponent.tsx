@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import s from "./styles.module.scss";
 import ymaps from "ymaps";
 import {removeControls} from "./helpers/ymap-options";
-import {mapControls, mapState} from "./constants/constants";
+import {mapControls, mapState, spots} from "./constants/constants";
 import {useNavigate, useParams} from "react-router-dom";
 import {getLocation} from "./helpers/location";
 import locationIcon from "./img/location.png";
@@ -82,7 +82,7 @@ export const YMapComponent = ({markers}: TYMapProps) => {
                     }
                     //действия при клике на маркет
                     newMarker.events.add("click", () => {
-                        spotId ? buildRouteInSpot() : navigate(`${RoutePath.spots}/${marker.id}/`)
+                        spotId ? buildRouteInSpot() : navigate(`${spots}${marker.id}/`)
                     })
                     //добавление маркера на карту
                     myMap.geoObjects.add(newMarker);

@@ -8,7 +8,7 @@ export const CardList = memo(({routesPass, favPage, spots}: TCardListProps) => {
 
     return (
         <div className={s.wrapper}>
-            {!favPage && !routesPass && <CardListHeader title="Наши Маршруты"/>}
+            {!favPage && !routesPass && <CardListHeader/>}
             <CardListBody spots={spots}/>
         </div>
     );

@@ -10,7 +10,7 @@ import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
 import {Link, useNavigate} from "react-router-dom";
 import {sendReview} from "modules/review-block/api/reviewApi";
-import {buttonText, elemName, popupTitle, reviewForm} from "modules/review-block/components/constants/constants";
+import {constants} from "modules/review-block/components/constants/constants";
 import {RoutePath} from "pages/routeConfig";
 import {isError, isLoader, setError} from "components/loader-error";
 import {imageSearchRoutes} from "modules/image-search-popup";
@@ -20,7 +20,7 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
     const navigate = useNavigate();
     const loader = useAppSelector(isLoader);
     const error = useAppSelector(isError);
-    const searchRoutesByImage = useAppSelector(imageSearchRoutes)
+    const searchRoutesByImage = useAppSelector(imageSearchRoutes);
     const [form] = Form.useForm();
     const {TextArea} = Input;
     const [content, setContent] = useState("");
@@ -36,9 +36,9 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
             const fetchData = async () => {
                 const trimmedContent = content.trim();
                 if (trimmedContent.length) {
-                    await sendReview(dispatch, trimmedContent, rating, spotId, form, setContent, setRating, closePopup, searchRoutesByImage);
+                    await sendReview(dispatch, trimmedContent, rating, spotId, form, setContent, setRating, closePopup, searchRoutesByImage, redirectToSpotPage);
                 }
-                setIsNotTrim(true)
+                setIsNotTrim(true);
             }
             fetchData();
         } else {
@@ -48,22 +48,23 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
 
     const rateOnChange = (value: number) => setRating(value);
     const textareaOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value);
+    const redirectToSpotPage = () => navigate(RoutePath.spotId);
 
     return (
         <div className={s.reviewPopup}>
-            <h2 className={s.reviewPopup__title}>{popupTitle}</h2>
-            <Form name={elemName.form} className={s.reviewPopup__form} onFinish={sendForm} form={form}>
-                <Form.Item name={elemName.rating} rules={[{required: true, message: reviewForm.ratingRule}]}>
+            <h2 className={s.reviewPopup__title}>{constants.popupTitle}</h2>
+            <Form name={constants.form} className={s.reviewPopup__form} onFinish={sendForm} form={form}>
+                <Form.Item name={constants.rating} rules={[{required: true, message: constants.ratingRule}]}>
                     <Rate allowClear={false} onChange={rateOnChange} value={rating} disabled={loader}/>
                 </Form.Item>
-                <Form.Item name={elemName.text} rules={[{
+                <Form.Item name={constants.text} rules={[{
                     required: true,
-                    message: isNotTrim ? reviewForm.textareaTrimText : reviewForm.textareaRule
+                    message: isNotTrim ? constants.textareaTrimText : constants.textareaRule
                 }]}>
                     <TextArea
                         maxLength={5000}
                         className={s.reviewPopup__form__textarea}
-                        placeholder={reviewForm.textareaText}
+                        placeholder={constants.textareaText}
                         style={{resize: "none"}}
                         onChange={textareaOnChange}
                         disabled={loader}
@@ -76,12 +77,12 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
                             extraClass={classNames("button", "button_green")}
                             disabled={loader}
                         >
-                            {buttonText.save}
+                            {constants.save}
                         </Button>
                     </div>
-                    <Link to={`${RoutePath.spots}/:${spotId}`} className="buttons__link">
+                    <Link to={`${constants.spots}:${spotId}`} className="buttons__link">
                         <Button action={closePopup} extraClass="button" disabled={loader}>
-                            {buttonText.later}
+                            {constants.later}
                         </Button>
                     </Link>
                 </div>

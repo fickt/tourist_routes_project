@@ -19,6 +19,7 @@ export async function sendReview(
     setRating: (value: number) => void,
     closePopup: () => void,
     searchRoutesByImage?: TLocalRoute[],
+    redirectToSpotPage?: () => void,
 ): Promise<void> {
     dispatch(setLoader(true));
     try {
@@ -42,5 +43,6 @@ export async function sendReview(
         dispatch(setError(e.response.data.error));
     } finally {
         dispatch(setLoader(false));
+        redirectToSpotPage();
     }
 }

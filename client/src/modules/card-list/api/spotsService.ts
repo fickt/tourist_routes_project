@@ -2,6 +2,7 @@ import {AxiosResponse} from "axios";
 import {RoutePath} from "pages/routeConfig";
 import {api} from "utils/api";
 import {TLocalRoute} from "utils/localRoutes";
+import {spots} from "modules/card-list/constants/constants";
 
 export class spotsService {
     fetchSpots(): Promise<AxiosResponse<TLocalRoute[]>> {
@@ -16,7 +17,7 @@ export class spotsService {
                 return `${RoutePath.routes}?category=${category}`
             if (difficulty && !category)
                 return `${RoutePath.routes}?difficulty=${difficulty}`
-            return RoutePath.spots
+            return spots;
         }
         return api.get(requestPath(difficulty, category));
     }

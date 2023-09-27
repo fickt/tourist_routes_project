@@ -6,3 +6,5 @@ export {apiSpots} from "./api/spotsService";
 export {handleSpots} from "./store/spotsActions";
 export {chosenMapSpotSelector, spotsSelector} from "./store/spotsSelectors";
 export {handleChosenMapSpot} from "./store/spotsActions";
+export {sortErrorMessage} from "./constants/constants";
+export {TPoints} from "./components/sorting/type";
