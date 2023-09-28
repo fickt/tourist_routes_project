@@ -15,7 +15,7 @@ import {messages} from "components/form-elem/constants/constants";
 import {isError, isLoader, setError} from "components/loader-error";
 import {setInputTouched} from "modules/profile";
 
-export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange}: TFormProps) => {
+export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange, restorePassword}: TFormProps) => {
     const dispatch = useAppDispatch();
     const [form] = Form.useForm<FormInstance>();
     const loader = useAppSelector(isLoader);
@@ -88,7 +88,7 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
                         loader={loader as boolean}
                     />
                 }
-                {(!isInfoChange || isPasswordChange)
+                {(!restorePassword && !isInfoChange || isPasswordChange)
                     && <PasswordInput
                         title={isPasswordChange ? messages.newPassword : messages.password}
                         isAuthForm={isAuthForm}
@@ -101,6 +101,21 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
         );
     };
 
+    const renderFormButtons = (loader: boolean) => {
+        return (
+            <div className={s.form__button}>
+                {restorePassword
+                    ? <FormButton value={authMessages.send} onClick={handleButtonClick} loader={loader as boolean}/>
+                    : <FormButton
+                        value={isRegister ? authMessages.register : authMessages.login}
+                        onClick={handleButtonClick}
+                        loader={loader as boolean}
+                    />
+                }
+            </div>
+        );
+    }
+
     return (
         <Form
             className={s.form}
@@ -111,18 +126,8 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
             onFinish={handleFormSubmit}
             onValuesChange={handleFormChange}
         >
-            <div className={s.form__inputs}>
-                {renderFormInputs(loader)}
-            </div>
-            {!isInfoChange && !isPasswordChange && (
-                <div className={s.form__button}>
-                    <FormButton
-                        value={isRegister ? authMessages.register : authMessages.login}
-                        onClick={handleButtonClick}
-                        loader={loader as boolean}
-                    />
-                </div>
-            )}
+            <div className={s.form__inputs}>{renderFormInputs(loader)}</div>
+            <div className={s.form__button}>{renderFormButtons(loader)}</div>
             {loader && <PreloaderCar/>}
             {!loader && (error && <ErrorMessage errorText={error}/>)}
         </Form>

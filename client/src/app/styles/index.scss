@@ -177,6 +177,10 @@ main {
     margin-bottom: 0;
 }
 
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-input-affix-wrapper > input.ant-input {
+    background-color: var(--background-02);
+}
+
 .ant-btn-default {
     box-shadow: none;
 }
