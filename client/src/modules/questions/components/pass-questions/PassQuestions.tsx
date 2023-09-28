@@ -8,11 +8,14 @@ export const PassQuestions = () => {
 
     return (
         <div className={s.passQuestions}>
-            <p className={s.passQuestions__text}>Рекомендаций пока нет, для того чтобы они появились необходимо заполнить анкету.</p>
-            <div className="buttons__wrapper">
-                <Link to={RoutePath.questions} className="buttons__link">
-                    <Button extraClass={classNames("button", "button_green")}>Анкета</Button>
-                </Link>
+            <p className={s.passQuestions__title}>Рекомендации</p>
+            <div className={s.passQuestions__wrapper}>
+                <p className={s.passQuestions__text}>Рекомендаций пока нет, для того чтобы они появились необходимо заполнить анкету.</p>
+                <div className="buttons__wrapper">
+                    <Link to={RoutePath.questions} className="buttons__link">
+                        <Button extraClass={classNames("button", "button_green")}>Анкета</Button>
+                    </Link>
+                </div>
             </div>
         </div>
     )
