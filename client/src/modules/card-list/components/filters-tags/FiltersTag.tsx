@@ -1,10 +1,12 @@
 import {useAppSelector} from "storage/hookTypes";
 import s from "./styles.module.scss";
-import {filterCategories} from "modules/filters";
+import {filterCategories, filterDifficulties} from "modules/filters";
 
 export const FiltersTags = () => {
 
-    const tags = useAppSelector(filterCategories);
+    const categories = useAppSelector(filterCategories);
+    const difficulties = useAppSelector(filterDifficulties);
+    const tags =  [...categories, ...difficulties];
 
     return (
         <div className={s.wrapper}>

@@ -17,6 +17,7 @@ import {isError, isLoader, setError, setLoader} from "components/loader-error";
 import {apiQuestions, PassQuestions} from "modules/questions";
 import {authService, TServerResponse} from "modules/auth-form";
 import {setFavoriteSpots} from "modules/favorites";
+import {ErrorMessage} from "ui/error-message/ErrorMessage";
 
 export const Profile = () => {
     const dispatch = useDispatch();
@@ -27,9 +28,9 @@ export const Profile = () => {
     const [questArray, setQuestArray] = useState<TLocalRoute[]>([]);
 
     useEffect(() => {
-        dispatch(setError(''))
+        dispatch(setError(""))
         dispatch(setLoader(false));
-        if (isStart === 'true') {
+        if (isStart === "true") {
             dispatch(setLoader(true));
             apiQuestions.fetchRecommendations()
                 .then(data => {
@@ -77,8 +78,8 @@ export const Profile = () => {
                     </Button>
                 </div>
             </div>
-            {isStart === 'false' && <PassQuestions/>}
-            {error}
+            {isStart === "false" && <PassQuestions/>}
+            {!loader && error && <ErrorMessage errorText={error}/>}
             {loader && <PreloaderCar/>}
             {questArray.length > 0 && !error && !loader && <CardListBody spots={questArray}/>}
         </div>

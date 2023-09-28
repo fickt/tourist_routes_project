@@ -57,10 +57,10 @@ export const QuestionCard = () => {
                     :
                     <img
                         className={s.questionCard__image}
-                        src={questions[questionIndex]?.photo_url}
+                        src={questionIndex !== questions.length ? questions[questionIndex]?.photo_url : questions[0]?.photo_url}
                         alt="Question Image"/>
                 }
-                {!error && questionIndex !== questions.length - 1 ? (
+                {!error && questionIndex !== questions.length ? (
                     <div className={s.questionCard__btns}>
                         <DislikeIcon
                             onClick={() => handleAnswer(false)}
@@ -76,7 +76,7 @@ export const QuestionCard = () => {
                     <p>{error}</p>
                 )}
                 <QuestionsButtons
-                    isSave={questionIndex === questions.length - 1}
+                    isSave={questionIndex === questions.length}
                     answers={answers}
                     title={questionsValues.ready}
                 />

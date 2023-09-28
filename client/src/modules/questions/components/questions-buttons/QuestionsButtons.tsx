@@ -51,8 +51,7 @@ export const QuestionsButtons = ({title, answers, isSave}: TQuestionsButtonProps
                         </div>
                     )}
                 </>
-                :
-                <Link className="buttons__link" to={RoutePath.questions}>
+                : <Link className="buttons__link" to={RoutePath.questions}>
                     <Button extraClass={classNames("button", "button_green")} action={startPassQuestions}>
                         {title}
                     </Button>
