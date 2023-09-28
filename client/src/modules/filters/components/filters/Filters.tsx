@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 import {Button} from "ui/button/Button";
 import s from "./styles.module.scss";
 import classNames from "classnames";
-import {ContentHeader} from "ui/content-header/ContentHeader";
 import {FilterItem} from "modules/filters/components/filter-item/FilterItem";
 import {categoriesTags, difficultyTags, filterValues} from "modules/filters/constants/filterValues";
 import {useNavigate} from "react-router-dom";
@@ -49,7 +48,6 @@ export const Filters = () => {
 
     return (
         <div className={s.wrapper}>
-            <ContentHeader title={filterValues.filter}/>
             <div className={s.filters}>
                 <FilterItem title={filterValues.category} list={categoriesTags}/>
                 <FilterItem title={filterValues.difficulty} list={difficultyTags}/>

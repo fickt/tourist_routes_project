@@ -1,7 +1,6 @@
 import {TRoutes} from "pages/types";
 import {HomePage} from "./home-page/HomePage";
 import {FavoritesPage} from "./favorites-page/FavoritesPage";
-import {SpotsPage} from "./spots-page/SpotsPage";
 import {AuthPage} from "./auth-page/AuthPage";
 import {SpotPage} from "./spot-page/SpotPage";
 import {ForgotPasswordPage} from "./forgot-password/ForgotPasswordPage";
@@ -24,7 +23,6 @@ export enum AppRoutes {
     QUESTIONS = "questions",
     SETTINGS = "settings",
     SETTINGS_PASSWORD = "settings_password",
-    SPOTS = "spots",
     ROUTES = "routes",
     SPOT_ID = "spotId",
     SPOT_MAP = "spotMap",
@@ -46,7 +44,6 @@ export const RoutePath = {
     [AppRoutes.QUESTIONS]: "/questions",
     [AppRoutes.SETTINGS]: "/settings",
     [AppRoutes.SETTINGS_PASSWORD]: "/settings_password",
-    [AppRoutes.SPOTS]: "/spots",
     [AppRoutes.ROUTES]: "/routes",
     [AppRoutes.LOCATION]: "/location",
     [AppRoutes.SPOT_ID]: "/spots/:spotId",
@@ -60,7 +57,6 @@ export const RoutePath = {
 
 export const mainRoutes: TRoutes[] = [
     {path: RoutePath.home, element: <HomePage/>},
-    {path: RoutePath.spots, element: <SpotsPage/>},
     {path: RoutePath.filters, element: <FiltersPage/>},
     {path: RoutePath.location, element: <LocationPage/>},
     {path: RoutePath.spotId, element: <SpotPage/>},

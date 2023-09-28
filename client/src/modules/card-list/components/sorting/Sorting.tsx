@@ -2,14 +2,11 @@ import React, {useState, useEffect, memo} from "react";
 import s from "./styles.module.scss";
 import ArrowDownIcon from "./assets/arrowDownIcon.svg";
 import {useAppSelector} from "storage/hookTypes";
-import {spotsSelector} from "modules/card-list/store/spotsSelectors";
 import {useDispatch} from "react-redux";
-import {handleSpots} from "modules/card-list/store/spotsActions";
 import {getLocation, TLocationFail, TLocationSuccess} from "components/ymap/helpers/location";
-import {TPoints} from "modules/card-list/components/sorting/type";
-import {sortErrorMessage} from "modules/card-list/constants/constants";
-import {imageSearchRoutes} from "modules/image-search-popup";
-import {setNewRoutes} from "modules/image-search-popup/store/imageSearchActions";
+import {imageSearchRoutes, setNewRoutes} from "modules/image-search-popup";
+import {handleSpots, sortErrorMessage, spotsSelector, TPoints} from "modules/card-list";
+import {sort} from "modules/card-list/constants/constants";
 
 // Функция для вычисления расстояния между двумя координатами
 function calculateDistance(point1: TPoints, point2:  TPoints) {
@@ -38,7 +35,6 @@ function deg2rad(degrees: number) {
 }
 
 export const Sorting = memo(() => {
-
     const dispatch = useDispatch();
     const localRoutes = useAppSelector(spotsSelector);
     const searchRoutesByImage = useAppSelector(imageSearchRoutes);
@@ -83,7 +79,7 @@ export const Sorting = memo(() => {
     }
 
     const sortSpotsByDistance = (isSortFromDistance:boolean, userLocation: TPoints) => {
-        setSortFromDistance(!isSortFromDistance)
+        setSortFromDistance(!isSortFromDistance);
         const newRoutes = [...routesToSort].sort((a, b) => {
             if (isSortFromDistance) {
                 const distanceA = calculateDistance(userLocation, {lat: a.latitude, lon: a.longitude});
@@ -102,15 +98,14 @@ export const Sorting = memo(() => {
 
     return (
         <div className={s.sort}>
-            <span className={s.sort__title}>Сортировка:</span>
             <button className={s.sort__button} onClick={toggleClick}>
-                <span className={s.sort__title}>Рейтинг</span>
+                <span className={s.sort__title}>{sort.rating}</span>
                 <div className={isSortFromTheBest ? s.sort__button__icon_up : ""}>
                     <ArrowDownIcon/>
                 </div>
             </button>
             <button className={s.sort__button} onClick={() => sortSpotsByDistance(isSortFromDistance, userLocation)}>
-                <span className={s.sort__title}>По удаленности</span>
+                <span className={s.sort__title}>{sort.distance}</span>
                 <div className={isSortFromDistance ? s.sort__button__icon_up : ""}>
                     <ArrowDownIcon/>
                 </div>

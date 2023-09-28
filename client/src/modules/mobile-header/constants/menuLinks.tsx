@@ -16,4 +16,7 @@ export const buttonText = {
     buildRoute: "Построить маршрут",
 }
 
-export const spotMap = "/spotMap/";
+export const url = {
+    spotMap: "/spotMap/",
+    spots: "/spots/",
+}

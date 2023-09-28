@@ -5,3 +5,5 @@ export const mapState = {
     zoom: 12,
     controls: ["fullscreenControl"]
 };
+
+export const spots = "/spots/";
