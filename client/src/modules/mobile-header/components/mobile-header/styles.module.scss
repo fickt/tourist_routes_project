@@ -7,6 +7,7 @@
   position: sticky;
   left: 0;
   bottom: 0;
+  z-index: 100;
 
   .menu {
     background: var(--background-02);
@@ -56,10 +57,7 @@
       stroke: var(--background-06);
     }
   }
-;
 }
-
-;
 
 .buttons__link_elem {
   width: fit-content;

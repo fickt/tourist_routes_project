@@ -61,6 +61,7 @@ export const mainRoutes: TRoutes[] = [
     {path: RoutePath.location, element: <LocationPage/>},
     {path: RoutePath.spotId, element: <SpotPage/>},
     {path: RoutePath.spotMap, element: <SpotMapPage/>},
+    {path: RoutePath.forgotPassword, element: <ForgotPasswordPage/>},
     {path: RoutePath.not_found, element: <NotFoundPage/>},
 ]
 
@@ -73,5 +74,4 @@ export const privateRoutes: TRoutes[] = [
     {path: RoutePath.settings_password, element: <ProtectedRoute><SettingsPasswordPage/></ProtectedRoute>},
     {path: RoutePath.auth_register, element: <ProtectedRoute onlyOnAuth isRegister><AuthPage isRegister={true}/></ProtectedRoute>},
     {path: RoutePath.auth_login, element: <ProtectedRoute onlyOnAuth><AuthPage/></ProtectedRoute>},
-    {path: RoutePath.forgotPassword, element: <ProtectedRoute onlyOnAuth><ForgotPasswordPage/></ProtectedRoute>},
 ]

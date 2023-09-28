@@ -1,9 +1,14 @@
 .loader {
+    height: auto;
     top: 50%;
     left: 50%;    
     z-index: 100;
     width: 120px;
     margin: 0 auto;
+
+    svg path {
+        stroke: var(--background-color-blue);
+    }
 
     .loader-wrapper {
         display: flex;
@@ -40,6 +45,7 @@
         .loading-text {
             text-align: center;
             font-size: 20px;
+            color: var(--background-color-blue);
         }
     }
 }
