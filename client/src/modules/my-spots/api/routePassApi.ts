@@ -1,10 +1,10 @@
 import {Dispatch} from "redux";
-import {TServerResponse} from "modules/auth-form/store/types/authTypes";
 import {toggleReviewPopup} from "components/popup/store/popupActions";
 import {routePassService} from "modules/my-spots/api/routePassService";
 import {TLocalRoutes} from "utils/localRoutes";
 import {setRoutesPass} from "modules/my-spots/store/routesPassActions";
 import {setError, setLoader} from "components/loader-error";
+import {TServerResponse} from "modules/auth-form";
 
 export async function setRoutePass(
     dispatch: Dispatch,
@@ -14,7 +14,7 @@ export async function setRoutePass(
     try {
         await routePassService.setRoutePass(spotId);
         const response = await routePassService.getRoutesPass();
-        dispatch(setRoutesPass(response.data));
+        response && dispatch(setRoutesPass(response.data));
         dispatch(toggleReviewPopup(true));
     } catch (e: Error | TServerResponse) {
         e.response && dispatch(setError(e.response.data.error));
@@ -30,7 +30,7 @@ export async function getRoutesPass(
     try {
         const response = await routePassService.getRoutesPass();
         const userRoutesPass: TLocalRoutes = response.data;
-        dispatch(setRoutesPass(userRoutesPass));
+        userRoutesPass && dispatch(setRoutesPass(userRoutesPass));
     } catch (e: Error | TServerResponse) {
         e.response && dispatch(setError(e.response.data.error));
     } finally {

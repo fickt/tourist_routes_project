@@ -1,19 +1,19 @@
-import {TRoutes} from "pages/types";
+import {TRoutes} from "./types";
 import {HomePage} from "./home-page/HomePage";
 import {FavoritesPage} from "./favorites-page/FavoritesPage";
 import {AuthPage} from "./auth-page/AuthPage";
 import {SpotPage} from "./spot-page/SpotPage";
 import {ForgotPasswordPage} from "./forgot-password/ForgotPasswordPage";
-import {NotFoundPage} from "./not-found-page/NotFoundPage";
-import {ProfilePage} from "pages/profile-page/ProfilePage";
-import {MySpotsPage} from "pages/my-spots-page/MySpotsPage";
+import {ProfilePage} from "./profile-page/ProfilePage";
+import {MySpotsPage} from "./my-spots-page/MySpotsPage";
 import {ProtectedRoute} from "components/protected-route/ProtectedRoute";
 import {LocationPage} from "./location-page/LocationPage";
-import {QuestionsPage} from "pages/questions-page/QuestionsPage";
+import {QuestionsPage} from "./questions-page/QuestionsPage";
 import {FiltersPage} from "./filters-page/FiltersPage";
-import {SettingsPage} from "pages/settings-page/SettingsPage";
-import {SettingsPasswordPage} from "pages/settings-password-page/SettingsPasswordPage";
-import {SpotMapPage} from "pages/spot-map-page/SpotMapPage";
+import {SettingsPage} from "./settings-page/SettingsPage";
+import {SettingsPasswordPage} from "./settings-password-page/SettingsPasswordPage";
+import {SpotMapPage} from "./spot-map-page/SpotMapPage";
+import {NotFoundPage} from "./not-found-page/NotFoundPage";
 
 export enum AppRoutes {
     HOME = "home",
@@ -46,13 +46,13 @@ export const RoutePath = {
     [AppRoutes.SETTINGS_PASSWORD]: "/settings_password",
     [AppRoutes.ROUTES]: "/routes",
     [AppRoutes.LOCATION]: "/location",
-    [AppRoutes.SPOT_ID]: "/spots/:spotId",
-    [AppRoutes.SPOT_MAP]: "/spotMap/:spotId",
     [AppRoutes.AUTH_LOGIN]: "/auth/login",
     [AppRoutes.AUTH_REGISTER]: "/auth/register",
     [AppRoutes.AUTH_LOGOUT]: "/auth/logout",
     [AppRoutes.FORGOT_PASSWORD]: "/forgotPassword",
-    [AppRoutes.NOT_FOUND]: "*",
+    [AppRoutes.SPOT_ID]: "/spots/:spotId",
+    [AppRoutes.SPOT_MAP]: "/spotMap/:spotId",
+    [AppRoutes.NOT_FOUND]: "/not_found"
 }
 
 export const mainRoutes: TRoutes[] = [
@@ -61,7 +61,9 @@ export const mainRoutes: TRoutes[] = [
     {path: RoutePath.location, element: <LocationPage/>},
     {path: RoutePath.spotId, element: <SpotPage/>},
     {path: RoutePath.spotMap, element: <SpotMapPage/>},
+    {path: RoutePath.forgotPassword, element: <ForgotPasswordPage/>},
     {path: RoutePath.not_found, element: <NotFoundPage/>},
+    {path: "*", element: <NotFoundPage/>},
 ]
 
 export const privateRoutes: TRoutes[] = [
@@ -73,5 +75,4 @@ export const privateRoutes: TRoutes[] = [
     {path: RoutePath.settings_password, element: <ProtectedRoute><SettingsPasswordPage/></ProtectedRoute>},
     {path: RoutePath.auth_register, element: <ProtectedRoute onlyOnAuth isRegister><AuthPage isRegister={true}/></ProtectedRoute>},
     {path: RoutePath.auth_login, element: <ProtectedRoute onlyOnAuth><AuthPage/></ProtectedRoute>},
-    {path: RoutePath.forgotPassword, element: <ProtectedRoute onlyOnAuth><ForgotPasswordPage/></ProtectedRoute>},
 ]

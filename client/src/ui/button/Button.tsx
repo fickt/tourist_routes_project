@@ -1,6 +1,6 @@
+import React, {MouseEvent} from "react";
 import {Button as ButtonAntd} from "antd";
 import {TButtonProps} from "./types";
-import {MouseEvent} from "react";
 import classNames from "classnames";
 
 export const Button = ({children, type, target, href, extraClass, htmlType, action, disabled}: TButtonProps) => {

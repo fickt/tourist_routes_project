@@ -8,6 +8,7 @@ import FilterSvg from "./assets/filter.svg";
 
 export const CardListBody = memo(({spots}: CardListBodyProps) => {
     const isProfile = window.location.href.includes(RoutePath.profile);
+
     return (
         <div className={s.cards}>
             {isProfile &&
@@ -16,8 +17,7 @@ export const CardListBody = memo(({spots}: CardListBodyProps) => {
                     <FilterSvg/>
                 </div>
             }
-            {spots?.map((spot: TLocalRoute) =>
-                <LocalCard key={spot.id} spot={spot} />)}
+            {spots?.map((spot: TLocalRoute) => <LocalCard key={spot.id} spot={spot}/>)}
         </div>
     );
 });

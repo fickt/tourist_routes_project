@@ -3,6 +3,7 @@ export type TFormProps = {
     isRegister?: boolean,
     isInfoChange?: boolean,
     isPasswordChange?: boolean,
+    restorePassword?: boolean,
 }
 
 export type TFormData = {

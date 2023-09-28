@@ -1,7 +1,7 @@
 export const sortErrorMessage = "Ошибка получения местоположения:";
 
 export const sort = {
-    rating: "По популярности",
-    distance: "По удалённости",
+    rating: "Рейтинг",
+    distance: "Удалённость",
 }
 export const spots = "/spots";
