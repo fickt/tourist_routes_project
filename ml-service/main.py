@@ -31,7 +31,6 @@ except Exception as ex:
     print(ex)
 
 place_recommender = PlaceRecommender()
-landscape_clf = keras.models.load_model('clfv5.keras')
 
 class File(BaseModel):
     file: str
@@ -41,20 +40,17 @@ class File(BaseModel):
 async def recommend_on_image(img: File):
     image = Image.open(io.BytesIO(base64.b64decode(bytes(img.file, "utf-8"))))
 
-    if np.array(image).shape[0] > 1080 or np.array(image).shape[1] > 1920 or np.array(image).shape[2] != 3:
+    if np.array(image).shape[0] > 1920 or np.array(image).shape[1] > 1920 or np.array(image).shape[2] != 3:
         raise HTTPException(status_code = 400, detail = 'Invalid file shape')
-
-    is_landscape = 1 if landscape_clf.predict(
-        np.expand_dims(np.array(image.resize((150, 150))), 0) / 255.0) > 0.5 else 0
-
-    if not is_landscape:
-        raise HTTPException(status_code = 400, detail = 'Loaded image is not landscape')
 
     try:
         to_predict = preprocess_input(np.expand_dims(np.array(image.resize((224, 224))), 0))
         to_recommend = place_recommender.recommend_on_image(to_predict, routes['embedding'])
-
-
-        return to_recommend
     except Exception as ex:
         return {'error': str(ex)}
+
+    if to_recommend[0][1][0][0] > 0.5:
+        to_recommend = [place[0] for place in to_recommend]
+        return to_recommend
+    else:
+        raise HTTPException(status_code = 400, detail = 'No similar images')
