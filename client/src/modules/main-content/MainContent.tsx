@@ -11,6 +11,7 @@ import {imageSearchRoutes, setFile} from "modules/image-search-popup";
 import {theBestRoute} from "./constants/constants";
 import {setError} from "components/loader-error";
 import {imgPopupState, Popup, toggleImgPopup} from "components/popup";
+import {filterCategories, filterDifficulties} from "modules/filters";
 
 export const MainContent = () => {
     const dispatch = useAppDispatch();
@@ -20,10 +21,19 @@ export const MainContent = () => {
     const [searchValue, setSearchValue] = useState("");
     const debounceSearchValue = useDebounce(searchValue, 500);
     const body = document.querySelector("body") as HTMLElement | null;
+    const categories = useAppSelector(filterCategories);
+    const difficulties = useAppSelector(filterDifficulties);
+    const tags = [...categories, ...difficulties];
 
     useEffect(() => {
-        handleSearchRequest()
-    }, [debounceSearchValue])
+        if (debounceSearchValue.trim()) {
+            handleSearchRequest();
+        } else if (tags.length === 0) {
+            apiSpots.fetchSpots()
+                .then(data => dispatch(handleSpots(data.data)))
+                .catch(err => dispatch((setError(err))))
+        }
+    }, [debounceSearchValue]);
 
     const inputChange = (value: string) => setSearchValue(value);
 
@@ -46,6 +56,7 @@ export const MainContent = () => {
     }
 
     const handleSearchRequest = () => {
+        debounceSearchValue &&
         apiSpots.fetchSearchRequest(debounceSearchValue)
             .then(data => dispatch(handleSpots(data.data)))
             .catch(err => dispatch((setError(err))));
