@@ -2,7 +2,6 @@ import {AxiosResponse} from "axios";
 import {RoutePath} from "pages/routeConfig";
 import {TAuthResponse, TLogoutResponse} from "modules/auth-form/store/types/authTypes";
 import {api} from "utils/api";
-import {refreshUrl} from "modules/auth-form";
 
 export class authService {
     static async login(email: string, password: string): Promise<AxiosResponse<TAuthResponse>> {
@@ -15,9 +14,5 @@ export class authService {
 
     static async logout(): Promise<AxiosResponse<TLogoutResponse>> {
         return api.post(RoutePath.auth_logout);
-    }
-
-    static async checkAuth(): Promise<AxiosResponse<TAuthResponse>> {
-        return api.post(refreshUrl);
     }
 }

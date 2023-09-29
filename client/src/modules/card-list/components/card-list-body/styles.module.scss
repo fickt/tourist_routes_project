@@ -1,13 +1,31 @@
-.cards {
+.cards,
+.cards__header {
   display: flex;
+  width: 100%;
+}
+
+.cards {
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
   row-gap: 26px;
   column-gap: 16px;
+  border-radius: 30px 30px 0 0;
+  background: var(--background-04);
+
+  &__header {
+    justify-content: space-between;
+    align-items: center;
+
+    &_title {
+      color: var(--text-01);
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
 }
 
-.not__found{
+.not__found {
   font-size: 30px;
   font-weight: 900;
 }

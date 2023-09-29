@@ -6,3 +6,5 @@ export const imgSearch = {
     btnCancel: "Отмена",
     yourImg: "Ваше изображение",
 }
+
+export const imgLoadError = "Максимальный размер файла: 10MB";

@@ -14,10 +14,10 @@ services:
       - NODE_ENV=development
       - CI=true
     labels:
-      - traefik.enable=true
-      - traefik.http.services.client.loadbalancer.server.port=3001
-      - traefik.http.routers.client.rule=Host(`client.localhost`)
-      - traefik.http.routers.client.entrypoints=web
+      - "traefik.enable=true"
+      - "traefik.http.services.client.loadbalancer.server.port=3001"
+      - "traefik.http.routers.client.rule=Host(`client.localhost`)"
+      - "traefik.http.routers.client.entrypoints=web"
 
   #Backend
   app:
@@ -31,13 +31,14 @@ services:
     depends_on:
       - db
       - traefik-proxy
+      - ml-service
     environment:
       - APP_LOG_FILE=${APP_LOG_FILE}
     labels:
-      - traefik.enable=true
-      - traefik.http.services.app.loadbalancer.server.port=56
-      - traefik.http.routers.app.rule=Host(`app.localhost`)
-      - traefik.http.routers.app.entrypoints=web
+      - "traefik.enable=true"
+      - "traefik.http.services.app.loadbalancer.server.port=56"
+      - "traefik.http.routers.app.rule=Host(`app.localhost`)"
+      - "traefik.http.routers.app.entrypoints=web"
     env_file:
       - .env
 
@@ -47,11 +48,11 @@ services:
     build:
       context: ./ml-service
       dockerfile: Dockerfile
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.ml-service.loadbalancer.server.port=9000
-      - traefik.http.routers.ml-service.rule=Host(`ml-service.localhost`)
-      - traefik.http.routers.ml-service.entrypoints=web
+   # labels:
+    #  - "traefik.enable=true"
+    #  - "traefik.http.services.ml-service.loadbalancer.server.port=9000"
+   #   - "traefik.http.routers.ml-service.rule=Host(`ml-service.localhost`)"
+    #  - "traefik.http.routers.ml-service.entrypoints=web"
     volumes:
       - ./ml-service:/usr/src/app
     ports:
@@ -62,11 +63,11 @@ services:
     restart: unless-stopped
     container_name: traefik-proxy
     command:
-      - --log.level=DEBUG
-      - --api.insecure=true
-      - --providers.docker=true
-      - --providers.docker.exposedbydefault=false
-      - --entrypoints.web.address=:80
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
     ports:
       - "80:80"
       - "8080:8080"

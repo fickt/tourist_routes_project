@@ -21,20 +21,11 @@
   align-items: flex-start;
 
   &__inputs {
-    row-gap: 24px;
+    row-gap: 20px;
   }
 
   &__button {
+    max-height: 50px;
     row-gap: 12px;
   }
-}
-
-.forgotPassword {
-  color: var(--text-03);
-  font-family: "Raleway", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  text-decoration-line: underline;
-  align-self: end;
 }

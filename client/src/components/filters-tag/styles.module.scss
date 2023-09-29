@@ -12,6 +12,51 @@
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
+
+    &__difficulty__easy {
+      display: flex;
+      padding: 4px 16px;
+      justify-content: center;
+      align-items: center;
+      color: var(--color-black);
+      border-radius: 20px;
+      background: #B7E5E4;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      text-transform: capitalize;
+    }
+
+    &__difficulty__middle {
+      display: flex;
+      padding: 4px 16px;
+      justify-content: center;
+      align-items: center;
+      color: var(--color-black);
+      border-radius: 20px;
+      background: #FFE8C4;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      text-transform: capitalize;
+    }
+
+    &__difficulty__hard {
+      display: flex;
+      padding: 4px 16px;
+      justify-content: center;
+      align-items: center;
+      color: var(--color-black);
+      border-radius: 20px;
+      background: #FCCCCA;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px;
+      text-transform: capitalize;
+    }
   }
 
   .tag:first-letter {

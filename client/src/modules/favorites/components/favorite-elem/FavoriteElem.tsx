@@ -10,7 +10,6 @@ import {setError} from "components/loader-error";
 import {errorFavMessage} from "modules/favorites/constants/constants";
 
 export const FavoriteElem = memo(({activeFavMark, spot}: TFavoriteElemProps) => {
-
     const dispatch = useAppDispatch();
     const favSpots = useAppSelector(userFavoritesSpots);
     const iconStyle = activeFavMark ? s.icon_active : "";

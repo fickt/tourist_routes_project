@@ -1,0 +1,47 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "arrow logo";
+  align-items: center;
+  background-color: var(--background-02);
+  width: 100%;
+  box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.3);
+  padding: 16px 10px;
+}
+
+.logo {
+  grid-area: logo;
+  text-decoration: none;
+  width: fit-content;
+  justify-self: center;
+
+  h2 {
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--background-07);
+  }
+}
+
+.back {
+  grid-area: arrow;
+  cursor: pointer;
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (min-width: 760px) {
+  .wrapper {
+    padding: 16px 32px;
+  }
+
+  .logo {
+    h2 {
+      font-size: 30px;
+    }
+  }
+}

@@ -5,5 +5,4 @@ export type TCardListProps = {
     routesPass?: boolean,
     favPage?: boolean,
     spots: TLocalRoute[] | TUpdatedRoutes,
-    activeFavMark?: boolean,
 }

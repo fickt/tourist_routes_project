@@ -1,23 +1,33 @@
-.notfound {
+.notFound {
+    font-family: "Nunito Sans", sans-serif;
     display: flex;
     flex-direction: column;
+    row-gap: 24px;
     align-items: center;
     justify-content: center;
-    height: 100%;
 
-    &__title {
-        font-weight: 700;
-        font-size: 32px;
-        line-height: 1.2;
+    &__images {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 288px;
+        height: 288px;
+        padding: 11px;
+
+        svg path {
+            stroke: var(--background-09);
+        }
     }
 
-    &__image {
-        width: 180px;
-        height: 180px;
-        object-fit: contain;
+    &__title {
+        font-size: 24px;
+        font-weight: 600;
+    }
 
-        path {
-            fill: gray;
-        }
+    &__text {
+        color: var(--text-01);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
     }
 }

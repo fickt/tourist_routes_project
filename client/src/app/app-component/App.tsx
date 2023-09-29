@@ -14,10 +14,9 @@ import {getSpots} from "modules/card-list";
 import {getFavSpots} from "modules/favorites";
 import {getRoutesPass} from "modules/my-spots/api/routePassApi";
 import {isError, isLoader} from "components/loader-error";
-import {handleStartPassQuestions} from "modules/questions/store/questionsActions";
+import {handleStartPassQuestions} from "modules/questions";
 
 const App = () => {
-
     const dispatch = useAppDispatch();
     const spotRoutes = useAppSelector(spotsSelector);
     const loader = useAppSelector(isLoader);
@@ -26,7 +25,7 @@ const App = () => {
 
     useEffect(() => {
         fetchData();
-    }, [token]);
+    }, []);
 
     const fetchData = async () => {
         if (token) {
@@ -35,7 +34,7 @@ const App = () => {
                 email: Cookies.get("email"),
                 is_questionnaire_completed: Cookies.get("is_questionnaire_completed") === "true",
             };
-            dispatch(handleStartPassQuestions(userData.is_questionnaire_completed))
+            dispatch(handleStartPassQuestions(userData.is_questionnaire_completed));
             dispatch(handleSetUser(userData));
             await getFavSpots(dispatch);
             await getRoutesPass(dispatch);

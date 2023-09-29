@@ -1,4 +1,4 @@
-import {ProfileSettings} from "modules/profile/components/profile-settings/ProfileSettings";
+import {ProfileSettings} from "modules/profile";
 
 export const SettingsPage = () => {
 

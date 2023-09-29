@@ -4,7 +4,6 @@ import {handleSpots} from "modules/card-list/store/spotsActions";
 import {apiSpots} from "modules/card-list/api/spotsService";
 import {Dispatch} from "redux";
 import {setError, setLoader} from "components/loader-error";
-import {errorMessage} from "modules/card-list/constants/constants";
 
 export async function getSpots(dispatch: Dispatch) {
     dispatch(setLoader(true));
@@ -16,9 +15,7 @@ export async function getSpots(dispatch: Dispatch) {
         }));
         dispatch(handleSpots(spotsWithFavoriteInfo));
     } catch (e) {
-        e.response
-            ? dispatch(setError(e.response.data.error))
-            : dispatch(setError(errorMessage));
+        e.response && dispatch(setError(e.response.data.error));
     } finally {
         dispatch(setLoader(false));
     }

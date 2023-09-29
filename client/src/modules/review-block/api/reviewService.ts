@@ -6,6 +6,6 @@ import {RoutePath} from "pages/routeConfig";
 export class reviewService {
 
     static async sendReview(content: string, rating: number, routeId: number): Promise<AxiosResponse<TLocalRoute>> {
-        return api.post(`${RoutePath.spots}/${routeId}/comment`, {content, rating});
+        return api.post(`${RoutePath.routes}/${routeId}/comment`, {content, rating});
     }
 }

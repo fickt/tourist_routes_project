@@ -1,19 +1,17 @@
 import React, {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
-import {handleChosenMapSpot} from "modules/card-list/store/spotsActions";
 import {YMapComponent} from "components/ymap/YMapComponent";
 import {useAdaptedSpotsType} from "hooks/useAdaptedSpotType";
-import {chosenMapSpotSelector, spotsSelector} from "modules/card-list/store/spotsSelectors";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {useNavigate, useParams} from "react-router-dom";
 import {TLocalRoute} from "utils/localRoutes";
 import {TMarker, TMarkers} from "utils/serverRoutes";
-import {Popup} from "ui/popup/Popup";
-import {toggleReviewPopup} from "ui/popup/store/popupActions";
-import {reviewPopupState} from "ui/popup/store/popupSelector";
+import {Popup} from "components/popup/Popup";
+import {toggleReviewPopup} from "components/popup/store/popupActions";
+import {reviewPopupState} from "components/popup/store/popupSelector";
+import {chosenMapSpotSelector, handleChosenMapSpot, spotsSelector} from "modules/card-list";
 
 export const SpotMapPage = () => {
-
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const {spotId} = useParams();
@@ -49,10 +47,7 @@ export const SpotMapPage = () => {
                     <Popup review spotId={transformSpotId()} popup={reviewPopup} closePopup={closeReviewPopup}/>
                 </>
             )}
-            {chosenMapSpot !== null
-                ? (<YMapComponent markers={[chosenMapSpot]}/>)
-                : <PreloaderCar/>
-            }
+            {chosenMapSpot !== null ? <YMapComponent markers={[chosenMapSpot]}/> : <PreloaderCar/>}
         </>
     );
 };

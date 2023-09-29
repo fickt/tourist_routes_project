@@ -22,5 +22,4 @@ class PlaceRecommender:
             to_recommend.append(cosine_similarity(features, [eval(embedding)]))
 
         to_recommend = sorted(list(enumerate(to_recommend)), reverse = True, key = lambda x: x[1])[0:5]
-        to_recommend = [place[0] for place in to_recommend]
         return to_recommend

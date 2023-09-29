@@ -1,27 +1,24 @@
 import React, {SyntheticEvent, useEffect, useState} from "react";
 import s from "./styles.module.scss";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import {menuLinks} from "./constants/menuLinks";
 import classNames from "classnames";
 import {Button} from "ui/button/Button";
 import {useAppSelector} from "storage/hookTypes";
-import {FavoriteElem} from "modules/favorites/components/favorite-elem/FavoriteElem";
-import {spotsSelector} from "modules/card-list/store/spotsSelectors";
-import {userFavoritesSpots} from "modules/favorites/store/favoriteSelector";
 import {TLocalRoute} from "utils/localRoutes";
 import {useDispatch} from "react-redux";
-import {setRoutePass} from "modules/my-spots/api/routePassApi";
-import {userRoutesPass} from "modules/my-spots/store/routesPassSelector";
 import Cookies from "js-cookie";
 import {RoutePath} from "pages/routeConfig";
 import {isLoader} from "components/loader-error";
+import {buttonText, menuLinks, url} from "modules/mobile-header/constants/menuLinks";
+import {FavoriteElem, userFavoritesSpots} from "modules/favorites";
+import {setRoutePass, userRoutesPass} from "modules/my-spots";
+import {spotsSelector} from "modules/card-list";
 
 const preventNavigation = (currentPath: string, targetPath: string) => {
     return currentPath === targetPath;
 };
 
 export const MobileHeader = () => {
-
     const dispatch = useDispatch();
     const location = useLocation();
     const {pathname} = location;
@@ -31,10 +28,10 @@ export const MobileHeader = () => {
     const spotRoutes = useAppSelector(spotsSelector);
     const favSpots = useAppSelector(userFavoritesSpots);
     const routesPass = useAppSelector(userRoutesPass);
-    const isSpot = location.pathname.includes("/spots/");
-    const isSpotMap = location.pathname.includes("/spotMap/");
+    const isSpot = location.pathname.includes(url.spots);
+    const isSpotMap = location.pathname.includes(url.spotMap);
     const chosenSpot = spotRoutes?.find((spot: TLocalRoute) => spot.id === spotIdAsNumber);
-    const favoriteSpot = favSpots?.find((favSpot: TLocalRoute) => favSpot === chosenSpot);
+    const favoriteSpot = favSpots?.find((favSpot: TLocalRoute) => favSpot.id === spotIdAsNumber);
     const [isAlreadyPass, setAlreadyPass] = useState(false);
     const token = Cookies.get("token");
 
@@ -78,12 +75,13 @@ export const MobileHeader = () => {
                                 action={setSpotPass}
                                 disabled={loader || isAlreadyPass || !token}
                             >
-                                Маршрут пройден
+                                {buttonText.passRoute}
                             </Button>
                         </div>
                     ) : !isSpot ? (
                         menuLinks.map((link, index) => (
                             <Link
+                                className={s.menu__link_wrapper}
                                 key={index}
                                 to={link.path}
                                 onClick={(e) => handleClick(e, link.path)}
@@ -91,15 +89,17 @@ export const MobileHeader = () => {
                                 <span className={classNames(s.menu__icon, {[s.menu__icon_filled]: pathname === link.path,})}>
                                     {link.icon}
                                 </span>
+                                <span className={classNames(s.menu__name, {[s.menu__name_filled]: pathname === link.path,})}>
+                                    {link.text}
+                                </span>
                             </Link>))
-                        ) : (<>
-                                {favoriteSpot && <FavoriteElem spot={favoriteSpot} activeFavMark />}
-                                {chosenSpot && <FavoriteElem spot={chosenSpot} />}
-                                <Link className={classNames("buttons__link", s.buttons__link_elem)} to={`/spotMap/:${spotId}`}>
-                                    <Button extraClass="button_green" type="primary">Построить маршрут</Button>
-                                </Link>
-                            </>
-                        )}
+                    ) : (<>
+                        <FavoriteElem spot={favoriteSpot ? favoriteSpot : chosenSpot} activeFavMark={!!favoriteSpot}/>
+                        <Link className={classNames("buttons__link", s.buttons__link_elem)} to={`${url.spotMap}:${spotId}`}>
+                            <Button extraClass="button_green" type="primary">{buttonText.buildRoute}</Button>
+                        </Link>
+                    </>
+                    )}
                 </div>
             </nav>
         </div>

@@ -1,11 +1,8 @@
-import { PreloaderCar } from "ui/preloader/PreloaderCar";
+import {RestorePassword} from "components/restore-password/RestorePassword";
 
 export const ForgotPasswordPage = () => {
 
     return (
-        <div className="content container">
-            <PreloaderCar />
-            <h2>Упс, тут пока ничего нет :(</h2>
-        </div>
+        <RestorePassword/>
     );
 }

@@ -1,1 +1,1 @@
-export const routesPassMessage = "Пока нет пройденных мест :(";
+export const routesPassMessage = "В списке нет ни одного пройденного маршрута";

@@ -32,6 +32,7 @@ class FindByImageRequest extends FormRequest
         return [
             'image.mimes' => 'Допустимые расширения изображений: jpeg,jpg,bmp,png',
             'image.dimensions' => 'Максимально допустимый размер изображения - 1920х1080',
+            'image.*' => 'Ошибка при загрузке изображения'
         ];
     }
 }

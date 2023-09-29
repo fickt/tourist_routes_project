@@ -4,24 +4,34 @@ import {TPasswordInputProps} from "./types";
 import {passwordRules} from "components/form-elem/constants/formRules";
 import {messages} from "components/form-elem/constants/constants";
 
-export const PasswordInput = ({title, isAuthForm, isRegister, isPasswordChange}: TPasswordInputProps) => {
-
-    const placeholderText = isPasswordChange
-        ? messages.imagineNewPassword
-        : isRegister
-            ? messages.imaginePassword
-            : messages.passPassword;
+export const PasswordInput = ({title, isAuthForm, isRegister, isPasswordChange, loader}: TPasswordInputProps) => {
+    const placeholderText = isPasswordChange ? messages.imagineNewPassword : isRegister
+        ? messages.imaginePassword
+        : messages.passPassword;
 
     return (
         <>
-            <Form.Item className="custom__antd__item" name="password" rules={passwordRules} validateStatus={""}
-                       hasFeedback>
+            {isPasswordChange && (<>
+                <Form.Item className="custom__antd__item" name={messages.passwordOld} rules={passwordRules} validateStatus={""} hasFeedback>
+                    <div className={s.field}>
+                        <span className={s.field__title}>{messages.lastPassword}</span>
+                        <Input.Password
+                            type="password"
+                            placeholder={messages.passLastPassword}
+                            className={s.field__input}
+                            disabled={loader}
+                        />
+                    </div>
+                </Form.Item>
+            </>)}
+            <Form.Item className="custom__antd__item" name="password" rules={passwordRules} validateStatus={""} hasFeedback>
                 <div className={s.field}>
                     <span className={s.field__title}>{title}</span>
                     <Input.Password
                         type="password"
                         placeholder={placeholderText}
                         className={s.field__input}
+                        disabled={loader}
                     />
                 </div>
             </Form.Item>
@@ -50,6 +60,7 @@ export const PasswordInput = ({title, isAuthForm, isRegister, isPasswordChange}:
                         <Input.Password
                             placeholder={isPasswordChange ? messages.repeatNewPassword : messages.repeatPassword}
                             className={s.field__input}
+                            disabled={loader}
                         />
                     </div>
                 </Form.Item>

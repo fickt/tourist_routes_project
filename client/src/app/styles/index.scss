@@ -57,13 +57,12 @@ a {
     height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 24px 16px;
+    padding: 24px 16px 0 16px;
     margin: 0 auto;
-    background-color: var(--background-04);
 };
 
 .overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -99,7 +98,7 @@ main {
 
     .mapIcon {
         border-radius: 10px;
-        border: 5px solid #ffffff;
+        border: 5px solid var(--color-white);
     }
 
     .balloon-image {
@@ -108,50 +107,60 @@ main {
     }
 };
 
+.myList {
+    background-color: var(--background-04);
+    height: 100%;
+}
+
 .buttons__wrapper {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
     border-radius: 10px;
-    background: var(--background-02);
 }
 
 .buttons__link {
     display: block;
     width: 100%;
+    height: 50px;
 
     .button {
-        &_green,
-        &_white {
-            font-family: "Nunito Sans", sans-serif;
-            font-size: 16px;
-            font-weight: 400;
-            padding: 10px 32px;
-            height: auto;
-        }
+        width: 100%;
+        border: none;
+        max-height: 50px;
+        background-color: transparent;
 
         &_green {
+            height: inherit;
             color: var(--text-02);
             background-color: var(--background-06);
         }
 
         &_white {
             color: var(--text-01);
-            background-color: var(--background-02);
-            box-shadow: 0 0 6px 0 rgba(90, 90, 90, 0.20);
+            border: 1px solid var(--background-01);
+            background: var(--background-02);
         }
     }
 }
 
-.button,
+.button:disabled {
+    background-color: rgba(0, 0, 0, 0.04);
+    color: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--button-disabled-color);
+    border-radius: 10px;
+    height: 50px;
+}
+
+.button_green,
+.button_white,
 .form__button {
     padding: 14px 32px;
     border-radius: 10px;
     font-family: "Nunito Sans", sans-serif;
     font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
+    font-weight: 400;
     height: auto;
     width: 100%;
 }
@@ -159,6 +168,7 @@ main {
 .form__button {
     color: var(--text-02);
     background-color: var(--background-06);
+    max-height: 50px;
 }
 
 // кастомизирует Input из antd
@@ -167,13 +177,44 @@ main {
     margin-bottom: 0;
 }
 
+:where(.css-dev-only-do-not-override-1sn0ohr).ant-input-affix-wrapper > input.ant-input {
+    background-color: var(--background-02);
+}
+
+.ant-btn-default {
+    box-shadow: none;
+}
+
+.preloader-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.disable-scroll {
+    overflow-y: hidden;
+}
+
 @media (min-width: 760px) {
     .container {
         padding-left: calc(var(--container-padding) * 2);
         padding-right: calc(var(--container-padding) * 2);
         width: calc(100% - 4*(var(--container-padding)));
     }
+
     .content {
         padding: calc(var(--content-padding) * 2) 0;
     }
-};
+
+    .wrapper {
+        width: 500px;
+    }
+
+    .buttons__link {
+        text-align: center;
+    }
+
+    .button {
+        max-width: 500px;
+    }
+}

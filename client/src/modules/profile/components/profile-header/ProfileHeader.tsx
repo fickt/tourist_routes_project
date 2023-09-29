@@ -1,12 +1,12 @@
 import s from "./styles.module.scss";
 import ArrowRightIcon from "./assets/arrow-right.svg";
 import {useAppSelector} from "storage/hookTypes";
-import {authUser} from "modules/auth-form/store/authSelectors";
 import {TProfileHeaderProps} from "./types";
 import {Link} from "react-router-dom";
+import {authUser} from "modules/auth-form";
+import {settings} from "modules/profile/constants/profileValues";
 
 export const ProfileHeader = ({path}: TProfileHeaderProps) => {
-
     const user = useAppSelector(authUser);
 
     return (
@@ -17,7 +17,7 @@ export const ProfileHeader = ({path}: TProfileHeaderProps) => {
                 </div>
                 <div className={s.profileInfo__settings}>
                     <h2 className={s.profileInfo__settings__title}>{user.nickname}</h2>
-                    <p>Управление аккаунтом</p>
+                    <p>{settings.profileControl}</p>
                 </div>
             </div>
             <Link to={path}>

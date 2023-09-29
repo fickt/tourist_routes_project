@@ -1,29 +1,37 @@
-import React, {ChangeEvent, useEffect} from "react";
+import React, {ChangeEvent} from "react";
 import s from "./styles.module.scss";
 import ImgPopupIcon from "modules/image-search-popup/assets/popupIcon.svg";
 import {Button} from "ui/button/Button";
 import classNames from "classnames";
 import {TImageSearchPopupProps} from "./types";
-import {imgSearch} from "modules/image-search-popup/constants/constants";
+import {imgLoadError, imgSearch} from "modules/image-search-popup/constants/constants";
 import {sendImage} from "modules/image-search-popup/api/imageSearchApi";
 import {Dispatch} from "redux";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
-import {isError, isLoader} from "components/loader-error";
+import {isError, isLoader, setError} from "components/loader-error";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
 import {setFile} from "modules/image-search-popup/store/imageSearchActions";
 import {userFile} from "modules/image-search-popup/store/imageSearchSelectors";
+import {RoutePath} from "pages/routeConfig";
+import {Link} from "react-router-dom";
 
 export const ImageSearchPopup = ({closePopup}: TImageSearchPopupProps) => {
-
     const dispatch = useAppDispatch();
     const loader = useAppSelector(isLoader);
     const error = useAppSelector(isError);
     const file = useAppSelector(userFile);
+    const MAX_IMAGE_SIZE_MB = 10;
 
     const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(setError(""));
         const files = e.target.files;
-        files && files.length > 0 && dispatch(setFile(files[0]));
+        if (files && files.length > 0) {
+            const file = files[0];
+            file.size <= MAX_IMAGE_SIZE_MB * 1920 * 1080
+                ? dispatch(setFile(file))
+                : dispatch(setError(imgLoadError));
+        }
     };
 
     const uploadImageInput = () => {
@@ -57,7 +65,7 @@ export const ImageSearchPopup = ({closePopup}: TImageSearchPopupProps) => {
                         src={URL.createObjectURL(file as Blob)}
                         alt={imgSearch.yourImg}
                     />
-                    : loader ? <PreloaderCar/> : <ImgPopupIcon/>
+                    : <ImgPopupIcon/>
                 }
             </div>
             {loader && <PreloaderCar/>
@@ -69,14 +77,17 @@ export const ImageSearchPopup = ({closePopup}: TImageSearchPopupProps) => {
                     ? <Button
                         action={handleClick}
                         disabled={loader}
-                        extraClass={classNames(`button, ${s.imagePopup__button_green}`)}
+                        extraClass={classNames("button", s.imagePopup__button_green)}
                         >
                             {imgSearch.btnSearch}
                         </Button>
-                    : uploadImageInput()}
-                <Button action={closePopup} extraClass={"button"} disabled={loader}>
-                    {imgSearch.btnCancel}
-                </Button>
+                    : uploadImageInput()
+                }
+                <Link to={`${RoutePath.home}`} className="buttons__link">
+                    <Button action={closePopup} extraClass="button" disabled={loader}>
+                        {imgSearch.btnCancel}
+                    </Button>
+                </Link>
             </div>
         </div>
     );

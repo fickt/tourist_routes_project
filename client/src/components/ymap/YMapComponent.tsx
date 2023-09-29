@@ -2,16 +2,16 @@ import React, {useEffect, useState} from "react";
 import s from "./styles.module.scss";
 import ymaps from "ymaps";
 import {removeControls} from "./helpers/ymap-options";
-import {mapControls, mapState} from "./constants/constants";
+import {mapControls, mapState, spots} from "./constants/constants";
 import {useNavigate, useParams} from "react-router-dom";
 import {getLocation} from "./helpers/location";
 import locationIcon from "./img/location.png";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
 import {TMarkers} from "utils/serverRoutes";
 import {TYMapProps} from "components/ymap/types";
+import {RoutePath} from "pages/routeConfig";
 
 export const YMapComponent = ({markers}: TYMapProps) => {
-
     const navigate = useNavigate();
     const {spotId} = useParams(); //проверяем на какой странице мы находимся, если есть spotId, то на странице места, иначе на страницу общей карты
     const [error, setError] = useState<string>(null);
@@ -27,7 +27,6 @@ export const YMapComponent = ({markers}: TYMapProps) => {
                 referencePoints: [],
                 params: {}
             });
-
             removeControls(myMap, mapControls); //удаляем лишние виджеты управления на карте
 
             const setLocationMarker = () => {
@@ -35,7 +34,6 @@ export const YMapComponent = ({markers}: TYMapProps) => {
                     iconLayout: "default#image",
                     iconImageHref: locationIcon,
                 }
-
                 const locationMarker = new ymaps.Placemark(geoPosition, {}, iconSets);
                 myMap.geoObjects.add(locationMarker);
             };
@@ -84,27 +82,22 @@ export const YMapComponent = ({markers}: TYMapProps) => {
                     }
                     //действия при клике на маркет
                     newMarker.events.add("click", () => {
-                        spotId ? buildRouteInSpot() : navigate(`/spots/${marker.id}/`)
+                        spotId ? buildRouteInSpot() : navigate(`${spots}${marker.id}/`)
                     })
                     //добавление маркера на карту
                     myMap.geoObjects.add(newMarker);
 
                     //Если это карта определенного места, то прокладываем маршрут
-                    if(spotId){
-                        buildRouteInSpot()
-                    }
+                    spotId && buildRouteInSpot();
                 })
             };
-
             setLocationMarker(); //устанавливаем иконку геопозиции
             setMarkers(markers); //устанавливаем маркеры мест
 
             // Установка границ видимой области карты так, чтобы все объекты были видны
-            myMap.setBounds(myMap.geoObjects.getBounds(), {
-                checkZoomRange: true, // проверка допустимости масштаба карты
-            });
+            myMap.setBounds(myMap.geoObjects.getBounds(), {checkZoomRange: true}); // проверка допустимости масштаба карты
         }
-        getLocation((pos) => mapInit(pos), (err) => mapInit(null, err)) //определяем геопозицию затем выполняем mapInition
+        getLocation((pos) => mapInit(pos), (err) => mapInit(null, err));
     }
 
     useEffect(() => {

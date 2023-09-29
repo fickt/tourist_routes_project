@@ -1,7 +1,6 @@
 import {TRoutes} from "pages/types";
 import {HomePage} from "./home-page/HomePage";
 import {FavoritesPage} from "./favorites-page/FavoritesPage";
-import {SpotsPage} from "./spots-page/SpotsPage";
 import {AuthPage} from "./auth-page/AuthPage";
 import {SpotPage} from "./spot-page/SpotPage";
 import {ForgotPasswordPage} from "./forgot-password/ForgotPasswordPage";
@@ -13,7 +12,6 @@ import {LocationPage} from "./location-page/LocationPage";
 import {QuestionsPage} from "pages/questions-page/QuestionsPage";
 import {FiltersPage} from "./filters-page/FiltersPage";
 import {SettingsPage} from "pages/settings-page/SettingsPage";
-import {SettingsInfoPage} from "pages/settings-info-page/SettingsInfoPage";
 import {SettingsPasswordPage} from "pages/settings-password-page/SettingsPasswordPage";
 import {SpotMapPage} from "pages/spot-map-page/SpotMapPage";
 
@@ -24,11 +22,10 @@ export enum AppRoutes {
     MY_SPOTS = "mySpots",
     QUESTIONS = "questions",
     SETTINGS = "settings",
-    SETTINGS_INFO = "settings_info",
     SETTINGS_PASSWORD = "settings_password",
-    SPOTS = "spots",
+    ROUTES = "routes",
     SPOT_ID = "spotId",
-    SPOT_MAP = "spot_map",
+    SPOT_MAP = "spotMap",
     FILTERS = "filters",
     LOCATION = "location",
     FORGOT_PASSWORD = "forgotPassword",
@@ -46,9 +43,8 @@ export const RoutePath = {
     [AppRoutes.FILTERS]: "/filters",
     [AppRoutes.QUESTIONS]: "/questions",
     [AppRoutes.SETTINGS]: "/settings",
-    [AppRoutes.SETTINGS_INFO]: "/settings_info",
     [AppRoutes.SETTINGS_PASSWORD]: "/settings_password",
-    [AppRoutes.SPOTS]: "/routes",
+    [AppRoutes.ROUTES]: "/routes",
     [AppRoutes.LOCATION]: "/location",
     [AppRoutes.SPOT_ID]: "/spots/:spotId",
     [AppRoutes.SPOT_MAP]: "/spotMap/:spotId",
@@ -61,11 +57,11 @@ export const RoutePath = {
 
 export const mainRoutes: TRoutes[] = [
     {path: RoutePath.home, element: <HomePage/>},
-    {path: RoutePath.spots, element: <SpotsPage/>},
     {path: RoutePath.filters, element: <FiltersPage/>},
     {path: RoutePath.location, element: <LocationPage/>},
     {path: RoutePath.spotId, element: <SpotPage/>},
-    {path: RoutePath.spot_map, element: <SpotMapPage/>},
+    {path: RoutePath.spotMap, element: <SpotMapPage/>},
+    {path: RoutePath.forgotPassword, element: <ForgotPasswordPage/>},
     {path: RoutePath.not_found, element: <NotFoundPage/>},
 ]
 
@@ -75,9 +71,7 @@ export const privateRoutes: TRoutes[] = [
     {path: RoutePath.favorites, element: <ProtectedRoute><FavoritesPage/></ProtectedRoute>},
     {path: RoutePath.questions, element: <ProtectedRoute><QuestionsPage/></ProtectedRoute>},
     {path: RoutePath.settings, element: <ProtectedRoute><SettingsPage/></ProtectedRoute>},
-    {path: RoutePath.settings_info, element: <ProtectedRoute><SettingsInfoPage/></ProtectedRoute>},
     {path: RoutePath.settings_password, element: <ProtectedRoute><SettingsPasswordPage/></ProtectedRoute>},
     {path: RoutePath.auth_register, element: <ProtectedRoute onlyOnAuth isRegister><AuthPage isRegister={true}/></ProtectedRoute>},
     {path: RoutePath.auth_login, element: <ProtectedRoute onlyOnAuth><AuthPage/></ProtectedRoute>},
-    {path: RoutePath.forgotPassword, element: <ProtectedRoute onlyOnAuth><ForgotPasswordPage/></ProtectedRoute>},
 ]
