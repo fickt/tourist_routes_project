@@ -11,6 +11,7 @@ import {routesPassReducer} from "modules/my-spots";
 import {imageSearchReducer} from "modules/image-search-popup";
 import {loaderErrorReducer} from "components/loader-error";
 import {profileReducer} from "modules/profile";
+import {ratingSortReducer} from "modules/card-list/components/sorting/store/ratingSortReducer";
 
 export const rootReducer = combineReducers({
     spots: spotsReducer,
@@ -26,5 +27,6 @@ export const rootReducer = combineReducers({
     routesPass: routesPassReducer,
     imgSearchRoutes: imageSearchReducer,
     profile: profileReducer,
+    ratingSort: ratingSortReducer
 })
 

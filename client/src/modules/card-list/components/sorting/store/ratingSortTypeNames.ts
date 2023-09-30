@@ -1,0 +1,1 @@
+export const SET_RATING_SPOTS = "SET_RATING_SPOTS";
