@@ -2,12 +2,11 @@ import {AxiosResponse} from "axios";
 import {TLocalRoute} from "utils/localRoutes";
 import {Dispatch} from "redux";
 import {reviewService} from "modules/review-block/api/reviewService";
-import {apiSpots} from "modules/card-list/api/spotsService";
-import {handleSpots} from "modules/card-list/store/spotsActions";
-import {TServerResponse} from "modules/auth-form/store/types/authTypes";
 import {FormInstance} from "antd";
 import {setError, setLoader} from "components/loader-error";
-import {setNewRoutes} from "modules/image-search-popup/store/imageSearchActions";
+import {apiSpots, handleSpots} from "modules/card-list";
+import {TServerResponse} from "modules/auth-form";
+import {setNewRoutes} from "modules/image-search-popup";
 
 export async function sendReview(
     dispatch: Dispatch,
@@ -39,10 +38,10 @@ export async function sendReview(
         setContent(null);
         setRating(0);
         closePopup();
+        redirectToSpotPage();
     } catch (e: Error | TServerResponse) {
         dispatch(setError(e.response.data.error));
     } finally {
         dispatch(setLoader(false));
-        redirectToSpotPage();
     }
 }

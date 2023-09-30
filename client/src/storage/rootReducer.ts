@@ -16,8 +16,6 @@ export const rootReducer = combineReducers({
     spots: spotsReducer,
     map_spots: spotsReducer,
     spotId: spotItemReducer,
-    chosen_spot: spotsReducer,
-    chosen_map_spot: spotsReducer,
     auth: authReducer,
     loaderError: loaderErrorReducer,
     questions: questionsReducer,

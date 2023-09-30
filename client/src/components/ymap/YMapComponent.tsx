@@ -9,7 +9,6 @@ import locationIcon from "./img/location.png";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
 import {TMarkers} from "utils/serverRoutes";
 import {TYMapProps} from "components/ymap/types";
-import {RoutePath} from "pages/routeConfig";
 
 export const YMapComponent = ({markers}: TYMapProps) => {
     const navigate = useNavigate();
@@ -82,7 +81,7 @@ export const YMapComponent = ({markers}: TYMapProps) => {
                     }
                     //действия при клике на маркет
                     newMarker.events.add("click", () => {
-                        spotId ? buildRouteInSpot() : navigate(`${spots}${marker.id}/`)
+                        spotId ? buildRouteInSpot() : navigate(`${spots}${marker.id}`)
                     })
                     //добавление маркера на карту
                     myMap.geoObjects.add(newMarker);
