@@ -47,7 +47,7 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
         const values = formInstance.getFieldsValue();
         isRegister
             ? await authenticate(values.nickname, values.email, values.password, true)
-            : await authenticate(values.nickname, values.email, values.password, false)
+            : await authenticate(values.nickname, values.email, values.password, false);
     }
 
     const handleFormSubmit = async () => {
@@ -60,61 +60,61 @@ export const FormElem = ({isAuthForm, isRegister, isInfoChange, isPasswordChange
     };
 
     const renderFormInputs = (loader: boolean) => {
+        const nicknameInputProps = {
+            name: messages.nickNameEng,
+            title: messages.nickNameRu,
+            rules: nicknameRules,
+            placeholder: isInfoChange ? user.nickname : messages.userName,
+            onChange: inputTouched,
+            loader: loader as boolean,
+        };
+
+        const emailInputProps = {
+            name: messages.email,
+            title: messages.emailSpecial,
+            rules: emailRules,
+            placeholder: isInfoChange ? user.email : messages.passEmail,
+            onChange: inputTouched,
+            loader: loader as boolean,
+        };
+
+        const passwordInputProps = {
+            title: isPasswordChange ? messages.newPassword : messages.password,
+            isAuthForm: isAuthForm,
+            isRegister: isRegister,
+            isPasswordChange: isPasswordChange,
+            loader: loader as boolean,
+        };
+
         return (
             <div className={s.form__inputs}>
-                {isInfoChange
-                    ? <FormInput
-                        name={messages.nickNameEng}
-                        title={messages.nickNameRu}
-                        rules={nicknameRules}
-                        placeholder={user.nickname}
-                        onChange={inputTouched}
-                        loader={loader as boolean}
-                    />
-                    : isRegister && <FormInput
-                        name={messages.nickNameEng}
-                        title={messages.nickNameRu}
-                        rules={nicknameRules}
-                        placeholder={messages.userName}
-                        loader={loader as boolean}
-                    />
-                }
-                {!isPasswordChange
-                    && <FormInput
-                        name={messages.email} title={messages.emailSpecial}
-                        rules={emailRules}
-                        placeholder={isInfoChange ? user.email : messages.passEmail}
-                        onChange={inputTouched}
-                        loader={loader as boolean}
-                    />
-                }
-                {(!restorePassword && !isInfoChange || isPasswordChange)
-                    && <PasswordInput
-                        title={isPasswordChange ? messages.newPassword : messages.password}
-                        isAuthForm={isAuthForm}
-                        isRegister={isRegister}
-                        isPasswordChange={isPasswordChange}
-                        loader={loader as boolean}
-                    />
-                }
+                {isInfoChange ? <FormInput {...nicknameInputProps}/> : isRegister && <FormInput {...nicknameInputProps}/>}
+                {!isPasswordChange && <FormInput {...emailInputProps}/>}
+                {(!restorePassword && !isInfoChange || isPasswordChange) && <PasswordInput {...passwordInputProps}/>}
             </div>
         );
     };
 
     const renderFormButtons = (loader: boolean) => {
+        let buttonValue;
+        const onClickHandler = handleButtonClick;
+
+        if (restorePassword) {
+            buttonValue = authMessages.send;
+        } else if (isRegister) {
+            buttonValue = authMessages.register;
+        } else {
+            buttonValue = authMessages.login;
+        }
+
         return (
             <div className={s.form__button}>
-                {restorePassword
-                    ? <FormButton value={authMessages.send} onClick={handleButtonClick} loader={loader as boolean}/>
-                    : <FormButton
-                        value={isRegister ? authMessages.register : authMessages.login}
-                        onClick={handleButtonClick}
-                        loader={loader as boolean}
-                    />
-                }
+                {!isPasswordChange && !isInfoChange && (
+                    <FormButton value={buttonValue} onClick={onClickHandler} loader={loader as boolean}/>
+                )}
             </div>
         );
-    }
+    };
 
     return (
         <Form
