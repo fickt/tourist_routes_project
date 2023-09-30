@@ -12,6 +12,8 @@ import {theBestRoute} from "./constants/constants";
 import {setError} from "components/loader-error";
 import {imgPopupState, Popup, toggleImgPopup} from "components/popup";
 import {filterCategories, filterDifficulties} from "modules/filters";
+import {ratingSortSelectors} from "modules/card-list/components/sorting/store/ratingSortSelectors";
+import {handleSort} from "modules/card-list/components/sorting/store/ratingSortAction";
 
 export const MainContent = () => {
     const dispatch = useAppDispatch();
@@ -24,13 +26,17 @@ export const MainContent = () => {
     const categories = useAppSelector(filterCategories);
     const difficulties = useAppSelector(filterDifficulties);
     const tags = [...categories, ...difficulties];
+    const isRatingSort = useAppSelector(ratingSortSelectors);
 
     useEffect(() => {
         if (debounceSearchValue.trim()) {
             handleSearchRequest();
         } else if (tags.length === 0) {
             apiSpots.fetchSpots()
-                .then(data => dispatch(handleSpots(data.data)))
+                .then(data => {
+                    dispatch(handleSpots(data.data))
+                    dispatch(handleSort(!isRatingSort))
+                })
                 .catch(err => dispatch((setError(err))))
         }
     }, [debounceSearchValue]);

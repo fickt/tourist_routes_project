@@ -4,9 +4,10 @@ import ArrowDownIcon from "./assets/arrowDownIcon.svg";
 import {useAppSelector} from "storage/hookTypes";
 import {useDispatch} from "react-redux";
 import {getLocation, TLocationFail, TLocationSuccess} from "components/ymap/helpers/location";
-import {imageSearchRoutes, setNewRoutes} from "modules/image-search-popup";
+import {imageSearchRoutes} from "modules/image-search-popup";
 import {handleSpots, sortErrorMessage, spotsSelector, TPoints} from "modules/card-list";
 import {sort} from "modules/card-list/constants/constants";
+import {ratingSortSelectors} from "modules/card-list/components/sorting/store/ratingSortSelectors";
 
 // Функция для вычисления расстояния между двумя координатами
 function calculateDistance(point1: TPoints, point2:  TPoints) {
@@ -42,10 +43,11 @@ export const Sorting = memo(() => {
     const [isSortFromDistance, setSortFromDistance] = useState(true);
     const [userLocation, setUserLocation] = useState(null);
     const [routesToSort, setRoutesToSort] = useState(localRoutes);
+    const isRatingSort = useAppSelector(ratingSortSelectors);
 
     useEffect(() => {
         sortSpots(isSortFromTheBest);
-    }, [isSortFromTheBest]);
+    }, [isRatingSort, isSortFromTheBest]);
 
     useEffect(() => {
         searchRoutesByImage && setRoutesToSort(searchRoutesByImage);
@@ -66,21 +68,19 @@ export const Sorting = memo(() => {
     };
 
     const sortSpots = (isSortFromTheBest: boolean) => {
-        const newRoutes = [...routesToSort].sort((a, b) => {
+        localRoutes.sort((a, b) => {
             if (isSortFromTheBest) {
                 return b.rating - a.rating;
             } else {
                 return a.rating - b.rating;
             }
         });
-        routesToSort === localRoutes
-            ? dispatch(handleSpots(newRoutes))
-            : dispatch(setNewRoutes(newRoutes));
+        dispatch(handleSpots([...localRoutes]))
     }
 
     const sortSpotsByDistance = (isSortFromDistance:boolean, userLocation: TPoints) => {
         setSortFromDistance(!isSortFromDistance);
-        const newRoutes = [...routesToSort].sort((a, b) => {
+        localRoutes.sort((a, b) => {
             if (isSortFromDistance) {
                 const distanceA = calculateDistance(userLocation, {lat: a.latitude, lon: a.longitude});
                 const distanceB = calculateDistance(userLocation, {lat: b.latitude, lon: b.longitude});
@@ -91,9 +91,7 @@ export const Sorting = memo(() => {
                 return distanceB - distanceA;
             }
         });
-        routesToSort === localRoutes
-            ? dispatch(handleSpots(newRoutes))
-            : dispatch(setNewRoutes(newRoutes));
+        dispatch(handleSpots([...localRoutes]))
     }
 
     return (
