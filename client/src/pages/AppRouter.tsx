@@ -4,7 +4,6 @@ import {mainRoutes, privateRoutes} from "./routeConfig";
 import {TRoutes} from "./types";
 
 const AppRouter = () => {
-
     const routeMap = ({path, element}: TRoutes) => <Route path={path} element={element} key={path}/>
 
     return (

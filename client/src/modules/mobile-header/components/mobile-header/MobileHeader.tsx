@@ -1,6 +1,6 @@
 import React, {SyntheticEvent, useEffect, useState} from "react";
 import s from "./styles.module.scss";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import classNames from "classnames";
 import {Button} from "ui/button/Button";
 import {useAppSelector} from "storage/hookTypes";
@@ -23,7 +23,8 @@ export const MobileHeader = () => {
     const location = useLocation();
     const {pathname} = location;
     const {spotId} = useAppSelector(state => state.spotId);
-    const spotIdAsNumber = parseInt(spotId, 10);
+    const {spotIdFromUrl} = useParams();
+    const spotIdAsNumber = parseInt(spotId ? spotId : spotIdFromUrl, 10);
     const loader = useAppSelector(isLoader);
     const spotRoutes = useAppSelector(spotsSelector);
     const favSpots = useAppSelector(userFavoritesSpots);
@@ -95,7 +96,10 @@ export const MobileHeader = () => {
                             </Link>))
                     ) : (<>
                         <FavoriteElem spot={favoriteSpot ? favoriteSpot : chosenSpot} activeFavMark={!!favoriteSpot}/>
-                        <Link className={classNames("buttons__link", s.buttons__link_elem)} to={`${url.spotMap}:${spotId}`}>
+                        <Link
+                            className={classNames("buttons__link", s.buttons__link_elem)}
+                            to={`${url.spotMap}:${spotId}`}
+                        >
                             <Button extraClass="button_green" type="primary">{buttonText.buildRoute}</Button>
                         </Link>
                     </>

@@ -31,24 +31,16 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
         dispatch(setError(null));
     }, [])
 
-    const sendForm = () => {
-        if (Cookies.get("token") ) {
-            const fetchData = async () => {
-                const trimmedContent = content.trim();
-                if (trimmedContent.length) {
-                    await sendReview(dispatch, trimmedContent, rating, spotId, form, setContent, setRating, closePopup, searchRoutesByImage, redirectToSpotPage);
-                }
-                setIsNotTrim(true);
-            }
-            fetchData();
-        } else {
-            navigate(RoutePath.auth_login);
-        }
+    const fetchData = async () => {
+        const trimmedContent = content.trim();
+        trimmedContent.length && await sendReview(dispatch, trimmedContent, rating, spotId, form, setContent, setRating, closePopup, searchRoutesByImage, redirectToSpotPage);
+        setIsNotTrim(true);
     }
 
+    const sendForm = () => Cookies.get("token") ? fetchData() : navigate(RoutePath.auth_login);
     const rateOnChange = (value: number) => setRating(value);
     const textareaOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value);
-    const redirectToSpotPage = () => navigate(RoutePath.spotId);
+    const redirectToSpotPage = () => navigate(`${constants.spots}${spotId}`);
 
     return (
         <div className={s.reviewPopup}>
@@ -80,7 +72,7 @@ export const ReviewPopup = memo(({spotId, closePopup}: TReviewPopupProps) => {
                             {constants.save}
                         </Button>
                     </div>
-                    <Link to={`${constants.spots}:${spotId}`} className="buttons__link">
+                    <Link to={`${constants.spots}${spotId}`} className="buttons__link">
                         <Button action={closePopup} extraClass="button" disabled={loader}>
                             {constants.later}
                         </Button>
