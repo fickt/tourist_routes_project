@@ -62,6 +62,11 @@
   width: fit-content;
 }
 
+@media (min-width: 760px) {
+  .container {
+    position: -webkit-sticky;
+  }
+}
 
 
 
