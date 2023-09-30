@@ -13,6 +13,7 @@ export const LocalCard = ({spot}: TCardProps) => {
     const routesPass = useAppSelector(userRoutesPass);
     const favMark = favSpots?.some(fav => fav.id === spot.id);
     const passMark = routesPass?.some(pass => pass.id === spot.id);
+    const spots = "/spots/";
 
     function getDeclension(number: number, one: string, two: string, five: string) {
         let n = Math.abs(number);
@@ -40,7 +41,7 @@ export const LocalCard = ({spot}: TCardProps) => {
         <div className={s.wrapper}>
             <div className={s.favorite}><FavoriteElem activeFavMark={favMark} spot={spot}/></div>
             {passMark && <div className={s.routePass}><FilterTag passRoute text={routePassText}/></div>}
-            <Link to={`/spots/${spot.id}`} className={s.card}>
+            <Link to={`${spots}${spot.id}`} className={s.card}>
                 <img className={s.card__img} src={spot.photos[0]} alt={spot.name}/>
                 <div className={s.card__main}>
                     <div className={s.card__main__header}>

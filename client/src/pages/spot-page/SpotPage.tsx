@@ -1,17 +1,17 @@
-import React, {useEffect} from "react";
-import {useParams} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useParams, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
-import {handleChosenMapSpot, handleChosenSpot, handleSpots} from "modules/card-list/store/spotsActions";
 import {SpotItem} from "modules/spot-item";
 import {TLocalRoute} from "utils/localRoutes";
-import {chosenSpotSelector, spotsSelector} from "modules/card-list/store/spotsSelectors";
-import {useAdaptedSpotType} from "hooks/useAdaptedSpotType";
+import {RoutePath} from "pages/routeConfig";
+import {handleSpots, spotsSelector} from "modules/card-list";
 
 export const SpotPage = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const spotRoutes = useAppSelector(spotsSelector);
     const {spotId} = useParams();
-    const spotItem: TLocalRoute = useAppSelector(chosenSpotSelector);
+    const [foundSpot, setFoundSpot] = useState<TLocalRoute | null>(null);
 
     useEffect(() => {
         if (spotId) {
@@ -22,17 +22,10 @@ export const SpotPage = () => {
 
     const getSpotById = (spotId: string) => {
         const foundSpot = spotRoutes.find((spot: TLocalRoute) => spot.id === Number(spotId));
-
-        if (foundSpot) {
-            const updatedFoundSpot = useAdaptedSpotType(foundSpot);
-            dispatch(handleChosenSpot(foundSpot));
-            dispatch(handleChosenMapSpot(updatedFoundSpot));
-        }
+        foundSpot ? setFoundSpot(foundSpot) : navigate(RoutePath.not_found);
     }
 
-    return (
-        <>
-            {spotItem && <div className="content container"><SpotItem spotItem={spotItem}/></div>}
-        </>
-    );
+    return (<>
+        {foundSpot && <div className="content container"><SpotItem spotItem={foundSpot}/></div>}
+    </>)
 }

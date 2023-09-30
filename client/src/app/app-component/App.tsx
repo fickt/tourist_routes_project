@@ -3,18 +3,16 @@ import AppRouter from "pages/AppRouter";
 import {Header} from "modules/header";
 import {MobileHeader} from "modules/mobile-header";
 import {useAppDispatch, useAppSelector} from "storage/hookTypes";
-import {spotsSelector} from "modules/card-list/store/spotsSelectors";
-import {handleSetUser} from "modules/auth-form/store/authActions";
 import {PreloaderCar} from "ui/preloader/PreloaderCar";
 import {ErrorMessage} from "ui/error-message/ErrorMessage";
 import s from "./styles.module.scss";
-import {TUser} from "modules/auth-form";
+import {handleSetUser, TUser} from "modules/auth-form";
 import Cookies from "js-cookie";
-import {getSpots} from "modules/card-list";
+import {getSpots, spotsSelector} from "modules/card-list";
 import {getFavSpots} from "modules/favorites";
-import {getRoutesPass} from "modules/my-spots/api/routePassApi";
 import {isError, isLoader} from "components/loader-error";
 import {handleStartPassQuestions} from "modules/questions";
+import {getRoutesPass} from "modules/my-spots";
 
 const App = () => {
     const dispatch = useAppDispatch();

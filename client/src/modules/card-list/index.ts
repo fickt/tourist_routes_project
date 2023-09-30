@@ -4,7 +4,6 @@ export {CardListBody} from "./components/card-list-body/CardListBody";
 export {getSpots} from "./api/spotsApi";
 export {apiSpots} from "./api/spotsService";
 export {handleSpots} from "./store/spotsActions";
-export {chosenMapSpotSelector, spotsSelector} from "./store/spotsSelectors";
-export {handleChosenMapSpot} from "./store/spotsActions";
+export {spotsSelector} from "./store/spotsSelectors";
 export {sortErrorMessage} from "./constants/constants";
 export {TPoints} from "./components/sorting/type";
