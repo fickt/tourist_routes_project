@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 
   &__loader {
     display: flex;
@@ -9,4 +9,9 @@
     flex-grow: 1;
     overflow-y: hidden;
   }
+}
+
+.main {
+  padding-bottom: 65px;
+  background-color: var(--background-02);
 }

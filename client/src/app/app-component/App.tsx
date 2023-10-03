@@ -44,7 +44,7 @@ const App = () => {
         <div className={s.wrapper}>
             <Header/>
             {spotRoutes
-                ? (<main><AppRouter/></main>)
+                ? (<main className={s.main}><AppRouter/></main>)
                 : (<div className={s.wrapper__loader}>
                     {loader && <PreloaderCar/>}
                     {!loader && (error && <ErrorMessage errorText={error}/>)}

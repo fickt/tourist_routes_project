@@ -7,3 +7,5 @@ export {handleSpots} from "./store/spotsActions";
 export {spotsSelector} from "./store/spotsSelectors";
 export {sortErrorMessage} from "./constants/constants";
 export {TPoints} from "./components/sorting/type";
+export {ratingSortSelectors} from "./components/sorting/store/ratingSortSelectors";
+export {handleSort} from "./components/sorting/store/ratingSortAction";

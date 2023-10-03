@@ -1,7 +1,7 @@
 import React, {FormEvent, useEffect, useState} from "react";
 import s from "./styles.module.scss";
 import {SearchForm} from "components/search/SearchForm";
-import {apiSpots, CardList, handleSpots, spotsSelector} from "modules/card-list";
+import {apiSpots, CardList, handleSort, handleSpots, ratingSortSelectors, spotsSelector} from "modules/card-list";
 import backImage from "./assets/bg.png";
 import classNames from "classnames";
 import {useDebounce} from "hooks/useDebounce";
@@ -12,8 +12,6 @@ import {theBestRoute} from "./constants/constants";
 import {setError} from "components/loader-error";
 import {imgPopupState, Popup, toggleImgPopup} from "components/popup";
 import {filterCategories, filterDifficulties} from "modules/filters";
-import {ratingSortSelectors} from "modules/card-list/components/sorting/store/ratingSortSelectors";
-import {handleSort} from "modules/card-list/components/sorting/store/ratingSortAction";
 
 export const MainContent = () => {
     const dispatch = useAppDispatch();

@@ -78,10 +78,10 @@ export const Profile = () => {
                     </Button>
                 </div>
             </div>
-            {isStart === "false" && <PassQuestions/>}
             {!loader && error && <ErrorMessage errorText={error}/>}
             {loader && <PreloaderCar/>}
             {questArray.length > 0 && !error && !loader && <CardListBody spots={questArray}/>}
+            {isStart === "false" && <PassQuestions/>}
         </div>
     )
 }
