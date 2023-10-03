@@ -58,7 +58,6 @@ export const MainContent = () => {
     const searchClick = (e: FormEvent) => {
         e.preventDefault();
         handleSearchRequest();
-        setSearchValue("");
     }
 
     const handleSearchRequest = () => {
