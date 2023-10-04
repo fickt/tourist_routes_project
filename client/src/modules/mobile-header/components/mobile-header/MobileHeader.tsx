@@ -14,10 +14,6 @@ import {FavoriteElem, userFavoritesSpots} from "modules/favorites";
 import {setRoutePass, userRoutesPass} from "modules/my-spots";
 import {spotsSelector} from "modules/card-list";
 
-const preventNavigation = (currentPath: string, targetPath: string) => {
-    return currentPath === targetPath;
-};
-
 export const MobileHeader = () => {
     const dispatch = useDispatch();
     const location = useLocation();
@@ -36,15 +32,41 @@ export const MobileHeader = () => {
     const [isAlreadyPass, setAlreadyPass] = useState(false);
     const token = Cookies.get("token");
 
-    const handleClick = (e: SyntheticEvent<HTMLAnchorElement>, path: string) => {
-        preventNavigation(pathname, path) && e.preventDefault();
-    };
-
     useEffect(() => {
         routesPass
             ? setAlreadyPass(routesPass.some((passSpot: TLocalRoute) => passSpot.id === spotIdAsNumber))
             : setAlreadyPass(false);
-    }, [routesPass, spotIdAsNumber, dispatch])
+    }, [routesPass, spotIdAsNumber, dispatch]);
+
+    const handleClick = (e: SyntheticEvent<HTMLAnchorElement>, path: string) => {
+        preventNavigation(pathname, path) && e.preventDefault();
+    };
+
+    const preventNavigation = (currentPath: string, targetPath: string) => {
+        return currentPath === targetPath;
+    };
+
+    const MobileHeaderMenuLinks = ({pathname}: {pathname: string}) => {
+        return (
+            <>
+                {menuLinks.map((link, index) => (
+                    <Link
+                        className={s.menu__link_wrapper}
+                        key={index}
+                        to={link.path}
+                        onClick={(e) => handleClick(e, link.path)}
+                    >
+                        <span className={classNames(s.menu__icon, {[s.menu__icon_filled]: pathname === link.path})}>
+                            {link.icon}
+                        </span>
+                        <span className={classNames(s.menu__name, {[s.menu__name_filled]: pathname === link.path})}>
+                            {link.text}
+                        </span>
+                    </Link>
+                ))}
+            </>
+        );
+    };
 
     const setSpotPass = () => {
         if (!token) {
@@ -62,12 +84,9 @@ export const MobileHeader = () => {
     }
 
     return (
-        <div className={s.container}>
+        <div className={s.mobileHeader}>
             <nav className={s.menu}>
-                <div className={!isSpotMap
-                    ? classNames(s.menu__wrapper, {[s.menu__wrapper_spot]: isSpot})
-                    : s.menu__wrapper_spot}
-                >
+                <div className={!isSpotMap ? classNames(s.menu__wrapper, {[s.menu__wrapper_spot]: isSpot}) : s.menu__wrapper_spot}>
                     {isSpotMap ? (
                         <div className={classNames("buttons__link", s.buttons__link_elem)}>
                             <Button
@@ -79,33 +98,19 @@ export const MobileHeader = () => {
                                 {buttonText.passRoute}
                             </Button>
                         </div>
-                    ) : !isSpot ? (
-                        menuLinks.map((link, index) => (
-                            <Link
-                                className={s.menu__link_wrapper}
-                                key={index}
-                                to={link.path}
-                                onClick={(e) => handleClick(e, link.path)}
-                            >
-                                <span className={classNames(s.menu__icon, {[s.menu__icon_filled]: pathname === link.path,})}>
-                                    {link.icon}
-                                </span>
-                                <span className={classNames(s.menu__name, {[s.menu__name_filled]: pathname === link.path,})}>
-                                    {link.text}
-                                </span>
-                            </Link>))
-                    ) : (<>
-                        <FavoriteElem spot={favoriteSpot ? favoriteSpot : chosenSpot} activeFavMark={!!favoriteSpot}/>
-                        <Link
-                            className={classNames("buttons__link", s.buttons__link_elem)}
-                            to={`${url.spotMap}:${spotId}`}
-                        >
-                            <Button extraClass="button_green" type="primary">{buttonText.buildRoute}</Button>
-                        </Link>
-                    </>
+                    ) : !isSpot
+                        ? (<MobileHeaderMenuLinks pathname={pathname}/>)
+                        : (<>
+                            <FavoriteElem spot={favoriteSpot ? favoriteSpot : chosenSpot} activeFavMark={!!favoriteSpot}/>
+                            <Link className={classNames("buttons__link", s.buttons__link_elem)} to={`${url.spotMap}:${spotId}`}>
+                                <Button extraClass="button_green" type="primary">{buttonText.buildRoute}</Button>
+                            </Link>
+                        </>
                     )}
                 </div>
             </nav>
         </div>
     );
 };
+
+export default MobileHeader;

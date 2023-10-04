@@ -1,10 +1,10 @@
 .menu__button,
-.container {
+.mobileHeader {
   width: 100%;
 }
 
-.container {
-  position: sticky;
+.mobileHeader {
+  position: fixed;
   bottom: 0;
   z-index: 10;
 
@@ -46,7 +46,6 @@
         gap: 20px;
       }
     }
-  ;
 
     &__icon svg path {
       stroke: var(--background-03);
@@ -61,12 +60,5 @@
 .buttons__link_elem {
   width: fit-content;
 }
-
-@media (min-width: 760px) {
-  .container {
-    position: -webkit-sticky;
-  }
-}
-
 
 
