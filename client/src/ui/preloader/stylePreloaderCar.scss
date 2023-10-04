@@ -1,8 +1,7 @@
 .loader {
     height: auto;
     top: 50%;
-    left: 50%;    
-    z-index: 100;
+    left: 50%;
     width: 120px;
     margin: 0 auto;
 
@@ -22,23 +21,21 @@
             align-items: end;
             justify-content: end;
 
-            .cloud-1 {
+            .cloud-1,
+            .cloud-2 {
                 position: absolute;
-                top: -2px;
                 right: -20px;
                 align-self: flex-end;
                 animation: cloud 3s linear infinite;
-                z-index: 101;
+            }
+
+            .cloud-1 {
+                top: -2px;
             }
 
             .cloud-2 {
-                position: absolute;
                 top: 2px;
-                right: -20px;
-                align-self: flex-end;
-                animation: cloud 3s linear infinite;
                 animation-delay: 1.5s;
-                z-index: 101;
             }            
         }
         
