@@ -10,7 +10,7 @@ export const headers = {
     settingsInfo: "Управление аккаунтом",
     route: "Маршрут",
     aboutSpot: "О месте",
-    logo: "LOGO",
+    logo: "",
     changePassword: "Изменение пароля",
     spotId: "/spots/",
     spotMap: "/spotMap/",

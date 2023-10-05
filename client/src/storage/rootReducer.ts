@@ -1,5 +1,5 @@
 import {combineReducers} from "redux";
-import {spotsReducer} from "modules/card-list"
+import {ratingSortReducer, spotsReducer} from "modules/card-list"
 import {authReducer} from "modules/auth-form";
 import {popupReducer} from "components/popup/store/popupReducer";
 import {questionsReducer} from "modules/questions";
@@ -11,7 +11,6 @@ import {routesPassReducer} from "modules/my-spots";
 import {imageSearchReducer} from "modules/image-search-popup";
 import {loaderErrorReducer} from "components/loader-error";
 import {profileReducer} from "modules/profile";
-import {ratingSortReducer} from "modules/card-list/components/sorting/store/ratingSortReducer";
 
 export const rootReducer = combineReducers({
     spots: spotsReducer,
